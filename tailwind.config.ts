@@ -19,6 +19,9 @@ const config = {
     },
     extend: {
       colors: {
+        "bg-courses" : '#F4F7FE' , 
+        "courses-main" : '#002979' , 
+        "cards-main" : '#2B3674' , 
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
