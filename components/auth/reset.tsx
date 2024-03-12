@@ -9,6 +9,8 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { AuthOption } from "./auth";
+import useResetPassword from "../../hooks/auth/reset";
 
 
 
@@ -22,12 +24,13 @@ export type TResetSchema = z.infer<typeof resetSchema>;
 
 
 type TLoading = 'LOADING' | 'SUCCESS' | 'ERROR' | 'DEFAULT' | 'DISABLED';
-export function ResetPassword() {
+export function ResetPassword({ setSelectedAuth }: { setSelectedAuth: (value: AuthOption) => void}) {
 	const [isLoading, setIsLoading] = useState<TLoading>('DEFAULT');
 
+	const { resetPassword } = useResetPassword();
 	async function onSubmit(values: TResetSchema) {
 		setIsLoading('LOADING');
-
+		await resetPassword(values.email, setSelectedAuth);
 		setTimeout(() => {
 			setIsLoading('DEFAULT');
 		}, 3000);
@@ -57,7 +60,7 @@ export function ResetPassword() {
 							<FormItem className=" flex flex-col gap-3">
 								<FormLabel>Email</FormLabel>
 								<FormControl
-									className=" border-gray-500 border-2 px-3"
+									className=" border-gray-500 border-2 px-3 rounded-md py-2"
 									placeholder="joe@example.com"
 									>
 									<Input type="email" {...field} />
