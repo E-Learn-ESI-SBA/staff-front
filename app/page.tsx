@@ -2,23 +2,35 @@
 import Landing from "../components/landing";
 import useAuth from "../hooks/auth/useAuth";
 import { useUserStore } from "../store/user";
-import { redirect } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
+import useAxios from "../hooks/axios/useAxios";
+import { useEffect } from "react";
 
 
 
 export default function Home() {
   const isAuth = useUserStore((state) => state.isAuth);
+  const axiosInstance = useAxios();
+  const router = useRouter();
+
+  const testAuth = async () => {
+    const res = await axiosInstance.get('api/auth-test/');
+    const data = await res.data;
+    console.log(data);
+  }
 
 
   if (!isAuth) {
-    redirect('/auth');
+    router.replace('/auth');
+  } else {
+    testAuth();
   }
 
+  const { logoutHandler } = useAuth();
+
+
+
   const user = useUserStore((state) => state.user);
-
-
-  const { logoutHandler } = useAuth(redirect);
-
 
   
   return (<main>

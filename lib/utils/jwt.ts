@@ -11,6 +11,8 @@ interface DecodedToken {
 	payload: {
 		email: string;
 		user_id: number;
+		exp: number;
+		iat: number;
 	};
 	signature: string;
 }

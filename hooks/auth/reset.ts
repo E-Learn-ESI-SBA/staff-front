@@ -1,24 +1,19 @@
 import { toast } from "../../@/components/ui/use-toast";
 import { AuthOption } from "../../components/auth/auth";
-
+import useAxios from "../axios/useAxios";
 
 
 const useResetPassword = () => {
+    const axiosInstance = useAxios();
     const resetPassword = async (email: string, setSelectedAuth: (value: AuthOption) => void) => {
         try {
-            const response = await fetch("http://localhost:8080/api/send-otp/", {
-                method: "POST",
-                headers: {
-                "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    email
-                }),
+            
+            const response = await axiosInstance.post("api/send-otp/", {
+                email
             });
 
-            const data = await response.json();
+            const data = await response.data;
 
-            console.log({data})
 
             if (response.status == 202) {
                 toast({
@@ -43,32 +38,19 @@ const useResetPassword = () => {
 
     const submitOTP = async (email: string, code: string, password: string) => {
         try {
-            const response = await fetch("http://localhost:8080/api/reset-password/", {
-                method: "POST",
-                headers: {
-                "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ email, code, password }),
+            const response = await axiosInstance.post("api/reset-password/", {
+                email, code, password
             });
 
-            const data = await response.json();
+            const data = await response.data;
 
             if (response.status == 202) {
-                toast({
-                    color: "success",
-                    description: data.message,
-                });
+               console.log({message: data.message})
             } else {
-                toast({
-                    color: "error",
-                    description: data.error,
-                });
+                console.log({error: data.error})
             }
         } catch (error) {
-            toast({
-                color: "error",
-                description: "An error occurred. Please try again.",
-            });
+            console.log({error})
         }
     }
 

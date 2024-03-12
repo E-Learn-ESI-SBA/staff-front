@@ -1,39 +1,33 @@
 import { toast } from "../../@/components/ui/use-toast";
 import { useUserStore } from "../../store/user";
 import { decodeJwt } from "../../lib/utils/jwt";
-import { RedirectType } from "next/navigation";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import useAxios from "../axios/useAxios";
+import { useRouter } from "next/navigation";
 
 
 
 
-
-const useAuth = (redirect: (url: string, type?: RedirectType) => never) => {
+const useAuth = () => {
+    const router = useRouter();
     const setUser = useUserStore((state) => state.setUser);
     const setAuth = useUserStore((state) => state.setAuth);
+    const setAccess = useUserStore((state) => state.setAccess);
+    const setRefresh = useUserStore((state) => state.setRefresh);
+    const axiosInstance = useAxios();
 
     const loginHandler = async (email: string, password: string) => {
-        const res = await fetch("http://localhost:8080/api/token/", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                email,
-                password
-            })
+ 
+        const res = await axiosInstance.post("api/token/", {
+            email,
+            password,
         });
 
-        const data = await res.json();
+        const data = await res.data;
 
-        if (res.ok) {
-            localStorage.setItem("token", data.access);
-            localStorage.setItem("refresh", data.refresh);
+        if (res.status === 200) {
+            setAccess(data.access);
+            setRefresh(data.refresh);
 
-            toast({
-                color:  "success",
-                description: "Successfully logged in",
-            });
             const { payload } = decodeJwt(data.access);
             setUser({
                 email: payload.email,
@@ -41,23 +35,22 @@ const useAuth = (redirect: (url: string, type?: RedirectType) => never) => {
             setAuth(true);
 
             setTimeout(() => {
-                redirect("/");
+                router.replace("/");
             }, 3000);
         } else {
-            toast({
-                color: "error",
-                description: data.detail,
-            });
+            console.log({
+                error: data.detail,
+            })
         }
     }
 
 
     const logoutHandler = () => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("refresh");
+        setAccess(null);
+        setRefresh(null);
         setUser(null);
         setAuth(false);
-        redirect("/auth");
+        router.replace("/auth");
     }
 
 

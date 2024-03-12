@@ -26,7 +26,7 @@ export function SignInAccount() {
 			password: '',
 		},
 	});
-	const { loginHandler } = useAuth(redirect);
+	const { loginHandler } = useAuth();
 	async function submitHandler(values: TAuthSchema) {
 		await loginHandler(values.email, values.password);
 	}
