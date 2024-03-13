@@ -1,7 +1,7 @@
 import Card from "./card"
 import SideBar from '../courses/sidebar'
 import SearchBar from "./searchbar"
-import Navbar from "./navbar"
+import Navbar from "../layouts/navbar"
 import  Cards  from "@/static/content/card"
 const Courses = () => {
     return <div className=" bg-bg-courses mx-auto  min-h-screen  " >
