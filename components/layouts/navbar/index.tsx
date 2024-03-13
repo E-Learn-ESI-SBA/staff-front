@@ -19,7 +19,7 @@ const Navbar = () => {
         </Link>
   ))}
      </div>
-     <Link href='login' className={`px-8 py-2 font-medium border rounded-tl-3xl rounded-br-3xl   ${path.substring(1) ? 'border-courses-main' :  ''  } `}  >
+     <Link href='/login' className={`px-8 py-2 font-medium border rounded-tl-3xl rounded-br-3xl   ${path.substring(1) ? 'border-courses-main' :  ''  } `}  >
       Login
      </Link>        
       </div>
