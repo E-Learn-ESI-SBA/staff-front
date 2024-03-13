@@ -1,6 +1,8 @@
+import Footer from "./footer"
+
 const Landing = () => {
-return <div className="text-green-500 red" >
-    Landing
+return <div >
+   <Footer/>
       </div>
  }
 
