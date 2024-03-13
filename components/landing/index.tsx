@@ -1,8 +1,8 @@
-import Footer from "./footer"
+import Testimonilas from "./testimonials"
 
 const Landing = () => {
 return <div >
-   <Footer/>
+   <Testimonilas/>
       </div>
  }
 
