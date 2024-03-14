@@ -32,7 +32,7 @@ const General = () => {
 <p>Sidi Bel Abbés</p>
 </li>    
 <li className="flex justify-start items-baseline gap-2" >
-<p className="font-medium">Adress:</p>
+<p className="font-medium">Address:</p>
 <p className="" >Plot no. 116, Lane number 4, Rathore nagar, Vaishali nagar , Jaipur</p>
 </li>    
 </ul> 
