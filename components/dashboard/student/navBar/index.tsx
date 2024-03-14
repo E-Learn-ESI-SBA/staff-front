@@ -1,0 +1,24 @@
+import React from 'react'
+import Search from './search';
+import Icon from './icon';
+import Image from 'next/image';
+
+
+type Props = {
+    title: string;
+}
+export default function NavBar({title}: Props) {
+  return (
+    <div className='grid grid-cols-2 w-ful h-16 p-2'>
+        <div className=''>
+            <p className='text-secondary text-3xl font-semibold'>{title}</p>
+        </div>
+        <div className='flex justify-between'>
+            <Search />
+            <Icon icon='/assets/icons/nav-bar/settings.svg' />
+            <Icon icon='/assets/icons/nav-bar/notifications.svg' />
+            <Image src={'/assets/person.png'} width={50} height={50} alt='person' className='rounded-full w-14 h-14' />
+        </div>
+    </div>
+  )
+}
