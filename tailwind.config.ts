@@ -31,6 +31,7 @@ const config = {
         secondary: {
           DEFAULT: "#2B3674",
           white: "#8BA3CB",
+          background: "#f4f7fe",
           foreground: "hsl(var(--secondary-foreground))",
         },
         text :{
