@@ -18,6 +18,10 @@ const config = {
       },
     },
     extend: {
+      backgroundImage: {
+        'g-crown': "url(/dashboard/leaderboard/g-crown.png)",
+        crown: "url(/dashboard/leaderboard/crown.png)",
+      },
       colors: {
         "bg-courses" : '#F4F7FE' , 
         "courses-main" : '#002979' , 

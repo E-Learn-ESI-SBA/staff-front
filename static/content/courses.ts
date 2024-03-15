@@ -1,4 +1,4 @@
-import {CourseCategory} from '@/types/courses.ts'
+import {CourseCategory} from '@/types/courses'
 const courseCategories : CourseCategory[] = [
     {
       icon: "/landing/courses/category.svg",
