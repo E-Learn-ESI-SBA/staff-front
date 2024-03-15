@@ -47,7 +47,7 @@ export function ResetPassword({ setSelectedAuth }: { setSelectedAuth: (value: Au
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-6 max-w-[380px]">
 				<CardHeader className=" my-8">
-					<CardTitle className="text-4xl my-6 text-center font-bold">Forgot your password?</CardTitle>
+					<CardTitle className="text-4xl my-6 text-left font-bold">Forgot your password?</CardTitle>
 					<CardDescription className="text-center text-gray-500 text-sm">provide your email so we can show you instructions on how to reset your password</CardDescription>
 				</CardHeader>
 				{}

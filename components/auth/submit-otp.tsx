@@ -42,7 +42,7 @@ export function SubmitOTP({ setSelectedAuth }: { setSelectedAuth: (value: AuthOp
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(submitHandler)} className="flex flex-col gap-6 max-w-[380px]">
 				<CardHeader className=" my-8">
-					<CardTitle className="text-4xl my-6 text-center font-bold">Reset your password</CardTitle>
+					<CardTitle className="text-4xl my-6 text-left font-bold">Reset your password</CardTitle>
 					<CardDescription className="text-center text-gray-500 text-sm">check your email to get your one time password</CardDescription>
 				</CardHeader>
 				{}

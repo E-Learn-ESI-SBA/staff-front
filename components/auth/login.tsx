@@ -34,7 +34,7 @@ export function SignInAccount() {
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(submitHandler)} className="flex flex-col gap-6 max-w-[380px]">
 				<CardHeader className=" my-8">
-					<CardTitle className="text-4xl my-6 text-center font-bold">Hello! Welcome Back</CardTitle>
+					<CardTitle className="text-4xl my-6 text-left font-bold">Hello! Welcome Back</CardTitle>
 					<CardDescription className="text-center text-gray-500 text-sm">use your email/password combination to login</CardDescription>
 				</CardHeader>
 				{}
