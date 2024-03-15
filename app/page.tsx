@@ -3,5 +3,5 @@ import Landing from "../components/landing";
 import LeaderBoard from "@/components/studentProfile/leaderBoard";
 
 export default function Home() {
-  return <Landing/>
+  return <LeaderBoard/>
 }
