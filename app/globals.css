@@ -1,3 +1,58 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.red{
+  background-color: red;
+}
+.gridview{
+  grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
+  place-items: center;
+ }
+
+ .selected {
+  color: #0066FF;
+  position: relative;
+  transition: all 0.4s ease;
+  padding: 30px;
+}
+
+.selected::after { 
+  content: "";
+  position: absolute;
+  height: 2px;
+  background-color: #0066FF;
+  border-radius: 8px 8px  0 0;
+  width: 0;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  transition: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) all;
+}
+
+
+.selected::after { width: 100%; }
