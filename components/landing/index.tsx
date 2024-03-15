@@ -6,7 +6,6 @@ const Landing = () => {
 return <div className="bg-[#002979] min-h-screen  py-8" >
     <Navbar/>
      <Courses/>
-     <HeroSection/>
       </div>
  }
 
