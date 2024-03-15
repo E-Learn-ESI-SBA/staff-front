@@ -32,8 +32,10 @@ export function SubmitOTP({ setSelectedAuth }: { setSelectedAuth: (value: AuthOp
 
     const { submitOTP } = useResetPassword();
 	async function submitHandler(values: TSubmitOTPSchema) {
-		await submitOTP(values.email, values.code, values.password);
-        setSelectedAuth("LOGIN")
+		const { success } = await submitOTP(values.email, values.code, values.password);
+        if (success) {
+			setSelectedAuth("PASSWORD_RESET_SUCCESSFULLY");
+		}
 	}
 
     return (
@@ -66,7 +68,7 @@ export function SubmitOTP({ setSelectedAuth }: { setSelectedAuth: (value: AuthOp
 						name="password"
 						render={({ field }) => (
 							<FormItem className=" flex flex-col gap-2">
-								<FormLabel>Password</FormLabel>
+								<FormLabel>New Password</FormLabel>
 								<FormControl
 								className="border-gray-500 border-2 px-3 rounded-md py-2"
 									placeholder="YTg1NjVmMzQ="

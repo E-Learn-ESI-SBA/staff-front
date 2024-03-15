@@ -46,11 +46,20 @@ const useResetPassword = () => {
 
             if (response.status == 202) {
                console.log({message: data.message})
+               return {
+                    success: true,
+               }
             } else {
                 console.log({error: data.error})
+                return {
+                    success: false,
+                }
             }
         } catch (error) {
             console.log({error})
+            return {
+                success: false,
+            }
         }
     }
 

@@ -7,9 +7,10 @@ import { useState } from "react";
 import { SignInAccount } from "./login";
 import { ResetPassword } from "./reset"; 
 import { SubmitOTP } from "./submit-otp";
+import ResetSuccess from "./reset-success";
 
 
-export type AuthOption = 'LOGIN' | 'RESET_PASSWORD' | 'SUBMIT_NEW_PASSWORD';
+export type AuthOption = 'LOGIN' | 'RESET_PASSWORD' | 'SUBMIT_NEW_PASSWORD' | 'PASSWORD_RESET_SUCCESSFULLY';
 export default function AuthUI() {
 	const [selectedAuth, setSelectedAuth] = useState<AuthOption>('LOGIN');
 
@@ -19,16 +20,21 @@ export default function AuthUI() {
 			{ selectedAuth === 'LOGIN' && (<SignInAccount />)}
 			{ selectedAuth === 'RESET_PASSWORD' && (<ResetPassword setSelectedAuth={setSelectedAuth} />)}
 			{ selectedAuth === 'SUBMIT_NEW_PASSWORD' && (<SubmitOTP setSelectedAuth={setSelectedAuth} />)}
+			{ selectedAuth === 'PASSWORD_RESET_SUCCESSFULLY' && (<ResetSuccess setSelectedAuth={setSelectedAuth} />) }
 			<CardFooter className="flex flex-col gap-6">
-				<Label
-					className="opacity-70 text-xs italic underline w-fit self-start cursor-pointer mt-2"
-					onClick={() =>
-						setSelectedAuth((prev) =>
-							prev === 'LOGIN' ? 'RESET_PASSWORD' : 'LOGIN'
-						)
-					}>
-					{selectedAuth === 'LOGIN' ? 'Forgot password?' : 'Back to login'}
-				</Label>
+				{
+					selectedAuth !== "PASSWORD_RESET_SUCCESSFULLY" && (
+						<Label
+							className="opacity-70 text-xs italic underline w-fit self-start cursor-pointer mt-2"
+							onClick={() =>
+								setSelectedAuth((prev) =>
+									prev === 'LOGIN' ? 'RESET_PASSWORD' : 'LOGIN'
+								)
+							}>
+							{selectedAuth === 'LOGIN' ? 'Forgot password?' : 'Back to login'}
+						</Label>
+					)
+				}
 				<div className="relative w-full">
 					<div className="absolute inset-0 flex  items-center">
 						<span className="w-full border-t  border-brand  " />

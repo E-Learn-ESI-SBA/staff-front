@@ -34,11 +34,14 @@ export default function Home() {
 
   
   return (<main>
-          <p>Logged in as {user.email}</p>
-          <button
+    {isAuth && (
+      <div>
+        <p>Logged in as {user.email}</p>
+        <button
           onClick={logoutHandler}
           className=" bg-gray-800 text-white px-4 py-2 rounded-md mt-4"
           >Logout</button>
+      </div>)}
         </main>);
 
 }
