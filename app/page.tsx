@@ -4,4 +4,3 @@ import LeaderBoard from "@/components/studentProfile/leaderBoard";
 
 export default function Home() {
   return <LeaderBoard/>
-}
