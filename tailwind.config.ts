@@ -36,6 +36,7 @@ const config = {
         },
         text :{
           DEFAULT: "#A3AED0",
+          GRAY: "#4E5566",
         },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
