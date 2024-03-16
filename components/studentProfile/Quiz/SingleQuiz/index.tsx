@@ -2,40 +2,10 @@
 import { useState } from 'react';
 import QuizDetails from './details';
 import Response from './response';
-import Quiz from '@/types/detailQuiz';
-
+import { questions } from '@/static/content/Quiz';
 
 const SingleQuiz: React.FC = () => {
   const [selectedButton, setSelectedButton] = useState(true);
-  const [quiz, setQuiz] = useState<Quiz>({
-    questions: [
-      {
-        id: 1,
-        questionText: 'Which of the following is not a networking protocol?',
-        answers: [
-          { id: 1, text: 'ICP' },
-          { id: 2, text: 'DCP' },
-          { id: 3, text: 'CCP' },
-          { id: 4, text: 'BCP' },
-        ],
-        correctAnswerId: 4, 
-        selectedAnswerId: 1, 
-      },
-      {
-        id: 2,
-        questionText: 'Which of the following is not a networking protocol?',
-        answers: [
-          { id: 1, text: 'ICP' },
-          { id: 2, text: 'DCP' },
-          { id: 3, text: 'CCP' },
-          { id: 4, text: 'BCP' },
-        ],
-        correctAnswerId: 3, 
-        selectedAnswerId: 3, 
-      },
-
-    ],
-  });
 
   const handleToggle = () => {
     setSelectedButton((prevState) => !prevState);
@@ -67,7 +37,13 @@ const SingleQuiz: React.FC = () => {
         </button>
       </div>
 
-      {selectedButton ? <QuizDetails  /> : <Response quiz={quiz} />}
+      {selectedButton ? <QuizDetails   title="Articulate structure of C++ and Java in Semester 1"
+  passed={true}
+  date="12-01-2023"
+  subject="Networking"
+  numberOfQuestions={50}
+  correctAnswers={35}
+  percentege={87}  /> : <Response questions={questions} />}
     </div>
   );
 };

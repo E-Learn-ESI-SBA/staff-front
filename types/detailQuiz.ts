@@ -3,7 +3,7 @@ type Answer = {
     text: string;
   };
   
-   type Question  = {
+  export type Question  = {
     id: number;
     questionText: string;
     answers: Answer[];
