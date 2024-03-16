@@ -4,7 +4,7 @@ import { testimonialsData } from "@/static/content/testimonials";
 import testimonials from "@/static/content/testimonials";
 const Testimonilas = () => {
     return (
-        <div className="my-8 py-8 mx-auto bg-[#4778EC] text-white rounded-3xl h-fit w-11/12  flex max-md:flex-col  max-md:justify-center  items-center md:justify-between ">
+        <div className="my-16 py-8 mx-auto bg-[#4778EC] text-white rounded-3xl h-fit w-11/12  flex max-md:flex-col  max-md:justify-center  items-center md:justify-between ">
             <div className="md:w-1/2 flex items-center justify-center " >
             <Image src={testimonials.bigImage} alt='cs' width={0} height={0} sizes='100vw' className=" h-3/4 w-3/4 "  />
             </div>

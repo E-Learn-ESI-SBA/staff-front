@@ -3,7 +3,7 @@ import Link from "next/link";
 import courseCategories from '@/static/content/courses'
 const Courses = () => {
     return (
-      <div className="my-8 py-8 mx-auto  w-full  text-white  h-fit  bg-[#4778EC] ">
+      <div className="my-16 py-8 mx-auto  w-full  text-white  h-fit  bg-[#4778EC] ">
       <p className="text-center font-semibold text-2xl">Courses Categories</p>
       <div className="grid gridview gap-8  max-w-screen-lg mx-auto py-8 px-2 relative">
         {courseCategories.map((category, index) => (
