@@ -1,8 +1,8 @@
-import Quiz from "@/types/detailQuiz";
-const Response: React.FC<{ quiz: Quiz }> = ({ quiz }) => {
+import { Question } from "@/types/detailQuiz";
+const Response: React.FC<{ questions: Question[] }> = ({ questions }) => {
   return (
     <div className='flex flex-col gap-4'>
-      {quiz.questions.map((question, index) => (
+      {questions.map((question, index) => (
         <div key={index} className='flex flex-col gap-2 items-start'>
           <p className='font-semibold text-lg'>{`Q${index+1}.`}</p>
           <p className='font-medium text-lg'>{question.questionText}</p>
