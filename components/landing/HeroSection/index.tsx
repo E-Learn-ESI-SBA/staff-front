@@ -5,6 +5,8 @@ const HeroSection = () => {
       <div className="grid grid-cols-5  sm:grid-cols-4  my-8 pt-8 px-4 mx-auto  w-full max-w-screen-lg text-white   relative">
      <div className="col-span-1 border-l-4 border-t-4 border-b-4 h-3/4 sm:h-2/3 border-dashed opacity-50 relative" >
      <div className="absolute -top-2 right-0 h-2 w-2/3 bg-[#002979]"></div> 
+     <Image src="/landing/heroSection/icon1.svg" alt="cs" width={0} height={0} sizes="100vw" className="  absolute h-12 w-12 top-[30%] left-8 " />  
+     <Image src="/landing/heroSection/icon2.svg" alt="cs" width={0} height={0} sizes="100vw" className=" absolute h-16 w-16 top-[50%] right-4 " />  
       </div>   
      <div className="flex flex-col items-center justify-center gap-8  col-span-3 sm:col-span-2 " >
       <div className="flex flex-col text-center gap-4 sm:gap-12" >
@@ -20,10 +22,11 @@ const HeroSection = () => {
      </div>
      <div className="col-span-1 border-r-4 border-t-4 border-b-4 rounded-br-[120px] border-dashed h-3/4 sm:h-2/3 opacity-50 relative">
                 <div className="absolute -top-2 left-0 h-2 w-2/3 bg-[#002979]"></div> 
+                <Image src="/landing/heroSection/icon3.svg" alt="cs" width={0} height={0} sizes="100vw" className=" absolute h-16 w-16 top-[50%] right-4  " />  
             </div>
-            <Image src="/landing/heroSection/icon1.svg" alt="cs" width={0} height={0} sizes="100vw" className=" absolute h-4 w-4  " />  
-            <Image src="/landing/heroSection/icon2.svg" alt="cs" width={0} height={0} sizes="100vw" className=" absolute h-4 w-4 " />  
-            <Image src="/landing/heroSection/icon3.svg" alt="cs" width={0} height={0} sizes="100vw" className="  absolute h-4 w-4  " />  
+          
+
+   
             <Image src="/landing/heroSection/icon4.svg" alt="cs" width={0} height={0} sizes="100vw" className=" absolute h-8 w-8  bottom-8 left-4 " />  
     </div>
     ) 
