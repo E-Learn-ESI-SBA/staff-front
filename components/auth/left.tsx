@@ -1,11 +1,11 @@
-import saly from '../../public/assets/auth/Saly-10.png'
-import stars from '../../public/assets/auth/stars.svg'
+import saly from '@/public/assets/auth/Saly-10.png'
+import stars from '@/public/assets/auth/stars.svg'
 import Image from 'next/image';
 
 
 export default function LeftSection() {
     return (
-        <div className="w-full md:w-1/2 h-full flex-col justify-start items-center hidden md:flex bg-blue-700 relative">
+        <div className="w-full md:w-1/2 h-full flex-col justify-start items-center hidden lg:flex bg-blue-700 relative">
             
             <Image
             height={700}

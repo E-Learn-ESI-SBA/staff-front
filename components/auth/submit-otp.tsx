@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form";
-import { Button } from "../../@/components/ui/button";
-import { CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../../@/components/ui/card";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../../@/components/ui/form";
-import { Input } from "../../@/components/ui/input";
+import { Button } from "@/@/components/ui/button";
+import { CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/@/components/ui/card";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/@/components/ui/form";
+import { Input } from "@/@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import useResetPassword from "../../hooks/auth/reset";
+import useResetPassword from "@/hooks/auth/reset";
 import { AuthOption } from "./auth";
 
 
@@ -43,7 +43,7 @@ export function SubmitOTP({ setSelectedAuth }: { setSelectedAuth: (value: AuthOp
 			<form onSubmit={form.handleSubmit(submitHandler)} className="flex flex-col gap-6 max-w-[380px]">
 				<CardHeader className=" my-8">
 					<CardTitle className="text-4xl my-6 text-left font-bold">Reset your password</CardTitle>
-					<CardDescription className="text-center text-gray-500 text-sm">check your email to get your one time password</CardDescription>
+					<CardDescription className="text-center text-gray-800 text-sm">check your email to get your one time password</CardDescription>
 				</CardHeader>
 				{}
 				<CardContent className="grid gap-4">
@@ -54,7 +54,7 @@ export function SubmitOTP({ setSelectedAuth }: { setSelectedAuth: (value: AuthOp
 							<FormItem className=" flex flex-col gap-2">
 								<FormLabel>Email</FormLabel>
 								<FormControl
-									className=" border-gray-500 border-2 px-3 rounded-md py-2"
+									className=" border-gray-500 border-2 px-3 rounded-[0.4rem] py-2"
 									placeholder="joe@example.com"
 									>
 									<Input type="email" {...field} />
@@ -70,7 +70,7 @@ export function SubmitOTP({ setSelectedAuth }: { setSelectedAuth: (value: AuthOp
 							<FormItem className=" flex flex-col gap-2">
 								<FormLabel>New Password</FormLabel>
 								<FormControl
-								className="border-gray-500 border-2 px-3 rounded-md py-2"
+								className="border-gray-500 border-2 px-3 rounded-[0.4rem] py-2"
 									placeholder="YTg1NjVmMzQ="
 								>
 									<Input type="password" {...field} />
@@ -86,7 +86,7 @@ export function SubmitOTP({ setSelectedAuth }: { setSelectedAuth: (value: AuthOp
 							<FormItem className=" flex flex-col gap-2">
 								<FormLabel>OTP</FormLabel>
 								<FormControl
-								className="border-gray-500 border-2 px-3 rounded-md py-2"
+								className="border-gray-500 border-2 px-3 rounded-[0.4rem] py-2"
 									placeholder="6Tg1NjV4"
 								>
 									<Input type="text" {...field} />
@@ -98,7 +98,7 @@ export function SubmitOTP({ setSelectedAuth }: { setSelectedAuth: (value: AuthOp
 				</CardContent>
 				<CardFooter className="flex  justify-center">
 					<Button
-                    className="w-full bg-blue-600 text-white"
+                    className="w-full bg-blue-600 text-white rounded-[0.4rem]"
                     // disabled={loading}
                     type="submit"
 					>

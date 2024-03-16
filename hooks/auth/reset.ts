@@ -1,5 +1,5 @@
-import { toast } from "../../@/components/ui/use-toast";
-import { AuthOption } from "../../components/auth/auth";
+import { toast } from "@/@/components/ui/use-toast";
+import { AuthOption } from "@/components/auth/auth";
 import useAxios from "../axios/useAxios";
 
 
@@ -16,23 +16,24 @@ const useResetPassword = () => {
 
 
             if (response.status == 202) {
-                toast({
-                    color: "success",
-                    description: data.message,
-                });
+                // toast({
+                //     color: "success",
+                //     description: data.message,
+                // });
                 setSelectedAuth('SUBMIT_NEW_PASSWORD');
             } else {
-                toast({
-                    color: "error",
-                    description: data.error,
-                });
+                // toast({
+                //     color: "error",
+                //     description: data.error,
+                // });
+                console.log({error: data.error})
             }
         } catch (error) {
             console.log({error})
-            toast({
-                color: "error",
-                description: "An error occurred. Please try again.",
-            });
+            // toast({
+            //     color: "error",
+            //     description: "An error occurred. Please try again.",
+            // });
         }
     };
 

@@ -1,15 +1,15 @@
 'use client';
 
 import { useState } from "react";
-import { Button } from "../../@/components/ui/button";
-import { CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../../@/components/ui/card";
-import { Input } from "../../@/components/ui/input";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../../@/components/ui/form";
+import { Button } from "@/@/components/ui/button";
+import { CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/@/components/ui/card";
+import { Input } from "@/@/components/ui/input";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { AuthOption } from "./auth";
-import useResetPassword from "../../hooks/auth/reset";
+import useResetPassword from "@/hooks/auth/reset";
 
 
 
@@ -47,8 +47,8 @@ export function ResetPassword({ setSelectedAuth }: { setSelectedAuth: (value: Au
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-6 max-w-[380px]">
 				<CardHeader className=" my-8">
-					<CardTitle className="text-4xl my-6 text-left font-bold">Forgot your password?</CardTitle>
-					<CardDescription className="text-center text-gray-500 text-sm">provide your email so we can show you instructions on how to reset your password</CardDescription>
+					<CardTitle className="text-4xl my-6 text-left font-bold text-black">Forgot your password?</CardTitle>
+					<CardDescription className="text-center text-gray-800 text-sm">provide your email so we can show you instructions on how to reset your password</CardDescription>
 				</CardHeader>
 				{}
 				<CardContent className="grid gap-4">
@@ -59,7 +59,7 @@ export function ResetPassword({ setSelectedAuth }: { setSelectedAuth: (value: Au
 							<FormItem className=" flex flex-col gap-3">
 								<FormLabel>Email</FormLabel>
 								<FormControl
-									className=" border-gray-500 border-2 px-3 rounded-md py-2"
+									className=" border-gray-500 border-2 px-3 rounded-[0.4rem] py-2"
 									placeholder="joe@example.com"
 									>
 									<Input type="email" {...field} />
@@ -71,7 +71,7 @@ export function ResetPassword({ setSelectedAuth }: { setSelectedAuth: (value: Au
 				</CardContent>
 				<CardFooter className="flex  justify-center">
 					<Button
-                    className="w-full bg-blue-600 text-white"
+                    className="w-full bg-blue-600 text-white rounded-[0.4rem]"
                     // disabled={loading}
 					disabled={false}
                     type="submit"

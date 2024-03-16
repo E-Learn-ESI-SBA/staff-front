@@ -1,6 +1,6 @@
-import { toast } from "../../@/components/ui/use-toast";
-import { useUserStore } from "../../store/user";
-import { decodeJwt } from "../../lib/utils/jwt";
+import { toast } from "@/@/components/ui/use-toast";
+import { useUserStore } from "@/store/user";
+import { decodeJwt } from "@/lib/utils/jwt";
 import useAxios from "../axios/useAxios";
 import { useRouter } from "next/navigation";
 

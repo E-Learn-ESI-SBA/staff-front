@@ -1,7 +1,7 @@
 'use client';
 import axios from "axios";
-import { decodeJwt } from "../../lib/utils/jwt";
-import { useUserStore } from "../../store/user";
+import { decodeJwt } from "@/lib/utils/jwt";
+import { useUserStore } from "@/store/user";
 import { useRouter } from "next/navigation";
 
 

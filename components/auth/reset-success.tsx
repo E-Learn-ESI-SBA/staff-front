@@ -1,7 +1,7 @@
-import { Button } from "../../@/components/ui/button";
+import { Button } from "@/@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
-import checkMark from "../../public/assets/auth/Check.png";
+import checkMark from "@/public/assets/auth/Check.png";
 import { AuthOption } from "./auth";
 
 
@@ -21,7 +21,7 @@ export default function ResetSuccess({ setSelectedAuth }: { setSelectedAuth: (va
             />
 
             <Button
-            className=" w-full bg-blue-600 text-white"
+            className=" w-full bg-blue-600 text-white rounded-[0.4rem]"
             onClick={() => setSelectedAuth("LOGIN")}
 			>
 				Back to Login

@@ -1,8 +1,8 @@
 'use client';
 
 import Link from "next/link";
-import { Card, CardFooter } from "../../@/components/ui/card";
-import { Label } from "../../@/components/ui/label";
+import { Card, CardFooter } from "@/@/components/ui/card";
+import { Label } from "@/@/components/ui/label";
 import { useState } from "react";
 import { SignInAccount } from "./login";
 import { ResetPassword } from "./reset"; 
@@ -21,11 +21,11 @@ export default function AuthUI() {
 			{ selectedAuth === 'RESET_PASSWORD' && (<ResetPassword setSelectedAuth={setSelectedAuth} />)}
 			{ selectedAuth === 'SUBMIT_NEW_PASSWORD' && (<SubmitOTP setSelectedAuth={setSelectedAuth} />)}
 			{ selectedAuth === 'PASSWORD_RESET_SUCCESSFULLY' && (<ResetSuccess setSelectedAuth={setSelectedAuth} />) }
-			<CardFooter className="flex flex-col gap-6">
+			<CardFooter className="flex flex-col gap-6 w-full px-0">
 				{
 					selectedAuth !== "PASSWORD_RESET_SUCCESSFULLY" && (
 						<Label
-							className="opacity-70 text-xs italic underline w-fit self-start cursor-pointer mt-2"
+							className="opacity-70 text-xs italic underline w-fit self-start cursor-pointer mt-2 text-slate-700 rounded-md"
 							onClick={() =>
 								setSelectedAuth((prev) =>
 									prev === 'LOGIN' ? 'RESET_PASSWORD' : 'LOGIN'
@@ -40,7 +40,7 @@ export default function AuthUI() {
 						<span className="w-full border-t  border-brand  " />
 					</div>
 				</div>
-				<p className="px-8 text-xs text-muted-foreground">
+				<p className="px-8 text-xs text-muted-foreground text-slate-700 text-left w-full">
 					By submitting, you agree to our terms of service and privacy.
 				</p>
 			</CardFooter>
