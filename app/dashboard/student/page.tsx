@@ -24,8 +24,9 @@ export default function page() {
     console.log('Search submitted:', searchValue);
   };
   return (
-    <main className='bg-secondary-background flex justify-between lg:h-lvh p-4'>
-      {/* <NavBar title='Hello Hakim'/> */}
+    <main className='bg-secondary-background lg:h-lvh'>
+      <NavBar title='Hello Hakim'/>
+      <div className='flex justify-between mt-4'>
       <div className='w-[66%]'>
         <div className='m-4'>
           <div className='flex w-full justify-between my-4'>
@@ -46,7 +47,7 @@ export default function page() {
 
         </div>
       </div>
-
+      </div>
     </main>
   )
 }

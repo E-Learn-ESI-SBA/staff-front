@@ -1,5 +1,7 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react'
+import ViewAll from './viewAll';
 
 type Props = {
     title: string;
@@ -8,7 +10,7 @@ type Props = {
 
 export default function UpcommingCard({title,points}: Props) {
   return (
-    <div className='p-8 rounded-3xl bg-white my-4'>
+    <div className='p-8 rounded-3xl bg-white my-4 w-[450px]'>
         <h1 className='font-medium text-4xl text-primary-text py-2'>{title}</h1>
         <div>
             {points.map((point) => (
@@ -20,6 +22,9 @@ export default function UpcommingCard({title,points}: Props) {
                     </div>
                 </div>
             ))}
+            <div className='flex justify-end'>
+       <ViewAll title='View All' />
+       </div>
         </div>
     </div>
   )
