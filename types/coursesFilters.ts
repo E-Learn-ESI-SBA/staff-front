@@ -1,6 +1,5 @@
 export type FilterType = {
-    [key: string]: {
-      [key: string]: string[];
-    };
+  [key: string]: {
+    [key: string]: string[];
   };
-  
+};
