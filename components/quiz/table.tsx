@@ -8,8 +8,6 @@ export function QuizTable() {
     <>
       <DataTable<IQuiz>
         data={quiz}
-        filterColumn="title"
-        filterTitle="Search by quiz title"
         headers={[
           {
             accessorKey: "id",
@@ -43,8 +41,14 @@ export function QuizTable() {
             accessorKey: "questions",
             title: "Questions",
           },
+            {
+                accessorKey: "duration",
+                title: "Duration",
+            },
         ]}
-        customColumns={[CustomColumns()]}
+        customColumns={[CustomColumns]}
+        defaultFilter="title"
+        fuzzyElements={["category", "module_name", "publisher"]}
       />
     </>
   );

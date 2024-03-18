@@ -4,12 +4,19 @@ import { twMerge } from "tailwind-merge";
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
-export function capitalize(wd: string, separator: "_" | "-" | " " = "_") {
+export function capitalize(wd: string, separator: "_" | "-" | " " = "_",option?:{
+    plural:{
+        count:number
+    }
+}) {
   // write function that capitalize the first letter of each word
-  return wd
-    .split(separator)
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
+  const   arr  =  wd.split(separator)
+  // make last one plural
+    if (option && option.plural.count > 1) {
+        arr[arr.length - 1] = pluralize(arr[arr.length - 1], option.plural.count)
+    }
+    return arr.map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ")
+
 }
 
 export function tableDisplayHeader<T>(
@@ -26,3 +33,23 @@ export function tableDisplayHeader<T>(
 export const timeUnitHandler = (time: number, unit: "Min" | "Hour" | "Day") => {
   return time + " " + unit + (time > 1 ? "s" : "");
 };
+export function pluralize(word: string, count: number): string {
+    // If count is 1, return the word as is
+    if (count === 1) {
+        return word;
+    }
+
+    // Words ending in 's', 'x', 'z', 'ch', or 'sh' add 'es' in plural form
+    if (word.endsWith('s') || word.endsWith('x') || word.endsWith('z') ||
+        word.endsWith('ch') || word.endsWith('sh')) {
+        return word + 'es';
+    }
+
+    // Words ending in 'y' preceded by a consonant, replace 'y' with 'ies'
+    if (word.endsWith('y') && !'aeiou'.includes(word[word.length - 2])) {
+        return word.slice(0, -1) + 'ies';
+    }
+
+    // For other cases, simply add 's' to make it plural
+    return word + 's';
+}

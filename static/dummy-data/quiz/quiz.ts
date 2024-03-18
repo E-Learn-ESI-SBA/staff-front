@@ -1,4 +1,4 @@
-import { IQuiz } from "@/types/quiz";
+import {IQuiz, QuizState} from "@/types/quiz";
 
 export const quiz: IQuiz[] = [
   {
@@ -12,7 +12,7 @@ export const quiz: IQuiz[] = [
     end: "2021-09-01",
     questions: 10,
     publisher: "Admin",
-    state: "UPCOMING",
+    state:  QuizState.FINISHED,
     module_name: "Mathematics",
   },
   {
@@ -26,7 +26,7 @@ export const quiz: IQuiz[] = [
     end: "2021-09-01",
     questions: 10,
     publisher: "Admin",
-    state: "ONGOING",
+    state:  QuizState.UPCOMING,
     module_name: "Physics",
   },
   {
@@ -40,7 +40,7 @@ export const quiz: IQuiz[] = [
     end: "2021-09-01",
     questions: 10,
     publisher: "Admin",
-    state: "FINISHED",
+    state: QuizState.FINISHED,
     module_name: "Chemistry",
   },
   {
@@ -54,7 +54,7 @@ export const quiz: IQuiz[] = [
     end: "2021-09-01",
     questions: 10,
     publisher: "Admin",
-    state: "UPCOMING",
+    state: QuizState.ONGOING,
     module_name: "Mathematics",
   },
   {
@@ -68,7 +68,7 @@ export const quiz: IQuiz[] = [
     end: "2021-09-01",
     questions: 10,
     publisher: "Admin",
-    state: "ONGOING",
+    state: QuizState.ONGOING,
     module_name: "Physics",
   },
   {
@@ -82,7 +82,7 @@ export const quiz: IQuiz[] = [
     end: "2021-09-01",
     questions: 10,
     publisher: "Admin",
-    state: "FINISHED",
+    state: QuizState.UPCOMING,
     module_name: "Chemistry",
   },
   {
@@ -96,7 +96,7 @@ export const quiz: IQuiz[] = [
     end: "2021-09-01",
     questions: 10,
     publisher: "Admin",
-    state: "UPCOMING",
+    state: QuizState.FINISHED,
     module_name: "Mathematics",
   },
   {
@@ -110,7 +110,7 @@ export const quiz: IQuiz[] = [
     end: "2021-09-01",
     questions: 10,
     publisher: "Admin",
-    state: "ONGOING",
+    state: QuizState.ONGOING,
     module_name: "Physics",
   },
   {
@@ -124,7 +124,7 @@ export const quiz: IQuiz[] = [
     end: "2021-09-01",
     questions: 10,
     publisher: "Admin",
-    state: "FINISHED",
+    state: QuizState.FINISHED,
     module_name: "Chemistry",
   },
   {
@@ -138,7 +138,7 @@ export const quiz: IQuiz[] = [
     end: "2021-09-01",
     questions: 10,
     publisher: "Admin",
-    state: "UPCOMING",
+    state: QuizState.UPCOMING,
     module_name: "Mathematics",
   },
   {
@@ -152,7 +152,7 @@ export const quiz: IQuiz[] = [
     end: "2021-09-01",
     questions: 10,
     publisher: "Admin",
-    state: "ONGOING",
+    state: QuizState.ONGOING,
     module_name: "Physics",
   },
   {
@@ -166,7 +166,7 @@ export const quiz: IQuiz[] = [
     end: "2021-09-01",
     questions: 10,
     publisher: "Admin",
-    state: "FINISHED",
+    state: QuizState.FINISHED,
     module_name: "Chemistry",
   },
 ];

@@ -6,11 +6,14 @@ import { IQuiz } from "@/types/quiz";
 export function CustomColumns(): ColumnDef<IQuiz> {
   return {
     accessorKey: "state",
-    header: "",
+    header: "State",
     cell: ({ row }: { row: Row<IQuiz> }) => {
-      return <div className="flex gap-2 ">
+    const color  = row.original.state === "ONGOING" ? "#FF9407"  : row.original.state === "UPCOMING" ? "#D80027"  : "#0F930F";
+      return <div className="flex gap-2 items-center "
+        style={{ color: color }}
+      >
+          <Ping color={color} />
           {row.original.state}
-          <Ping color={row.original.state === "ONGOING" ? "bg-orange-400"  : row.original.state === "UPCOMING" ? "bg-red-700"  : "bg-green-500"} />
       </div>;
     },
   };
@@ -21,13 +24,15 @@ type Props = {
 };
 export function Ping({ color }: Props) {
   return (
-    <span className="relative flex h-3 w-3">
+    <span className="relative flex  h-3 w-3">
       <span
-        className={`animate-ping absolute inline-flex h-full w-full rounded-full ${color} opacity-75`}
-      ></span>
+        className="animate-ping absolute inline-flex h-full w-full rounded-full   opacity-75"
+        style={{ backgroundColor: color }}
+      />
       <span
-        className={`relative inline-flex rounded-full h-3 w-3 ${color}`}
-      ></span>
+        className="relative inline-flex rounded-full h-3 w-3"
+        style={{ backgroundColor: color }}
+      />
     </span>
   );
 }

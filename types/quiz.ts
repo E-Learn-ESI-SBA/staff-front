@@ -10,5 +10,10 @@ export interface IQuiz {
   questions: number;
   module_name: string;
   publisher: string;
-  state: "UPCOMING" | "ONGOING" | "FINISHED";
+  state: QuizState;
+}
+export enum QuizState {
+    UPCOMING = "UPCOMING",
+    ONGOING = "ONGOING",
+    FINISHED = "FINISHED",
 }
