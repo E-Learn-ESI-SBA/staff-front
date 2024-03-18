@@ -1,4 +1,4 @@
-import {IQuiz, QuizState} from "@/types/quiz";
+import { IQuiz, QuizState } from "@/types/quiz";
 
 export const quiz: IQuiz[] = [
   {
@@ -12,7 +12,7 @@ export const quiz: IQuiz[] = [
     end: "2021-09-01",
     questions: 10,
     publisher: "Admin",
-    state:  QuizState.FINISHED,
+    state: QuizState.FINISHED,
     module_name: "Mathematics",
   },
   {
@@ -26,7 +26,7 @@ export const quiz: IQuiz[] = [
     end: "2021-09-01",
     questions: 10,
     publisher: "Admin",
-    state:  QuizState.UPCOMING,
+    state: QuizState.UPCOMING,
     module_name: "Physics",
   },
   {

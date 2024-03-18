@@ -1,7 +1,7 @@
 import { IQuiz } from "@/types/quiz";
 import { DataTable } from "../common/table";
 import { quiz } from "@/static/dummy-data/quiz/quiz";
-import {CustomColumns} from "@/components/quiz/colloms";
+import { CustomColumns } from "@/components/quiz/colloms";
 
 export function QuizTable() {
   return (
@@ -41,10 +41,10 @@ export function QuizTable() {
             accessorKey: "questions",
             title: "Questions",
           },
-            {
-                accessorKey: "duration",
-                title: "Duration",
-            },
+          {
+            accessorKey: "duration",
+            title: "Duration",
+          },
         ]}
         customColumns={[CustomColumns]}
         defaultFilter="title"

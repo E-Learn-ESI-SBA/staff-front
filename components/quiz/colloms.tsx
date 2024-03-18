@@ -8,13 +8,18 @@ export function CustomColumns(): ColumnDef<IQuiz> {
     accessorKey: "state",
     header: "State",
     cell: ({ row }: { row: Row<IQuiz> }) => {
-    const color  = row.original.state === "ONGOING" ? "#FF9407"  : row.original.state === "UPCOMING" ? "#D80027"  : "#0F930F";
-      return <div className="flex gap-2 items-center "
-        style={{ color: color }}
-      >
+      const color =
+        row.original.state === "ONGOING"
+          ? "#FF9407"
+          : row.original.state === "UPCOMING"
+            ? "#D80027"
+            : "#0F930F";
+      return (
+        <div className="flex gap-2 items-center " style={{ color: color }}>
           <Ping color={color} />
           {row.original.state}
-      </div>;
+        </div>
+      );
     },
   };
 }

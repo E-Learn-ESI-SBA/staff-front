@@ -13,7 +13,7 @@ export interface IQuiz {
   state: QuizState;
 }
 export enum QuizState {
-    UPCOMING = "UPCOMING",
-    ONGOING = "ONGOING",
-    FINISHED = "FINISHED",
+  UPCOMING = "UPCOMING",
+  ONGOING = "ONGOING",
+  FINISHED = "FINISHED",
 }
