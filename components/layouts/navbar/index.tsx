@@ -1,12 +1,17 @@
-'use client'
-import Image from "next/image"
-import Link from "next/link"
-import { Links } from "@/static/content/navbar"
-import { usePathname } from 'next/navigation'
+"use client";
+import Image from "next/image";
+import Link from "next/link";
+import { Links } from "@/static/content/navbar";
+import { usePathname } from "next/navigation";
 const Navbar = () => {
   const path = usePathname();
-  const isActiveLink = (url:string) => {
-    return path.substring(1).toLowerCase().replace(/[^a-z]/g, '') === url.substring(1).toLowerCase() ;
+  const isActiveLink = (url: string) => {
+    return (
+      path
+        .substring(1)
+        .toLowerCase()
+        .replace(/[^a-z]/g, "") === url.substring(1).toLowerCase()
+    );
   };
     return <div className={`w-full px-4 md:px-8  `}  >
       <div className={`flex justify-between items-center py-4  ${path.substring(1) ? 'text-courses-main' :  'text-white  border-white border-b-2  border-dashed '  } `} >
@@ -23,10 +28,8 @@ const Navbar = () => {
       Login
      </Link>        
       </div>
-          </div>
-     }
-    
-    export default Navbar
-    
-    
-    
+    </div>
+  );
+};
+
+export default Navbar;
