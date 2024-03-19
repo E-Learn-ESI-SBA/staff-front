@@ -19,7 +19,7 @@ const config = {
     },
     extend: {
       backgroundImage: {
-        'g-crown': "url(/dashboard/leaderboard/g-crown.png)",
+        "g-crown": "url(/dashboard/leaderboard/g-crown.png)",
         crown: "url(/dashboard/leaderboard/crown.png)",
       },
       colors: {
