@@ -21,6 +21,9 @@ const config = {
       colors: {
         "bg-courses": "#F4F7FE",
         "courses-main": "#002979",
+        "typo-color": {
+          h2: "#2B3674",
+        },
         "cards-main": "#2B3674",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -55,6 +58,9 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+      },
+      fontSize: {
+        h2: "1.2rem",
       },
       borderRadius: {
         lg: "var(--radius)",

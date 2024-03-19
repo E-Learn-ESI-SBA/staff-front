@@ -63,3 +63,16 @@ export function pluralize(word: string, count: number): string {
   // For other cases, simply add 's' to make it plural
   return word + "s";
 }
+
+export function numberToText(num: number): string {
+  switch (num) {
+    case 1:
+      return "Once";
+    case 2:
+      return "Twice";
+    case 3:
+      return "Thrice";
+    default:
+      return `${num} times`;
+  }
+}

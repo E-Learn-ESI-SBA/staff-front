@@ -1,4 +1,4 @@
-import {  Table } from "@tanstack/react-table";
+import { Table } from "@tanstack/react-table";
 import { useMemo } from "react";
 import { capitalize } from "@/lib/utils";
 import {
@@ -30,7 +30,7 @@ export function Filter<T>({
       typeof firstValue === "number"
         ? []
         : Array.from(getFacetedUniqueValues().keys()).sort(),
-    [getFacetedUniqueValues,firstValue],
+    [getFacetedUniqueValues, firstValue],
   );
 
   return typeof firstValue === "number" || !column.getCanFilter() ? (

@@ -5,12 +5,14 @@ export interface IQuiz {
   duration: number;
   category: string;
   image: string;
-  start: string;
-  end: string;
+  startDate: string;
+  endDate: string;
   questions: number;
   module_name: string;
   publisher: string;
   state: QuizState;
+  points: number;
+  attempts: number;
 }
 export enum QuizState {
   UPCOMING = "UPCOMING",
