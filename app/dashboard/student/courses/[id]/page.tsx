@@ -10,6 +10,7 @@ const points :string[]= [
     "Get an understanding of how to create GUIs in the Jupyter Notebook system!"]
 const description = "<h1>It gives you a huge self-satisfaction when you look at your work and say, 'I made this!'. I love that feeling after I'm done working on something. When I lean back in my chair, look at the final result with a smile, and have this little 'spark joy' moment. It's especially satisfying when I know I just made $5,000.</h1><h1>What you will learn in this course</h1><h1>What you will learn in this course</h1><br/><h1>What you will learn in this course</h1>"
 export default function page() {
+    // here to fetch the course with the id (from params) 
     return (
         <div className='bg-secondary-background h-lvh'>
             <Overview description={description} points={points}/>
