@@ -61,7 +61,10 @@ const config = {
         },
         customGray: {
           DEFAULT: "#201D23",
-        }
+        },
+        customBlue: {
+          DEFAULT: "#718EBF",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

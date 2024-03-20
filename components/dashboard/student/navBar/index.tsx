@@ -1,5 +1,5 @@
 import React from 'react'
-import Search from './search';
+import SearchIn from './search';
 import Icon from './icon';
 import Image from 'next/image';
 
@@ -14,9 +14,9 @@ export default function NavBar({title}: Props) {
             <p className='text-secondary text-3xl font-semibold'>{title}</p>
         </div>
         <div className='flex justify-between'>
-            <Search />
-            <Icon icon='/assets/icons/nav-bar/settings.svg' />
-            <Icon icon='/assets/icons/nav-bar/notifications.svg' />
+            <SearchIn />
+            <Icon icon='settings' />
+            <Icon icon='notifications' />
             <Image src={'/assets/person.png'} width={50} height={50} alt='person' className='rounded-full w-14 h-14 mx-4' />
         </div>
     </div>

@@ -42,12 +42,12 @@ export const  SideBar: React.FC = () => {
         <Image src={'/icons/logo.svg'} width={150} height={150} alt='logo' />
       </div>
 
-      <div className='flex flex-col justify-between'>
+      <div className='flex flex-col justify-between gap-4'>
         {SideItems()}
       </div>
       <div className='logout absolute bottom-8'>
         <SideItem
-          icon={"/assets/icons/side-bar/logout.svg"}
+          icon={"logout"}
           url={"/logout"}
           label={"Log Out"}
           isActive={false}
