@@ -4,7 +4,7 @@ import MsgBox from '@/components/dashboard/student/home/msgBox';
 import NavBar from '@/components/dashboard/student/navBar';
 import TrialClass from '@/components/dashboard/student/home/trialClass';
 import UpcommingCard from '@/components/dashboard/student/home/upcommingCard';
-export default function page() {
+export default function QuizTable() {
 
   const tasks: [string, string][] = [
     ["Lorem epsssss", "12:00 PM"],
