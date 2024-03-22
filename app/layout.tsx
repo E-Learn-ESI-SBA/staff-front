@@ -20,7 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={monts.className}>{children}</body>
+
+    <body className={monts.className}>{children}</body>
+
     </html>
   );
 }

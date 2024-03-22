@@ -35,12 +35,19 @@ const config = {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "hsl(var(--primary))",
+          DEFAULT: "#0066FF",
+          text: "#2B3674",
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
+          DEFAULT: "#2B3674",
+          white: "#8BA3CB",
+          background: "#f4f7fe",
           foreground: "hsl(var(--secondary-foreground))",
+        },
+        text :{
+          DEFAULT: "#A3AED0",
+          GRAY: "#4E5566",
         },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
@@ -61,6 +68,12 @@ const config = {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+        },
+        customGray: {
+          DEFAULT: "#201D23",
+        },
+        customBlue: {
+          DEFAULT: "#718EBF",
         },
       },
       fontSize: {
