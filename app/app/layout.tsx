@@ -7,12 +7,13 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
+       <body className='flex'> 
         <Suspense>
-        <body className='flex'> 
                 <SideBar />
                 <div className='flex-1 pl-80'>{children}</div>
-            </body>
+
         </Suspense>
+        </body>
     );
 }
 
