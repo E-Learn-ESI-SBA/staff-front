@@ -1,5 +1,4 @@
-import Profile from "@/components/studentProfile";
-import LeaderBoard from "@/components/studentProfile/leaderBoard";
+import LeaderBoard from "@/components/dashboard/student/studentProfile/leaderboard";
 
 export default function ProfilePage() {
   return (
