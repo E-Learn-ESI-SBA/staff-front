@@ -4,7 +4,7 @@ export const sideBarItems:SideBarItem[] = [
     {
         "label":"Dashboard",
         "icon":"menu",
-        "url":"/dashboard/student"
+        "url":"/app/u/s"
     },
     {
         "label":"Courses",

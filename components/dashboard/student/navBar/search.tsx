@@ -1,5 +1,5 @@
 'use client'
-import { cn } from '@/@/lib/utils';
+import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Search } from 'lucide-react';
 import React, { ChangeEvent, KeyboardEvent } from 'react';

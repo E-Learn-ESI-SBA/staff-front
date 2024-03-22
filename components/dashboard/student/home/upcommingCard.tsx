@@ -13,8 +13,8 @@ export default function UpcommingCard({title,points}: Props) {
     <div className='p-8 rounded-3xl bg-white my-4 w-[450px]'>
         <h1 className='font-medium text-4xl text-primary-text py-2'>{title}</h1>
         <div>
-            {points.map((point) => (
-                <div className='border-1-4 flex my-4'>
+            {points.map((point,i) => (
+                <div key={i}  className='border-1-4 flex my-4'>
                     <Image src='/assets/icons/home/border.svg' width={4} height={4} alt='border' />
                     <div className='ml-2'>
                     <p className='text-lg font-medium text-primary-text'>{point[0]}</p>
