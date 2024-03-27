@@ -28,8 +28,27 @@ const config = {
 				'typo-color': {
 					h2: '#2B3674',
 				},
+				red: {
+					origin: '#D80027',
+					light: '#FFF0F0',
+				},
 				green: {
 					light: '#E1F7E3',
+					origin: '#0F930F',
+				},
+				blue: {
+					light: '#EBF8FF',
+					origin: '#0066FF',
+					font: {
+						dark: '#2B3674',
+					},
+				},
+				purple: {
+					light: '#EBEBFF',
+					origin: '#7F56D9',
+				},
+				light: {
+					medium: '#F1F1F1',
 				},
 				'cards-main': '#2B3674',
 				border: 'hsl(var(--border))',

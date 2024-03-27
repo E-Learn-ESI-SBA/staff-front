@@ -2,23 +2,21 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 type Props = {
 	message: string;
-	name: string;
 	senderId: string;
-	senderName: string;
 	timestamp: number;
 	currentUserId: string;
 	previousMessageUserId: string;
 	senderImage: string;
+	name: string;
 };
 
 export function Message({
 	currentUserId,
-	name,
 	message,
+	name,
 	previousMessageUserId,
 	senderId,
 	senderImage,
-	senderName,
 	timestamp,
 }: Props) {
 	return (
