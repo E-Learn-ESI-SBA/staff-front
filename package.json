@@ -8,11 +8,13 @@
 		"start": "next start",
 		"clean": "rm -rf .next",
 		"lint": "eslint . --ext .ts,.tsx",
-		"format": "prettier --write ."
+		"format": "prettier --write .",
+		"prepare": "husky"
 	},
 	"husky": {
 		"hooks": {
-			"pre-commit": "pnpm  lint && pnpm format"
+			"pre-commit": "pnpm  lint && pnpm format",
+			"pre-push": "echo 'Thanks , did you avoid pushing to main branch? 👩‍🏫'"
 		}
 	},
 	"dependencies": {
