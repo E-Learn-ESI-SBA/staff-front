@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { PropsWithChildren } from 'react';
 import { H2, H4 } from '@/components/common/typography';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 type FileBoxProps = PropsWithChildren & {
 	fileType: EFileType;
@@ -68,14 +69,16 @@ type Props = {
 };
 export function fileAside({ files }: Props) {
 	return (
-		<aside className="max-w-80 min-w-52">
+		<aside className="max-w-80 min-w-52 ">
 			<H2 className="text-base">
 				Files: <span className="p-1 bg-light-medium">{files.length}</span>
 			</H2>
-			<ul className="flex gap-2">
-				{files.map((file, index) => (
-					<Box key={index} {...file} />
-				))}
+			<ul className="flex gap-2 p-2 max-h-[420px]">
+				<ScrollArea>
+					{files.map((file, index) => (
+						<Box key={index} {...file} />
+					))}
+				</ScrollArea>
 			</ul>
 		</aside>
 	);
