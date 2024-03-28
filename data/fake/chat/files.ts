@@ -1,0 +1,138 @@
+import { EFileType, ISender, TChatFile } from '@/types/messages';
+
+export const chatFiles: TChatFile[] = [
+	{
+		url: 'https://example.com/file1.pdf',
+		fileType: EFileType.CODE,
+		size: '2MB',
+		name: 'document1.pdf',
+	},
+	{
+		url: 'https://example.com/image1.jpg',
+		fileType: EFileType.IMAGE,
+		size: '1.5MB',
+		name: 'image1.jpg',
+	},
+	{
+		url: 'https://example.com/file2.docx',
+		fileType: EFileType.PDF,
+		size: '3MB',
+		name: 'document2.docx',
+	},
+	{
+		url: 'https://example.com/code.py',
+		fileType: EFileType.DOCUMENT,
+		size: '100KB',
+		name: 'code.py',
+	},
+	{
+		url: 'https://example.com/file1.pdf',
+		fileType: EFileType.CODE,
+		size: '2MB',
+		name: 'document1.pdf',
+	},
+	{
+		url: 'https://example.com/image1.jpg',
+		fileType: EFileType.IMAGE,
+		size: '1.5MB',
+		name: 'image1.jpg',
+	},
+	{
+		url: 'https://example.com/file2.docx',
+		fileType: EFileType.PDF,
+		size: '3MB',
+		name: 'document2.docx',
+	},
+	{
+		url: 'https://example.com/code.py',
+		fileType: EFileType.DOCUMENT,
+		size: '100KB',
+		name: 'code.py',
+	},
+];
+export const members: ISender[] = [
+	{
+		id: 'user1',
+		username: 'JohnDoe',
+		title: 'Mr.',
+		image: '/assets/messages/random.png',
+		isOnline: true,
+	},
+	{
+		id: 'user2',
+		username: 'JaneSmith',
+		title: 'Ms.',
+		image: '/assets/messages/random.png',
+		isOnline: false,
+	},
+	{
+		id: 'user3',
+		username: 'MikeJohnson',
+		title: 'Dr.',
+		image: '/assets/messages/random.png',
+		isOnline: true,
+	},
+	{
+		id: 'user1',
+		username: 'JohnDoe',
+		title: 'Mr.',
+		image: '/assets/messages/random.png',
+		isOnline: true,
+	},
+	{
+		id: 'user2',
+		username: 'JaneSmith',
+		title: 'Ms.',
+		image: '/assets/messages/random.png',
+		isOnline: false,
+	},
+	{
+		id: 'user3',
+		username: 'MikeJohnson',
+		title: 'Dr.',
+		image: '/assets/messages/random.png',
+		isOnline: true,
+	},
+	{
+		id: 'user1',
+		username: 'JohnDoe',
+		title: 'Mr.',
+		image: '/assets/messages/random.png',
+		isOnline: true,
+	},
+	{
+		id: 'user2',
+		username: 'JaneSmith',
+		title: 'Ms.',
+		image: '/assets/messages/random.png',
+		isOnline: false,
+	},
+	{
+		id: 'user3',
+		username: 'MikeJohnson',
+		title: 'Dr.',
+		image: '/assets/messages/random.png',
+		isOnline: true,
+	},
+	{
+		id: 'user1',
+		username: 'JohnDoe',
+		title: 'Mr.',
+		image: '/assets/messages/random.png',
+		isOnline: true,
+	},
+	{
+		id: 'user2',
+		username: 'JaneSmith',
+		title: 'Ms.',
+		image: '/assets/messages/random.png',
+		isOnline: false,
+	},
+	{
+		id: 'user3',
+		username: 'MikeJohnson',
+		title: 'Dr.',
+		image: '/assets/messages/random.png',
+		isOnline: true,
+	},
+];
