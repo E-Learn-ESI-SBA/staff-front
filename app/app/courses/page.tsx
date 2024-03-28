@@ -4,9 +4,9 @@ import React from 'react'
 
 export default function page() {
   return (
-<>
-    <NavBar title='Courses' />
-    <Teachers />
+    <>
+      <NavBar title='Courses' />
+      <Teachers />
     </>
   )
 }

@@ -5,3 +5,10 @@ export interface CourseCategory {
   cycle: string;
   total: number;
 }
+
+export enum EFileType {
+  PDF = "pdf",
+  IMAGE = "image",
+  DOCUMENT = "document",
+  CODE = "code",
+}
