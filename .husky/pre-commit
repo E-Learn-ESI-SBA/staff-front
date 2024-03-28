@@ -1,0 +1,3 @@
+pnpm lint && pnpm format
+git add * 
+git commit -m "Format"
