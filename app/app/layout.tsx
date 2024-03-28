@@ -1,4 +1,4 @@
-import { Suspense } from 'react';
+// import { Suspense } from 'react';
 import { SideBar } from "@/components/dashboard/student/sidebar";
 
 export default function RootLayout({
@@ -8,11 +8,9 @@ export default function RootLayout({
 }>) {
     return (
        <body className='flex'> 
-        <Suspense>
                 <SideBar />
                 <div className='flex-1 pl-80'>{children}</div>
 
-        </Suspense>
         </body>
     );
 }
