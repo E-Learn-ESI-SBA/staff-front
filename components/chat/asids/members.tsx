@@ -32,7 +32,7 @@ type BoxProps = {
 };
 function Box({ member: { image, name, title } }: BoxProps) {
   return (
-    <div className="flex gap-2">
+    <li className="flex gap-2">
       <Avatar className="w-12 h-12 rounded-lg">
         <AvatarImage src={image} alt={name} />
         <AvatarFallback>ESI</AvatarFallback>
@@ -41,6 +41,6 @@ function Box({ member: { image, name, title } }: BoxProps) {
         <H4 className="text-base font-bold">{name}</H4>
         <span className="text-xs text-li">{title}</span>
       </div>
-    </div>
+    </li>
   );
 }
