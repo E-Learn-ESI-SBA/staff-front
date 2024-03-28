@@ -4,7 +4,4 @@
 	grid-template-rows: 1fr 10fr;
 	grid-column-gap: 0px;
 	grid-row-gap: 0px;
-	::-webkit-scrollbar {
-		width: 10px;
-	}
 }

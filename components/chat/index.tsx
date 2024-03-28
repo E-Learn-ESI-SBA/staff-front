@@ -21,7 +21,7 @@ export default function ChatComponent() {
 		id: '23',
 	};
 	return (
-		<section className={cn(styles.gridStyle)}>
+		<section className={(cn(styles.gridStyle), 'chat')}>
 			<div className="flex justify-between border-b items-center p-4">
 				<div className="flex gap-3 w-fit ">
 					<H4 className="font-bold text-lg">Messages</H4>
