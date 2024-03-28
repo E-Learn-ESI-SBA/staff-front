@@ -1,3 +1,3 @@
 export function MessageSideBar() {
-	return <aside></aside>;
+  return <aside></aside>;
 }

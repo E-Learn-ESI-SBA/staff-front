@@ -1,14 +1,14 @@
 export interface CourseCategory {
-	icon: string;
-	bgColor: string;
-	year: string;
-	cycle: string;
-	total: number;
+  icon: string;
+  bgColor: string;
+  year: string;
+  cycle: string;
+  total: number;
 }
 
 export enum EFileType {
-	PDF = 'pdf',
-	IMAGE = 'image',
-	DOCUMENT = 'document',
-	CODE = 'code',
+  PDF = "pdf",
+  IMAGE = "image",
+  DOCUMENT = "document",
+  CODE = "code",
 }
