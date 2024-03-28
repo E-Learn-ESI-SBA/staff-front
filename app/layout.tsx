@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Montserrat } from 'next/font/google';
+import { Toaster } from '@/components/ui/sonner';
 const monts = Montserrat({
 	weight: ['300', '400', '500', '600', '700'],
 	subsets: ['latin'],
@@ -21,7 +22,10 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={monts.className}>{children}</body>
+			<body className={monts.className}>
+				{children}
+				<Toaster />
+			</body>
 		</html>
 	);
 }
