@@ -18,8 +18,8 @@ export function MemberAside({ members }: Props) {
 			</H2>
 			<ul className="flex gap-2 p-2 max-h-[420px]">
 				<ScrollArea>
-					{members.map((file, index) => (
-						<Box key={index} {...file} />
+					{members.map((member, index) => (
+						<Box key={index} member={member} />
 					))}
 				</ScrollArea>
 			</ul>
@@ -39,7 +39,7 @@ function Box({ member: { image, name, title } }: BoxProps) {
 			</Avatar>
 			<div className="flex gap-1">
 				<H4 className="text-base font-bold">{name}</H4>
-				<span className="text-sm">{title}</span>
+				<span className="text-xs text-li">{title}</span>
 			</div>
 		</div>
 	);
