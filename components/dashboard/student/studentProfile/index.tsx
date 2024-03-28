@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useState } from "react";
 import Quizzes from "./quizzes";
 import General from "./general";
-const Profile = () => {
+const Profile = () => { 
   const [selected, setSelected] = useState(0);
   return (
     <div className="bg-blue-500 min-h-screen p-8">
