@@ -1,5 +1,5 @@
 import { z } from "zod";
-import {EQuizType,ECourseType } from "./index";
+import {EQuizType,ECourseType } from ".";
 
 /* 
 Start Zod Schema for Multi step form  
