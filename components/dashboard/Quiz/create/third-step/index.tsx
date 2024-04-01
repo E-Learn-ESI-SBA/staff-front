@@ -2,7 +2,6 @@ import { Button } from '@/components/ui/button';
 import {
     Form,
 } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
 import { TypographyP } from '@/components/ui/typography';
 import { useQuestionFormStore } from '@/store/forms/questions/question.store';
 import { zodResolver } from '@hookform/resolvers/zod';
