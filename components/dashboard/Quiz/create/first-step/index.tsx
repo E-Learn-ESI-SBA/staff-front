@@ -11,7 +11,7 @@ import { examSchemaValidator } from "@/types/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import { Exam } from "@/types/quizForm";
+import { Exam } from "@/types";
 import {
 	Select,
 	SelectContent,
@@ -19,7 +19,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select';
-import { EQuizType } from "@/types/quizForm";
+import { EQuizType } from "@/types";
 import { useQuestionFormStore } from '@/store/forms/questions/question.store';
 
 const   defaultValues = {
