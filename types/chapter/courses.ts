@@ -6,13 +6,11 @@ export interface CourseCategory {
 	total: number;
 }
 
-export interface Chapter {
-	name: string;
-	id: string;
+export interface Module extends IResource {}
+
+export interface Chapter extends IResource {
 	module_id: string;
 	chapter_number: number;
-	createdAt?: Date;
-	updatedAt?: Date;
 }
 
 export interface Section {

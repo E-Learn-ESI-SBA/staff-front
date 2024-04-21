@@ -1,4 +1,4 @@
-import { ChapterWithSections } from '@/types/courses';
+import { ChapterWithSections } from '@/types/chapter/courses';
 
 const chaptersWithSections: ChapterWithSections[] = [
 	{
