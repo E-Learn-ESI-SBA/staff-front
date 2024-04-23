@@ -5,7 +5,7 @@ import Testimonilas from "./testimonials";
 import HeroSection from "./HeroSection";
 import Footer from "../layouts/footer";
 import { useUserStore } from "@/store/user";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 const Landing = () => {
 
   const isAuth = useUserStore((state) => state.isAuth);
