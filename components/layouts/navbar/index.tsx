@@ -2,7 +2,14 @@
 import Link from "next/link";
 import { Links } from "@/static/content/navbar";
 import { usePathname } from "next/navigation";
+import { useUserStore } from "@/store/user";
+import useAuth from "@/lib/hooks/auth/useAuth";
 const Navbar = () => {
+
+  const isAuth = useUserStore((state) => state.isAuth);
+
+  const {logoutHandler} = useAuth()
+
   const path = usePathname();
   const isActiveLink = (url: string) => {
     return (
@@ -30,12 +37,21 @@ const Navbar = () => {
             </Link>
           ))}
         </div>
+        {isAuth == false?  (
         <Link
-          href="/login"
+          href="/auth"
           className={`px-8 py-2 font-medium border rounded-tl-3xl rounded-br-3xl   ${path.substring(1) ? "border-courses-main" : ""} `}
         >
           Login
-        </Link>
+        </Link>): (
+        <button 
+        onClick={() => {
+          logoutHandler()
+        }}
+        className={`px-8 py-2 font-medium border rounded-tl-3xl rounded-br-3xl   ${path.substring(1) ? "border-courses-main" : ""} `}>
+          Logout
+        </button>
+        ) }
       </div>
     </div>
   );

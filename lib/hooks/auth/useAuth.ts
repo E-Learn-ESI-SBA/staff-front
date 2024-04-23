@@ -12,7 +12,7 @@ const useAuth = () => {
 	const axiosInstance = useAxios();
 
 	const loginHandler = async (email: string, password: string) => {
-		const res = await axiosInstance.post('api/token/', {
+		const res = await axiosInstance.post('api/auth/login/', {
 			email,
 			password,
 		});
