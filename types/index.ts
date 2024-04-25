@@ -41,8 +41,8 @@ export type Exam = {
   quiz_duration: number;
   question_time_limit: number;
   questions_count: number;
-  start_date: Date; 
-  end_date: Date; 
+  start_date: Date;
+  end_date: Date;
   start_time: string;
   end_time: string;
 };

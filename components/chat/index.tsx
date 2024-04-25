@@ -10,8 +10,6 @@ import { Massager } from './asids/message';
 import { MemberAside } from './asids/members';
 import { chatFiles, members } from '@/data/fake/chat/files';
 import { FileAside } from './asids/files';
-import { cn } from '@/lib/utils';
-import { Separator } from '../ui/separator';
 export default function ChatComponent() {
 	const selectedUser: ISender = {
 		image: '/assets/messages/random.png',
@@ -21,7 +19,7 @@ export default function ChatComponent() {
 		id: '23',
 	};
 	return (
-		<section className={(cn(styles.gridStyle), 'chat')}>
+		<section id="chat" className={styles.gridStyle}>
 			<div className="flex justify-between border-b items-center p-4">
 				<div className="flex gap-3 w-fit ">
 					<H4 className="font-bold text-lg">Messages</H4>
