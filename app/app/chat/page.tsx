@@ -1,5 +1,5 @@
-import ChatComponent from '@/components/chat';
+import ChatComponent from "@/components/chat";
 
 export default function Chat() {
-	return <ChatComponent />;
+  return <ChatComponent />;
 }
