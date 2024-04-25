@@ -1,3 +1,5 @@
+import {IDate} from "@/types/common";
+
 export interface CourseCategory {
   icon: string;
   bgColor: string;
@@ -6,14 +8,26 @@ export interface CourseCategory {
   total: number;
 }
 
-export interface Module extends IResource {}
+export interface Module extends IResource {
+  name        :string
+  year        :number
+  speciality?  : string
+  description :string
+  semester    :number
+  coefficient :number
+  instructors :number[]
+  isPublic    :boolean
+  plan:        string []
+  image? : string
+}
 
 export interface Chapter extends IResource {
   module_id: string;
   chapter_number: number;
+  description: string;
 }
 
-export interface Section {
+export interface Section extends IDate {
   name: string;
   course_id: string;
   id?: string;
@@ -21,24 +35,30 @@ export interface Section {
 
 export interface Video extends IResource {
   url: string;
+  section_id: string;
 }
 export interface Lecture extends IResource {
   content: string;
+    section_id: string;
 }
-export interface Note extends Lecture {}
+export interface Note extends Lecture {
+
+}
+
+export interface File extends IResource {
+  section_id: string;
+}
 export interface SectionWithResources extends Section {
   videos: Video[];
   lectures: Lecture[];
   note?: Note;
-  files?: IResource[];
+  files?: File[];
 }
 
-export interface IResource {
+export interface IResource extends  IDate {
   name: string;
   id: string;
-  createdAt?: Date;
-  section_id: string;
-  teacher_id: string;
+  teacher_id: number;
 }
 
 export interface ChapterWithSections extends Chapter {
@@ -50,4 +70,7 @@ export enum ResourceEnum {
   Lecture = "lecture",
   Note = "note",
   File = "file",
+}
+export interface ModulesWithChapters  extends  Module {
+    chapters: ChapterWithSections[];
 }

@@ -1,10 +1,18 @@
 "use client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Chapter } from "./resources/chapter";
-import chaptersWithSections from "@/static/dummy-data/modules/chapter";
 import { usePathname } from "next/navigation";
+import Overview from "@/components/dashboard/student/courses/overview";
+import {ChapterWithSections} from "@/types/chapter/courses";
 
-export default function TeacherCourse() {
+type Props  = {
+  data? : {
+    description: string;
+    plan: string[];
+    chapters:ChapterWithSections[]
+  }
+}
+export default function TeacherCourse({data}:Props ) {
   const tabs = ["Overview", "Resources", "Instructors", "Discuss"];
   const pathname = usePathname();
   return (
@@ -23,10 +31,12 @@ export default function TeacherCourse() {
           ))}
         </TabsList>
         <div className="p-4 pt-12">
-          <TabsContent value="Overview">Hello.</TabsContent>
+          <TabsContent value="Overview">
+            <Overview description={data.description} points={data.plan} />
+          </TabsContent>
           <TabsContent value="Resources">
             <div className="w-full h-full flex flex-col gap-6 bg-white rounded-lg p-4">
-              {chaptersWithSections.map((c, i) => (
+              {data.chapters.map((c, i) => (
                 <Chapter chapter={c} key={i} pathname={pathname} />
               ))}
             </div>
