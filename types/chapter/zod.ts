@@ -23,3 +23,14 @@ export const SectionFormSchema = z.object({
 	id: z.string().optional(),
 });
 export type TSectionFormSchema = z.infer<typeof SectionFormSchema>;
+
+// File Form
+export const FileFormSchema = z.object({
+	name: z.string(),
+	id: z.string().optional(),
+	section_id: z.string(),
+});
+
+export type TFileFormSchema = z.infer<typeof FileFormSchema> & {
+	file: File;
+};

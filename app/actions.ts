@@ -1,12 +1,12 @@
 'use server';
-import { CREATE_SECTION_URL, UPDATE_SECTION_URL } from '@/config/constants';
-import { TSectionFormSchema } from '@/types/chapter/zod';
+import {
+	CREATE_FILE_URL,
+	CREATE_SECTION_URL,
+	UPDATE_SECTION_URL,
+} from '@/config/constants';
+import { TFileFormSchema, TSectionFormSchema } from '@/types/chapter/zod';
 import { cookies } from 'next/headers';
 
-type Props = {
-	data: TSectionFormSchema;
-	mode: 'UPDATE' | 'CREATE';
-};
 type ReturnType = {
 	success: boolean;
 	message: string;
@@ -45,6 +45,30 @@ export const updateSection = async (data: TSectionFormSchema) => {
 			body: JSON.stringify(data),
 		});
 
+		const res = await response.json();
+		return res;
+	} catch (e) {
+		console.log(e);
+		return {
+			success: false,
+			message: e.message,
+		};
+	}
+};
+
+export const createFile = async (data: TFileFormSchema) => {
+	try {
+		const formData = new FormData();
+		formData.append('file', data.file);
+		formData.append('name', data.name);
+		formData.append('section_id', data.section_id);
+		const response = await fetch(CREATE_FILE_URL, {
+			method: 'POST',
+			headers: {
+				Authorization: `Bearer ${cookies().get('token')}`,
+			},
+			body: formData,
+		});
 		const res = await response.json();
 		return res;
 	} catch (e) {
