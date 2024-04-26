@@ -10,3 +10,6 @@ export const UPDATE_FILE_URL = `${SERVER_URL}/file`;
 export const DELETE_FILE_URL = `${SERVER_URL}/file`;
 export const GET_FILE_URL = `${SERVER_URL}/file`;
 export const GET_ALL_FILE_URL = `${SERVER_URL}/file`;
+
+
+export const STAFF_SERVICE_URL = 'http://localhost:8000/api/';
