@@ -1,7 +1,18 @@
 const { withSentryConfig } = require("@sentry/nextjs");
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        hostname: "github.com",
+        port: "",
+        pathname: "/*",
+        protocol: "https",
+      }
+    ]
+  },
+};
 
 module.exports = withSentryConfig(
   nextConfig,

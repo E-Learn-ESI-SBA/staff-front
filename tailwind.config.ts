@@ -52,6 +52,7 @@ const config = {
 				},
 				gray: {
 					light: '#F1F1F1',
+					thin: '#4E5566'
 				},
 				'cards-main': '#2B3674',
 				border: 'hsl(var(--border))',

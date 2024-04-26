@@ -108,3 +108,12 @@ body {
 	}
 }
 /* Handle */
+
+/* feed related */
+.feed_border {
+	@apply border border-[#CCCCCC] rounded-md m-6 py-4 px-5
+}
+
+.feed_filter_item {
+	@apply cursor-pointer flex flex-row font-bold gap-2 items-center
+}
