@@ -1,3 +1,3 @@
 export default function CommunicationProfile() {
-	return <div>Communication</div>;
+  return <div>Communication</div>;
 }

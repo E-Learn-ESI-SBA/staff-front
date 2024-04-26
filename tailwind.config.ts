@@ -28,6 +28,13 @@ const config = {
         "typo-color": {
           h2: "#2B3674",
         },
+        yellow: {
+          origin: "#FFC700",
+        },
+        orange: {
+          origin: "#FF6636",
+          light: "#FFEEE8",
+        },
         red: {
           origin: "#D80027",
           light: "#FFF0F0",
@@ -52,6 +59,7 @@ const config = {
         },
         gray: {
           light: "#F1F1F1",
+          origin: "#888",
         },
         "cards-main": "#2B3674",
         border: "hsl(var(--border))",

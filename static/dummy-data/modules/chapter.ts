@@ -1,4 +1,7 @@
-import {ChapterWithSections, ModulesWithChapters} from "@/types/chapter/courses";
+import {
+  ChapterWithSections,
+  ModulesWithChapters,
+} from "@/types/chapter/courses";
 
 const chaptersWithSections: ChapterWithSections[] = [
   {
@@ -23,6 +26,7 @@ const chaptersWithSections: ChapterWithSections[] = [
             section_id: "1",
             teacher_id: 1,
             createdAt: new Date(),
+            groups: [1, 2, 3],
           },
           {
             name: "Video 2",
@@ -31,6 +35,7 @@ const chaptersWithSections: ChapterWithSections[] = [
             section_id: "1",
             teacher_id: 1,
             createdAt: new Date(),
+            groups: [1, 2, 3],
           },
           {
             name: "Video 2",
@@ -39,6 +44,7 @@ const chaptersWithSections: ChapterWithSections[] = [
             section_id: "1",
             teacher_id: 1,
             createdAt: new Date(),
+            groups: [1, 2, 3],
           },
         ],
         lectures: [
@@ -49,6 +55,7 @@ const chaptersWithSections: ChapterWithSections[] = [
             section_id: "1",
             teacher_id: 1,
             createdAt: new Date(),
+            groups: [1, 2, 3],
           },
           {
             name: "Lecture 1",
@@ -57,6 +64,7 @@ const chaptersWithSections: ChapterWithSections[] = [
             section_id: "1",
             teacher_id: 1,
             createdAt: new Date(),
+            groups: [1, 2, 3],
           },
           {
             name: "Lecture 1",
@@ -65,6 +73,7 @@ const chaptersWithSections: ChapterWithSections[] = [
             section_id: "1",
             teacher_id: 1,
             createdAt: new Date(),
+            groups: [1, 2, 3],
           },
         ],
         note: {
@@ -74,6 +83,7 @@ const chaptersWithSections: ChapterWithSections[] = [
           section_id: "1",
           teacher_id: 1,
           createdAt: new Date(),
+          groups: [1, 2, 3],
         },
         files: [
           {
@@ -82,7 +92,7 @@ const chaptersWithSections: ChapterWithSections[] = [
             section_id: "1",
             teacher_id: 1,
             createdAt: new Date(),
-
+            groups: [1, 2, 3],
           },
           {
             name: "File 1",
@@ -90,6 +100,7 @@ const chaptersWithSections: ChapterWithSections[] = [
             section_id: "1",
             teacher_id: 1,
             createdAt: new Date(),
+            groups: [1, 2, 3],
           },
           {
             name: "File 1",
@@ -97,6 +108,7 @@ const chaptersWithSections: ChapterWithSections[] = [
             section_id: "1",
             teacher_id: 1,
             createdAt: new Date(),
+            groups: [1, 2, 3],
           },
           {
             name: "File 1",
@@ -104,6 +116,7 @@ const chaptersWithSections: ChapterWithSections[] = [
             section_id: "1",
             teacher_id: 1,
             createdAt: new Date(),
+            groups: [1, 2, 3],
           },
         ],
       },
@@ -115,6 +128,7 @@ const chaptersWithSections: ChapterWithSections[] = [
     name: "Chapter 1",
     id: "1",
     module_id: "1",
+
     chapter_number: 1,
     createdAt: new Date(),
     updatedAt: new Date(),
@@ -131,6 +145,7 @@ const chaptersWithSections: ChapterWithSections[] = [
             section_id: "1",
             teacher_id: 1,
             createdAt: new Date(),
+            groups: [1, 2, 3],
           },
           {
             name: "Video 2",
@@ -139,6 +154,7 @@ const chaptersWithSections: ChapterWithSections[] = [
             section_id: "1",
             teacher_id: 1,
             createdAt: new Date(),
+            groups: [1, 2, 3],
           },
           {
             name: "Video 2",
@@ -147,6 +163,7 @@ const chaptersWithSections: ChapterWithSections[] = [
             section_id: "1",
             teacher_id: 1,
             createdAt: new Date(),
+            groups: [1, 2, 3],
           },
         ],
         lectures: [
@@ -157,6 +174,7 @@ const chaptersWithSections: ChapterWithSections[] = [
             section_id: "1",
             teacher_id: 1,
             createdAt: new Date(),
+            groups: [1, 2, 3],
           },
           {
             name: "Lecture 1",
@@ -165,6 +183,7 @@ const chaptersWithSections: ChapterWithSections[] = [
             section_id: "1",
             teacher_id: 1,
             createdAt: new Date(),
+            groups: [1, 2, 3],
           },
           {
             name: "Lecture 1",
@@ -173,6 +192,7 @@ const chaptersWithSections: ChapterWithSections[] = [
             section_id: "1",
             teacher_id: 1,
             createdAt: new Date(),
+            groups: [1, 2, 3],
           },
         ],
         note: {
@@ -182,6 +202,7 @@ const chaptersWithSections: ChapterWithSections[] = [
           section_id: "1",
           teacher_id: 1,
           createdAt: new Date(),
+          groups: [1, 2, 3],
         },
         files: [
           {
@@ -190,6 +211,7 @@ const chaptersWithSections: ChapterWithSections[] = [
             section_id: "1",
             teacher_id: 1,
             createdAt: new Date(),
+            groups: [1, 2, 3],
           },
           {
             name: "File 1",
@@ -197,6 +219,7 @@ const chaptersWithSections: ChapterWithSections[] = [
             section_id: "1",
             teacher_id: 1,
             createdAt: new Date(),
+            groups: [1, 2, 3],
           },
           {
             name: "File 1",
@@ -204,6 +227,7 @@ const chaptersWithSections: ChapterWithSections[] = [
             section_id: "1",
             teacher_id: 1,
             createdAt: new Date(),
+            groups: [1, 2, 3],
           },
           {
             name: "File 1",
@@ -211,14 +235,16 @@ const chaptersWithSections: ChapterWithSections[] = [
             section_id: "1",
             teacher_id: 1,
             createdAt: new Date(),
+            groups: [1, 2, 3],
           },
         ],
       },
     ],
   },
   {
-      description: "This is the description of the chapter",
-      teacher_id: 1,
+    description: "This is the description of the chapter",
+    teacher_id: 1,
+
     name: "Chapter 1",
     id: "1",
     module_id: "1",
@@ -238,6 +264,7 @@ const chaptersWithSections: ChapterWithSections[] = [
             section_id: "1",
             teacher_id: 1,
             createdAt: new Date(),
+            groups: [1, 2, 3],
           },
           {
             name: "Video 2",
@@ -246,6 +273,7 @@ const chaptersWithSections: ChapterWithSections[] = [
             section_id: "1",
             teacher_id: 1,
             createdAt: new Date(),
+            groups: [1, 2, 3],
           },
           {
             name: "Video 2",
@@ -254,6 +282,8 @@ const chaptersWithSections: ChapterWithSections[] = [
             section_id: "1",
             teacher_id: 1,
             createdAt: new Date(),
+
+            groups: [1, 2, 3],
           },
         ],
         lectures: [
@@ -264,6 +294,7 @@ const chaptersWithSections: ChapterWithSections[] = [
             section_id: "1",
             teacher_id: 1,
             createdAt: new Date(),
+            groups: [1, 2, 3],
           },
           {
             name: "Lecture 1",
@@ -272,6 +303,7 @@ const chaptersWithSections: ChapterWithSections[] = [
             section_id: "1",
             teacher_id: 1,
             createdAt: new Date(),
+            groups: [1, 2, 3],
           },
           {
             name: "Lecture 1",
@@ -280,6 +312,7 @@ const chaptersWithSections: ChapterWithSections[] = [
             section_id: "1",
             teacher_id: 1,
             createdAt: new Date(),
+            groups: [1, 2, 3],
           },
         ],
         note: {
@@ -289,6 +322,7 @@ const chaptersWithSections: ChapterWithSections[] = [
           section_id: "1",
           teacher_id: 1,
           createdAt: new Date(),
+          groups: [1, 2, 3],
         },
         files: [
           {
@@ -297,6 +331,7 @@ const chaptersWithSections: ChapterWithSections[] = [
             section_id: "1",
             teacher_id: 1,
             createdAt: new Date(),
+            groups: [1, 2, 3],
           },
           {
             name: "File 1",
@@ -304,6 +339,7 @@ const chaptersWithSections: ChapterWithSections[] = [
             section_id: "1",
             teacher_id: 1,
             createdAt: new Date(),
+            groups: [1, 2, 3],
           },
           {
             name: "File 1",
@@ -311,6 +347,7 @@ const chaptersWithSections: ChapterWithSections[] = [
             section_id: "1",
             teacher_id: 1,
             createdAt: new Date(),
+            groups: [1, 2, 3],
           },
           {
             name: "File 1",
@@ -318,6 +355,7 @@ const chaptersWithSections: ChapterWithSections[] = [
             section_id: "1",
             teacher_id: 1,
             createdAt: new Date(),
+            groups: [1, 2, 3],
           },
         ],
       },
@@ -325,10 +363,10 @@ const chaptersWithSections: ChapterWithSections[] = [
   },
 ];
 
-export const moduleData:ModulesWithChapters =  {
-    name: "Module 1",
-    id: "1",
-    chapters: chaptersWithSections,
+export const moduleData: ModulesWithChapters = {
+  name: "Module 1",
+  id: "1",
+  chapters: chaptersWithSections,
   teacher_id: 1,
   description: "This is the description of the module",
   coefficient: 1,
@@ -339,6 +377,6 @@ export const moduleData:ModulesWithChapters =  {
   semester: 1,
   speciality: "Speciality 1",
   year: 2021,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    };
+  createdAt: new Date(),
+  updatedAt: new Date(),
+};

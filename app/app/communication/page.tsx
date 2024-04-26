@@ -1,3 +1,3 @@
 export default function Communication() {
-	return <div>Communication</div>;
+  return <div>Communication</div>;
 }

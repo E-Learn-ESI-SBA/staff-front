@@ -1,5 +1,4 @@
-
 export interface IDate {
-    createdAt?: Date;
-    updatedAt?: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }

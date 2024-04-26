@@ -3,16 +3,16 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Chapter } from "./resources/chapter";
 import { usePathname } from "next/navigation";
 import Overview from "@/components/dashboard/student/courses/overview";
-import {ChapterWithSections} from "@/types/chapter/courses";
+import { ChapterWithSections } from "@/types/chapter/courses";
 
-type Props  = {
-  data? : {
+type Props = {
+  data?: {
     description: string;
     plan: string[];
-    chapters:ChapterWithSections[]
-  }
-}
-export default function TeacherCourse({data}:Props ) {
+    chapters: ChapterWithSections[];
+  };
+};
+export default function TeacherCourse({ data }: Props) {
   const tabs = ["Overview", "Resources", "Instructors", "Discuss"];
   const pathname = usePathname();
   return (
