@@ -4,7 +4,11 @@ import {
 	CREATE_SECTION_URL,
 	UPDATE_SECTION_URL,
 } from '@/config/constants';
-import { TFileFormSchema, TSectionFormSchema } from '@/types/chapter/zod';
+import {
+	TFileFormSchema,
+	TFileFormSchemaWithFile,
+	TSectionFormSchema,
+} from '@/types/chapter/zod';
 import { cookies } from 'next/headers';
 
 type ReturnType = {
@@ -56,7 +60,31 @@ export const updateSection = async (data: TSectionFormSchema) => {
 	}
 };
 
-export const createFile = async (data: TFileFormSchema) => {
+export const createFile = async (data: TFileFormSchemaWithFile) => {
+	try {
+		const formData = new FormData();
+		formData.append('file', data.file);
+		formData.append('name', data.name);
+		formData.append('section_id', data.section_id);
+		const response = await fetch(CREATE_FILE_URL, {
+			method: 'POST',
+			headers: {
+				Authorization: `Bearer ${cookies().get('token')}`,
+			},
+			body: formData,
+		});
+		const res = await response.json();
+		return res;
+	} catch (e) {
+		console.log(e);
+		return {
+			success: false,
+			message: e.message,
+		};
+	}
+};
+
+export const updateFile = async (data: TFileFormSchemaWithFile) => {
 	try {
 		const formData = new FormData();
 		formData.append('file', data.file);

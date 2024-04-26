@@ -1,6 +1,7 @@
 'use client';
 import { createSection, updateSection } from '@/app/actions';
 import {
+	Form,
 	FormControl,
 	FormField,
 	FormItem,
@@ -45,23 +46,25 @@ export function SectionForm({
 		});
 	}
 	return (
-		<form
-			onSubmit={form.handleSubmit(formAction)}
-			className="space-y-8 flex flex-col gap-4  w-full py-4">
-			<FormField
-				control={form.control}
-				name="name"
-				render={({ field }) => (
-					<FormItem className="w-full">
-						<FormLabel>Section Title</FormLabel>
-						<FormControl>
-							<Input placeholder="Enter The title here..." {...field} />
-						</FormControl>
-						<FormMessage />
-					</FormItem>
-				)}
-			/>
-			{children}
-		</form>
+		<Form {...form}>
+			<form
+				onSubmit={form.handleSubmit(formAction)}
+				className="space-y-8 flex flex-col gap-4    py-4">
+				<FormField
+					control={form.control}
+					name="name"
+					render={({ field }) => (
+						<FormItem className="w-full">
+							<FormLabel>Section Title</FormLabel>
+							<FormControl>
+								<Input placeholder="Enter The title here..." {...field} />
+							</FormControl>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
+				{children}
+			</form>
+		</Form>
 	);
 }
