@@ -1,6 +1,6 @@
 import { H3 } from '@/components/common/typography';
 import { Button } from '@/components/ui/button';
-import { ResourceEnum, SectionWithResources } from '@/types/courses';
+import { ResourceEnum, SectionWithResources } from '@/types/chapter/courses';
 import { FolderOpen, Pencil, Plus, Trash2 } from 'lucide-react';
 import { Resource } from './resource';
 import { Separator } from '@/components/ui/separator';

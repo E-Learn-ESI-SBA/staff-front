@@ -102,7 +102,7 @@ body {
 .selected::after {
 	width: 100%;
 }
-.chat {
+#chat {
 	::-webkit-scrollbar {
 		width: 10px;
 	}
