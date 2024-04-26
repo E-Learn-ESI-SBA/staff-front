@@ -16,7 +16,7 @@ const people : Props[] = [
     image: "/assets/teacher.jpeg",
   },
   {
-    name: "Hakim Maroc",
+    name: "Hakim Hakim",
     position: "Senior Software Engineer",
     company: "Meta",
     image: "/assets/teacher.jpeg",
