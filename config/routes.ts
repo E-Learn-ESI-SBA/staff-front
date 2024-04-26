@@ -13,3 +13,13 @@ export const routes: TRoute = {
     desc: "Video description",
   },
 };
+
+
+export const protectedRoutes: string[] = [
+  "/app/chat",
+  '/'
+]
+
+export const authRoutes: string[] = [
+  "/auth",
+]
