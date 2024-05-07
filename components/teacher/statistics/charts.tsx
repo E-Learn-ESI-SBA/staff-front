@@ -299,23 +299,23 @@ export const ReviewChart = ({
         <div className="flex flex-col bg-orange-light items-center justify-center p-6">
           <h5 className="font-bold text-2xl">{average}</h5>
           <div className="flex gap-px">
-          {START_NUMBER.map((n) => {
-            return n < Math.floor(average) ? (
-              <StarIcon
-                className="h-3 w-3 text-[#FD8E1F] "
-                key={n}
-                fill="#FD8E1F"
-              />
-            ) : n + 0.5 <= average ? (
-              <StarHalf
-                className="h-3 w-3 text-[#FD8E1F] "
-                key={n}
-                fill="#FD8E1F"
-              />
-            ) : (
-              <StarIcon className="h-3 w-3 text-[#FD8E1F]" key={n} />
-            );
-          })}
+            {START_NUMBER.map((n) => {
+              return n < Math.floor(average) ? (
+                <StarIcon
+                  className="h-3 w-3 text-[#FD8E1F] "
+                  key={n}
+                  fill="#FD8E1F"
+                />
+              ) : n + 0.5 <= average ? (
+                <StarHalf
+                  className="h-3 w-3 text-[#FD8E1F] "
+                  key={n}
+                  fill="#FD8E1F"
+                />
+              ) : (
+                <StarIcon className="h-3 w-3 text-[#FD8E1F]" key={n} />
+              );
+            })}
           </div>
           <p className="text-xs text-black">Overall Rating</p>
         </div>

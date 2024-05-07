@@ -1,5 +1,4 @@
-import {Chapter, Module} from "@/types/chapter/courses";
-
+import { Chapter, Module } from "@/types/chapter/courses";
 
 const chaptersWithSections: Chapter[] = [
   {
@@ -347,7 +346,7 @@ export const moduleData: Module = {
   description: "This is the description of the module",
   coefficient: 1,
   image: "https://example.com/image.jpg",
-  instructors: ['1'],
+  instructors: ["1"],
   isPublic: true,
   plan: ["Plan 1", "Plan 2", "Plan 3", "Plan 4"],
   semester: 1,

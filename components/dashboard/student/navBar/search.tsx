@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
 import React, { ChangeEvent, KeyboardEvent } from "react";
-import {Input} from "@/components/ui/input";
+import { Input } from "@/components/ui/input";
 
 // interface SearchProps {
 //     value: string;

@@ -1,5 +1,5 @@
 "use client";
-import { createSection, updateSection } from "@/app/actions";
+import { createSection, updateSection } from "@/app/actions/actions";
 import {
   Form,
   FormControl,

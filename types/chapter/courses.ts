@@ -21,7 +21,6 @@ export interface Module extends IDate {
   plan: string[];
   image: string;
   courses: Chapter[]; // Assuming courses can be of any type
-
 }
 
 export interface Chapter extends IDate {
@@ -53,10 +52,9 @@ export interface Note extends Lecture {
 }
 
 export interface File extends IResource {
-url: string;
-type: string;
+  url: string;
+  type: string;
 }
-
 
 export interface IResource extends IDate {
   name: string;
@@ -64,8 +62,6 @@ export interface IResource extends IDate {
   teacher_id: number;
   groups: number[];
 }
-
-
 
 export enum ResourceEnum {
   Video = "video",
