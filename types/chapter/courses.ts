@@ -9,32 +9,34 @@ export interface CourseCategory {
 }
 
 export interface Module extends IDate {
+  id?: string;
   name: string;
-  id: string;
-  teacher_id: number;
   year: number;
-  speciality?: string;
-  description: string;
+  speciality: string;
   semester: number;
   coefficient: number;
-  instructors: number[];
+  teacher_id: string;
+  instructors: string[];
   isPublic: boolean;
   plan: string[];
-  image?: string;
+  image: string;
+  courses: Chapter[]; // Assuming courses can be of any type
+
 }
 
 export interface Chapter extends IDate {
   name: string;
-  id: string;
-  teacher_id: number;
-  module_id: string;
-  chapter_number: number;
+  id?: string;
   description: string;
+  sections: Section[];
 }
 
 export interface Section extends IDate {
   name: string;
-  course_id: string;
+  teacher_id: string;
+  videos: Video[]; // Assuming videos can be of any type
+  lectures: Lecture[]; // Assuming lectures can be of any type
+  files: File[];
   id?: string;
 }
 
@@ -44,19 +46,17 @@ export interface Video extends IResource {
 }
 export interface Lecture extends IResource {
   content: string;
-  section_id: string;
+  isPublic: boolean;
 }
-export interface Note extends Lecture {}
+export interface Note extends Lecture {
+  content: string;
+}
 
 export interface File extends IResource {
-  section_id: string;
+url: string;
+type: string;
 }
-export interface SectionWithResources extends Section {
-  videos: Video[];
-  lectures: Lecture[];
-  note?: Note;
-  files?: File[];
-}
+
 
 export interface IResource extends IDate {
   name: string;
@@ -65,16 +65,11 @@ export interface IResource extends IDate {
   groups: number[];
 }
 
-export interface ChapterWithSections extends Chapter {
-  sections: SectionWithResources[];
-}
+
 
 export enum ResourceEnum {
   Video = "video",
   Lecture = "lecture",
   Note = "note",
   File = "file",
-}
-export interface ModulesWithChapters extends Module {
-  chapters: ChapterWithSections[];
 }

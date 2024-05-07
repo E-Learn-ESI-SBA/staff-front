@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
 import React, { ChangeEvent, KeyboardEvent } from "react";
+import {Input} from "@/components/ui/input";
 
 // interface SearchProps {
 //     value: string;
@@ -23,7 +24,7 @@ const SearchIn: React.FC = () => {
       <Button className="bg-transparent border-none">
         <Search color="#718EBF" />
       </Button>
-      <input
+      <Input
         type="text"
         value={value}
         onChange={(e) => {

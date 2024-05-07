@@ -186,12 +186,12 @@ const Sidebar = () => {
                                       selectedFilters.includes(
                                         `${category}-${subcategory}-${filter}`,
                                       )
-                                        ? "accent-courses-main"
+                                        ? "accent-modules-main"
                                         : ""
                                     }
                                   />
                                   <span
-                                    className={`text-sm ${selectedFilters.includes(`${category}-${subcategory}-${filter}`) ? "text-courses-main" : ""}`}
+                                    className={`text-sm ${selectedFilters.includes(`${category}-${subcategory}-${filter}`) ? "text-modules-main" : ""}`}
                                   >
                                     {filter}
                                   </span>

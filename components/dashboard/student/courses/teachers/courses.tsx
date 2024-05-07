@@ -3,19 +3,19 @@ import React from "react";
 
 const cards = [
   {
-    image: "/courses/card-pic.png",
+    image: "/modules/card-pic.png",
     subject: "Architectures Évoluées des Ordinateurs",
     coef: 4,
     duration: "18 Semaines",
   },
   {
-    image: "/courses/card-pic.png",
+    image: "/modules/card-pic.png",
     subject: "Architectures Évoluées des Ordinateurs",
     coef: 4,
     duration: "19 Semaines",
   },
   {
-    image: "/courses/card-pic.png",
+    image: "/modules/card-pic.png",
     subject: "Architectures Évoluées des Ordinateurs",
     coef: 4,
     duration: "19 Semaines",

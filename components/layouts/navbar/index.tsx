@@ -20,7 +20,7 @@ const Navbar = () => {
   return (
     <div className={`w-full px-4 md:px-8  `}>
       <div
-        className={`flex justify-between items-center py-4  ${path.substring(1) ? "text-courses-main" : "text-white  border-white border-b-2  border-dashed "} `}
+        className={`flex justify-between items-center py-4  ${path.substring(1) ? "text-modules-main" : "text-white  border-white border-b-2  border-dashed "} `}
       >
         {/* <Image src='' alt='logo' width={0} height={0} sizes="100vw" className="h-12 w-24" /> */}
         <p className="text-2xl font-extrabold">Madaurus</p>
@@ -38,7 +38,7 @@ const Navbar = () => {
         {isAuth == false ? (
           <Link
             href="/auth"
-            className={`px-8 py-2 font-medium border rounded-tl-3xl rounded-br-3xl   ${path.substring(1) ? "border-courses-main" : ""} `}
+            className={`px-8 py-2 font-medium border rounded-tl-3xl rounded-br-3xl   ${path.substring(1) ? "border-modules-main" : ""} `}
           >
             Login
           </Link>
@@ -47,7 +47,7 @@ const Navbar = () => {
             onClick={() => {
               logoutHandler();
             }}
-            className={`px-8 py-2 font-medium border rounded-tl-3xl rounded-br-3xl   ${path.substring(1) ? "border-courses-main" : ""} `}
+            className={`px-8 py-2 font-medium border rounded-tl-3xl rounded-br-3xl   ${path.substring(1) ? "border-modules-main" : ""} `}
           >
             Logout
           </button>
