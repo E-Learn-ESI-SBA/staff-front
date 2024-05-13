@@ -18,6 +18,8 @@ import { Input } from '@/components/ui/input';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { login } from '@/app/actions';
+import { useRouter } from 'next/navigation';
 
 export const authSchema = z.object({
 	email: z.string().email().min(2, 'Email is required'),
@@ -27,6 +29,7 @@ export const authSchema = z.object({
 export type TAuthSchema = z.infer<typeof authSchema>;
 
 export function SignInAccount() {
+	const router = useRouter()
 	const form = useForm<TAuthSchema>({
 		mode: 'onChange',
 		resolver: zodResolver(authSchema),
@@ -35,8 +38,12 @@ export function SignInAccount() {
 			password: '',
 		},
 	});
-	const submitHandler = (data: TAuthSchema) => {
-		console.log(data);
+	const submitHandler = async (data: TAuthSchema) => {
+		const response = await login(data);
+		localStorage.setItem("accessToken", response['access'])
+		router.replace('/')
+		// console.log(response.data)
+		// console.log(response);
 	};
 	return (
 		<Form {...form}>

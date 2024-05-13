@@ -10,6 +10,10 @@ import {
 	TSectionFormSchema,
 } from '@/types/chapter/zod';
 import { cookies } from 'next/headers';
+import { TAuthSchema } from "@/components/auth/login"
+import staffServiceAxiosClient from "@/utils/axiosClient"
+
+
 
 type ReturnType = {
 	success: boolean;
@@ -107,3 +111,124 @@ export const updateFile = async (data: TFileFormSchemaWithFile) => {
 		};
 	}
 };
+
+
+
+
+export interface StoreTokenRequest {
+	access: string
+	refresh: string
+}
+
+export async function storeToken(request: StoreTokenRequest) {
+	'use server'
+	console.log(request)
+	cookies().set({
+		name: "accessToken",
+		value: request.access,
+		httpOnly: true,
+		sameSite: "strict",
+		secure: true,
+	})
+
+	cookies().set({
+		name: "refreshToken",
+		value: request.refresh,
+		httpOnly: true,
+		sameSite: "strict",
+		secure: true,
+	})
+}
+
+export async function login(data: TAuthSchema) {
+	'use server'
+	try {
+		const response = await staffServiceAxiosClient.post('auth/login/', data);
+		await storeToken(response.data)
+		return response.data;
+	} catch (err) {
+		console.log(err)
+		throw new Error("couldn't login")
+	}
+}
+
+
+export async function refreshTokens() {
+	'use server'
+	try {
+		const refreshToken = cookies().get('refreshToken').value
+		const response = await fetch('http://localhost:8000/api/auth/refresh/', {
+			method: "POST",
+			body: JSON.stringify({ refresh: refreshToken }),
+			headers: {
+				"Content-Type": "application/json"
+			},
+		});
+		const data = await response.json()
+		console.log("body" + data)
+		if (response.ok) {
+			console.log(data)
+			cookies().set({
+				name: "accessToken",
+				value: data.access,
+				httpOnly: true,
+				sameSite: "strict",
+				secure: true,
+			})
+
+			cookies().set({
+				name: "refreshToken",
+				value: data.refresh,
+				httpOnly: true,
+				sameSite: "strict",
+				secure: true,
+			})
+			return { succes: true, data: data }
+		}
+		return { succes: false, data: null }
+	} catch (error) {
+		return { succes: false, data: null }
+	}
+}
+
+
+
+
+
+export const getAuth = async (
+	refreshAble?: boolean
+): Promise<{
+	isAuth: boolean;
+	data?: any;
+}> => {
+	try {
+		const cookie = cookies();
+		const token = cookie.get('accessToken')?.value;
+		console.log("token" + token)
+		if (!token)
+			return {
+				isAuth: false,
+			};
+
+		const auth = await refreshTokens();
+		console.log("auth" + auth)
+		console.log("hello")
+		if (auth.succes) {
+			return {
+				isAuth: true,
+				data: auth.data
+			}
+		}
+		return {
+			isAuth: false,
+		}
+	} catch (e) {
+		console.log('Error:', e);
+		return {
+			isAuth: false,
+		};
+	}
+};
+
+
+
