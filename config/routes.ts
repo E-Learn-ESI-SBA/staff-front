@@ -41,3 +41,13 @@ export const routes: TRoute = {
     videos: undefined,
   },
 };
+
+
+export const protectedRoutes: string[] = [
+  "/app/chat",
+  '/'
+]
+
+export const authRoutes: string[] = [
+  "/auth",
+]

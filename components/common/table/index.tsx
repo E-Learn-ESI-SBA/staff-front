@@ -111,7 +111,7 @@ export function DataTable<T extends { id: string }>({
   words_separator = "_",
   fuzzyElements,
 }: Props<T>) {
-  const shorterFuzzyElements = fuzzyElements.slice(0, 3);
+  const shorterFuzzyElements = fuzzyElements?.slice(0, 3);
   const columns: ColumnDef<T>[] = [
     {
       id: "select",
@@ -154,6 +154,7 @@ export function DataTable<T extends { id: string }>({
               onClick={() =>
                 column.toggleSorting(column.getIsSorted() === "asc")
               }
+             
             >
               {header.title}
               <CaretSortIcon className="ml-2 h-4 w-4" />
@@ -161,7 +162,7 @@ export function DataTable<T extends { id: string }>({
           );
         },
         cell: ({ row }: { row: Row<T> }) => (
-          <div className="capitalize text-center">
+          <div className="capitalize text-start">
             {row.getValue(header.accessorKey as string)}
           </div>
         ),

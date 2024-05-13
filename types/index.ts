@@ -1,3 +1,5 @@
+import { AssignmentType } from "./assignment";
+
 // Sidebar types -->
 export interface SideBarItem {
   label: string;
@@ -46,3 +48,20 @@ export type Exam = {
   start_time: string;
   end_time: string;
 };
+
+export type Assignment = {
+  id: string;
+  assignment_title: string;
+  assignment_description: string;
+  assignment_type: AssignmentType;
+  course: ECourseType;
+  start_date: Date;
+  end_date: Date;
+  start_time: string;
+  end_time: string;
+};
+
+export type File = {
+  url : string;
+  name : string;
+}
