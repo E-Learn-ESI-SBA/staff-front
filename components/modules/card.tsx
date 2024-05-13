@@ -8,13 +8,8 @@ type Props = {
 };
 export const ModuleCard: React.FC<Props> = ({ data }) => {
   return (
-    <Link
-      href={
-        routes.hasOwnProperty("teacher") &&
-        `${routes["teacher"]["modules"].path}/${data.id}`
-      }
-    >
-      <div className="rounded-2xl h-[250px]  text-cards-main bg-white shadow-xl ">
+
+      <div className="rounded-2xl min-w-72 text-cards-main bg-white shadow-xl ">
         <Image
           src={data.image}
           alt="course picture"
@@ -33,6 +28,5 @@ export const ModuleCard: React.FC<Props> = ({ data }) => {
           </div>
         </div>
       </div>
-    </Link>
   );
 };

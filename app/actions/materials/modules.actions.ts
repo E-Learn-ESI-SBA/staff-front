@@ -8,7 +8,7 @@ export const useGetTeacherModules = async (): Promise<IResponse<Module[]>> => {
     const response = await fetch(GET_TEACHER_MODULES_URL, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${cookies().get("token")}`,
+        Authorization: `Bearer ${cookies().get("token").value}`,
       },
     });
 
@@ -22,7 +22,7 @@ export const useGetTeacherModules = async (): Promise<IResponse<Module[]>> => {
         data: [],
         error: new Error(error),
       };
-    }
+    }4
     return {
       status: response.status,
       data: data,

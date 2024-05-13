@@ -11,7 +11,7 @@ export interface CourseCategory {
 export interface Module extends IDate {
   id?: string;
   name: string;
-  year: number;
+  year: string;
   speciality: string;
   semester: number;
   coefficient: number;
