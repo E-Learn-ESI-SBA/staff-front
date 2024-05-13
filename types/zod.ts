@@ -1,8 +1,10 @@
+import { assignments } from '@/static/dummy-data/assignment/assignment';
 import { z } from "zod";
 import { EQuizType, ECourseType } from ".";
+import { AssignmentType } from './assignment';
 
 /* 
-Start Zod Schema for Multi step form  
+Start Zod Schema for Multi step form Quiz form
 
 */
 
@@ -92,3 +94,33 @@ export type TGradesForm = z.infer<typeof GradesSchema>;
 End Zod Schema for Multi step form  
 
 */
+
+
+/* 
+Start Zod Schema for Multi step Assignment form  
+
+*/
+
+
+
+export const assignmentSchemaValidator = z.object({
+  id: z.string().optional(),
+  assignment_title: z
+    .string()
+    .min(2, { message: "must be at least 2 characters long" }),
+  assignment_description: z
+    .string()
+    .min(12, { message: "must be at least 12 characters long" }),
+  assignment_type: z.nativeEnum(AssignmentType).default(AssignmentType.MANUAL),
+  course: z.nativeEnum(ECourseType).default(ECourseType.OOP),
+  start_date: z.date(),
+  end_date: z.date(),
+  start_time: z
+    .string()
+    .regex(timeRegex, { message: "invalid time format. Use HH:MM format." }),
+  end_time: z
+    .string()
+    .regex(timeRegex, { message: "invalid time format. Use HH:MM format." }),
+});
+
+export type TAssignmentSchema = z.infer<typeof assignmentSchemaValidator>;
