@@ -1,5 +1,5 @@
 import { AssignmentTable } from "@/components/assignment/table";
 
 export default function StudentDashboard() {
-  return <AssignmentTable />;
+  return <AssignmentTable show={true} />;
 }
