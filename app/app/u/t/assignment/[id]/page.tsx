@@ -1,5 +1,6 @@
-import SingleAssignemnt from "@/components/dashboard/student/studentProfile/assignment/SingleAssignment";
+import SingleAssignment from "@/components/dashboard/teacher/assignments/SingleAssignment";
+
 
 export default function Assignment() {
-  return <SingleAssignemnt />;
+  return <SingleAssignment />;
 }
