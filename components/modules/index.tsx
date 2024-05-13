@@ -3,7 +3,7 @@ import { Filter } from "@/components/common/filter";
 import { Module } from "@/types/chapter/courses";
 import { useState } from "react";
 import { ModuleCard } from "@/components/modules/card";
-import {routes} from "@/config/routes";
+import { routes } from "@/config/routes";
 import Link from "next/link";
 
 type Props = {
@@ -29,15 +29,15 @@ export default function ModulesPage({ data }: Props) {
       />
       <div className="flex gap-4 items-center justify-center">
         {filteredData.map((module, i) => (
-            <Link
-                key={i}
-                href={
-                    routes.hasOwnProperty("teacher") &&
-                    `${routes["teacher"]["modules"].path}/${module.id}`
-                }
-            >
-          <ModuleCard data={module} />
-            </Link>
+          <Link
+            key={i}
+            href={
+              routes.hasOwnProperty("teacher") &&
+              `${routes["teacher"]["modules"].path}/${module.id}`
+            }
+          >
+            <ModuleCard data={module} />
+          </Link>
         ))}
       </div>
     </div>

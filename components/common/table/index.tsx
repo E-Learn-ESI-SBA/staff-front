@@ -154,7 +154,6 @@ export function DataTable<T extends { id: string }>({
               onClick={() =>
                 column.toggleSorting(column.getIsSorted() === "asc")
               }
-             
             >
               {header.title}
               <CaretSortIcon className="ml-2 h-4 w-4" />

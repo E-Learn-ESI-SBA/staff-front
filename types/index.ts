@@ -62,6 +62,6 @@ export type Assignment = {
 };
 
 export type File = {
-  url : string;
-  name : string;
-}
+  url: string;
+  name: string;
+};

@@ -3,16 +3,13 @@ import { Assignment, File } from "@/types";
 interface IAssignmentSlice {
   currentStep: number;
   first_step_content: Assignment | null;
-  second_step_content:  File[] | null;
+  second_step_content: File[] | null;
   setFirstStepContent: (content: Assignment) => void;
   setSecondStepContent: (content: File[]) => void;
   cleanUp: () => void;
   nextStep: () => void;
   prevStep: () => void;
-  setInitialValues: (
-    firstStep: Assignment,
-    secondStep: File[],
-  ) => void;
+  setInitialValues: (firstStep: Assignment, secondStep: File[]) => void;
 }
 
 const firstStepContentInitialState = null;

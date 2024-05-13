@@ -42,12 +42,6 @@ export const routes: TRoute = {
   },
 };
 
+export const protectedRoutes: string[] = ["/app/chat", "/"];
 
-export const protectedRoutes: string[] = [
-  "/app/chat",
-  '/'
-]
-
-export const authRoutes: string[] = [
-  "/auth",
-]
+export const authRoutes: string[] = ["/auth"];

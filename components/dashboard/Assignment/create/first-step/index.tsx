@@ -7,11 +7,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {assignmentSchemaValidator } from "@/types/zod";
+import { assignmentSchemaValidator } from "@/types/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import { Assignment} from "@/types";
+import { Assignment } from "@/types";
 import {
   Select,
   SelectContent,
@@ -52,7 +52,7 @@ export default function AssignmentFirstStepForm() {
     data.start_date = new Date(data.start_date);
     data.end_date = new Date(data.end_date);
     setFirstStepContent(data);
-    console.log('zez',data)
+    console.log("zez", data);
     nextStep();
   };
 
@@ -69,7 +69,10 @@ export default function AssignmentFirstStepForm() {
             <FormItem className="w-full">
               <FormLabel>Assignment Title</FormLabel>
               <FormControl>
-                <Input placeholder="Enter assignment title here..." {...field} />
+                <Input
+                  placeholder="Enter assignment title here..."
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -106,7 +109,9 @@ export default function AssignmentFirstStepForm() {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value={AssignmentType.AUTOMATED}>AUTOMATED</SelectItem>
+                  <SelectItem value={AssignmentType.AUTOMATED}>
+                    AUTOMATED
+                  </SelectItem>
                   <SelectItem value={AssignmentType.MANUAL}>MANUAL</SelectItem>
                 </SelectContent>
               </Select>
@@ -127,8 +132,8 @@ export default function AssignmentFirstStepForm() {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value={ECourseType.OOP} >OOP</SelectItem>
-                  <SelectItem value={ECourseType.ANALYSE} >Analyse</SelectItem>
+                  <SelectItem value={ECourseType.OOP}>OOP</SelectItem>
+                  <SelectItem value={ECourseType.ANALYSE}>Analyse</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />

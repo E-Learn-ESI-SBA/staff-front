@@ -1,7 +1,7 @@
-import { assignments } from '@/static/dummy-data/assignment/assignment';
+import { assignments } from "@/static/dummy-data/assignment/assignment";
 import { z } from "zod";
 import { EQuizType, ECourseType } from ".";
-import { AssignmentType } from './assignment';
+import { AssignmentType } from "./assignment";
 
 /* 
 Start Zod Schema for Multi step form Quiz form
@@ -95,13 +95,10 @@ End Zod Schema for Multi step form
 
 */
 
-
 /* 
 Start Zod Schema for Multi step Assignment form  
 
 */
-
-
 
 export const assignmentSchemaValidator = z.object({
   id: z.string().optional(),

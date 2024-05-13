@@ -9,10 +9,12 @@ export default function CreateQuiz() {
   return (
     <div className="p-2">
       <div className="flex justify-between items-center">
-        <p className="text-2xl text-[#434343] font-medium ">Create New Assignment</p>
+        <p className="text-2xl text-[#434343] font-medium ">
+          Create New Assignment
+        </p>
       </div>
       <div className="flex flex-col">
-        {currentStep === 1 && <AssignmentFirstStepForm/>}
+        {currentStep === 1 && <AssignmentFirstStepForm />}
         {currentStep === 2 && <AssignmentSecondStep />}
       </div>
     </div>

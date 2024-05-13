@@ -8,7 +8,11 @@ export function CustomColumns(): ColumnDef<IAssignment> {
     header: "Attachments",
     cell: ({ row }: { row: Row<any> }) => {
       return (
-        <Link href={row.original.file.url} target="_blank"  className="px-4 py-1 border border-gray-400" >
+        <Link
+          href={row.original.file.url}
+          target="_blank"
+          className="px-4 py-1 border border-gray-400"
+        >
           open
         </Link>
       );

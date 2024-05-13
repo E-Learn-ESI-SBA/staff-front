@@ -1,26 +1,24 @@
-
-
 export interface PostProps {
-    id: string;
-    body: string;
-    img?: string;
+  id: string;
+  body: string;
+  img?: string;
 }
 
 export interface PostsProps {
-    data: PostProps[];
+  data: PostProps[];
 }
 
 export interface PersonType {
-    id: string;
-    img?: string;
-    username: string;
-    summary?: string;
+  id: string;
+  img?: string;
+  username: string;
+  summary?: string;
 }
 
 export interface SuggestionsProps {
-    data: PersonType[];
+  data: PersonType[];
 }
 
 export interface PersonProps {
-    data: PersonType;
+  data: PersonType;
 }

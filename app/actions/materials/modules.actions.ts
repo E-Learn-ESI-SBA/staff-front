@@ -22,7 +22,8 @@ export const useGetTeacherModules = async (): Promise<IResponse<Module[]>> => {
         data: [],
         error: new Error(error),
       };
-    }4
+    }
+    4;
     return {
       status: response.status,
       data: data,

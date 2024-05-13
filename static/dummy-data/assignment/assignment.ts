@@ -1,4 +1,8 @@
-import { IAssignment,AssignmentState,AssignmentType } from './../../../types/assignment';
+import {
+  IAssignment,
+  AssignmentState,
+  AssignmentType,
+} from "./../../../types/assignment";
 
 export const assignments: IAssignment[] = [
   {

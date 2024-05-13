@@ -6,10 +6,10 @@ export interface IAssignment {
   endDate: string;
   module_name: string;
   publisher: string;
-  files ?: string[];
+  files?: string[];
   state: AssignmentState;
-  marks ?: number;
-  type : AssignmentType;
+  marks?: number;
+  type: AssignmentType;
 }
 export enum AssignmentState {
   UPCOMING = "UPCOMING",
@@ -20,4 +20,3 @@ export enum AssignmentType {
   MANUAL = "manual",
   AUTOMATED = "automated",
 }
-

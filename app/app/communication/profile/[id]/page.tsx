@@ -1,5 +1,5 @@
-import Profile from '@/components/communication/profile';
+import Profile from "@/components/communication/profile";
 
 export default function page() {
-	return <Profile />;
+  return <Profile />;
 }
