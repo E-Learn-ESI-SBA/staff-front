@@ -2,8 +2,17 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { CircleX, FileUp } from 'lucide-react'
+import { useAssignmentFormStore } from '@/store/forms/assignments/question.store'
 
 const Submission = () => {
+    const {
+    prevStep,
+    first_step_content,
+  } = useAssignmentFormStore((state) => ({
+    nextStep: state.nextStep,
+    prevStep: state.prevStep,
+    first_step_content: state.first_step_content,
+  }));
   const [files, setFiles] = useState([])
   const [rejected, setRejected] = useState([])
 
@@ -12,7 +21,7 @@ const Submission = () => {
       setFiles(previousFiles => [
         ...previousFiles,
         ...acceptedFiles.map(file =>
-          Object.assign(file)
+         Object.assign(file, { preview: URL.createObjectURL(file) })
         )
       ])
     }
@@ -30,6 +39,11 @@ const Submission = () => {
     onDrop
   })
 
+    useEffect(() => {
+    // Revoke the data uris to avoid memory leaks
+    return () => files.forEach(file => URL.revokeObjectURL(file.preview))
+  }, [files])
+
   const removeFile = name => {
     setFiles(files => files.filter(file => file.name !== name))
   }
@@ -45,10 +59,14 @@ const Submission = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-
     if (!files?.length) return
   const formData = new FormData()
-  files.forEach(file => formData.append('file', file))
+  files.forEach((file, index) => {
+      formData.append(`file${index}`, file);
+    });
+    console.log("Submitted form");
+    console.log("step1", first_step_content);
+    console.log('step2',formData)
   }
 
   return (
