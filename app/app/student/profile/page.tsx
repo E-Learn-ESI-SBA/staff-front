@@ -1,5 +1,5 @@
-import Profile from '@/components//dashboard/student/studentProfile';
+import Profile from "@/components//dashboard/student/studentProfile";
 
 export default function ProfilePage() {
-	return <Profile />;
+  return <Profile />;
 }
