@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/form";
 import { SelectLabel } from "@radix-ui/react-select";
 
-type Header<T> = {
+type Header<T extends { [s: string]: unknown }> = {
   key: keyof T;
   label: string;
 };
@@ -36,14 +36,14 @@ const FilterSchema = z.object({
   ),
 });
 type FilterType = z.infer<typeof FilterSchema>;
-type Props<T> = {
+type Props<T extends { [s: string]: unknown }> = {
   data: T[];
   withSearch?: boolean;
   filters: Header<T>[];
   setFilteredData: React.Dispatch<React.SetStateAction<T[]>>;
 };
 
-export function Filter<T>({
+export function Filter<T extends { [s: string]: unknown }>({
   filters,
   withSearch,
   data,
@@ -66,17 +66,17 @@ export function Filter<T>({
 
   const distinctValues = (filter: Header<T>) => {
     const { key } = filter;
-    return Array.from(new Set(data.map((d) => d[key] as unknown)));
+    return Array.from(new Set(data.map((d) => String(d[key]))));
   };
 
   const submitHandler = (values: FilterType) => {
-    console.log(values);
-    console.log(data);
     const filteredData = data.filter((item) => {
       if (
-        values.search !== "" &&
+        values.search &&
         !Object.values(item).some((val) =>
-          val.toString().toLowerCase().includes(values.search.toLowerCase()),
+          String(val)
+            .toLowerCase()
+            .includes(String(values.search).toLowerCase()),
         )
       ) {
         return false;
@@ -84,9 +84,9 @@ export function Filter<T>({
 
       for (const filter of values.filters) {
         if (
+          filter.value &&
           filter.value !== "none" &&
-          filter.value !== "" &&
-          item[filter.key].toString() !== filter.value
+          String(item[filter.key as keyof T]) !== filter.value
         ) {
           return false;
         }
@@ -129,6 +129,7 @@ export function Filter<T>({
         <div className="flex-1 flex gap-4 justify-start">
           {fields.map((field, index) => {
             const filter = filters.find((f) => f.key === field.key);
+            if (!filter) return null;
             return (
               <FormField
                 key={field.id}
@@ -143,14 +144,14 @@ export function Filter<T>({
                       >
                         <SelectTrigger>
                           <SelectValue
-                            placeholder={`Select By ${filter.label}`}
+                            placeholder={`Select By ${filter?.label}`}
                           />
                         </SelectTrigger>
                         <FormControl>
                           <SelectContent>
                             <SelectGroup>
                               <SelectLabel>
-                                {`Select By ${filter.label}`}
+                                {`Select By ${filter?.label}`}
                               </SelectLabel>
                               <SelectItem key="none" value="none">
                                 None
