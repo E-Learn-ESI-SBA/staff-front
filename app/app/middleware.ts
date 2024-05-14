@@ -5,11 +5,14 @@ import { getAuth } from '../actions/auth';
 import { STUDENT, TEACHER } from '@/config/constants';
 
 export async function middleware(request: NextRequest) {
+	const { pathname } = request.nextUrl;
+	if (!pathname.match(/\/app\/*/)) {
+		return NextResponse.next();
+	}
 	const auth = await getAuth();
 	if (!auth.isAuth) {
 		return NextResponse.redirect(new URL('/auth', request.url));
 	}
-	const { pathname } = request.nextUrl;
 	if (pathname.match(/\/app\/teacher/) && auth.payload?.role == TEACHER) {
 		return NextResponse.next();
 	}
@@ -25,13 +28,10 @@ export async function middleware(request: NextRequest) {
 }
 export const config = {
 	matcher: [
-		/*
-		 * Match all request paths except for the ones starting with:
-		 * - api (API routes)
-		 * - _next/static (static files)
-		 * - _next/image (image optimization files)
-		 * - favicon.ico (favicon file)
-		 */
+		'api',
+		'_next/static',
+		'_next/image',
+		'favicon.ico',
 		'/((?!api|_next/static|_next/image|favicon.ico).*)',
 	],
 };

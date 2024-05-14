@@ -6,7 +6,6 @@ import {
 	UPDATE_SECTION_URL,
 } from '@/config/constants';
 import {
-	TFileFormSchema,
 	TFileFormSchemaWithFile,
 	TSectionFormSchema,
 } from '@/types/chapter/zod';
@@ -32,7 +31,7 @@ export const createSection = async (
 		});
 		const res = await response.json();
 		return res;
-	} catch (e) {
+	} catch (e: any & { message: string }) {
 		console.log(e);
 		return {
 			success: false,
@@ -54,7 +53,7 @@ export const updateSection = async (data: TSectionFormSchema) => {
 
 		const res = await response.json();
 		return res;
-	} catch (e) {
+	} catch (e: any & { message: string }) {
 		console.log(e);
 		return {
 			success: false,
@@ -78,7 +77,7 @@ export const createFile = async (data: TFileFormSchemaWithFile) => {
 		});
 		const res = await response.json();
 		return res;
-	} catch (e) {
+	} catch (e: any & { message: string }) {
 		console.log(e);
 		return {
 			success: false,
@@ -102,7 +101,7 @@ export const updateFile = async (data: TFileFormSchemaWithFile) => {
 		});
 		const res = await response.json();
 		return res;
-	} catch (e) {
+	} catch (e: any & { message: string }) {
 		console.log(e);
 		return {
 			success: false,
@@ -151,7 +150,8 @@ export async function login(data: TAuthSchema) {
 export async function refreshTokens() {
 	'use server';
 	try {
-		const refreshToken = cookies().get('refreshToken').value;
+		const refreshTokenCookie = cookies().get('refreshToken');
+		const refreshToken = refreshTokenCookie?.value ?? '';
 		const response = await fetch('http://localhost:8000/api/auth/refresh/', {
 			method: 'POST',
 			body: JSON.stringify({ refresh: refreshToken }),

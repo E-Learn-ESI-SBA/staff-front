@@ -62,9 +62,11 @@ interface IRoute {
 
 class Routes {
 	private treeRoute: IRoute;
+	private availableKeys: { [key: string]: string };
 
 	constructor(treeRoute: IRoute) {
 		this.treeRoute = treeRoute;
+		this.availableKeys = this.getKeys();
 	}
 
 	public findRouteByKey(key: string): IRoute | undefined {
@@ -101,6 +103,11 @@ class Routes {
 		};
 		traverse(this.treeRoute);
 		return keys;
+	}
+	public getPath(key: string): string {
+		return this.availableKeys.hasOwnProperty(key)
+			? this.availableKeys[key]
+			: '';
 	}
 }
 
