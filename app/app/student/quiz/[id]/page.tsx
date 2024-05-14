@@ -1,5 +1,4 @@
-import SingleQuiz from "@/components/dashboard/student/studentProfile/Quiz/SingleQuiz";
-
+import PreQuiz from "@/components/quiz/PassQuiz";
 export default function StudentDashboard() {
-  return <SingleQuiz />;
+  return <PreQuiz />;
 }
