@@ -33,21 +33,15 @@ export const FileFormSchema = z.object({
     .array(
       z.object({
         label: z.string(),
-        value: z.string().nullish(),
-        disabled: z.boolean().default(false),
+        value: z.string().default(""),
+        disabled: z.boolean().default(false).optional(),
       }),
     )
     .min(1, "Please Select at least one group "),
   teacher_id: z.number(),
 });
 
-export type TFileFormSchema = z.infer<typeof FileFormSchema> & {
-  groups: {
-    label: string;
-    value: string;
-    disable: boolean;
-  }[];
-};
+export type TFileFormSchema = z.infer<typeof FileFormSchema>
 export type TFileFormSchemaWithFile = TFileFormSchema & {
-  file: File;
+  file: File | null;
 };

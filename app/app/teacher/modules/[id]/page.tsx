@@ -9,6 +9,7 @@ type Props = {
   };
 };
 export default function CoursePage({ params }: Props) {
+
   const path = appRouter.getPath("module")?.concat("/", params.id);
   const tabs = [
     {

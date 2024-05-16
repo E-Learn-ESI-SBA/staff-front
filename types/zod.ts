@@ -121,3 +121,17 @@ export const assignmentSchemaValidator = z.object({
 });
 
 export type TAssignmentSchema = z.infer<typeof assignmentSchemaValidator>;
+
+/* Module Form Validator */
+
+export const moduleSchemaValidator = z.object({
+    id: z.string().optional(),
+    title: z
+        .string()
+        .min(2, { message: "must be at least 2 characters long" }),
+    description: z
+        .string()
+        .min(12, { message: "must be at least 12 characters long" }),
+    points: z.array(z.string()).min(3, { message: "must be at least 3 points" }),
+    });
+export type TModuleSchema = z.infer<typeof moduleSchemaValidator>;

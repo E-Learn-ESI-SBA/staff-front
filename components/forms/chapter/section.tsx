@@ -12,9 +12,9 @@ import { Input } from "@/components/ui/input";
 import { SectionFormSchema, TSectionFormSchema } from "@/types/chapter/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PropsWithChildren } from "react";
-import { useFormState } from "react-dom";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import {IError} from "@/types/errors";
 
 type Props = PropsWithChildren & {
   onSubmit: (data: TSectionFormSchema) => void;
@@ -26,25 +26,23 @@ export function SectionForm({
   mode = "CREATE",
   children,
 }: Props) {
-  const [state, formAction] = useFormState(
-    mode === "CREATE" ? createSection : updateSection,
-    defaultValues,
-  );
+ const formAction = mode === "CREATE" ? createSection : updateSection;
+ const submitHandler = async  (data: TSectionFormSchema) => {
+   try {
+   const res = await formAction(data);
+   toast.success(res.message)
+   } catch (e) {
+     const err = new IError(e)
+     toast.error(err.message
+     )
+   }
+ }
   const form = useForm<TSectionFormSchema>({
     resolver: zodResolver(SectionFormSchema),
     mode: "onSubmit",
     defaultValues: defaultValues,
   });
-  console.log(state);
-  if (state.status === "success") {
-    form.reset();
-    toast.success(state.message, {
-      style: {
-        backgroundColor: "green",
-        color: "white",
-      },
-    });
-  }
+
   return (
     <Form {...form}>
       <form
