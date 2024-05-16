@@ -29,7 +29,7 @@ export default function CommentPage({ data }: Props) {
         </div>
       </ScrollArea>
       <Button
-    variant="ghost"
+        variant="ghost"
         className="w-fit bg-blue-light text-blue-origin text-base "
         onClick={cursorHandler}
       >

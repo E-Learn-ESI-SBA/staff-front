@@ -89,7 +89,7 @@ export default function CreatePost() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-      <ImageIcon className="h-8 w-8" color="gray"  />
+      <ImageIcon className="h-8 w-8" color="gray" />
       <Paperclip className="h-8 w-8" color="gray" />
     </div>
   );

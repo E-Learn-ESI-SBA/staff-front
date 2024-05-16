@@ -29,7 +29,6 @@ type Props = PropsWithChildren & {
   mode: "CREATE" | "UPDATE";
 };
 export function FileForm({ defaultValues, mode = "CREATE", children }: Props) {
-
   const form = useForm<TFileFormSchema>({
     resolver: zodResolver(FileFormSchema),
     mode: "onSubmit",
@@ -38,7 +37,7 @@ export function FileForm({ defaultValues, mode = "CREATE", children }: Props) {
   const action = mode === "CREATE" ? createFile : updateFile;
   const submitHandler = (data: TFileFormSchema) => {
     console.log(data);
-    const dataWithFile:TFileFormSchemaWithFile = {
+    const dataWithFile: TFileFormSchemaWithFile = {
       ...data,
       file: currentFile,
     };
@@ -176,8 +175,13 @@ export function FileForm({ defaultValues, mode = "CREATE", children }: Props) {
                 type="file"
                 className="w-fll absolute top-0 h-full  opacity-0"
                 onChange={(e) => {
-                  if (e.target.files && e.target.files[0].size < MAX_FILE_SIZE) {
-                    setCurrentFile(() => e.target?.files ? e.target?.files[0] : null);
+                  if (
+                    e.target.files &&
+                    e.target.files[0].size < MAX_FILE_SIZE
+                  ) {
+                    setCurrentFile(() =>
+                      e.target?.files ? e.target?.files[0] : null,
+                    );
                   }
                 }}
               />

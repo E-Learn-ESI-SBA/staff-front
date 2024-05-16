@@ -44,10 +44,10 @@
 }
 
 .dot::before {
-  content: '';
+  content: "";
   height: 100%;
   width: 100%;
-  background-color: #0066FF;
+  background-color: #0066ff;
   border-radius: 50%;
   transform: scale(var(--uib-scale));
   transition: background-color 0.3s ease;

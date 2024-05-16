@@ -10,7 +10,7 @@ import {
   TSectionFormSchema,
 } from "@/types/chapter/zod";
 import { cookies } from "next/headers";
-import {IError} from "@/types/errors";
+import { IError } from "@/types/errors";
 
 type ReturnType = {
   success: boolean;

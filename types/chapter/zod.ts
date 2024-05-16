@@ -41,7 +41,7 @@ export const FileFormSchema = z.object({
   teacher_id: z.number(),
 });
 
-export type TFileFormSchema = z.infer<typeof FileFormSchema>
+export type TFileFormSchema = z.infer<typeof FileFormSchema>;
 export type TFileFormSchemaWithFile = TFileFormSchema & {
   file: File | null;
 };

@@ -14,7 +14,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { PropsWithChildren } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import {IError} from "@/types/errors";
+import { IError } from "@/types/errors";
 
 type Props = PropsWithChildren & {
   onSubmit: (data: TSectionFormSchema) => void;
@@ -26,17 +26,16 @@ export function SectionForm({
   mode = "CREATE",
   children,
 }: Props) {
- const formAction = mode === "CREATE" ? createSection : updateSection;
- const submitHandler = async  (data: TSectionFormSchema) => {
-   try {
-   const res = await formAction(data);
-   toast.success(res.message)
-   } catch (e) {
-     const err = new IError(e)
-     toast.error(err.message
-     )
-   }
- }
+  const formAction = mode === "CREATE" ? createSection : updateSection;
+  const submitHandler = async (data: TSectionFormSchema) => {
+    try {
+      const res = await formAction(data);
+      toast.success(res.message);
+    } catch (e) {
+      const err = new IError(e);
+      toast.error(err.message);
+    }
+  };
   const form = useForm<TSectionFormSchema>({
     resolver: zodResolver(SectionFormSchema),
     mode: "onSubmit",

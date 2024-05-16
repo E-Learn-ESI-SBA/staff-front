@@ -1,7 +1,7 @@
 import { LinksTabs } from "@/components/teacher/courses/tabs";
 import appRouter from "@/config/routes";
 import { moduleData } from "@/static/dummy-data/modules/chapter";
-import {Overview} from "@/components/courses/overview";
+import { Overview } from "@/components/courses/overview";
 
 type Props = {
   params: {
@@ -9,7 +9,6 @@ type Props = {
   };
 };
 export default function CoursePage({ params }: Props) {
-
   const path = appRouter.getPath("module")?.concat("/", params.id);
   const tabs = [
     {
@@ -35,8 +34,12 @@ export default function CoursePage({ params }: Props) {
       <LinksTabs activePath={path} tabs={tabs} />
       <div className="p-4 pt-12">
         <Overview
-          data={{description:modules.description,points:modules.plan,title:modules.name}}
-      withEdit={true}
+          data={{
+            description: modules.description,
+            points: modules.plan,
+            title: modules.name,
+          }}
+          withEdit={true}
         />
       </div>
     </main>

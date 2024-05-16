@@ -1,8 +1,8 @@
 export class IError extends Error {
-  public  message: string;
-  public  status?: number;
-    stack?: string;
-  constructor(e : unknown) {
+  public message: string;
+  public status?: number;
+  stack?: string;
+  constructor(e: unknown) {
     super();
     if (e instanceof Error) {
       this.message = e.message;

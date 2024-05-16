@@ -73,7 +73,7 @@ export function Filter<T>({
     const filteredData = data.filter((item) => {
       if (
         values.search &&
-          // @ts-ignore
+        // @ts-ignore
         !Object.values(item).some((val) =>
           String(val)
             .toLowerCase()
