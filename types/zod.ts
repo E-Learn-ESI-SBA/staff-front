@@ -132,6 +132,6 @@ export const moduleSchemaValidator = z.object({
     description: z
         .string()
         .min(12, { message: "must be at least 12 characters long" }),
-    points: z.array(z.string()).min(3, { message: "must be at least 3 points" }),
+    points: z.array(z.object({value: z.string().min(3, { message: "must be at least 3 points" })}))
     });
 export type TModuleSchema = z.infer<typeof moduleSchemaValidator>;

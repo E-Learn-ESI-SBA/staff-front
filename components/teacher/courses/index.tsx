@@ -2,7 +2,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ChapterComponent } from "./resources/chapter";
 import { usePathname } from "next/navigation";
-import Overview from "@/components/dashboard/student/courses/overview";
+import Overview from "@/components/courses/overview";
 import { Module } from "@/types/chapter/courses";
 
 type Props = {

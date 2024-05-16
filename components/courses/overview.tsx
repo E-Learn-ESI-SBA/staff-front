@@ -1,5 +1,8 @@
-import Image from "next/image";
+"use client"
 import {useState} from "react";
+import {CircleCheck} from "lucide-react";
+import {EditModule} from "@/components/forms/module";
+import {Button} from "@/components/ui/button";
 
 type TData = {
     title: string;
@@ -15,7 +18,7 @@ interface OverviewProps  {
  }
 };
 
-export  const  Overview = ({withEdit,  data: {
+export  const  Overview = ({withEdit=false,  data: {
     title, description, points
 }
 }: OverviewProps)  =>  {
@@ -28,12 +31,12 @@ export  const  Overview = ({withEdit,  data: {
                          {title}
                      </h1>
                      {withEdit && (
-                         <button
-                             className="bg-primary text-white rounded-3xl p-2"
+                         <Button
+                             className="p-4 px-6 w-fit "
                              onClick={() => setEdit(!edit)}
                          >
                              Edit
-                         </button>
+                         </Button>
                      )}
                  </div>
                  <div className="text-text-GRAY rounded-3xl p-4">
@@ -52,23 +55,17 @@ export  const  Overview = ({withEdit,  data: {
                          </h5>
                          <div className="grid grid-cols-2  gap-4">
                              {points.map((p, i) => (
-                                 <div className="flex items-center w-full   gap-1" key={i}>
-                                     <Image
-                                         src="/assets/icons/courses/check.svg"
-                                         width={30}
-                                         height={30}
-                                         alt="overview"
-                                     />
+                                 <div className="flex items-center w-full   gap-2" key={i}>
+                                     <CircleCheck className="w-8 h-8 text-white " fill="#0066FF" />
                                      <p className=" text-sm md:text-base ">{p}</p>
                                  </div>
                              ))}
                          </div>
                      </div>
                  </div>
+
              </div>
          )
      }
-     return (
-            <OverviewComp />
-     );
+     return !edit ? <OverviewComp /> : <EditModule data={{title,description,points}} setClose={setEdit} />
  }

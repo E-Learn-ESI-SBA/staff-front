@@ -1,7 +1,7 @@
-import Overview from "@/components/dashboard/student/courses/overview";
 import { LinksTabs } from "@/components/teacher/courses/tabs";
 import appRouter from "@/config/routes";
 import { moduleData } from "@/static/dummy-data/modules/chapter";
+import {Overview} from "@/components/courses/overview";
 
 type Props = {
   params: {
@@ -35,9 +35,8 @@ export default function CoursePage({ params }: Props) {
       <LinksTabs activePath={path} tabs={tabs} />
       <div className="p-4 pt-12">
         <Overview
-          description={modules.description}
-          points={modules.plan}
-          title={modules.name}
+          data={{description:modules.description,points:modules.plan,title:modules.name}}
+      withEdit={true}
         />
       </div>
     </main>

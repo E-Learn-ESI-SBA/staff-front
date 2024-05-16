@@ -1,4 +1,4 @@
-import Overview from "@/components/dashboard/student/courses/overview";
+import Overview from "@/components/courses/overview";
 import { ChapterComponent } from "@/components/teacher/courses/resources/chapter";
 import { LinksTabs } from "@/components/teacher/courses/tabs";
 import appRouter from "@/config/routes";

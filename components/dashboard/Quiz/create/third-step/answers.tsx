@@ -8,9 +8,13 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { TrashIcon } from "@radix-ui/react-icons";
-import { useFieldArray } from "react-hook-form";
+import {useFieldArray, UseFormReturn} from "react-hook-form";
 
-export const AnswersComponent = ({ nestIndex, form }) => {
+type Props= {
+    nestIndex:number;
+    form: UseFormReturn;
+}
+export const AnswersComponent = ({ nestIndex, form }:Props) => {
   const { fields, append, remove } = useFieldArray({
     name: `questions.${nestIndex}.answers`,
     control: form.control,
