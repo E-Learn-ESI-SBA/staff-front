@@ -22,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" title="Madaurus" >
+    <html lang="en" title="Madaurus">
       <body className={monts.className}>
         {children}
         <Toaster />
