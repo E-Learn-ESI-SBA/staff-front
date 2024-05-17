@@ -3,8 +3,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: calc(75px * 0.8);
-  width: 75px;
+  height: calc(105px * 0.8);
+  width: 105px;
 }
 
 .host--hidden {
@@ -12,13 +12,13 @@
 }
 
 .container {
-  --uib-dot-size: calc(75px * 0.1);
+  --uib-dot-size: calc(105px * 0.1);
   position: relative;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  height: calc(75px * 0.64);
-  width: calc(75px * 0.64);
+  height: calc(105px * 0.64);
+  width: calc(105px * 0.64);
 }
 
 .dot {

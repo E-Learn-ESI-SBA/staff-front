@@ -1,4 +1,22 @@
-export const defaultEditorContent = {
+interface Mark {
+  type: string;
+  attrs?: { [key: string]: any };
+}
+
+interface Node {
+  type: string;
+  attrs?: { [key: string]: any };
+  content?: Node[];
+  text?: string;
+  marks?: Mark[];
+}
+
+interface DocContent {
+  type: string;
+  content: Node[];
+}
+
+export const defaultEditorContent: DocContent = {
   type: "doc",
   content: [
     {

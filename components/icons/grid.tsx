@@ -1,9 +1,10 @@
 import React, { memo } from "react";
 import styles from "./grid.module.css";
+import { cn } from "@/lib/utils";
 
-const Grid = memo(() => {
+const GridLoader = memo(() => {
   return (
-    <div className={styles.host}>
+    <div className={cn("w-full h-full", styles.host)}>
       <div className={styles.container}>
         <div className={`${styles.dot} ${styles["dot--1"]}`} />
         <div className={`${styles.dot} ${styles["dot--2"]}`} />
@@ -26,6 +27,6 @@ const Grid = memo(() => {
   );
 });
 
-Grid.displayName = "Grid";
+GridLoader.displayName = "Grid";
 
-export default Grid;
+export default GridLoader;

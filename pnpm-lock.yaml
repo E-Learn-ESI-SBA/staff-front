@@ -11,6 +11,9 @@ dependencies:
   "@radix-ui/react-accordion":
     specifier: ^1.1.2
     version: 1.1.2(@types/react-dom@18.2.14)(@types/react@18.2.33)(react-dom@18.2.0)(react@18.3.1)
+  "@radix-ui/react-alert-dialog":
+    specifier: ^1.0.5
+    version: 1.0.5(@types/react-dom@18.2.14)(@types/react@18.2.33)(react-dom@18.2.0)(react@18.3.1)
   "@radix-ui/react-avatar":
     specifier: ^1.0.4
     version: 1.0.4(@types/react-dom@18.2.14)(@types/react@18.2.33)(react-dom@18.2.0)(react@18.3.1)
@@ -110,6 +113,9 @@ dependencies:
   react-hook-form:
     specifier: ^7.51.2
     version: 7.51.2(react@18.3.1)
+  react-player:
+    specifier: ^2.16.0
+    version: 2.16.0(react@18.3.1)
   recharts:
     specifier: ^2.12.6
     version: 2.12.6(react-dom@18.2.0)(react@18.3.1)
@@ -944,6 +950,35 @@ packages:
       "@radix-ui/react-id": 1.0.1(@types/react@18.2.33)(react@18.3.1)
       "@radix-ui/react-primitive": 1.0.3(@types/react-dom@18.2.14)(@types/react@18.2.33)(react-dom@18.2.0)(react@18.3.1)
       "@radix-ui/react-use-controllable-state": 1.0.1(@types/react@18.2.33)(react@18.3.1)
+      "@types/react": 18.2.33
+      "@types/react-dom": 18.2.14
+      react: 18.3.1
+      react-dom: 18.2.0(react@18.3.1)
+    dev: false
+
+  /@radix-ui/react-alert-dialog@1.0.5(@types/react-dom@18.2.14)(@types/react@18.2.33)(react-dom@18.2.0)(react@18.3.1):
+    resolution:
+      {
+        integrity: sha512-OrVIOcZL0tl6xibeuGt5/+UxoT2N27KCFOPjFyfXMnchxSHZ/OW7cCX2nGlIYJrbHK/fczPcFzAwvNBB6XBNMA==,
+      }
+    peerDependencies:
+      "@types/react": "*"
+      "@types/react-dom": "*"
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+    peerDependenciesMeta:
+      "@types/react":
+        optional: true
+      "@types/react-dom":
+        optional: true
+    dependencies:
+      "@babel/runtime": 7.24.1
+      "@radix-ui/primitive": 1.0.1
+      "@radix-ui/react-compose-refs": 1.0.1(@types/react@18.2.33)(react@18.3.1)
+      "@radix-ui/react-context": 1.0.1(@types/react@18.2.33)(react@18.3.1)
+      "@radix-ui/react-dialog": 1.0.5(@types/react-dom@18.2.14)(@types/react@18.2.33)(react-dom@18.2.0)(react@18.3.1)
+      "@radix-ui/react-primitive": 1.0.3(@types/react-dom@18.2.14)(@types/react@18.2.33)(react-dom@18.2.0)(react@18.3.1)
+      "@radix-ui/react-slot": 1.0.2(@types/react@18.2.33)(react@18.3.1)
       "@types/react": 18.2.33
       "@types/react-dom": 18.2.14
       react: 18.3.1
@@ -4406,6 +4441,14 @@ packages:
       }
     dev: true
 
+  /deepmerge@4.3.1:
+    resolution:
+      {
+        integrity: sha512-3sUqbMEc77XqpdNO7FRyRog+eW3ph+GYCbj+rK+uYyRMuwsVy0rMiVtPn+QJlKFvWP/1PYpapqYn0Me2knFn+A==,
+      }
+    engines: { node: ">=0.10.0" }
+    dev: false
+
   /defaults@1.0.4:
     resolution:
       {
@@ -6358,6 +6401,13 @@ packages:
       }
     dev: false
 
+  /load-script@1.0.0:
+    resolution:
+      {
+        integrity: sha512-kPEjMFtZvwL9TaZo0uZ2ml+Ye9HUMmPwbYRJ324qF9tqMejwykJ5ggTyvzmrbBeapCAbk98BSbTeovHEEP1uCA==,
+      }
+    dev: false
+
   /load-yaml-file@0.2.0:
     resolution:
       {
@@ -6576,6 +6626,13 @@ packages:
     resolution:
       {
         integrity: sha512-Lf+9+2r+Tdp5wXDXC4PcIBjTDtq4UKjCPMQhKIuzpJNW0b96kVqSwW0bT7FhRSfmAiFYgP+SCRvdrDozfh0U5w==,
+      }
+    dev: false
+
+  /memoize-one@5.2.1:
+    resolution:
+      {
+        integrity: sha512-zYiwtZUcYyXKo/np96AGZAckk+FWWsUdJ3cHGGmld7+AhvcWmQyGCYUh1hc4Q/pkOhb65dQR/pqCyK0cOaHz4Q==,
       }
     dev: false
 
@@ -8065,6 +8122,22 @@ packages:
       overlap-area: 1.1.0
       react-css-styled: 1.1.9
       react-selecto: 1.26.3
+    dev: false
+
+  /react-player@2.16.0(react@18.3.1):
+    resolution:
+      {
+        integrity: sha512-mAIPHfioD7yxO0GNYVFD1303QFtI3lyyQZLY229UEAp/a10cSW+hPcakg0Keq8uWJxT2OiT/4Gt+Lc9bD6bJmQ==,
+      }
+    peerDependencies:
+      react: ">=16.6.0"
+    dependencies:
+      deepmerge: 4.3.1
+      load-script: 1.0.0
+      memoize-one: 5.2.1
+      prop-types: 15.8.1
+      react: 18.3.1
+      react-fast-compare: 3.2.2
     dev: false
 
   /react-remove-scroll-bar@2.3.6(@types/react@18.2.33)(react@18.3.1):

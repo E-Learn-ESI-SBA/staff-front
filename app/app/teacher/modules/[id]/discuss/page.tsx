@@ -13,7 +13,7 @@ export default function ResourcePage({ params: { id } }: Props) {
   const tabs = [
     {
       title: "Overview",
-      path: path,
+      path: path.concat("/overview"),
     },
     {
       title: "Resources",

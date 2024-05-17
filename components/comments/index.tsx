@@ -21,7 +21,7 @@ export default function CommentPage({ data }: Props) {
   };
   return (
     <div className="flex flex-col  h-full w-full justify-between   p-6 lg:p-8 ">
-      <ScrollArea className="min-h-96 max-h-[720px]">
+      <ScrollArea className="h-[720px]">
         <div className="flex flex-col gap-4 p-8 lg:p-12">
           {fetchedData.map((c, i) => (
             <CommentItem key={i} data={c} setOpenComment={setStateModal} />

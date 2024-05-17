@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
@@ -8,8 +9,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useRouter } from "next/navigation";
+import { router } from "next/client";
 
 export default function NotFound() {
+  const router = useRouter();
+  const GoBack = () => {
+    router.back();
+  };
   return (
     <div className="flex items-center justify-center h-screen">
       <Card className="w-[420px]">
@@ -21,7 +28,7 @@ export default function NotFound() {
         </CardHeader>
         <CardFooter className="flex justify-center">
           <Button asChild>
-            <Link href="/">Go Back</Link>
+            <Button onClick={GoBack}>Go Back</Button>
           </Button>
         </CardFooter>
       </Card>
