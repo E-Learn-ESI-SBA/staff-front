@@ -1,5 +1,8 @@
 import { LinksTabs } from "@/components/teacher/courses/tabs";
 import appRouter from "@/config/routes";
+import VideoSection from "@/components/videos";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 type Props = {
   params: {
@@ -12,7 +15,7 @@ export default function VideoPage({ params: { videoId, id } }: Props) {
   const tabs = [
     {
       title: "Overview",
-      path: path,
+      path: path.concat("/overview"),
     },
     {
       title: "Resources",
@@ -30,7 +33,14 @@ export default function VideoPage({ params: { videoId, id } }: Props) {
   return (
     <main className="w-full min-h-screen bg-secondary-background  p-4">
       <LinksTabs activePath={path?.concat("/resources")} tabs={tabs} />
-      <div className="p-4 pt-12">Get your video</div>
+      <div className="p-8 flex flex-col gap-2">
+        <Link href={path?.concat("/resources")}>
+          <Button className="p-2" variant="link">
+            Return to resources list
+          </Button>
+        </Link>
+        <VideoSection videoId={videoId} />
+      </div>
     </main>
   );
 }

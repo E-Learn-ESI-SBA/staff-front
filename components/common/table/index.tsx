@@ -58,6 +58,8 @@ import { Search } from "lucide-react";
 import { compareItems, rankItem } from "@tanstack/match-sorter-utils";
 import { CollTableDropDown } from "@/components/common/table/coll-dropdown";
 import { Filter } from "@/components/common/table/filter";
+import { AlertModal } from "@/components/common/dialog/alert";
+import { toast } from "sonner";
 
 const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
   const itemRank = rankItem(row.getValue(columnId), value);
@@ -90,7 +92,7 @@ export type Props<T extends { id: string }> = {
   url?: string;
   customColumns?: (() => ColumnDef<T>)[];
   editHandler?: (row: T) => void;
-  deleteHandler?: (row: T) => void;
+  deleteHandler?: (row: T) => void | Promise<void>;
   customOperations?: {
     title: string;
     handler: (row: T) => void;
@@ -137,7 +139,7 @@ export function DataTable<T extends { id: string }>({
       enableHiding: false,
     },
     ...headers.map((header): ColumnDef<T> => {
-      const isFuzzy = shorterFuzzyElements.includes(header.accessorKey);
+      const isFuzzy = shorterFuzzyElements?.includes(header.accessorKey);
       const obj = isFuzzy && {
         filterFn: "fuzzy",
         sortingFn: fuzzySort,
@@ -161,7 +163,7 @@ export function DataTable<T extends { id: string }>({
           );
         },
         cell: ({ row }: { row: Row<T> }) => (
-          <div className="capitalize text-start">
+          <div className="capitalize text-center">
             {row.getValue(header.accessorKey as string)}
           </div>
         ),
@@ -174,10 +176,12 @@ export function DataTable<T extends { id: string }>({
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
   const [selectedCols, setSelectedCols] = useState<keyof T>(defaultFilter);
-
+  const [wantDelete, setWantDelete] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(false);
+  const [selectedRowState, setSelectedRowState] = useState<T | null>(null);
   const table = useReactTable({
     data,
-
+    //
     columns: columns.concat(...customColumns.map((c) => c()), {
       id: "actions",
       enableHiding: false,
@@ -230,7 +234,10 @@ export function DataTable<T extends { id: string }>({
               {deleteHandler && (
                 <DropdownMenuItem
                   className="flex justify-between text-red-700"
-                  onClick={() => deleteHandler(selectedRow)}
+                  onClick={() => {
+                    setWantDelete(true);
+                    setSelectedRowState(selectedRow);
+                  }}
                 >
                   <span>Delete</span>
                   <TrashIcon />
@@ -263,6 +270,22 @@ export function DataTable<T extends { id: string }>({
     getFacetedUniqueValues: getFacetedUniqueValues(),
     getFacetedMinMaxValues: getFacetedMinMaxValues(),
   });
+  const DeleteFn = async (row: T) => {
+    if (deleteHandler) {
+      try {
+        setDeleteLoading(true);
+        await deleteHandler(row);
+        setDeleteLoading(false);
+        setWantDelete(false);
+        toast.success("Item deleted successfully.");
+      } catch (e) {
+        setDeleteLoading(false);
+        setWantDelete(false);
+        toast.error("An error occurred while deleting the item.");
+      }
+    }
+    return;
+  };
 
   return (
     <div className="space-y-4 overflow-hidden bg-white p-4 rounded-md min-w-[580px]">
@@ -299,7 +322,7 @@ export function DataTable<T extends { id: string }>({
           />
         </div>
         <div className="flex gap-4">
-          {shorterFuzzyElements.map((e, i) => (
+          {shorterFuzzyElements?.map((e, i) => (
             <Filter<T> header={e} table={table} key={i} />
           ))}
         </div>
@@ -362,6 +385,17 @@ export function DataTable<T extends { id: string }>({
         </Table>
       </div>
       <TablePagination<T> table={table} />
+      {deleteHandler && selectedRowState && (
+        <AlertModal
+          isLoading={deleteLoading}
+          title="Are you absolutely sure?"
+          modalHandler={() => DeleteFn(selectedRowState)}
+          desc="This action cannot be undone. This will permanently delete this item."
+          open={wantDelete}
+          onOpenChange={setWantDelete}
+          withTrigger
+        />
+      )}
     </div>
   );
 }
@@ -372,16 +406,3 @@ type Headers<T> = {
   title: string;
   accessorKey: keyof T;
 }[];
-
-/* function buildMapFromHeaders<T>(headers: Headers<T>,defaultFilter:keyof T): Map<keyof T, boolean> {
-  const generatedObj: { [key in keyof T]: boolean } = {} as any;
-
-  headers.forEach(header => {
-    generatedObj[header.accessorKey] = false;
-  });
-
-  const map = new Map<keyof T, boolean>(Object.entries(generatedObj) as [keyof T, boolean][]);
-  map.set(defaultFilter, true);
-  return map;
-}
-*/

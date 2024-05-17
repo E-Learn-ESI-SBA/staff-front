@@ -1,11 +1,15 @@
 import { TInstructor } from "@/types/staff";
 import Image from "next/image";
+import Link from "next/link";
 
 type Props = TInstructor;
 
-export const Instructor = ({ about, image, name, title }: Props) => {
+export const Instructor = ({ about, image, name, title, id }: Props) => {
   return (
-    <div className="flex gap-4 p-4 items-center rounded-2xl bg-white">
+    <Link
+      className="flex gap-4 p-4 items-center rounded-2xl bg-white"
+      href={`/user/${id}`}
+    >
       <Image
         src={image}
         width={160}
@@ -22,6 +26,6 @@ export const Instructor = ({ about, image, name, title }: Props) => {
         </div>
         <p className="text-sm font-light">{about}</p>
       </div>
-    </div>
+    </Link>
   );
 };

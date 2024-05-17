@@ -21,7 +21,7 @@ import { Button } from "@/components/ui/button";
 
 const extensions = [...defaultExtensions, slashCommand];
 type Props = {
-  saveHandler: (e: JSONContent) => void;
+  saveHandler?: (e: JSONContent) => void;
   usageMode?: "read" | "write";
 };
 const EditorComp: React.FC<Props> = ({ saveHandler, usageMode = "read" }) => {
@@ -40,7 +40,7 @@ const EditorComp: React.FC<Props> = ({ saveHandler, usageMode = "read" }) => {
         editor.storage.markdown.getMarkdown(),
       );
       setSaveStatus("Saved");
-      saveHandler(json);
+      saveHandler && saveHandler(json);
     },
     500,
   );

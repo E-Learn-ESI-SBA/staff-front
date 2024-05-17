@@ -3,4 +3,5 @@ export type TInstructor = {
   name: string;
   title: string;
   about: string;
+  id: string;
 };
