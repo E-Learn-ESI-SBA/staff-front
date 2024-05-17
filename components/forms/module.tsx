@@ -74,7 +74,7 @@ export function EditModule({ data, setClose }: Props) {
                       type="text"
                       placeholder="Distributed Transactions"
                       id="title"
-                      className="text-black text-lg xl:text-2xl lg:text-xl font-medium p-4"
+                      className="text-black w-96 text-lg xl:text-2xl lg:text-xl outline-none font-medium p-4"
                     />
                   </FormControl>
                   <FormMessage />

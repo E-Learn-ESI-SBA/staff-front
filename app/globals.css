@@ -147,3 +147,105 @@ body {
 }
 
 /* Circular progress bar end */
+
+h1 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+* {
+  margin-top: 2px;
+}
+h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 1.17rem;
+  font-weight: bold;
+}
+
+h4 {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+h5 {
+  font-size: 0.83rem;
+  font-weight: bold;
+}
+
+h6 {
+  font-size: 0.67rem;
+  font-weight: bold;
+}
+
+p {
+  font-size: 1rem;
+  font-weight: normal;
+}
+body {
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+a {
+  font-size: 1rem;
+  font-weight: normal;
+  text-decoration: underline;
+}
+
+strong {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+em {
+  font-size: 1rem;
+  font-style: italic;
+}
+
+ul,
+ol {
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+li {
+  font-size: 1rem;
+  font-weight: normal;
+  margin-top: 8px;
+}
+
+blockquote {
+  font-size: 1rem;
+  font-weight: normal;
+  font-style: italic;
+}
+
+code {
+  font-size: 1rem;
+  font-family: monospace;
+}
+
+pre {
+  font-size: 1rem;
+  font-family: monospace;
+}
+
+table {
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+th,
+td {
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+caption {
+  font-size: 1rem;
+  font-weight: normal;
+  text-align: center;
+}

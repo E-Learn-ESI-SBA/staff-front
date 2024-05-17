@@ -13,7 +13,7 @@ export default function CoursePage({ params }: Props) {
   const tabs = [
     {
       title: "Overview",
-      path: path,
+      path: path.concat("/overview"),
     },
     {
       title: "Resources",
@@ -31,7 +31,7 @@ export default function CoursePage({ params }: Props) {
   const modules = moduleData;
   return (
     <main className="w-full min-h-screen bg-secondary-background  p-4">
-      <LinksTabs activePath={path} tabs={tabs} />
+      <LinksTabs activePath={path.concat("/overview")} tabs={tabs} />
       <div className="p-4 pt-12">
         <Overview
           data={{
