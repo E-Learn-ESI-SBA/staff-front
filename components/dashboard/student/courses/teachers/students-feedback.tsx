@@ -7,7 +7,7 @@ const ReviewData = [
     name: "John Doe",
     DateTime: "2022-03-25T12:00:00",
     content:
-      "This course is just amazing! has great course content, the best practices, and a lot of real-world knowledge. I love the way of giving examples, the best tips by the instructor which are pretty interesting, fun and knowledgable and I was never getting bored throughout the course. This course meets more than my expectation and, I made the best investment of time to learn and practice what I am passionate about. Thank you so much to our excellent instructor Vako!! Highly recommend this course! Take the next step.",
+      "This course is just amazing! has great course content, the best practices, and a lot of real-world knowledge. I love the way of giving examples.tsx, the best tips by the instructor which are pretty interesting, fun and knowledgable and I was never getting bored throughout the course. This course meets more than my expectation and, I made the best investment of time to learn and practice what I am passionate about. Thank you so much to our excellent instructor Vako!! Highly recommend this course! Take the next step.",
     stars: 5,
   },
   {

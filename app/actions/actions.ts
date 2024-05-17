@@ -10,6 +10,7 @@ import {
   TSectionFormSchema,
 } from "@/types/chapter/zod";
 import { cookies } from "next/headers";
+import { IError } from "@/types/errors";
 
 type ReturnType = {
   success: boolean;
@@ -30,10 +31,11 @@ export const createSection = async (
     const res = await response.json();
     return res;
   } catch (e) {
+    const message = (e as IError).message;
     console.log(e);
     return {
       success: false,
-      message: e.message,
+      message,
     };
   }
 };
@@ -51,11 +53,11 @@ export const updateSection = async (data: TSectionFormSchema) => {
 
     const res = await response.json();
     return res;
-  } catch (e) {
-    console.log(e);
+  } catch (e: unknown) {
+    const message = (e as IError).message;
     return {
       success: false,
-      message: e.message,
+      message,
     };
   }
 };
@@ -66,6 +68,7 @@ export const createFile = async (data: TFileFormSchemaWithFile) => {
     formData.append("file", data.file);
     formData.append("name", data.name);
     formData.append("section_id", data.section_id);
+    formData.append("groups", JSON.stringify(data.groups.map((g) => g.value)));
     const response = await fetch(CREATE_FILE_URL, {
       method: "POST",
       headers: {
@@ -76,10 +79,12 @@ export const createFile = async (data: TFileFormSchemaWithFile) => {
     const res = await response.json();
     return res;
   } catch (e) {
+    const message = (e as IError).message;
+
     console.log(e);
     return {
       success: false,
-      message: e.message,
+      message,
     };
   }
 };
@@ -90,6 +95,7 @@ export const updateFile = async (data: TFileFormSchemaWithFile) => {
     formData.append("file", data.file);
     formData.append("name", data.name);
     formData.append("section_id", data.section_id);
+    formData.append("groups", JSON.stringify(data.groups.map((g) => g.value)));
     const response = await fetch(CREATE_FILE_URL, {
       method: "POST",
       headers: {
@@ -100,10 +106,11 @@ export const updateFile = async (data: TFileFormSchemaWithFile) => {
     const res = await response.json();
     return res;
   } catch (e) {
+    const message = (e as IError).message;
     console.log(e);
     return {
       success: false,
-      message: e.message,
+      message,
     };
   }
 };

@@ -1,6 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import {
-  Image,
+  Image as ImageIcon,
   Link,
   Youtube,
   Paperclip,
@@ -59,7 +59,7 @@ export default function CreatePost() {
               rows={6}
             />
             <div className="flex flex-row gap-8 items-center">
-              <Item Icon={Image} />
+              <Item Icon={ImageIcon} />
               <Item Icon={Youtube} />
               <Item Icon={Link} />
               <Item Icon={Settings2} />
@@ -89,7 +89,7 @@ export default function CreatePost() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-      <Image className="h-8 w-8" color="gray" />
+      <ImageIcon className="h-8 w-8" color="gray" />
       <Paperclip className="h-8 w-8" color="gray" />
     </div>
   );

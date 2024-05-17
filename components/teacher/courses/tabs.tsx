@@ -18,7 +18,7 @@ export const LinksTabs = ({ tabs, activePath }: Props) => {
           href={tab.path}
           className={cn(
             "text-text-GRAY p-4 px-8 text-center cursor-pointer",
-            tab.path === activePath ? "border-b-4 border-blue-600" : "",
+            tab.path.startsWith(activePath) ? "border-b-4 border-blue-600" : "",
           )}
         >
           {tab.title}

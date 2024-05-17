@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/form";
 import { SelectLabel } from "@radix-ui/react-select";
 
-type Header<T extends { [s: string]: unknown }> = {
+type Header<T> = {
   key: keyof T;
   label: string;
 };
@@ -36,14 +36,14 @@ const FilterSchema = z.object({
   ),
 });
 type FilterType = z.infer<typeof FilterSchema>;
-type Props<T extends { [s: string]: unknown }> = {
+type Props<T> = {
   data: T[];
   withSearch?: boolean;
   filters: Header<T>[];
   setFilteredData: React.Dispatch<React.SetStateAction<T[]>>;
 };
 
-export function Filter<T extends { [s: string]: unknown }>({
+export function Filter<T>({
   filters,
   withSearch,
   data,
@@ -73,6 +73,7 @@ export function Filter<T extends { [s: string]: unknown }>({
     const filteredData = data.filter((item) => {
       if (
         values.search &&
+        // @ts-ignore
         !Object.values(item).some((val) =>
           String(val)
             .toLowerCase()

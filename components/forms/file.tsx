@@ -16,7 +16,6 @@ import {
 } from "@/types/chapter/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PropsWithChildren, useState } from "react";
-import { useFormState } from "react-dom";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import MultipleSelector, { Option } from "../ui/multi-select";
@@ -30,24 +29,20 @@ type Props = PropsWithChildren & {
   mode: "CREATE" | "UPDATE";
 };
 export function FileForm({ defaultValues, mode = "CREATE", children }: Props) {
-  const [state, formAction] = useFormState(
-    mode === "CREATE" ? createFile : updateFile,
-    (defaultValues = {
-      groups: [],
-      name: "",
-      id: "",
-    }),
-  );
   const form = useForm<TFileFormSchema>({
     resolver: zodResolver(FileFormSchema),
     mode: "onSubmit",
     defaultValues: defaultValues,
   });
-  console.log(state);
-  const submitHandler = (data: z.infer<typeof FileFormSchema>) => {
+  const action = mode === "CREATE" ? createFile : updateFile;
+  const submitHandler = (data: TFileFormSchema) => {
     console.log(data);
-    //@ts-ignore
-    formAction({ ...data, file: currentFile });
+    const dataWithFile: TFileFormSchemaWithFile = {
+      ...data,
+      file: currentFile,
+    };
+
+    action(dataWithFile);
   };
   //@ts-ignore
   if (state.status === "success") {
@@ -180,8 +175,13 @@ export function FileForm({ defaultValues, mode = "CREATE", children }: Props) {
                 type="file"
                 className="w-fll absolute top-0 h-full  opacity-0"
                 onChange={(e) => {
-                  if (e.target.files[0].size < MAX_FILE_SIZE) {
-                    setCurrentFile(() => e.target.files[0]);
+                  if (
+                    e.target.files &&
+                    e.target.files[0].size < MAX_FILE_SIZE
+                  ) {
+                    setCurrentFile(() =>
+                      e.target?.files ? e.target?.files[0] : null,
+                    );
                   }
                 }}
               />
