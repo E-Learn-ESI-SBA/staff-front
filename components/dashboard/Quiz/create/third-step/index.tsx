@@ -5,41 +5,10 @@ import { useQuizFormStore } from "@/store/forms/quiz/quiz.store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { TrashIcon } from "@radix-ui/react-icons";
 import { useFieldArray, useForm } from "react-hook-form";
-import { z } from "zod";
 import Questions from "./questions";
 import convertObject from '@/utils/convertObjects'
 import { defaultValues2 } from "@/static/dummy-data/quiz/details";
-const QCMSchema = z.object({
-  questions: z
-    .array(
-      z.object({
-        body: z.string().min(3, "Question announcement is required"),
-        score: z.coerce
-        .number()
-        .min(1, { message: "must be at least 1 point" })
-        .default(30),
-        image: z.string().default("").optional(),
-        file : z.any(),
-        options: z
-          .array(
-            z.object({
-              option: z.string().min(3, "Answer is required"),
-              validity: z.boolean().default(false),
-              id : z.string(),
-            }),
-          )
-          .min(3, "At least 3 answers must be provided")
-          .refine((val) => {
-            return val.filter((item) => item.validity).length > 0;
-          }, "At least one answer must be selected"),
-      }),
-    )
-    .min(3, "At least 3 questions must be provided"),
-});
-
-type TQCMForm = z.infer<typeof QCMSchema>;
-
-
+import { TQCMForm,QCMSchema } from "@/types/zod";
 export default function QCMForm() {
   const { nextStep, third_step_content, setThirdStepContent, prevStep } =
     useQuizFormStore((state) => ({

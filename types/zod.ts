@@ -44,18 +44,23 @@ export const QCMSchema = z.object({
     .array(
       z.object({
         body: z.string().min(3, "Question announcement is required"),
+        score: z.coerce
+        .number()
+        .min(1, { message: "must be at least 1 point" })
+        .default(30),
         image: z.string().default("").optional(),
-        file: z.any(),
+        file : z.any(),
         options: z
           .array(
             z.object({
-              option: z.string().min(3, "Question is required"),
+              option: z.string().min(3, "Answer is required"),
               validity: z.boolean().default(false),
+              id : z.string(),
             }),
           )
-          .min(3, "At least 3 questions must be provided")
+          .min(3, "At least 3 answers must be provided")
           .refine((val) => {
-            return val.filter((item) => item.option).length > 0;
+            return val.filter((item) => item.validity).length > 0;
           }, "At least one answer must be selected"),
       }),
     )
@@ -130,3 +135,7 @@ export const moduleSchemaValidator = z.object({
   ),
 });
 export type TModuleSchema = z.infer<typeof moduleSchemaValidator>;
+
+
+
+
