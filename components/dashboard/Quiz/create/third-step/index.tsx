@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { TypographyP } from "@/components/ui/typography";
-import { useQuestionFormStore } from "@/store/forms/questions/question.store";
+import { useQuizFormStore } from "@/store/forms/quiz/quiz.store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { TrashIcon } from "@radix-ui/react-icons";
 import { useFieldArray, useForm } from "react-hook-form";
@@ -66,7 +66,7 @@ const defaultValues = {
 
 export default function QCMForm() {
   const { nextStep, third_step_content, setThirdStepContent, prevStep } =
-    useQuestionFormStore((state) => ({
+    useQuizFormStore((state) => ({
       nextStep: state.nextStep,
       prevStep: state.prevStep,
       setThirdStepContent: state.setThirdStepContent,

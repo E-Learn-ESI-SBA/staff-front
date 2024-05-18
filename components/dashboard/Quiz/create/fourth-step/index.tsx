@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { useQuestionFormStore } from "@/store/forms/questions/question.store";
+import { useQuizFormStore } from "@/store/forms/quiz/quiz.store";
 
 export default function Preview() {
   const {
@@ -8,7 +8,7 @@ export default function Preview() {
     first_step_content,
     second_step_content,
     third_step_content,
-  } = useQuestionFormStore((state) => ({
+  } = useQuizFormStore((state) => ({
     nextStep: state.nextStep,
     prevStep: state.prevStep,
     first_step_content: state.first_step_content,

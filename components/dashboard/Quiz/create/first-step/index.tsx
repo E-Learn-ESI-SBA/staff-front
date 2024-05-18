@@ -20,7 +20,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { EQuizType } from "@/types";
-import { useQuestionFormStore } from "@/store/forms/questions/question.store";
+import { useQuizFormStore} from "@/store/forms/quiz/quiz.store";
 
 const defaultValues = {
   quiz_title: "",
@@ -39,7 +39,7 @@ const defaultValues = {
 };
 export default function QuizFirstStepForm() {
   const { first_step_content, nextStep, setFirstStepContent } =
-    useQuestionFormStore((state) => ({
+  useQuizFormStore((state) => ({
       nextStep: state.nextStep,
       setFirstStepContent: state.setFirstStepContent,
       first_step_content: state.first_step_content ?? defaultValues,
