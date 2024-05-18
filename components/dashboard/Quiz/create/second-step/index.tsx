@@ -16,7 +16,7 @@ import { useFieldArray, useForm } from "react-hook-form";
 import { useQuizFormStore } from "@/store/forms/quiz/quiz.store";
 import { TypographyP } from "@/components/ui/typography";
 
-const defaultValues = {
+const defaultValues2 = {
   grades: [
     {
       min: 80,
@@ -36,7 +36,7 @@ const defaultValues = {
   ],
 };
 
-export default function GradesForm() {
+export default function GradesForm({defaultValues} :any) {
   const { nextStep, setSecondStepContent, second_step_content, prevStep } =
   useQuizFormStore((state) => ({
       nextStep: state.nextStep,
@@ -44,9 +44,10 @@ export default function GradesForm() {
       setSecondStepContent: state.setSecondStepContent,
       second_step_content: state.second_step_content ?? defaultValues,
     }));
+    console.log('sdsd',second_step_content)
   const form = useForm<TGradesForm>({
     resolver: zodResolver(GradesSchema),
-    defaultValues: second_step_content,
+    defaultValues: second_step_content ?? defaultValues2 ,
     mode: "onChange",
   });
   const { fields, append, remove } = useFieldArray({
@@ -57,7 +58,6 @@ export default function GradesForm() {
     setSecondStepContent(data);
     nextStep();
   };
-
   return (
     <Form {...form}>
       <form

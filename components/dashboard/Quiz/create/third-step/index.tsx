@@ -9,22 +9,23 @@ import Questions from "./questions";
 import convertObject from '@/utils/convertObjects'
 import { defaultValues2 } from "@/static/dummy-data/quiz/details";
 import { TQCMForm,QCMSchema } from "@/types/zod";
-export default function QCMForm() {
+export default function QCMForm({defaultValues}:any) {
   const { nextStep, third_step_content, setThirdStepContent, prevStep } =
     useQuizFormStore((state) => ({
       nextStep: state.nextStep,
       prevStep: state.prevStep,
       setThirdStepContent: state.setThirdStepContent,
-      third_step_content: state.third_step_content ?? convertObject(defaultValues2,2) ,
+      third_step_content: state.third_step_content ?? defaultValues ,
     }));
 
   const form = useForm<TQCMForm>({
     resolver: zodResolver(QCMSchema),
-    defaultValues: third_step_content,
+    defaultValues: third_step_content ? convertObject(third_step_content,2) : convertObject(defaultValues2,2)  ,
     mode: "onChange",
   });
 
 
+  console.log('dssd',third_step_content)
   const onSubmit = (data:any) => {
   const updatedData = convertObject(data,1)
   setThirdStepContent(updatedData);
