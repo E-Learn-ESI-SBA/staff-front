@@ -8,6 +8,7 @@ import { useFieldArray, useForm } from "react-hook-form";
 import { z } from "zod";
 import Questions from "./questions";
 import convertObject from '@/utils/convertObjects'
+import { defaultValues2 } from "@/static/dummy-data/quiz/details";
 const QCMSchema = z.object({
   questions: z
     .array(
@@ -38,121 +39,6 @@ const QCMSchema = z.object({
 
 type TQCMForm = z.infer<typeof QCMSchema>;
 
-const defaultValues = {
-  questions: [
-    {
-      body : "question1",
-      score : 10,
-      image: "",
-      file : null,
-      options: [
-        { option: "answer1", validity: false , id : null },
-        { option: "answer2", validity: true , id : null},
-        { option: "answer3", validity: false  , id : null},
-      ],
-    },
-    {
-      body: "question2",
-      score : 10,
-      image: "",
-      file : null,
-      options: [
-        { option: "answer1", validity: false , id : null},
-        { option: "answer2", validity: true , id : null},
-        { option: "answer3", validity: false  , id : null},
-      ],
-    },
-    {
-      body: "question3",
-      score : 10,
-      image: "",
-      file : null,
-      options: [
-        { option: "answer1", validity: false , id : null },
-        { option: "answer2", validity: true , id : null},
-        { option: "answer3", validity: false , id : null},
-      ],
-    },
-  ],
-};
-
-
-const defaultValues2 = {
-  questions: [
-    {
-      body: "question1",
-      score: 10,
-      image: "",
-      file: null,
-      options: [
-        {
-          option: "answer1",
-          id: "120"
-        },
-        {
-          option: "answer2",
-          id: "128"
-        },
-        {
-          option: "answer3",
-          id: "129"
-        }
-      ],
-      correct_Idx: [
-        "128",
-        "129"
-      ]
-    },
-    {
-      body: "question2",
-      score: 10,
-      image: "",
-      file: null,
-      options: [
-        {
-          option: "answer1",
-          id: "5"
-        },
-        {
-          option: "answer2",
-          id: "1"
-        },
-        {
-          option: "answer3",
-          id: "9"
-        }
-      ],
-      correct_Idx: [
-        "5",
-        "1"
-      ]
-    },
-    {
-      body: "question3",
-      score: 10,
-      image: "",
-      file: null,
-      options: [
-        {
-          option: "answer1",
-          id: "21"
-        },
-        {
-          option: "answer2",
-          id: "22"
-        },
-        {
-          option: "answer3",
-          id: "23"
-        }
-      ],
-      correct_Idx: [
-        "21",
-        "23"
-      ]
-    }
-  ]
-};
 
 export default function QCMForm() {
   const { nextStep, third_step_content, setThirdStepContent, prevStep } =
