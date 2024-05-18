@@ -13,7 +13,7 @@ import { GradesSchema, TGradesForm } from "@/types/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { TrashIcon } from "@radix-ui/react-icons";
 import { useFieldArray, useForm } from "react-hook-form";
-import { useQuestionFormStore } from "@/store/forms/questions/question.store";
+import { useQuizFormStore } from "@/store/forms/quiz/quiz.store";
 import { TypographyP } from "@/components/ui/typography";
 
 const defaultValues = {
@@ -44,7 +44,7 @@ const defaultValues = {
 
 export default function GradesForm() {
   const { nextStep, setSecondStepContent, second_step_content, prevStep } =
-    useQuestionFormStore((state) => ({
+    useQuizFormStore((state) => ({
       nextStep: state.nextStep,
       prevStep: state.prevStep,
       setSecondStepContent: state.setSecondStepContent,
