@@ -7,23 +7,29 @@ import { TrashIcon } from "@radix-ui/react-icons";
 import { useFieldArray, useForm } from "react-hook-form";
 import { z } from "zod";
 import Questions from "./questions";
-
+import convertObject from '@/utils/convertObjects'
 const QCMSchema = z.object({
   questions: z
     .array(
       z.object({
-        qst_title: z.string().min(3, "Question announcement is required"),
-        qst_image: z.string().default("").optional(),
-        answers: z
+        body: z.string().min(3, "Question announcement is required"),
+        score: z.coerce
+        .number()
+        .min(1, { message: "must be at least 1 point" })
+        .default(30),
+        image: z.string().default("").optional(),
+        file : z.any(),
+        options: z
           .array(
             z.object({
-              title: z.string().min(3, "Answer is required"),
-              validite: z.boolean().default(false),
+              option: z.string().min(3, "Answer is required"),
+              validity: z.boolean().default(false),
+              id : z.string(),
             }),
           )
           .min(3, "At least 3 answers must be provided")
           .refine((val) => {
-            return val.filter((item) => item.validite).length > 0;
+            return val.filter((item) => item.validity).length > 0;
           }, "At least one answer must be selected"),
       }),
     )
@@ -35,34 +41,131 @@ type TQCMForm = z.infer<typeof QCMSchema>;
 const defaultValues = {
   questions: [
     {
-      qst_title: "question1",
-      qst_image: "",
-      answers: [
-        { title: "answer1", validite: false },
-        { title: "answer2", validite: true },
-        { title: "answer3", validite: false },
+      body : "question1",
+      score : 10,
+      image: "",
+      file : null,
+      options: [
+        { option: "answer1", validity: false , id : null },
+        { option: "answer2", validity: true , id : null},
+        { option: "answer3", validity: false  , id : null},
       ],
     },
     {
-      qst_title: "question2",
-      qst_image: "",
-      answers: [
-        { title: "answer1", validite: false },
-        { title: "answer2", validite: true },
-        { title: "answer3", validite: false },
+      body: "question2",
+      score : 10,
+      image: "",
+      file : null,
+      options: [
+        { option: "answer1", validity: false , id : null},
+        { option: "answer2", validity: true , id : null},
+        { option: "answer3", validity: false  , id : null},
       ],
     },
     {
-      qst_title: "question3",
-      qst_image: "",
-      answers: [
-        { title: "answer1", validite: false },
-        { title: "answer2", validite: true },
-        { title: "answer3", validite: false },
+      body: "question3",
+      score : 10,
+      image: "",
+      file : null,
+      options: [
+        { option: "answer1", validity: false , id : null },
+        { option: "answer2", validity: true , id : null},
+        { option: "answer3", validity: false , id : null},
       ],
     },
   ],
 };
+
+
+const defaultValues2 = {
+  questions: [
+    {
+      body: "question1",
+      score: 10,
+      image: "",
+      file: null,
+      options: [
+        {
+          option: "answer1",
+          id: "120"
+        },
+        {
+          option: "answer2",
+          id: "128"
+        },
+        {
+          option: "answer3",
+          id: "129"
+        }
+      ],
+      correct_Idx: [
+        "128",
+        "129"
+      ]
+    },
+    {
+      body: "question2",
+      score: 10,
+      image: "",
+      file: null,
+      options: [
+        {
+          option: "answer1",
+          id: "5"
+        },
+        {
+          option: "answer2",
+          id: "1"
+        },
+        {
+          option: "answer3",
+          id: "9"
+        }
+      ],
+      correct_Idx: [
+        "5",
+        "1"
+      ]
+    },
+    {
+      body: "question3",
+      score: 10,
+      image: "",
+      file: null,
+      options: [
+        {
+          option: "answer1",
+          id: "21"
+        },
+        {
+          option: "answer2",
+          id: "22"
+        },
+        {
+          option: "answer3",
+          id: "23"
+        }
+      ],
+      correct_Idx: [
+        "21",
+        "23"
+      ]
+    }
+  ]
+};
+
+function addCorrectIdx(questions:any) {
+  //@ts-ignore
+  return questions.map(question => {
+    const correct_idxs = question.options
+    //@ts-ignore
+      .map((option, index) => option.validity ? option.id : -1)
+      //@ts-ignore
+      .filter(id => id !== -1);
+    return { ...question, correct_idxs };
+  });
+}
+
 
 export default function QCMForm() {
   const { nextStep, third_step_content, setThirdStepContent, prevStep } =
@@ -70,7 +173,7 @@ export default function QCMForm() {
       nextStep: state.nextStep,
       prevStep: state.prevStep,
       setThirdStepContent: state.setThirdStepContent,
-      third_step_content: state.third_step_content ?? defaultValues,
+      third_step_content: state.third_step_content ?? convertObject(defaultValues2,2) ,
     }));
 
   const form = useForm<TQCMForm>({
@@ -79,15 +182,21 @@ export default function QCMForm() {
     mode: "onChange",
   });
 
-  const onSubmit = (data) => {
-    console.log("data", data);
-    setThirdStepContent(data);
+
+  const onSubmit = (data:any) => {
+    console.log('data',data)
+  const updatedData = convertObject(data,1)
+  console.log('ii',updatedData)
+  
+  setThirdStepContent(updatedData);
     nextStep();
   };
   const { fields, append, remove } = useFieldArray({
     name: "questions",
     control: form.control,
   });
+
+  console.log('erros',form.formState?.errors.questions)
 
   return (
     <Form {...form}>
@@ -114,7 +223,8 @@ export default function QCMForm() {
           className="bg-[#F3F6FF] text-[#3D70F5] rounded-lg my-8 py-2 px-4"
           type="button"
           onClick={() => {
-            append({ qst_title: "" });
+            //@ts-ignore
+            append({body: ""});
           }}
         >
           + add question
@@ -134,7 +244,7 @@ export default function QCMForm() {
         </div>
         {form.formState?.errors.questions && (
           <TypographyP className=" indent-6 text-red-600 my-5 text-sm">
-            {form.formState.errors.questions?.root?.message}
+           {form.formState.errors.questions?.root?.message}
           </TypographyP>
         )}
       </form>
