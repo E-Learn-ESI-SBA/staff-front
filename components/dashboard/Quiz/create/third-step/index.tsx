@@ -154,19 +154,6 @@ const defaultValues2 = {
   ]
 };
 
-function addCorrectIdx(questions:any) {
-  //@ts-ignore
-  return questions.map(question => {
-    const correct_idxs = question.options
-    //@ts-ignore
-      .map((option, index) => option.validity ? option.id : -1)
-      //@ts-ignore
-      .filter(id => id !== -1);
-    return { ...question, correct_idxs };
-  });
-}
-
-
 export default function QCMForm() {
   const { nextStep, third_step_content, setThirdStepContent, prevStep } =
     useQuizFormStore((state) => ({
