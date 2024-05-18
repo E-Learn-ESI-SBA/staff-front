@@ -29,25 +29,25 @@ export enum EQuizType {
 }
 
 export enum ECourseType {
-  OOP = "OOP",
-  ANALYSE = "Analyse",
+  OOP = "66453ff8a9a6b2a1a507b8a2",
+  ANALYSE = "66453ff8a9a6b2a1a507b8a1",
 }
 
 export type Exam = {
-  createdAt: string;
   id: string;
-  quiz_title: string;
-  quiz_instructions: string;
-  quiz_type: EQuizType;
-  course: ECourseType;
-  quiz_duration: number;
-  question_time_limit: number;
-  questions_count: number;
-  start_date: Date;
-  end_date: Date;
-  start_time: string;
-  end_time: string;
+  title: string;
+  instructions: string;
+  module_id: ECourseType;
+  image:string;
+  file : any;
+  duration: number;
+  max_score : number;
+  min_score: number;
+  question_count: number;
+  start_date: string;
+  end_date: string;
 };
+
 
 export type Assignment = {
   id: string;
