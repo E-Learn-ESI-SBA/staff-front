@@ -1,3 +1,4 @@
+"use client"
 import {
   Form,
   FormControl,
@@ -6,12 +7,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { examSchemaValidator } from "@/types/zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
-import { Exam } from "@/types";
 import {
   Select,
   SelectContent,
@@ -19,27 +14,38 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { EQuizType } from "@/types";
-import { useQuizFormStore} from "@/store/forms/quiz/quiz.store";
+import { Input } from "@/components/ui/input";
+import { examSchemaValidator } from "@/types/zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { Button } from "@/components/ui/button";
+import { Exam } from "@/types";
+import { useQuizFormStore } from "@/store/forms/quiz/quiz.store";
+import { useState} from "react";
+import Image from "next/image";
+
+
+
 
 const defaultValues = {
-  quiz_title: "",
-  quiz_instructions: "",
+  title: "",
+  instructions: "",
   quiz_type: undefined,
-  course: undefined,
-  quiz_duration: undefined,
-  question_time_limit: undefined,
-  questions_count: undefined,
+  image : "",
+  file : undefined,
+  module_id: undefined,
+  max_score: undefined,
+  min_score : undefined,
+  duration: undefined,
+  question_count: undefined,
   start_date: undefined,
   end_date: undefined,
-  start_time: "",
-  end_time: "",
   id: "",
-  createdAt: new Date().toISOString(),
 };
 export default function QuizFirstStepForm() {
+
   const { first_step_content, nextStep, setFirstStepContent } =
-  useQuizFormStore((state) => ({
+   useQuizFormStore((state) => ({
       nextStep: state.nextStep,
       setFirstStepContent: state.setFirstStepContent,
       first_step_content: state.first_step_content ?? defaultValues,
@@ -51,13 +57,18 @@ export default function QuizFirstStepForm() {
     mode: "onChange",
   });
 
+  const [currentImage, setCurrentImage] = useState<string>(
+    form.getValues('image') ?? "/assets/person.png",
+  );
+
   const submitHandler = (data: Exam) => {
-    data.start_date = new Date(data.start_date);
-    data.end_date = new Date(data.end_date);
     setFirstStepContent(data);
+    console.log('moh',data)
     nextStep();
   };
 
+  const [resource, setResource] = useState();
+ console.log('resource',resource)
   return (
     <Form {...form}>
       <form
@@ -66,7 +77,7 @@ export default function QuizFirstStepForm() {
       >
         <FormField
           control={form.control}
-          name="quiz_title"
+          name="title"
           render={({ field }) => (
             <FormItem className="w-full">
               <FormLabel>Quiz Title</FormLabel>
@@ -77,9 +88,47 @@ export default function QuizFirstStepForm() {
             </FormItem>
           )}
         />
+  
+  <div className=" relative flex flex-col gap-4 ">
+          <Image
+            alt="Question Image"
+            className=""
+            width={150}
+            height={100}
+            src={currentImage.length > 0 ? currentImage : "/assets/person.png"}
+          />
+          <Button variant="default" className="relative self-end ">
+            Upload Image
+            <Input
+              className="opacity-0 absolute top-0 left-0 w-full h-full cursor-pointer"
+              type="file"
+              accept="image/*"
+              onChange={(e) => {
+                if (e.target.files) {
+                  const file = e.target.files[0];
+                  form.setValue('file', file);
+                  const reader = new FileReader();
+                  reader.onloadend = () => {
+                    setCurrentImage(reader.result as string);
+                    form.setValue(
+                      `image`,
+                      reader.result as string,
+                    );
+                  };
+                  try {
+                    reader.readAsDataURL(file);
+                  } catch (error) {
+                    console.log(error);
+                  }
+                }
+              }}
+            />
+          </Button>
+        </div>
+
         <FormField
           control={form.control}
-          name="quiz_instructions"
+          name="instructions"
           render={({ field }) => (
             <FormItem className="w-full">
               <FormLabel>Quiz Instructions</FormLabel>
@@ -97,31 +146,10 @@ export default function QuizFirstStepForm() {
 
         <FormField
           control={form.control}
-          name="quiz_type"
+          name="module_id"
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel>Question Type:</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select Type Of Quiz" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value={EQuizType.DEVOIR}>DEVOIR</SelectItem>
-                  <SelectItem value={EQuizType.TEST}>TEST</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="course"
-          render={({ field }) => (
-            <FormItem className="w-full">
-              <FormLabel>Course:</FormLabel>
+              <FormLabel>Module:</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
@@ -129,8 +157,8 @@ export default function QuizFirstStepForm() {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="OOP">OOP</SelectItem>
-                  <SelectItem value="Analyse">Analyse</SelectItem>
+                  <SelectItem value="66453ff8a9a6b2a1a507b8a2">OOP</SelectItem>
+                  <SelectItem value="66453ff8a9a6b2a1a507b8a2">Analyse</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
@@ -138,9 +166,48 @@ export default function QuizFirstStepForm() {
           )}
         />
 
+        <div className="flex justify-between items-center" >
         <FormField
           control={form.control}
-          name="quiz_duration"
+          name="max_score"
+          render={({ field }) => (
+            <FormItem className="w-1/2">
+              <FormLabel>Max Score</FormLabel>
+              <FormControl>
+                <Input
+                  type="number"
+                  placeholder="Enter Max score..."
+                  {...field}
+                  min={1}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+                <FormField
+          control={form.control}
+          name="min_score"
+          render={({ field }) => (
+            <FormItem className="w-1/2">
+              <FormLabel>Pass score</FormLabel>
+              <FormControl>
+                <Input
+                  type="number"
+                  placeholder="Enter Pass score..."
+                  {...field}
+                  min={1}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        </div>
+
+        <FormField
+          control={form.control}
+          name="duration"
           render={({ field }) => (
             <FormItem className="w-full">
               <FormLabel>Quiz duration</FormLabel>
@@ -157,23 +224,9 @@ export default function QuizFirstStepForm() {
             </FormItem>
           )}
         />
-        <div className="flex gap-4">
           <FormField
             control={form.control}
-            name="question_time_limit"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormLabel>Questions Time Limit </FormLabel>
-                <FormControl>
-                  <Input type="number" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="questions_count"
+            name="question_count"
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormLabel>Questions Count </FormLabel>
@@ -184,7 +237,6 @@ export default function QuizFirstStepForm() {
               </FormItem>
             )}
           />
-        </div>
         <div className="flex gap-4">
           <FormField
             control={form.control}
@@ -194,16 +246,21 @@ export default function QuizFirstStepForm() {
                 <FormLabel>Start Date</FormLabel>
                 <FormControl>
                   <Input
-                    type="date"
+                    type="datetime-local"
+                    //@ts-ignore
                     value={
-                      field.value instanceof Date
-                        ? field.value.toISOString().split("T")[0]
-                        : field.value
+                      field.value
+                        ?? ''
                     }
                     onChange={(e) => {
-                      const selectedDate = new Date(e.target.value);
+                      const value = e.target.value;
+                      const selectedDate = new Date(value);
                       if (!isNaN(selectedDate.getTime())) {
-                        field.onChange(selectedDate);
+                        const localDateTime = new Date(selectedDate.getTime() - (selectedDate.getTimezoneOffset() * 60000)).toISOString().slice(0, 16);
+                        console.log('dss',localDateTime)
+                        field.onChange(localDateTime);
+                      } else {
+                        field.onChange('');
                       }
                     }}
                   />
@@ -220,16 +277,21 @@ export default function QuizFirstStepForm() {
                 <FormLabel>End Date</FormLabel>
                 <FormControl>
                   <Input
-                    type="date"
+                    type="datetime-local"
+                    //@ts-ignore
                     value={
-                      field.value instanceof Date
-                        ? field.value.toISOString().split("T")[0]
-                        : field.value
+                      field.value
+                        ?? ''
                     }
                     onChange={(e) => {
-                      const selectedDate = new Date(e.target.value);
+                      const value = e.target.value;
+                      const selectedDate = new Date(value);
                       if (!isNaN(selectedDate.getTime())) {
-                        field.onChange(selectedDate);
+                        const localDateTime = new Date(selectedDate.getTime() - (selectedDate.getTimezoneOffset() * 60000)).toISOString().slice(0, 16);
+                        console.log('dss',localDateTime)
+                        field.onChange(localDateTime);
+                      } else {
+                        field.onChange('');
                       }
                     }}
                   />
@@ -239,35 +301,6 @@ export default function QuizFirstStepForm() {
             )}
           />
         </div>
-        <div className="flex gap-4">
-          <FormField
-            control={form.control}
-            name="start_time"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormLabel>Start Time</FormLabel>
-                <FormControl>
-                  <Input type="time" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="end_time"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormLabel>End Time</FormLabel>
-                <FormControl>
-                  <Input type="time" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-
         <Button type="submit">Next</Button>
       </form>
     </Form>
