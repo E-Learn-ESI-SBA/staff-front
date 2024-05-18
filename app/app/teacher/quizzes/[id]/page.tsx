@@ -1,4 +1,3 @@
-import PreQuiz from "@/components/quiz/PassQuiz";
 import { cookies } from "next/headers";
 import { quiz } from "@/static/dummy-data/quiz";
 import Quiz from "@/components/dashboard/Quiz";
@@ -20,7 +19,7 @@ async function getQuiz(id:string) {
   return quiz
 }
 
-export default async function UpdateQuiz({ params }: { params: { id: string } }) {
+export default async function SingleQuiz({ params }: { params: { id: string } }) {
   const data = await getQuiz(params?.id)
 
   return <Quiz quiz={data} />;

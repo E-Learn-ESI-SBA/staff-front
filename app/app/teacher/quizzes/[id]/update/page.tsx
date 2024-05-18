@@ -1,11 +1,10 @@
-import PreQuiz from "@/components/quiz/PassQuiz";
 import { cookies } from "next/headers";
 import { quiz } from "@/static/dummy-data/quiz";
 import Quiz from "@/components/dashboard/Quiz";
 
 async function getQuiz(id:string) {
 //   const res = await fetch( `quiz/${id}`,{
-//     method: "GET",
+//     method: "PATCH",
 //     headers: {
 //       "Content-Type": "application/json",
 //       "Authorization": `Bearer ${cookies().get("token")}`,
