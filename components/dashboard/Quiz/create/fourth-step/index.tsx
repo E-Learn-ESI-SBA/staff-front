@@ -34,7 +34,10 @@ export default function Preview() {
     setUploading(true);
     setImageUploadError(false);
     const promises = [];
-    promises.push(storeImage(data.file,-1))
+    if(data.file){
+      promises.push(storeImage(data.file,-1))
+    }
+
     for (let i = 0; i < questions.length; i++) {
       if(questions[i].file){
         promises.push(storeImage(questions[i]?.file,i));

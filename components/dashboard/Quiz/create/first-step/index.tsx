@@ -27,22 +27,22 @@ import { ECourseType } from "@/types";
 
 
 
-const defaultValues = {
-  title: "",
-  instructions: "",
-  quiz_type: undefined,
-  image : "",
-  file : undefined,
-  module_id: undefined,
-  max_score: undefined,
-  min_score : undefined,
-  duration: undefined,
-  question_count: undefined,
-  start_date: undefined,
-  end_date: undefined,
-  id: "",
-};
-export default function QuizFirstStepForm() {
+// const defaultValues = {
+//   title: "",
+//   instructions: "",
+//   quiz_type: undefined,
+//   image : "",
+//   file : undefined,
+//   module_id: undefined,
+//   max_score: undefined,
+//   min_score : undefined,
+//   duration: undefined,
+//   question_count: undefined,
+//   start_date: undefined,
+//   end_date: undefined,
+//   id: "",
+// };
+export default function QuizFirstStepForm({defaultValues} :any) {
 
   const { first_step_content, nextStep, setFirstStepContent } =
    useQuizFormStore((state) => ({
@@ -56,6 +56,8 @@ export default function QuizFirstStepForm() {
     defaultValues: first_step_content,
     mode: "onChange",
   });
+
+  console.log('data',first_step_content)
 
   const [currentImage, setCurrentImage] = useState<string>(
     form.getValues('image') ?? "/assets/person.png",
