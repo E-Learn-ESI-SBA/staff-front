@@ -26,10 +26,7 @@ export default function QCMForm() {
 
 
   const onSubmit = (data:any) => {
-    console.log('data',data)
   const updatedData = convertObject(data,1)
-  console.log('ii',updatedData)
-  
   setThirdStepContent(updatedData);
     nextStep();
   };
@@ -37,8 +34,6 @@ export default function QCMForm() {
     name: "questions",
     control: form.control,
   });
-
-  console.log('erros',form.formState?.errors.questions)
 
   return (
     <Form {...form}>

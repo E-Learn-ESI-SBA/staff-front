@@ -54,8 +54,6 @@ export default function GradesForm() {
     control: form.control,
   });
   const submitHandler = (data: TGradesForm) => {
-    console.log("Submitted form");
-    console.log(data);
     setSecondStepContent(data);
     nextStep();
   };

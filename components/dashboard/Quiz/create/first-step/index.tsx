@@ -23,7 +23,7 @@ import { Exam } from "@/types";
 import { useQuizFormStore } from "@/store/forms/quiz/quiz.store";
 import { useState} from "react";
 import Image from "next/image";
-
+import { ECourseType } from "@/types";
 
 
 
@@ -63,12 +63,9 @@ export default function QuizFirstStepForm() {
 
   const submitHandler = (data: Exam) => {
     setFirstStepContent(data);
-    console.log('moh',data)
     nextStep();
   };
 
-  const [resource, setResource] = useState();
- console.log('resource',resource)
   return (
     <Form {...form}>
       <form
@@ -157,8 +154,8 @@ export default function QuizFirstStepForm() {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="66453ff8a9a6b2a1a507b8a2">OOP</SelectItem>
-                  <SelectItem value="66453ff8a9a6b2a1a507b8a2">Analyse</SelectItem>
+                  <SelectItem value={ECourseType.OOP}>OOP</SelectItem>
+                  <SelectItem value={ECourseType.ANALYSE}>Analyse</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
