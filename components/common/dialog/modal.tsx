@@ -4,9 +4,9 @@ import { DialogContent, DialogOverlay } from "@/components/ui/dialog";
 
 type Props = PropsWithChildren & {
   open: boolean;
-  onOpenChange: Dispatch<SetStateAction<boolean>>;
+  onOpenChange: (value: boolean) => void;
 };
-export function ModalDialog({ open, onOpenChange, children }: Props) {
+export function ModalDialog<T>({ open, onOpenChange, children }: Props) {
   return (
     <DialogPrimitive.Root open={open} onOpenChange={onOpenChange}>
       <DialogPrimitive.Portal>

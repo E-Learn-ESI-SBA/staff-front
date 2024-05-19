@@ -14,13 +14,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { SectionFormSchema, TSectionFormSchema } from "@/types/chapter/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { PropsWithChildren } from "react";
+import {PropsWithChildren, SetStateAction} from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { IError } from "@/types/errors";
+import {Chapter} from "@/types/chapter/courses";
 
 type Props = PropsWithChildren & {
-  onSubmit: (data: TSectionFormSchema) => void;
   defaultValues?: TSectionFormSchema;
   mode: "CREATE" | "UPDATE";
 };

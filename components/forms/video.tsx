@@ -13,8 +13,9 @@ import {IError} from "@/types/errors";
 import {createVideo, updateVideo} from "@/app/actions/materials/video.actions";
 
 type Props = PropsWithChildren & {
-  defaultValues: TVideoSchema;
+  defaultValues?: TVideoSchema;
   sectionId: string;
+  year:string
   mode : "CREATE" | "UPDATE";
 };
 const groups: Option[] = [
@@ -51,7 +52,7 @@ const groups: Option[] = [
         value: "8",
     },
 ];
-export default function Video({
+export default function VideoForm({
   defaultValues,
   sectionId,
     mode,
@@ -97,7 +98,7 @@ export default function Video({
     };
   return (
     <Form {...form}>
-      <form className="">
+      <form className="flex gap-4 flex-col " onSubmit={form.handleSubmit(submitHandler)}>
         <FormField
           name="name"
           control={form.control}

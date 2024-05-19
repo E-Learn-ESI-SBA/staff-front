@@ -1,13 +1,17 @@
+"use client"
 import { Button } from "@/components/ui/button";
 import { Folders, Pencil, Plus, Trash2 } from "lucide-react";
 import { SectionComponent } from "./section";
 import { Chapter } from "@/types/chapter/courses";
+import {EditModal} from "@/types/forms/state";
 
 type Props = {
   chapter: Chapter;
   pathname: string;
+  year:string
 };
-export function ChapterComponent({ chapter, pathname }: Props) {
+
+export function ChapterComponent({ chapter, pathname,year }: Props) {
   return (
     <div className="bg-secondary-background p-4 flex flex-col gap-4 rounded-lg">
       <div className="flex justify-between items-center">
@@ -29,8 +33,10 @@ export function ChapterComponent({ chapter, pathname }: Props) {
         </div>
       </div>
       {chapter.sections.map((s, i) => (
-        <SectionComponent key={i} section={s} pathname={pathname} />
+        <SectionComponent key={i} section={s} pathname={pathname} year={year}  />
       ))}
+
+      <Button onClick={() => setEdit(EditModal.ADD_CHAPTER)} className="w-fit self-end p-4" >Add Chapter</Button>
     </div>
   );
 }

@@ -8,8 +8,9 @@ import { Separator } from "@/components/ui/separator";
 type Props = {
   section: Section;
   pathname: string;
+  year:string
 };
-export function SectionComponent({ section, pathname }: Props) {
+export function SectionComponent({ section, pathname,year }: Props) {
   return (
     <div className="bg-white p-4 rounded-lg">
       <div className="flex justify-between items-center">

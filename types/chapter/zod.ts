@@ -19,7 +19,6 @@ export const FileFormSchema = z.object({
       }),
     )
     .min(1, "Please Select at least one group "),
-  teacher_id: z.number(),
 });
 
 export type TFileFormSchema = z.infer<typeof FileFormSchema>;
