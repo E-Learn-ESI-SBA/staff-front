@@ -112,7 +112,7 @@ export default function PassQuiz() {
           <div className="fixed inset-0 z-50 flex justify-center items-center  ">
             <div className="relative bg-white rounded-lg shadow max-w-4xl w-full  h-fit py-8 px-4 flex flex-col">
               <div className="flex flex-col gap-4 font-normal py-4  ">
-                <p className="text-lg font-medium">Time's Up!</p>
+                <p className="text-lg font-medium">Time{"\'"}s Up!</p>
                 <p>The quiz has ended. Your answers have been submitted.</p>
               </div>
               <Link href='/' className="rounded-md px-4 py-1 bg-blue-500 self-end text-white">

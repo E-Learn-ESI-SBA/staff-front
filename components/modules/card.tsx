@@ -8,7 +8,7 @@ export const ModuleCard: React.FC<Props> = ({ data }) => {
   return (
     <div className="rounded-2xl min-w-72 text-cards-main bg-white shadow-xl ">
       <Image
-        src={data.image}
+        src="/store/img.jpg"
         alt="course picture"
         width={0}
         height={0}

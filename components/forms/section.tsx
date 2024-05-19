@@ -1,5 +1,8 @@
 "use client";
-import { createSection, updateSection } from "@/app/actions/actions";
+import {
+  createSection,
+  updateSection,
+} from "@/app/actions/materials/sections.actions";
 import {
   Form,
   FormControl,
@@ -30,10 +33,20 @@ export function SectionForm({
   const submitHandler = async (data: TSectionFormSchema) => {
     try {
       const res = await formAction(data);
-      toast.success(res.message);
+      toast.success(res.data, {
+        style: {
+          backgroundColor: "green",
+          color: "white",
+        },
+      });
     } catch (e) {
       const err = new IError(e);
-      toast.error(err.message);
+      toast.error(err.message, {
+        style: {
+          backgroundColor: "red",
+          color: "white",
+        },
+      });
     }
   };
   const form = useForm<TSectionFormSchema>({
@@ -45,7 +58,7 @@ export function SectionForm({
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(formAction)}
+        onSubmit={form.handleSubmit(submitHandler)}
         className="space-y-8 flex flex-col gap-4    py-4"
       >
         <FormField

@@ -6,5 +6,11 @@ import { dummyModules } from "@/static/dummy-data/modules/modules";
 
 export default async function Modules() {
   const res = dummyModules;
-  return <ModulesPage data={res} />;
+  const response = await useGetTeacherModules();
+  console.log(response);
+  return (
+    <main className="p-6 w-full">
+      <ModulesPage data={response.data} />;
+    </main>
+  );
 }

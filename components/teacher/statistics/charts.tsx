@@ -59,7 +59,9 @@ export function RecentActivity({
         <h4 className="text-lg font-semibold text-black">Recent Activity</h4>
         <Select
           onValueChange={(v) => {
-            setSelectedDate(availableDates.find((date) => date.key === v));
+            setSelectedDate(
+              (prev) => availableDates.find((date) => date.key === v) ?? prev,
+            );
           }}
         >
           <SelectTrigger className="w-[120px]">
@@ -120,7 +122,9 @@ export const SingleAreaChart = ({
         <h4 className="text-lg font-semibold text-black">Recent Activity</h4>
         <Select
           onValueChange={(v) => {
-            setSelectedDate(availableDates.find((date) => date.key === v));
+            setSelectedDate(
+              (prev) => availableDates.find((date) => date.key === v) ?? prev,
+            );
           }}
         >
           <SelectTrigger className="w-[120px]">
@@ -196,7 +200,9 @@ export const BarChartComp = ({
         <h4 className="text-lg text-black font-semibold">Recent Activity</h4>
         <Select
           onValueChange={(v) => {
-            setSelectedDate(availableDates.find((date) => date.key === v));
+            setSelectedDate(
+              (prev) => availableDates.find((date) => date.key === v) ?? prev,
+            );
           }}
         >
           <SelectTrigger className="w-[120px]">
@@ -261,7 +267,7 @@ type ReviewProps = {
   };
 };
 export const ReviewChart = ({
-  availableDates,
+  availableDates = [],
   defaultDate,
   data,
   details,
@@ -278,7 +284,9 @@ export const ReviewChart = ({
         </h4>
         <Select
           onValueChange={(v) => {
-            setSelectedDate(availableDates.find((date) => date.key === v));
+            setSelectedDate(
+              (prev) => availableDates.find((date) => date.key === v) ?? prev,
+            );
           }}
         >
           <SelectTrigger className="w-[120px]">
@@ -357,7 +365,7 @@ export const ReviewChart = ({
                 {START_NUMBER.map((n) => (
                   <StarIcon
                     className="text-[#FD8E1F] w-4 h-4 "
-                    fill={n <= m && "#FD8E1F"}
+                    fill={n <= m ? "#FD8E1F" : ""}
                     key={n}
                   />
                 ))}
