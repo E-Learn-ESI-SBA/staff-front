@@ -28,7 +28,7 @@ export default function ModulesPage({ data }: Props) {
         setFilteredData={setFilteredData}
         withSearch
       />
-      <div className="flex gap-4 items-center justify-center">
+      <div className="grid gap-8 gridview">
         {filteredData.map((module, i) => (
           <Link
             key={i}
@@ -36,6 +36,7 @@ export default function ModulesPage({ data }: Props) {
               appRouter.getPath("module") &&
               appRouter.getPath("module").concat("/", module.id!)
             }
+            className="hover:shadow-lg hover:scale-105 transition-all duration-300 ease-in-out"
           >
             <ModuleCard data={module} />
           </Link>

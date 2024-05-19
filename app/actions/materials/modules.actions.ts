@@ -1,14 +1,17 @@
+"use server";
+
 import { cookies } from "next/headers";
-import { GET_TEACHER_MODULES_URL } from "@/config/urls/material/queries";
+import { GET_ALL_MODULES_URL } from "@/config/urls/material/queries";
 import { Module } from "@/types/chapter/courses";
 import { IResponse } from "@/types/http";
+import { IError } from "@/types/errors";
 
 export const useGetTeacherModules = async (): Promise<IResponse<Module[]>> => {
   try {
-    const response = await fetch(GET_TEACHER_MODULES_URL, {
+    const response = await fetch(GET_ALL_MODULES_URL, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${cookies().get("token").value}`,
+        Authorization: `Bearer ${cookies().get("accessToken")?.value}`,
       },
     });
 
@@ -20,7 +23,7 @@ export const useGetTeacherModules = async (): Promise<IResponse<Module[]>> => {
       return {
         status: response.status,
         data: [],
-        error: new Error(error),
+        error: new IError(error),
       };
     }
     4;
@@ -30,9 +33,10 @@ export const useGetTeacherModules = async (): Promise<IResponse<Module[]>> => {
       error: null,
     };
   } catch (e) {
+    const err = new IError(e);
     return {
       status: 500,
-      error: e.message,
+      error: err,
       data: [],
     };
   }

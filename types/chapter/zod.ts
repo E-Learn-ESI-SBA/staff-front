@@ -45,3 +45,17 @@ export type TFileFormSchema = z.infer<typeof FileFormSchema>;
 export type TFileFormSchemaWithFile = TFileFormSchema & {
   file: File | null;
 };
+
+export const ChapterSchema = z.object({
+  name: z.string().min(5, "name is required"),
+  id: z.string().optional(),
+  description: z.string().min(80, "description is required"),
+});
+export type TChapterSchema = z.infer<typeof ChapterSchema>;
+
+export const VideoSchema = z.object({
+  name: z.string(),
+  id: z.string().optional(),
+  url: z.string().url("url is required"),
+  chapter_id: z.string(),
+});

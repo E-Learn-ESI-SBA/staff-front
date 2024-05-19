@@ -14,7 +14,7 @@ import { toast } from "sonner";
 import { IError } from "@/types/errors";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { CircleCheck } from "lucide-react";
+import { CircleCheck, Delete, Plus, Trash2 } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
 import { Button } from "@/components/ui/button";
 
@@ -55,40 +55,38 @@ export function EditModule({ data, setClose }: Props) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(submitHandler)}
-        className="w-full flex flex-col justify-center"
+        className="w-full  flex flex-col gap-4 justify-center p-4"
       >
-        <div className="flex justify-between flex-wrap">
-          <FormField
-            render={({ field }) => {
-              return (
-                <FormItem>
-                  <FormLabel
-                    htmlFor="title"
-                    className="text-black text-lg xl:text-2xl lg:text-xl font-medium p-4"
-                  >
-                    Title
-                  </FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      type="text"
-                      placeholder="Distributed Transactions"
-                      id="title"
-                      className="text-black w-96 text-lg xl:text-2xl lg:text-xl outline-none font-medium p-4"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              );
-            }}
-            name="title"
-            control={form.control}
-          />
-        </div>
         <FormField
           render={({ field }) => {
             return (
-              <FormItem className="text-text-GRAY rounded-3xl p-4">
+              <FormItem>
+                <FormLabel
+                  htmlFor="title"
+                  className="text-black text-lg xl:text-2xl lg:text-xl font-medium p-4"
+                >
+                  Title
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    {...field}
+                    type="text"
+                    placeholder="Distributed Transactions"
+                    id="title"
+                    className="text-black w-full text-lg xl:text-2xl lg:text-xl outline-none font-medium p-4"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            );
+          }}
+          name="title"
+          control={form.control}
+        />
+        <FormField
+          render={({ field }) => {
+            return (
+              <FormItem className="text-text-GRAY rounded-3xl ">
                 <FormLabel
                   htmlFor="title"
                   className="text-secondary text-lg xl:text-3xl lg:text-xl font-medium my-4"
@@ -118,37 +116,67 @@ export function EditModule({ data, setClose }: Props) {
             <div className="grid grid-cols-2  gap-4">
               {fields.map((item, k) => {
                 return (
-                  <FormField
-                    render={({ field }) => {
-                      return (
-                        <FormItem className="text-text-GRAY rounded-3xl p-4">
-                          <div className="flex gap-2">
-                            <FormLabel htmlFor="title">
-                              <CircleCheck
-                                className="w-8 h-8 text-white "
-                                fill="#0066FF"
-                              />
-                            </FormLabel>
-                            <FormControl>
-                              <Input
-                                {...field}
-                                placeholder="Distributed Transactions"
-                                id="title"
-                                className="text-sm md:text-base"
-                              />
-                            </FormControl>
+                  <div className="flex gap-2 items-center" key={item.id}>
+                    <FormField
+                      name={`points.${k}.value`}
+                      render={({ field }) => {
+                        console.log("Field", field, k);
+                        return (
+                          <div
+                            className="flex w-full items-center gap-2"
+                            key={k}
+                          >
+                            <FormItem className="text-text-GRAY flex gap-2 rounded-3xl p-4">
+                              <FormLabel htmlFor="title">
+                                <CircleCheck
+                                  className="w-8 h-8 text-white "
+                                  fill="#0066FF"
+                                />
+                              </FormLabel>
+                              <FormControl className="flex-1 w-full">
+                                <Input
+                                  {...field}
+                                  placeholder="Distributed Transactions"
+                                  id="title"
+                                  className="text-sm md:text-base w-full"
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
                           </div>
-                          <FormMessage />
-                        </FormItem>
-                      );
-                    }}
-                    name={`points.${k}.value`}
-                    control={form.control}
-                    key={k}
-                  />
+                        );
+                      }}
+                      control={form.control}
+                      key={k}
+                    />
+                    <Button
+                      variant="ghost"
+                      disabled={fields.length < 2}
+                      className="p-4"
+                      onClick={() => {
+                        console.log("Delete Plan", k);
+                        remove(k);
+                      }}
+                      type="button"
+                    >
+                      <Trash2 className="text-red-origin w-4 h-4" />
+                    </Button>
+                  </div>
                 );
               })}
             </div>
+            <Button
+              className="flex mt-4 p-4 gap-2"
+              variant="ghost"
+              onClick={() =>
+                append({
+                  value: "",
+                })
+              }
+            >
+              Add Point
+              <Plus className="w-6 h-6 text-blue-origin" />
+            </Button>
           </div>
         </div>
         <div className="flex justify-end items-center gap-4">
