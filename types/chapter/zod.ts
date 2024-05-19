@@ -35,9 +35,9 @@ export const ChapterSchema = z.object({
 export type TChapterSchema = z.infer<typeof ChapterSchema>;
 
 export const VideoSchema = z.object({
-  name: z.string(),
+  name: z.string().min(5, "name is required"),
   id: z.string().optional(),
-  url: z.string().url("url is required"),
+  url: z.string().optional().default(""),
 });
 
 export type TVideoSchema = z.infer<typeof VideoSchema>;
