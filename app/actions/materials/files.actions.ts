@@ -1,12 +1,15 @@
 "use server";
 import { TFileFormSchemaWithFile } from "@/types/chapter/zod";
-import { CREATE_FILE_URL } from "@/config/urls/material/mutations";
+import {
+  CREATE_FILE_URL,
+  UPDATE_FILE_URL,
+} from "@/config/urls/material/mutations";
 import { cookies } from "next/headers";
 import { IError } from "@/types/errors";
-import { IResponse } from "@/types/http";
+import { IMessage, IResponse } from "@/types/http";
 export const createFile = async (
   data: TFileFormSchemaWithFile,
-): Promise<IResponse<Object>> => {
+): Promise<IResponse<IMessage>> => {
   try {
     const formData = new FormData();
     const blob = new Blob([data.file as BlobPart], {
@@ -39,31 +42,28 @@ export const createFile = async (
     return {
       status: 500,
       error: new IError(e),
-      data: {},
+      data: { message: "" },
     };
   }
 };
 
-export const updateFile = async (data: TFileFormSchemaWithFile) => {
+export const updateFile = async (
+  data: TFileFormSchemaWithFile,
+): Promise<IResponse<IMessage>> => {
   try {
-    const formData = new FormData();
-    // append the file
-    // make the file as blob
-    const blob = new Blob([data.file as BlobPart], {
-      type: data.file?.type,
-    });
-    formData.append("file", blob);
-    formData.append("name", data.name);
-    formData.append("section_id", data.section_id);
-    formData.append("groups", JSON.stringify(data.groups.map((g) => g.value)));
+    const body = {
+      name: data.name,
+      groups: data.groups.map((g) => g.value),
+    };
+
     const response = await fetch(
-      `${CREATE_FILE_URL}?sectionId=${data.section_id}`,
+      `${UPDATE_FILE_URL}?sectionId=${data.section_id}`,
       {
-        method: "POST",
+        method: "PUT",
         headers: {
           Authorization: `Bearer ${cookies().get("accessToken")}`,
         },
-        body: formData,
+        body: JSON.stringify(body),
       },
     );
     const res = await response.json();
@@ -77,7 +77,7 @@ export const updateFile = async (data: TFileFormSchemaWithFile) => {
     return {
       status: 500,
       error: new IError(e),
-      data: {},
+      data: { message: "" },
     };
   }
 };

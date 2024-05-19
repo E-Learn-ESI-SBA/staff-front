@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useQuizFormStore } from "@/store/forms/quiz/quiz.store";
@@ -8,10 +8,9 @@ import {
   getStorage,
   ref,
   uploadBytesResumable,
-} from 'firebase/storage';
-import { app } from '@/config/firebase';
+} from "firebase/storage";
+import { app } from "@/config/firebase";
 // import { cookies } from "next/headers";
-
 
 export default function Preview() {
   const {
@@ -27,56 +26,53 @@ export default function Preview() {
     third_step_content: state.third_step_content,
   }));
 
-  const [imageUploadError, setImageUploadError] = useState<string | boolean >();
+  const [imageUploadError, setImageUploadError] = useState<string | boolean>();
   const [uploading, setUploading] = useState(false);
-  
-  const handleImageSubmit = async(questions:any,data:any) => {
+
+  const handleImageSubmit = async (questions: any, data: any) => {
     setUploading(true);
     setImageUploadError(false);
     const promises = [];
-    if(data.file){
-      promises.push(storeImage(data.file,-1))
+    if (data.file) {
+      promises.push(storeImage(data.file, -1));
     }
 
     for (let i = 0; i < questions.length; i++) {
-      if(questions[i].file){
-        promises.push(storeImage(questions[i]?.file,i));
+      if (questions[i].file) {
+        promises.push(storeImage(questions[i]?.file, i));
       }
+    }
+    try {
+      const results = await Promise.all(promises);
 
-    } 
-  try {
-    const results = await Promise.all(promises);
-
-            results.forEach((result : any) => {
-              const { downloadURL, i } = result;
-              if(i != -1){
-                questions[i].image = downloadURL;
-              }else{
-               data.image = downloadURL
-              }
-           
-            });
-            const { file, ...updatedData } = data;
-            const updatedQuestions = questions.map(({ file , ...rest }:any) => rest);
-            setImageUploadError(false);
-            setUploading(false);
-           return [updatedQuestions,updatedData]
-
-    }catch (err) {
-      setImageUploadError('Image upload failed (2 mb max per image)');
+      results.forEach((result: any) => {
+        const { downloadURL, i } = result;
+        if (i != -1) {
+          questions[i].image = downloadURL;
+        } else {
+          data.image = downloadURL;
+        }
+      });
+      const { file, ...updatedData } = data;
+      const updatedQuestions = questions.map(({ file, ...rest }: any) => rest);
+      setImageUploadError(false);
       setUploading(false);
-      throw err; 
-    };
+      return [updatedQuestions, updatedData];
+    } catch (err) {
+      setImageUploadError("Image upload failed (2 mb max per image)");
+      setUploading(false);
+      throw err;
+    }
   };
-  
-  const storeImage = async (file:any,i:any) => {
+
+  const storeImage = async (file: any, i: any) => {
     return new Promise((resolve, reject) => {
       const storage = getStorage(app);
       const fileName = new Date().getTime() + file.name;
       const storageRef = ref(storage, fileName);
       const uploadTask = uploadBytesResumable(storageRef, file);
       uploadTask.on(
-        'state_changed',
+        "state_changed",
         (snapshot) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -87,27 +83,27 @@ export default function Preview() {
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            resolve({downloadURL,i});
+            resolve({ downloadURL, i });
           });
-        }
+        },
       );
     });
   };
 
+  const submit = async () => {
+    const [questions, firstData] = await handleImageSubmit(
+      third_step_content!.questions,
+      first_step_content,
+    );
 
-
-  const submit = async() => {
-
-   const [questions,firstData] = await handleImageSubmit(third_step_content!.questions,first_step_content)
-   
-   const data = {
+    const data = {
       ...firstData,
       ...second_step_content,
-      questions : questions,
+      questions: questions,
       module_id: "66453ff8a9a6b2a1a507b8a2",
-      teacher_id: "2"
+      teacher_id: "2",
     };
-   console.log('final data',data)
+    console.log("final data", data);
     try {
       const response = await fetch("http://localhost:8080/quizes", {
         method: "POST",
@@ -116,11 +112,11 @@ export default function Preview() {
           Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4NTUxMzk3LCJpYXQiOjE3MTU5NTkzOTcsImp0aSI6IjYxN2EwNDU3MzNiNDQxNDlhNjY5Y2ZmMjkzOGQ3ZWFlIiwiaWQiOiIyMjNlYmU5Yi1jMWMyLTQ5M2EtYTdiYS02OThhOTM1NjdkYmUiLCJhdmF0YXIiOiJkZWZhdWx0IiwidXNlcm5hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AaG9zdC5jb20iLCJyb2xlIjoiYWRtaW4iLCJncm91cCI6Ik5vbmUiLCJ5ZWFyIjoiTm9uZSJ9.2UFOb8hOBkfnGpWHgkQdJcnbK6YwqbEtn9aIFA-FNBc`,
         },
         //@ts-ignore
-        body: data
+        body: data,
       });
 
       if (response.ok) {
-        console.log("Quiz submitted successfully",response);
+        console.log("Quiz submitted successfully", response);
       } else {
         console.error("Failed to submit quiz");
       }
@@ -159,12 +155,13 @@ export default function Preview() {
                   <span>{option.option}</span>
                 </p>
                 {
-                //@ts-ignore
-                question.correct_Idx.includes(option.id) && (
-                  <div className="px-4 py-2 rounded-lg text-[#2E8760] bg-[#E9FFF5]">
-                    Marked as Correct
-                  </div>
-                )}
+                  //@ts-ignore
+                  question.correct_Idx.includes(option.id) && (
+                    <div className="px-4 py-2 rounded-lg text-[#2E8760] bg-[#E9FFF5]">
+                      Marked as Correct
+                    </div>
+                  )
+                }
               </li>
             ))}
           </ul>

@@ -3,7 +3,7 @@ import QuizFirstStepForm from "@/components/dashboard/Quiz/create/first-step";
 import Preview from "@/components/dashboard/Quiz/create/fourth-step";
 import GradesForm from "@/components/dashboard/Quiz/create/second-step";
 import QCMForm from "@/components/dashboard/Quiz/create/third-step";
-import { useQuizFormStore} from "@/store/forms/quiz/quiz.store";
+import { useQuizFormStore } from "@/store/forms/quiz/quiz.store";
 
 export default function CreateQuiz() {
   const { currentStep } = useQuizFormStore((state) => ({

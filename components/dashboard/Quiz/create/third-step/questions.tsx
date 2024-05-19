@@ -9,10 +9,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { TypographyP } from "@/components/ui/typography";
 import Image from "next/image";
-import { useState} from "react";
+import { useState } from "react";
 import { OptionsComponent } from "./options";
 
-export default function Questions({ form, index} :any ) {
+export default function Questions({ form, index }: any) {
   const [currentImage, setCurrentImage] = useState<string>(
     form.getValues(`questions.${index}.image`) ?? "/assets/person.png",
   );
@@ -36,7 +36,7 @@ export default function Questions({ form, index} :any ) {
             </FormItem>
           )}
         />
-            <FormField
+        <FormField
           control={form.control}
           name={`questions.${index}.score`}
           render={({ field }) => (
@@ -53,7 +53,6 @@ export default function Questions({ form, index} :any ) {
             </FormItem>
           )}
         />
-
 
         <div className=" relative flex flex-col gap-4 ">
           <Image
@@ -97,21 +96,16 @@ export default function Questions({ form, index} :any ) {
 
       {form.formState?.errors.questions && (
         <>
-          {Object.keys(form.formState.errors.questions).map(
-            (key) => (
-              <p>
-                {" "}
-                {key == index && (
-                  <TypographyP className="indent-6 text-red-600 my-5 text-sm">
-                   {
-                      form.formState.errors.questions[key].options?.root
-                        ?.message
-                    }
-                  </TypographyP>
-                )}{" "}
-              </p>
-            ),
-          )}
+          {Object.keys(form.formState.errors.questions).map((key) => (
+            <p>
+              {" "}
+              {key == index && (
+                <TypographyP className="indent-6 text-red-600 my-5 text-sm">
+                  {form.formState.errors.questions[key].options?.root?.message}
+                </TypographyP>
+              )}{" "}
+            </p>
+          ))}
         </>
       )}
     </div>

@@ -22,38 +22,60 @@ import MultipleSelector, { Option } from "../ui/multi-select";
 import { Label } from "../ui/label";
 import { Delete, File } from "lucide-react";
 import { Button } from "../ui/button";
+import { IError } from "@/types/errors";
+import {FileComp} from "@/components/common/file-overview";
 
 type Props = PropsWithChildren & {
   defaultValues?: TFileFormSchema;
   mode: "CREATE" | "UPDATE";
+  year: string;
 };
-export function FileForm({ defaultValues, mode = "CREATE", children }: Props) {
+export function FileForm({
+  defaultValues,
+  mode = "CREATE",
+  children,
+  year,
+}: Props) {
   const form = useForm<TFileFormSchema>({
     resolver: zodResolver(FileFormSchema),
     mode: "onSubmit",
     defaultValues: defaultValues,
   });
   const action = mode === "CREATE" ? createFile : updateFile;
-  const submitHandler = (data: TFileFormSchema) => {
+  const submitHandler = async (data: TFileFormSchema) => {
     console.log(data);
     const dataWithFile: TFileFormSchemaWithFile = {
       ...data,
       file: currentFile,
     };
-
-    action(dataWithFile);
+    try {
+      const res = await action(dataWithFile);
+      if (res.status === 200 || res.status == 201) {
+        form.reset();
+        toast.success(res.data.message, {
+          style: {
+            backgroundColor: "green",
+            color: "white",
+          },
+        });
+      } else {
+        toast.error(res.error?.message ?? "Error While Doing this action", {
+          style: {
+            backgroundColor: "red",
+            color: "white",
+          },
+        });
+      }
+    } catch (e) {
+      const err = new IError(e);
+      toast.error(err.message, {
+        style: {
+          backgroundColor: "red",
+          color: "white",
+        },
+      });
+    }
   };
-  //@ts-ignore
-  if (state.status === "success") {
-    form.reset();
-    //@ts-ignore
-    toast.success(state.message, {
-      style: {
-        backgroundColor: "green",
-        color: "white",
-      },
-    });
-  }
   const groups: Option[] = [
     {
       label: "Group 1",
@@ -91,34 +113,6 @@ export function FileForm({ defaultValues, mode = "CREATE", children }: Props) {
   const MAX_FILE_SIZE = 8000000;
   const [currentFile, setCurrentFile] = useState<File | null>(null);
 
-  const FileComp = ({ f }: { f: File }) => {
-    return (
-      <div className="flex justify-between w-full items-center gap-4 ">
-        <div className="flex items-center gap-2 p-2">
-          <File className="w-8 h-8 text-green-origin" />
-          <div className="flex flex-col gap-px  ">
-            <p className="text-xs  text-gray-600 dark:text-gray-400">
-              name: {f.name.slice(1, f.name.length / 6)}
-            </p>
-            <p className="text-xs  text-gray-600 dark:text-gray-400">
-              Type : {f.type.split("/")[1]}
-            </p>
-            <p className="text-xs  text-gray-600 dark:text-gray-400">
-              Size: {f.size / Math.pow(2, 10)}
-            </p>
-          </div>
-        </div>
-        <Button
-          variant="ghost"
-          onClick={() => {
-            setCurrentFile(() => null);
-          }}
-        >
-          <Delete className="text-red-origin w-8 h-8" />
-        </Button>
-      </div>
-    );
-  };
   return (
     <Form {...form}>
       <form
@@ -144,6 +138,9 @@ export function FileForm({ defaultValues, mode = "CREATE", children }: Props) {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Groups</FormLabel>
+              {
+                //    <GroupSelector label="Select Group" value={field.value} onChange={field.onChange} year={year}  />
+              }
               <FormControl>
                 <MultipleSelector
                   aria-label="Select groups"
@@ -165,35 +162,37 @@ export function FileForm({ defaultValues, mode = "CREATE", children }: Props) {
           )}
         />
 
-        <div className="flex flex-col gap-4 border justify-center relative items-center p-6 w-full min-h-[100px]">
-          {!currentFile ? (
-            <>
-              <Input
-                required
-                accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.py,.java, .c, .cpp, .pas"
-                type="file"
-                className="w-fll absolute top-0 h-full  opacity-0"
-                onChange={(e) => {
-                  if (
-                    e.target.files &&
-                    e.target.files[0].size < MAX_FILE_SIZE
-                  ) {
-                    setCurrentFile(() =>
-                      e.target?.files ? e.target?.files[0] : null,
-                    );
-                  }
-                }}
-              />
+        {mode == "CREATE" && (
+            <div className="flex flex-col gap-4 border justify-center relative items-center p-6 w-full min-h-[100px]">
+              {!currentFile ? (
+                  <>
+                    <Input
+                        required
+                        accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.py,.java, .c, .cpp, .pas"
+                        type="file"
+                        className="w-fll absolute top-0 h-full  opacity-0"
+                        onChange={(e) => {
+                          if (
+                              e.target.files &&
+                              e.target.files[0].size < MAX_FILE_SIZE
+                          ) {
+                            setCurrentFile(() =>
+                                e.target?.files ? e.target?.files[0] : null,
+                            );
+                          }
+                        }}
+                    />
 
-              <Label>Attached File</Label>
-              <p className="text-center text-sm leading-10 text-gray-600 dark:text-gray-400">
-                Drag and Drop or file browse with size lower then 8MB
-              </p>
-            </>
-          ) : (
-            <FileComp f={currentFile} />
-          )}
-        </div>
+                    <Label>Attached File</Label>
+                    <p className="text-center text-sm leading-10 text-gray-600 dark:text-gray-400">
+                      Drag and Drop or file browse with size lower then 8MB
+                    </p>
+                  </>
+              ) : (
+                  <FileComp f={currentFile} setCurrentFile={setCurrentFile}/>
+              )}
+            </div>
+        )}
         {children}
       </form>
     </Form>

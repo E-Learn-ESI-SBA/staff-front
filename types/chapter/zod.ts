@@ -37,7 +37,17 @@ export type TChapterSchema = z.infer<typeof ChapterSchema>;
 export const VideoSchema = z.object({
   name: z.string().min(5, "name is required"),
   id: z.string().optional(),
+  groups: z
+    .array(
+      z.object({
+        label: z.string(),
+        value: z.string().default(""),
+        disabled: z.boolean().default(false).optional(),
+      }),
+    )
+    .min(1, "Please Select at least one group "),
   url: z.string().optional().default(""),
+  section_id: z.string(),
 });
 
 export type TVideoSchema = z.infer<typeof VideoSchema>;

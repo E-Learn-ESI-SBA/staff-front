@@ -5,3 +5,7 @@ export interface IResponse<T> {
   data: T;
   error: IError | null;
 }
+
+export interface IMessage {
+  message: string;
+}

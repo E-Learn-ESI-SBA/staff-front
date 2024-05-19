@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import {
   Form,
   FormControl,
@@ -21,11 +21,9 @@ import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Exam } from "@/types";
 import { useQuizFormStore } from "@/store/forms/quiz/quiz.store";
-import { useState} from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { ECourseType } from "@/types";
-
-
 
 // const defaultValues = {
 //   title: "",
@@ -42,10 +40,9 @@ import { ECourseType } from "@/types";
 //   end_date: undefined,
 //   id: "",
 // };
-export default function QuizFirstStepForm({defaultValues} :any) {
-
+export default function QuizFirstStepForm({ defaultValues }: any) {
   const { first_step_content, nextStep, setFirstStepContent } =
-   useQuizFormStore((state) => ({
+    useQuizFormStore((state) => ({
       nextStep: state.nextStep,
       setFirstStepContent: state.setFirstStepContent,
       first_step_content: state.first_step_content ?? defaultValues,
@@ -57,10 +54,10 @@ export default function QuizFirstStepForm({defaultValues} :any) {
     mode: "onChange",
   });
 
-  console.log('data',first_step_content)
+  console.log("data", first_step_content);
 
   const [currentImage, setCurrentImage] = useState<string>(
-    form.getValues('image') ?? "/assets/person.png",
+    form.getValues("image") ?? "/assets/person.png",
   );
 
   const submitHandler = (data: Exam) => {
@@ -87,8 +84,8 @@ export default function QuizFirstStepForm({defaultValues} :any) {
             </FormItem>
           )}
         />
-  
-  <div className=" relative flex flex-col gap-4 ">
+
+        <div className=" relative flex flex-col gap-4 ">
           <Image
             alt="Question Image"
             className=""
@@ -105,14 +102,11 @@ export default function QuizFirstStepForm({defaultValues} :any) {
               onChange={(e) => {
                 if (e.target.files) {
                   const file = e.target.files[0];
-                  form.setValue('file', file);
+                  form.setValue("file", file);
                   const reader = new FileReader();
                   reader.onloadend = () => {
                     setCurrentImage(reader.result as string);
-                    form.setValue(
-                      `image`,
-                      reader.result as string,
-                    );
+                    form.setValue(`image`, reader.result as string);
                   };
                   try {
                     reader.readAsDataURL(file);
@@ -165,43 +159,43 @@ export default function QuizFirstStepForm({defaultValues} :any) {
           )}
         />
 
-        <div className="flex justify-between items-center" >
-        <FormField
-          control={form.control}
-          name="max_score"
-          render={({ field }) => (
-            <FormItem className="w-1/2">
-              <FormLabel>Max Score</FormLabel>
-              <FormControl>
-                <Input
-                  type="number"
-                  placeholder="Enter Max score..."
-                  {...field}
-                  min={1}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-                <FormField
-          control={form.control}
-          name="min_score"
-          render={({ field }) => (
-            <FormItem className="w-1/2">
-              <FormLabel>Pass score</FormLabel>
-              <FormControl>
-                <Input
-                  type="number"
-                  placeholder="Enter Pass score..."
-                  {...field}
-                  min={1}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <div className="flex justify-between items-center">
+          <FormField
+            control={form.control}
+            name="max_score"
+            render={({ field }) => (
+              <FormItem className="w-1/2">
+                <FormLabel>Max Score</FormLabel>
+                <FormControl>
+                  <Input
+                    type="number"
+                    placeholder="Enter Max score..."
+                    {...field}
+                    min={1}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="min_score"
+            render={({ field }) => (
+              <FormItem className="w-1/2">
+                <FormLabel>Pass score</FormLabel>
+                <FormControl>
+                  <Input
+                    type="number"
+                    placeholder="Enter Pass score..."
+                    {...field}
+                    min={1}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
         </div>
 
         <FormField
@@ -223,19 +217,19 @@ export default function QuizFirstStepForm({defaultValues} :any) {
             </FormItem>
           )}
         />
-          <FormField
-            control={form.control}
-            name="question_count"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormLabel>Questions Count </FormLabel>
-                <FormControl>
-                  <Input type="number" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+        <FormField
+          control={form.control}
+          name="question_count"
+          render={({ field }) => (
+            <FormItem className="w-full">
+              <FormLabel>Questions Count </FormLabel>
+              <FormControl>
+                <Input type="number" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <div className="flex gap-4">
           <FormField
             control={form.control}
@@ -247,19 +241,21 @@ export default function QuizFirstStepForm({defaultValues} :any) {
                   <Input
                     type="datetime-local"
                     //@ts-ignore
-                    value={
-                      field.value
-                        ?? ''
-                    }
+                    value={field.value ?? ""}
                     onChange={(e) => {
                       const value = e.target.value;
                       const selectedDate = new Date(value);
                       if (!isNaN(selectedDate.getTime())) {
-                        const localDateTime = new Date(selectedDate.getTime() - (selectedDate.getTimezoneOffset() * 60000)).toISOString().slice(0, 16);
-                        console.log('dss',localDateTime)
+                        const localDateTime = new Date(
+                          selectedDate.getTime() -
+                            selectedDate.getTimezoneOffset() * 60000,
+                        )
+                          .toISOString()
+                          .slice(0, 16);
+                        console.log("dss", localDateTime);
                         field.onChange(localDateTime);
                       } else {
-                        field.onChange('');
+                        field.onChange("");
                       }
                     }}
                   />
@@ -278,19 +274,21 @@ export default function QuizFirstStepForm({defaultValues} :any) {
                   <Input
                     type="datetime-local"
                     //@ts-ignore
-                    value={
-                      field.value
-                        ?? ''
-                    }
+                    value={field.value ?? ""}
                     onChange={(e) => {
                       const value = e.target.value;
                       const selectedDate = new Date(value);
                       if (!isNaN(selectedDate.getTime())) {
-                        const localDateTime = new Date(selectedDate.getTime() - (selectedDate.getTimezoneOffset() * 60000)).toISOString().slice(0, 16);
-                        console.log('dss',localDateTime)
+                        const localDateTime = new Date(
+                          selectedDate.getTime() -
+                            selectedDate.getTimezoneOffset() * 60000,
+                        )
+                          .toISOString()
+                          .slice(0, 16);
+                        console.log("dss", localDateTime);
                         field.onChange(localDateTime);
                       } else {
-                        field.onChange('');
+                        field.onChange("");
                       }
                     }}
                   />

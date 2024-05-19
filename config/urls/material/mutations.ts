@@ -5,6 +5,9 @@ import { SERVER_URL } from "@/config/urls/material/queries";
 export const CREATE_MODULE_URL = `${SERVER_URL}/module`;
 export const UPDATE_MODULE_URL = `${SERVER_URL}/module`;
 export const DELETE_MODULE_URL = `${SERVER_URL}/module`;
+export const GET_ALL_MODULES_URL = `${SERVER_URL}/modules/public`;
+export const GET_STUDENT_MODULES_URL = `${SERVER_URL}/modules/student`;
+export const GET_TEACHER_MODULES_URL = `${SERVER_URL}/modules/teacher`;
 
 // Chapters
 export const CREATE_CHAPTER_URL = `${SERVER_URL}/chapter`;
@@ -16,8 +19,24 @@ export const UPDATE_SECTION_URL = `${SERVER_URL}/section`;
 export const CREATE_SECTION_URL = `${SERVER_URL}/section`;
 
 // Files
-export const CREATE_FILE_URL = `${SERVER_URL}/file`;
+export const CREATE_FILE_URL = `${SERVER_URL}/transactions/file`;
 export const UPDATE_FILE_URL = `${SERVER_URL}/file`;
 export const DELETE_FILE_URL = `${SERVER_URL}/file`;
+export const GET_FILE_URL = `${SERVER_URL}/file`;
+
 //Videos
+export const CREATE_VIDEO_URL = `${SERVER_URL}/transactions/videos`;
+export const UPDATE_VIDEO_URL = `${SERVER_URL}/video`;
 // Lectures
+
+// Comments
+export const CREATE_COMMENT_URL = `${SERVER_URL}/comment`;
+export const UPDATE_COMMENT_URL = `${SERVER_URL}/comment`;
+export const DELETE_COMMENT_URL = `${SERVER_URL}/comment`;
+
+export const DELETE_SECTION_URL = `${SERVER_URL}/section`;
+export const GET_SECTION_URL = `${SERVER_URL}/section`;
+export const GET_ALL_SECTION_URL = `${SERVER_URL}/section`;
+// Files:
+
+// Modules:

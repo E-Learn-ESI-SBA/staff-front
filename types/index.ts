@@ -38,16 +38,15 @@ export type Exam = {
   title: string;
   instructions: string;
   module_id: ECourseType;
-  image:string;
-  file : any;
+  image: string;
+  file: any;
   duration: number;
-  max_score : number;
+  max_score: number;
   min_score: number;
   question_count: number;
   start_date: string;
   end_date: string;
 };
-
 
 export type Assignment = {
   id: string;

@@ -36,18 +36,18 @@ const defaultValues2 = {
   ],
 };
 
-export default function GradesForm({defaultValues} :any) {
+export default function GradesForm({ defaultValues }: any) {
   const { nextStep, setSecondStepContent, second_step_content, prevStep } =
-  useQuizFormStore((state) => ({
+    useQuizFormStore((state) => ({
       nextStep: state.nextStep,
       prevStep: state.prevStep,
       setSecondStepContent: state.setSecondStepContent,
       second_step_content: state.second_step_content ?? defaultValues,
     }));
-    console.log('sdsd',second_step_content)
+  console.log("sdsd", second_step_content);
   const form = useForm<TGradesForm>({
     resolver: zodResolver(GradesSchema),
-    defaultValues: second_step_content ?? defaultValues2 ,
+    defaultValues: second_step_content ?? defaultValues2,
     mode: "onChange",
   });
   const { fields, append, remove } = useFieldArray({
@@ -161,9 +161,9 @@ export default function GradesForm({defaultValues} :any) {
           onClick={() => {
             if (fields.length <= 5)
               append({
-            //@ts-ignore
+                //@ts-ignore
                 min: null,
-            //@ts-ignore
+                //@ts-ignore
                 max: null,
                 grade: "",
                 // note: "",

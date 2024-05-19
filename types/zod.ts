@@ -12,11 +12,9 @@ const timeRegex = /^(?:2[0-3]|[01][0-9]):[0-5][0-9]$/;
 
 export const examSchemaValidator = z.object({
   id: z.string().optional(),
-  title: z
-    .string()
-    .min(2, { message: "must be at least 2 characters long" }),
-  image : z.string().optional(),
-  file : z.any().optional(),
+  title: z.string().min(2, { message: "must be at least 2 characters long" }),
+  image: z.string().optional(),
+  file: z.any().optional(),
   instructions: z
     .string()
     .min(12, { message: "must be at least 12 characters long" }),
@@ -24,12 +22,8 @@ export const examSchemaValidator = z.object({
   duration: z.coerce
     .number()
     .min(15, { message: "must be at least 15 minutes" }),
-    max_score: z.coerce
-    .number()
-    .min(1, { message: "must be at least 1 point" }),
-    min_score: z.coerce
-    .number()
-    .min(2, { message: "must be at least 2 points" }),
+  max_score: z.coerce.number().min(1, { message: "must be at least 1 point" }),
+  min_score: z.coerce.number().min(2, { message: "must be at least 2 points" }),
   question_count: z.coerce
     .number()
     .min(10, { message: "must be at least 10 questions" }),
@@ -45,17 +39,17 @@ export const QCMSchema = z.object({
       z.object({
         body: z.string().min(3, "Question announcement is required"),
         score: z.coerce
-        .number()
-        .min(1, { message: "must be at least 1 point" })
-        .default(30),
+          .number()
+          .min(1, { message: "must be at least 1 point" })
+          .default(30),
         image: z.string().default("").optional(),
-        file : z.any(),
+        file: z.any(),
         options: z
           .array(
             z.object({
               option: z.string().min(3, "Answer is required"),
               validity: z.boolean().default(false),
-              id : z.string(),
+              id: z.string(),
             }),
           )
           .min(3, "At least 3 answers must be provided")
@@ -135,7 +129,3 @@ export const moduleSchemaValidator = z.object({
   ),
 });
 export type TModuleSchema = z.infer<typeof moduleSchemaValidator>;
-
-
-
-

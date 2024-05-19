@@ -1,4 +1,4 @@
-import {GET_GROUPS, GET_TEACHERS} from "@/config/urls/staff/queries";
+import { GET_GROUPS, GET_TEACHERS } from "@/config/urls/staff/queries";
 import { cookies } from "next/headers";
 import { IResponse } from "@/types/http";
 import { IError } from "@/types/errors";
@@ -29,16 +29,18 @@ export const getUsers = async (): Promise<IResponse<Users[]>> => {
     };
   }
 };
-
-export const getGroups = async (): Promise<IResponse<string[]>> => {
+type Groups = {
+  groups: string[];
+};
+export const getGroups = async (year: string): Promise<IResponse<Groups>> => {
   try {
-    const response = await fetch(GET_GROUPS, {
+    const response = await fetch(`${GET_GROUPS}?year=${year}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${cookies().get("accessToken")?.value}`,
       },
     });
-    const res = (await response.json()) as string[];
+    const res = (await response.json()) as Groups;
     return {
       status: response.status,
       data: res,
@@ -48,7 +50,7 @@ export const getGroups = async (): Promise<IResponse<string[]>> => {
     return {
       status: 500,
       error: new IError(e),
-      data: [],
+      data: { groups: [] },
     };
   }
 };

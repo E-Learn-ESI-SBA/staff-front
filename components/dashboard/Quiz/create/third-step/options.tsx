@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { TrashIcon } from "@radix-ui/react-icons";
 import { useFieldArray } from "react-hook-form";
 
-export const OptionsComponent = ({ nestIndex, form }:any) => {
+export const OptionsComponent = ({ nestIndex, form }: any) => {
   const { fields, append, remove } = useFieldArray({
     name: `questions.${nestIndex}.options`,
     control: form.control,
@@ -26,17 +26,18 @@ export const OptionsComponent = ({ nestIndex, form }:any) => {
               key={item.id}
               className="flex justify-between items-center gap-4 my-4"
             >
-           {form.setValue(
-                      `questions.${nestIndex}.options.${k}.id`,
-                      form.getValues(`questions.${nestIndex}.options.${k}.id`) ?? item.id ,
-                    )}
+              {form.setValue(
+                `questions.${nestIndex}.options.${k}.id`,
+                form.getValues(`questions.${nestIndex}.options.${k}.id`) ??
+                  item.id,
+              )}
               <FormField
                 control={form.control}
                 name={`questions.${nestIndex}.options.${k}.option`}
                 render={({ field }) => (
                   <FormItem className="w-full">
                     <FormControl>
-                      <Input type="text"  {...field} />
+                      <Input type="text" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

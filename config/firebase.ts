@@ -13,7 +13,7 @@ const firebaseConfig = {
   storageBucket: "madaurus-71e46.appspot.com",
   messagingSenderId: "132991748094",
   appId: "1:132991748094:web:e66cbbc78b06164ca1e2af",
-  measurementId: "G-2DPWNXJRQG"
+  measurementId: "G-2DPWNXJRQG",
 };
 
 // Initialize Firebase
