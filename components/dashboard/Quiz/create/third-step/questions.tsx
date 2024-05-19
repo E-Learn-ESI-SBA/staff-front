@@ -9,25 +9,20 @@ import {
 import { Input } from "@/components/ui/input";
 import { TypographyP } from "@/components/ui/typography";
 import Image from "next/image";
-import { useState, useRef } from "react";
-import { AnswersComponent } from "./answers";
+import { useState} from "react";
+import { OptionsComponent } from "./options";
 
-export default function Questions({ form, index }) {
+export default function Questions({ form, index} :any ) {
   const [currentImage, setCurrentImage] = useState<string>(
-    form.getValues(`questions.${index}.qst_image`) ?? "/assets/person.png",
+    form.getValues(`questions.${index}.image`) ?? "/assets/person.png",
   );
-  const inputFileRef = useRef<HTMLInputElement>(null);
-
-  const save = () => {
-    form.setValue(`questions.${index}.qst_image`, currentImage);
-  };
 
   return (
     <div className="border border-[#A4A4A4] rounded-xl w-11/12 flex flex-col gap-4 p-4 ">
       <div className="flex justify-between items-center gap-4">
         <FormField
           control={form.control}
-          name={`questions.${index}.qst_title`}
+          name={`questions.${index}.body`}
           render={({ field }) => (
             <FormItem className="w-full">
               <FormControl>
@@ -41,8 +36,26 @@ export default function Questions({ form, index }) {
             </FormItem>
           )}
         />
+            <FormField
+          control={form.control}
+          name={`questions.${index}.score`}
+          render={({ field }) => (
+            <FormItem className="w-full">
+              <FormControl>
+                <Input
+                  type="number"
+                  placeholder="Type score"
+                  {...field}
+                  min={1}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-        <div className=" relative flex justify-start gap-4 ">
+
+        <div className=" relative flex flex-col gap-4 ">
           <Image
             alt="Question Image"
             className=""
@@ -56,15 +69,15 @@ export default function Questions({ form, index }) {
               className="opacity-0 absolute top-0 left-0 w-full h-full cursor-pointer"
               type="file"
               accept="image/*"
-              ref={inputFileRef}
               onChange={(e) => {
                 if (e.target.files) {
                   const file = e.target.files[0];
+                  form.setValue(`questions.${index}.file`, file);
                   const reader = new FileReader();
                   reader.onloadend = () => {
                     setCurrentImage(reader.result as string);
                     form.setValue(
-                      `questions.${index}.qst_image`,
+                      `questions.${index}.image`,
                       reader.result as string,
                     );
                   };
@@ -80,18 +93,18 @@ export default function Questions({ form, index }) {
         </div>
       </div>
 
-      <AnswersComponent nestIndex={index} form={form} />
+      <OptionsComponent nestIndex={index} form={form} />
 
       {form.formState?.errors.questions && (
         <>
           {Object.keys(form.formState.errors.questions).map(
-            (key, indexError) => (
-              <p key={indexError}>
+            (key) => (
+              <p>
                 {" "}
                 {key == index && (
                   <TypographyP className="indent-6 text-red-600 my-5 text-sm">
-                    {
-                      form.formState.errors.questions[key].answers?.root
+                   {
+                      form.formState.errors.questions[key].options?.root
                         ?.message
                     }
                   </TypographyP>

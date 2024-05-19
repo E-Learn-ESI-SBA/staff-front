@@ -1,87 +1,34 @@
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { TypographyP } from "@/components/ui/typography";
-import { useQuestionFormStore } from "@/store/forms/questions/question.store";
+import { useQuizFormStore } from "@/store/forms/quiz/quiz.store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { TrashIcon } from "@radix-ui/react-icons";
 import { useFieldArray, useForm } from "react-hook-form";
-import { z } from "zod";
 import Questions from "./questions";
-
-const QCMSchema = z.object({
-  questions: z
-    .array(
-      z.object({
-        qst_title: z.string().min(3, "Question announcement is required"),
-        qst_image: z.string().default("").optional(),
-        answers: z
-          .array(
-            z.object({
-              title: z.string().min(3, "Answer is required"),
-              validite: z.boolean().default(false),
-            }),
-          )
-          .min(3, "At least 3 answers must be provided")
-          .refine((val) => {
-            return val.filter((item) => item.validite).length > 0;
-          }, "At least one answer must be selected"),
-      }),
-    )
-    .min(3, "At least 3 questions must be provided"),
-});
-
-type TQCMForm = z.infer<typeof QCMSchema>;
-
-const defaultValues = {
-  questions: [
-    {
-      qst_title: "question1",
-      qst_image: "",
-      answers: [
-        { title: "answer1", validite: false },
-        { title: "answer2", validite: true },
-        { title: "answer3", validite: false },
-      ],
-    },
-    {
-      qst_title: "question2",
-      qst_image: "",
-      answers: [
-        { title: "answer1", validite: false },
-        { title: "answer2", validite: true },
-        { title: "answer3", validite: false },
-      ],
-    },
-    {
-      qst_title: "question3",
-      qst_image: "",
-      answers: [
-        { title: "answer1", validite: false },
-        { title: "answer2", validite: true },
-        { title: "answer3", validite: false },
-      ],
-    },
-  ],
-};
-
-export default function QCMForm() {
+import convertObject from '@/utils/convertObjects'
+import { defaultValues2 } from "@/static/dummy-data/quiz/details";
+import { TQCMForm,QCMSchema } from "@/types/zod";
+export default function QCMForm({defaultValues}:any) {
   const { nextStep, third_step_content, setThirdStepContent, prevStep } =
-    useQuestionFormStore((state) => ({
+    useQuizFormStore((state) => ({
       nextStep: state.nextStep,
       prevStep: state.prevStep,
       setThirdStepContent: state.setThirdStepContent,
-      third_step_content: state.third_step_content ?? defaultValues,
+      third_step_content: state.third_step_content ?? defaultValues ,
     }));
 
   const form = useForm<TQCMForm>({
     resolver: zodResolver(QCMSchema),
-    defaultValues: third_step_content,
+    defaultValues: third_step_content ? convertObject(third_step_content,2) : convertObject(defaultValues2,2)  ,
     mode: "onChange",
   });
 
-  const onSubmit = (data) => {
-    console.log("data", data);
-    setThirdStepContent(data);
+
+  console.log('dssd',third_step_content)
+  const onSubmit = (data:any) => {
+  const updatedData = convertObject(data,1)
+  setThirdStepContent(updatedData);
     nextStep();
   };
   const { fields, append, remove } = useFieldArray({
@@ -114,7 +61,8 @@ export default function QCMForm() {
           className="bg-[#F3F6FF] text-[#3D70F5] rounded-lg my-8 py-2 px-4"
           type="button"
           onClick={() => {
-            append({ qst_title: "" });
+            //@ts-ignore
+            append({body: ""});
           }}
         >
           + add question
@@ -134,7 +82,7 @@ export default function QCMForm() {
         </div>
         {form.formState?.errors.questions && (
           <TypographyP className=" indent-6 text-red-600 my-5 text-sm">
-            {form.formState.errors.questions?.root?.message}
+           {form.formState.errors.questions?.root?.message}
           </TypographyP>
         )}
       </form>

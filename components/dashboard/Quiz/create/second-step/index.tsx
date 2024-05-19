@@ -13,59 +13,51 @@ import { GradesSchema, TGradesForm } from "@/types/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { TrashIcon } from "@radix-ui/react-icons";
 import { useFieldArray, useForm } from "react-hook-form";
-import { useQuestionFormStore } from "@/store/forms/questions/question.store";
+import { useQuizFormStore } from "@/store/forms/quiz/quiz.store";
 import { TypographyP } from "@/components/ui/typography";
 
-const defaultValues = {
-  grade_items: [
+const defaultValues2 = {
+  grades: [
     {
-      minInterval: 80,
-      maxInterval: 100,
+      min: 80,
+      max: 100,
       grade: "A",
-      note: "excellent",
-      passed: true,
     },
     {
-      minInterval: 50,
-      maxInterval: 80,
+      min: 50,
+      max: 80,
       grade: "B",
-      note: "well done",
-      passed: true,
     },
     {
-      minInterval: 0,
-      maxInterval: 50,
+      min: 0,
+      max: 50,
       grade: "F",
-      note: "focus",
-      passed: false,
     },
   ],
 };
 
-export default function GradesForm() {
+export default function GradesForm({defaultValues} :any) {
   const { nextStep, setSecondStepContent, second_step_content, prevStep } =
-    useQuestionFormStore((state) => ({
+  useQuizFormStore((state) => ({
       nextStep: state.nextStep,
       prevStep: state.prevStep,
       setSecondStepContent: state.setSecondStepContent,
       second_step_content: state.second_step_content ?? defaultValues,
     }));
+    console.log('sdsd',second_step_content)
   const form = useForm<TGradesForm>({
     resolver: zodResolver(GradesSchema),
-    defaultValues: second_step_content,
+    defaultValues: second_step_content ?? defaultValues2 ,
     mode: "onChange",
   });
   const { fields, append, remove } = useFieldArray({
-    name: "grade_items",
+    name: "grades",
     control: form.control,
   });
   const submitHandler = (data: TGradesForm) => {
-    console.log("Submitted form");
-    console.log(data);
     setSecondStepContent(data);
     nextStep();
   };
-
   return (
     <Form {...form}>
       <form
@@ -73,17 +65,14 @@ export default function GradesForm() {
         onSubmit={form.handleSubmit(submitHandler)}
       >
         <div className="flex justify-between items-center font-medium">
-          <div className="flex gap-4 w-1/4">
+          <div className="flex gap-4 w-2/5">
             <p>Minimum Marks</p>
           </div>
-          <div className="flex gap-4 w-1/4">
+          <div className="flex gap-4 w-2/5">
             <p>Grade</p>
           </div>
-          <div className="flex gap-4 w-1/4">
-            <p>Note</p>
-          </div>
-          <div className="flex gap-4 w-1/4">
-            <p>Result</p>
+          <div className="flex gap-4 w-1/5">
+            <p>Delete</p>
           </div>
         </div>
 
@@ -92,10 +81,10 @@ export default function GradesForm() {
             className="flex justify-between items-start gap-2"
             key={field.id}
           >
-            <div className="flex gap-4 w-1/4">
+            <div className="flex gap-4 w-2/5">
               <FormField
                 control={form.control}
-                name={`grade_items.${index}.minInterval`}
+                name={`grades.${index}.min`}
                 render={({ field }) => (
                   <FormItem className="w-full">
                     <FormControl>
@@ -113,7 +102,7 @@ export default function GradesForm() {
 
               <FormField
                 control={form.control}
-                name={`grade_items.${index}.maxInterval`}
+                name={`grades.${index}.max`}
                 render={({ field }) => (
                   <FormItem className="w-full">
                     <FormControl>
@@ -129,10 +118,10 @@ export default function GradesForm() {
                 )}
               />
             </div>
-            <div className="flex gap-4 w-1/4">
+            <div className="flex gap-4 w-2/5">
               <FormField
                 control={form.control}
-                name={`grade_items.${index}.grade`}
+                name={`grades.${index}.grade`}
                 render={({ field }) => (
                   <FormItem className="w-full">
                     <FormControl>
@@ -148,43 +137,7 @@ export default function GradesForm() {
                 )}
               />
             </div>
-            <div className="flex gap-4 w-1/4">
-              <FormField
-                control={form.control}
-                name={`grade_items.${index}.note`}
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormControl>
-                      <Input
-                        type="text"
-                        {...field}
-                        placeholder="Add Any Extra Note"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-            <div className="flex items-center gap-4 w-1/4">
-              <FormField
-                control={form.control}
-                name={`grade_items.${index}.passed`}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <div className="flex items-center gap-2">
-                        <Checkbox
-                          defaultChecked={field.value}
-                          onCheckedChange={field.onChange}
-                        />
-                        <p>Pass</p>
-                      </div>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+            <div className="flex items-center gap-4 w-1/5">
               <Button
                 disabled={fields.length === 0}
                 variant="outline"
@@ -208,11 +161,12 @@ export default function GradesForm() {
           onClick={() => {
             if (fields.length <= 5)
               append({
-                minInterval: null,
-                maxInterval: null,
+            //@ts-ignore
+                min: null,
+            //@ts-ignore
+                max: null,
                 grade: "",
-                note: "",
-                passed: false,
+                // note: "",
               });
           }}
         >
@@ -221,7 +175,7 @@ export default function GradesForm() {
 
         {form.formState?.errors && (
           <TypographyP className=" indent-6 text-red-600 my-5 text-sm">
-            {form.formState.errors.grade_items?.root?.message}
+            {form.formState.errors.grades?.root?.message}
           </TypographyP>
         )}
 
