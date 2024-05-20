@@ -30,10 +30,10 @@ export function SectionForm({
   children,
 }: Props) {
   const formAction = mode === "CREATE" ? createSection : updateSection;
-  const submitHandler = async (data: TSectionFormSchema) => {
+  const submitHandler = async (v: TSectionFormSchema) => {
     try {
-      const res = await formAction(data);
-      toast.success(res.data, {
+      const {data,error} = await formAction(v);
+      toast.success(data, {
         style: {
           backgroundColor: "green",
           color: "white",

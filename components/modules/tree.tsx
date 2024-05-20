@@ -132,6 +132,14 @@ export function ModuleTree({modulesData,path}:Props) {
                    </div>
                </FileForm>
            </ModalDialog>
+           <ModalDialog open={formState == EditModal.EDIT_LECTURE} onOpenChange={(v:boolean) => setFormState(EditModal.CLOSE)} >
+               <Lecture year={currentModule.year} defaultValues={{section_id: selectedFile.sectionId,groups: [],name: "",id: ""}}      mode="CREATE"  >
+                   <div className="flex w-full gap-4 items-center justify-end ">
+                       <Button onClick={() => setFormState(EditModal.CLOSE)} className="w-fit p-4" variant="ghost">Cancel</Button>
+                       <Button type="submit" className="w-fit p-4" disabled={buttonLoading} >Save</Button>
+                   </div>
+               </Lecture>
+           </ModalDialog>
            <br />
 
        </>

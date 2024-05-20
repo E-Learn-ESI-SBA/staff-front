@@ -2,7 +2,7 @@ import {TFileFormSchema, TFileFormSchemaWithFile, TVideoSchema, VideoSchema} fro
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
-import {PropsWithChildren, useState} from "react";
+import {PropsWithChildren, useId, useState} from "react";
 import MultipleSelector, {Option} from "@/components/ui/multi-select";
 import {Input} from "@/components/ui/input";
 import {Label} from "@/components/ui/label";
@@ -11,6 +11,7 @@ import {FileComp} from "@/components/common/file-overview";
 import {toast} from "sonner";
 import {IError} from "@/types/errors";
 import {createVideo, updateVideo} from "@/app/actions/materials/video.actions";
+import {useModuleTreeStore} from "@/store/module/store";
 
 type Props = PropsWithChildren & {
   defaultValues?: TVideoSchema;
@@ -54,10 +55,15 @@ const groups: Option[] = [
 ];
 export default function VideoForm({
   defaultValues,
-  sectionId,
+  //sectionId,
     mode,
   children,
 }: Props) {
+    const {onSubmit,currentMap} = useModuleTreeStore(state => ({
+        onSubmit: state.onSubmit,
+        currentMap: state.currentMap
+    }))
+    const ID = useId()
     const MAX_FILE_SIZE = 250000000;
     const [currentFile, setCurrentFile] = useState<File | null>(null);
   const form = useForm<TVideoSchema>({
@@ -66,25 +72,69 @@ export default function VideoForm({
     mode: "onSubmit",
   });
   const action = mode === "CREATE" ? createVideo : updateVideo
-    const submitHandler = async (data: TVideoSchema) => {
-
+    const submitHandler = async (v: TVideoSchema) => {
         try {
-            const res = await action(data,currentFile);
-            if (res.status === 200 || res.status == 201) {
-                form.reset();
-                toast.success(res.data.message, {
-                    style: {
-                        backgroundColor: "green",
-                        color: "white",
-                    },
-                });
-            } else {
-                toast.error(res.error?.message ?? "Error While Doing this action", {
+            const {data,error} = await action(v,currentFile);
+            if (error) {
+                toast.error(error.message, {
                     style: {
                         backgroundColor: "red",
                         color: "white",
                     },
                 });
+            } else {
+                toast.success(data.message , {
+                    style: {
+                        backgroundColor: "green",
+                        color: "white",
+                    },
+                });
+                onSubmit((prev) => {
+                    if (mode == "CREATE") {
+                        const courseIndex = currentMap.get("selectedCourse");
+                        const sectionIndex = currentMap.get("selectedSection");
+                        if (
+                            !courseIndex ||
+                            !sectionIndex ||
+                            sectionIndex == -1 ||
+                            courseIndex == -1
+                        )
+                            return prev;
+                        const newPrev = { ...prev };
+                        newPrev.courses[courseIndex].sections[
+                            sectionIndex
+                            ].videos.push({
+                            name: v.name,
+                            groups: v.groups.map((g) => g.value),
+                            url: "https://www.google.com", // Should be ui that tells user to load the page
+                            id:ID,
+                            teacher_id: ID,
+                        });
+                        return newPrev;
+                    }
+                    const courseIndex = currentMap.get("selectedCourse");
+                    const sectionIndex = currentMap.get("selectedSection");
+                    const fileIndex = currentMap.get("selectedResource");
+                    if (
+                        !courseIndex ||
+                        !sectionIndex ||
+                        !fileIndex ||
+                        fileIndex == -1 ||
+                        sectionIndex == -1 ||
+                        courseIndex == -1
+                    )
+                        return prev;
+                    const newPrev = { ...prev };
+                    newPrev.courses[courseIndex].sections[sectionIndex].videos[
+                        fileIndex
+                        ].name = v.name;
+                    newPrev.courses[courseIndex].sections[sectionIndex].videos[
+                        fileIndex
+                        ].groups = v.groups.map((g) => g.value);
+                    return newPrev;
+                })
+                form.reset();
+
             }
         } catch (e) {
             const err = new IError(e);
@@ -181,13 +231,13 @@ export default function VideoForm({
                               }}
                           />
 
-                          <Label>Attached File</Label>
+                          <Label>Attached Video</Label>
                           <p className="text-center text-sm leading-10 text-gray-600 dark:text-gray-400">
-                              Drag and Drop or file browse with size lower then 8MB
+                              please load a video  with size lower than 250MB
                           </p>
                       </>
                   ) : (
-                      <FileComp f={currentFile} setCurrentFile={setCurrentFile}/>
+                      <FileComp f={currentFile} setCurrentFile={setCurrentFile} loadType="VIDEO"/>
                   )}
               </div>
           )}

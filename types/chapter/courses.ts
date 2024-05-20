@@ -62,7 +62,7 @@ export interface File extends IResource {
 export interface IResource extends IDate {
   name: string;
   id: string;
-  teacher_id: string;
+  teacher_id?: string;
   groups: string[];
 }
 

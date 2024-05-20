@@ -30,6 +30,13 @@ export const createVideo = async (
       },
     );
     const res = (await response.json()) as IMessage;
+    if (!response.ok || response.status != 201) {
+      return {
+        status: response.status,
+        data: { message: "" },
+        error: new IError({ message: res.message }),
+      };
+    }
     return {
       status: response.status,
       data: res,
@@ -65,6 +72,13 @@ export const updateVideo = async (
       },
     );
     const res = await response.json();
+    if (!response.ok) {
+      return {
+        status: response.status,
+        data: { message: "" },
+        error: new IError({ message: res.message }),
+      };
+    }
     return {
       status: response.status,
       data: res,

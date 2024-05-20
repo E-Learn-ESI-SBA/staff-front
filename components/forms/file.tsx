@@ -15,7 +15,7 @@ import {
   TFileFormSchemaWithFile,
 } from "@/types/chapter/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { PropsWithChildren, useState } from "react";
+import {PropsWithChildren, useId, useState} from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import MultipleSelector, { Option } from "../ui/multi-select";
@@ -24,42 +24,92 @@ import { Delete, File } from "lucide-react";
 import { Button } from "../ui/button";
 import { IError } from "@/types/errors";
 import {FileComp} from "@/components/common/file-overview";
+import {useModuleTreeStore} from "@/store/module/store";
 
 type Props = PropsWithChildren & {
   defaultValues?: TFileFormSchema;
   mode: "CREATE" | "UPDATE";
-  year: string;
+  year?:string
 };
 export function FileForm({
   defaultValues,
   mode = "CREATE",
   children,
-  year,
 }: Props) {
+  const {currentMap,onSubmit} = useModuleTreeStore(state => ({
+    currentMap: state.currentMap,
+    onSubmit: state.onSubmit
+  }))
+  const ID = useId()
   const form = useForm<TFileFormSchema>({
     resolver: zodResolver(FileFormSchema),
     mode: "onSubmit",
     defaultValues: defaultValues,
   });
   const action = mode === "CREATE" ? createFile : updateFile;
-  const submitHandler = async (data: TFileFormSchema) => {
-    console.log(data);
+  const submitHandler = async (v: TFileFormSchema) => {
+    console.log(v);
     const dataWithFile: TFileFormSchemaWithFile = {
-      ...data,
+      ...v,
       file: currentFile,
     };
     try {
-      const res = await action(dataWithFile);
-      if (res.status === 200 || res.status == 201) {
+      const {data,error} = await action(dataWithFile);
+      if (!error) {
         form.reset();
-        toast.success(res.data.message, {
+        toast.success(data.message, {
           style: {
             backgroundColor: "green",
             color: "white",
           },
         });
+        onSubmit((prev) => {
+          if (mode == "CREATE") {
+            const courseIndex = currentMap.get("selectedCourse");
+            const sectionIndex = currentMap.get("selectedSection");
+            if (
+              !courseIndex ||
+              !sectionIndex ||
+              sectionIndex == -1 ||
+              courseIndex == -1
+            )
+              return prev;
+            const newPrev = { ...prev };
+            newPrev.courses[courseIndex].sections[
+              sectionIndex
+            ].files.push({
+                name: v.name,
+                groups: v.groups.map((g) => g.value),
+              url: "https://www.google.com",
+              id:ID,
+              type:currentFile?.type ?? "pdf",
+              teacher_id: "1",
+            });
+            return newPrev;
+          }
+          const courseIndex = currentMap.get("selectedCourse");
+          const sectionIndex = currentMap.get("selectedSection");
+          const fileIndex = currentMap.get("selectedResource");
+          if (
+            !courseIndex ||
+            !sectionIndex ||
+            !fileIndex ||
+            fileIndex == -1 ||
+            sectionIndex == -1 ||
+            courseIndex == -1
+          )
+            return prev;
+          const newPrev = { ...prev };
+          newPrev.courses[courseIndex].sections[sectionIndex].files[
+            fileIndex
+          ].name = v.name;
+          newPrev.courses[courseIndex].sections[sectionIndex].files[
+            fileIndex
+          ].groups = v.groups.map((g) => g.value);
+          return newPrev;
+        })
       } else {
-        toast.error(res.error?.message ?? "Error While Doing this action", {
+        toast.error(error?.message ?? "Error While Doing this action", {
           style: {
             backgroundColor: "red",
             color: "white",

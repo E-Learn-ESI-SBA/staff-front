@@ -28,7 +28,8 @@ export const GET_FILE_URL = `${SERVER_URL}/file`;
 export const CREATE_VIDEO_URL = `${SERVER_URL}/transactions/videos`;
 export const UPDATE_VIDEO_URL = `${SERVER_URL}/video`;
 // Lectures
-
+export const GET_LECTURE_URL  = `${SERVER_URL}/lectures`
+export const UPDATE_LECTURE_URL = `${SERVER_URL}/lectures`
 // Comments
 export const CREATE_COMMENT_URL = `${SERVER_URL}/comment`;
 export const UPDATE_COMMENT_URL = `${SERVER_URL}/comment`;

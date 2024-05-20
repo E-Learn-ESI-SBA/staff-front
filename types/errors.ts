@@ -1,8 +1,8 @@
 export class IError extends Error {
-  public message: string;
+  public message: string = "Something went wrong";
   public status?: number = 500;
   stack?: string;
-  constructor(e: unknown) {
+  constructor(e?: unknown) {
     super();
     if (e instanceof Error) {
       this.message = e.message;
@@ -15,6 +15,7 @@ export class IError extends Error {
           : "An error occurred";
     }
   }
+
   get stackTrace() {
     return this.stack;
   }

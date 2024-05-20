@@ -30,6 +30,13 @@ export const createFile = async (
       },
     );
     const res = await response.json();
+    if (response.status != 201 || !response.ok) {
+      return {
+        status: response.status,
+        data: { message: "" },
+        error: new IError({ message: res.message }),
+      };
+    }
     return {
       status: response.status,
       data: res,

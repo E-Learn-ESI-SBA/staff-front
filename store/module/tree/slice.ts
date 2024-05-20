@@ -2,28 +2,34 @@ import {Chapter, Lecture, Module, Section, File, Video} from "@/types/chapter/co
 import {EditModal} from "@/types/forms/state";
 import {StateCreator} from "zustand";
 
+type MapK =  "selectedCourse" | "selectedSection" | "selectedResource"
+type Indexes  = {
+    selectedCourse: number;
+    selectedSection?: number;
+    selectedResource?: number;
+}
 interface IModuleTreeSlice {
     name: string;
     currentModule: Module
     buttonLoading : boolean;
     setModule: (module: Module) => void;
     setButtonLoading: (loading: boolean) => void;
-    updateModule: (cb: (prev:Module) => Module) => void;
     formState:EditModal
     setFormState: (state: EditModal) => void;
-    selectedIndex: number;
-    setSelectedIndex: (index: number) => void;
-    onSubmit: () => void;
+    onSubmit: (cb: (prev:Module) => Module) => void;
     selectedChapter: Chapter;
-    setSelectedChapter: (chapter: Chapter) => void;
-    selectedSection: Section & {chapterId: string};
-    setSelectedSection: (section: Section & {chapterId:string}) => void;
-    selectedLesson: Lecture & {sectionId: string};
-    setSelectedLesson: (lecture: Lecture & {sectionId:string}) => void;
-    selectedFile: File & {sectionId:string};
-    setSelectedFile: (file: File & {sectionId:string}) => void
-    selectedVideo: Video & {sectionId:string};
-    setSelectedVideo: (video: Video & {sectionId:string}) => void
+    setSelectedChapter: (chapter: Chapter,indexes: Indexes) => void;
+    selectedSection: Section ;
+    setSelectedSection: (section: Section ,indexes: Indexes) => void;
+    selectedLesson: Lecture ;
+    setSelectedLesson: (lecture: Lecture,indexes: Indexes) => void;
+    selectedFile: File ;
+    setSelectedFile: (file: File , indexes: Indexes ) => void
+    selectedVideo: Video ;
+    setSelectedVideo: (video: Video ,indexes: Indexes) => void
+    // Map should contain key "selectedCourse" , "selectedSection","selectedResource"  add this in the type of the map
+    currentMap: Map<MapK,number>,
+
 
 }
 
@@ -33,11 +39,8 @@ const initialState: IModuleTreeSlice = {
     buttonLoading: false,
     setModule: () => {},
     setButtonLoading: () => {},
-    updateModule: () => {},
     formState: EditModal.CLOSE,
     setFormState: () => {},
-    selectedIndex: -1,
-    setSelectedIndex: () => {},
     onSubmit: () => {},
     selectedChapter: {} as Chapter,
     setSelectedChapter: () => {},
@@ -49,6 +52,7 @@ const initialState: IModuleTreeSlice = {
     setSelectedFile: () => {},
     selectedVideo: {} as Video & {sectionId:string},
     setSelectedVideo: () => {},
+    currentMap: new Map<MapK,number>().set("selectedSection",-1).set("selectedCourse",-1).set("selectedResource",-1)
 
 
 };
@@ -56,12 +60,29 @@ const moduleTreeSlice :StateCreator<IModuleTreeSlice> = (set,get) => ({
     ...initialState,
     setModule: (currentModule) => set({currentModule}),
     setButtonLoading: (buttonLoading) => set({buttonLoading}),
-    updateModule: (cb) => set(state => ({currentModule: cb(state.currentModule)})),
     setFormState: (formState) => set({formState}),
-    setSelectedIndex: (selectedIndex) => set({selectedIndex}),
-    onSubmit: () => {
-        set({buttonLoading: false,formState: EditModal.CLOSE,selectedIndex: -1})
-    }
+    onSubmit: (cb) => {
+        set({buttonLoading: false,formState: EditModal.CLOSE}),
+            set(state => ({currentModule: cb(state.currentModule)})),
+            set({currentMap: new Map<MapK,number>().set("selectedSection",-1).set("selectedCourse",-1).set("selectedResource",-1)})
+    },
+    setSelectedVideo: (selectedVideo,indexes) => {
+        set({selectedVideo,currentMap: new Map<MapK,number>().set("selectedSection",indexes.selectedSection ?? -1).set("selectedCourse",indexes.selectedCourse).set("selectedResource",indexes.selectedResource ?? -1)})
+    },
+    setSelectedFile: (selectedFile,indexes) => {
+        set({selectedFile,currentMap: new Map<MapK,number>().set("selectedSection",indexes.selectedSection ?? -1).set("selectedCourse",indexes.selectedCourse).set("selectedResource",indexes.selectedResource ?? -1)})
+    },
+    setSelectedLesson: (selectedLesson,indexes) => {
+        set({selectedLesson,currentMap: new Map<MapK,number>().set("selectedSection",indexes.selectedSection ?? -1).set("selectedCourse",indexes.selectedCourse).set("selectedResource",indexes.selectedResource ?? -1)})
+    },
+    setSelectedSection: (selectedSection,indexes) => {
+        set({selectedSection,currentMap: new Map<MapK,number>().set("selectedSection",indexes.selectedSection ?? -1).set("selectedCourse",indexes.selectedCourse).set("selectedResource",indexes.selectedResource ?? -1)})
+    },
+    setSelectedChapter: (selectedChapter,indexes) => {
+        set({selectedChapter,currentMap: new Map<MapK,number>().set("selectedSection",indexes.selectedSection ?? -1).set("selectedCourse",indexes.selectedCourse).set("selectedResource",indexes.selectedResource ?? -1)})
+    },
+
+
 
 })
 export {moduleTreeSlice}
