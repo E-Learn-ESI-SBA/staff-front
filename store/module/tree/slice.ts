@@ -29,6 +29,7 @@ interface IModuleTreeSlice {
     setSelectedVideo: (video: Video ,indexes: Indexes) => void
     // Map should contain key "selectedCourse" , "selectedSection","selectedResource"  add this in the type of the map
     currentMap: Map<MapK,number>,
+    onError: () => void
 
 
 }
@@ -52,7 +53,8 @@ const initialState: IModuleTreeSlice = {
     setSelectedFile: () => {},
     selectedVideo: {} as Video & {sectionId:string},
     setSelectedVideo: () => {},
-    currentMap: new Map<MapK,number>().set("selectedSection",-1).set("selectedCourse",-1).set("selectedResource",-1)
+    currentMap: new Map<MapK,number>().set("selectedSection",-1).set("selectedCourse",-1).set("selectedResource",-1),
+    onError: ()  => {}
 
 
 };
@@ -81,7 +83,9 @@ const moduleTreeSlice :StateCreator<IModuleTreeSlice> = (set,get) => ({
     setSelectedChapter: (selectedChapter,indexes) => {
         set({selectedChapter,currentMap: new Map<MapK,number>().set("selectedSection",indexes.selectedSection ?? -1).set("selectedCourse",indexes.selectedCourse).set("selectedResource",indexes.selectedResource ?? -1)})
     },
-
+    onError: () => {
+        set({buttonLoading: false})
+    }
 
 
 })

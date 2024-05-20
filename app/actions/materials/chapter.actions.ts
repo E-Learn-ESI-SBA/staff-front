@@ -1,5 +1,5 @@
 "use server";
-import { IResponse } from "@/types/http";
+import {IMessage, IResponse} from "@/types/http";
 import { CREATE_CHAPTER_URL } from "@/config/urls/material/mutations";
 import { TChapterSchema } from "@/types/chapter/zod";
 import { cookies } from "next/headers";
@@ -7,7 +7,7 @@ import { IError } from "@/types/errors";
 
 export const createChapter = async (
   data: TChapterSchema,
-): Promise<IResponse<object>> => {
+): Promise<IResponse<IMessage>> => {
   try {
     const response = await fetch(CREATE_CHAPTER_URL, {
       method: "POST",
@@ -17,7 +17,14 @@ export const createChapter = async (
       },
       body: JSON.stringify(data),
     });
-    const res = await response.json();
+    const res = await response.json() as IMessage
+    if (response.status !== 201 || !response.ok) {
+        return {
+            status: response.status,
+            data: {message:""},
+            error: new IError({message: res.message}),
+        };
+    }
     return {
       status: response.status,
       data: res,
@@ -28,7 +35,7 @@ export const createChapter = async (
     return {
       status: 500,
       error: new IError(e),
-      data: {},
+      data: {message:""},
     };
   }
 };
