@@ -1,6 +1,7 @@
 import { Delete, File, Film } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dispatch, SetStateAction } from "react";
+import {humanFileSize} from "@/utils/utils";
 
 export const FileComp = ({
   f,
@@ -27,7 +28,7 @@ export const FileComp = ({
             Type : {f.type.split("/")[1]}
           </p>
           <p className="text-xs  text-gray-600 dark:text-gray-400">
-            Size: {f.size / Math.pow(2, 10)}
+            Size: {humanFileSize(f.size)}
           </p>
         </div>
       </div>

@@ -90,7 +90,6 @@ export default function VideoForm({
     mode: "onSubmit",
   });
   const action = mode === "CREATE" ? createVideo : updateVideo;
-  console.log("formState",form.formState.errors)
   const submitHandler = async (v: TVideoSchema): Promise<void> => {
     try {
       setButtonLoading(true)
@@ -248,7 +247,7 @@ export default function VideoForm({
                   <>
                     <Input
                         required
-                        accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.py,.java, .c, .cpp, .pas"
+                        accept=".mp4"
                         type="file"
                         className="w-fll absolute top-0 h-full  opacity-0"
                         onChange={(e) => {
