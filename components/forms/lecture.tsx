@@ -20,7 +20,7 @@ import {useModuleTreeStore} from "@/store/module/store";
 
 type Props = PropsWithChildren & {
     defaultValues?: TLectureSchema;
-
+    year:string
 
 
 };

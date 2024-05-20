@@ -25,3 +25,16 @@ export const optionsToGroup = (options: { label: string; value: string }[]) => {
     return option.value;
   });
 };
+
+
+export const fromStringGroupToOptions = (groups: string[]) => {
+    // Convert array of groups to array of objects with label and value
+    return groups.map((group) => {
+        const groupArr = StringToArray(group, "-");
+        return {
+        label: groupArr[1] ?? group, // g8,
+        value: group, // 2021-g8
+         disabled: false
+        };
+    });
+}

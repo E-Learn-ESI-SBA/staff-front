@@ -1,6 +1,7 @@
 import {Chapter, Lecture, Module, Section, File, Video} from "@/types/chapter/courses";
 import {EditModal} from "@/types/forms/state";
 import {StateCreator} from "zustand";
+import {TChapterSchema, TFileFormSchema, TLectureSchema, TSectionFormSchema, TVideoSchema} from "@/types/chapter/zod";
 
 type MapK =  "selectedCourse" | "selectedSection" | "selectedResource"
 type Indexes  = {
@@ -17,16 +18,16 @@ interface IModuleTreeSlice {
     formState:EditModal
     setFormState: (state: EditModal) => void;
     onSubmit: (cb: (prev:Module) => Module) => void;
-    selectedChapter: Chapter;
-    setSelectedChapter: (chapter: Chapter,indexes: Indexes) => void;
-    selectedSection: Section ;
-    setSelectedSection: (section: Section ,indexes: Indexes) => void;
-    selectedLesson: Lecture ;
-    setSelectedLesson: (lecture: Lecture,indexes: Indexes) => void;
-    selectedFile: File ;
-    setSelectedFile: (file: File , indexes: Indexes ) => void
-    selectedVideo: Video ;
-    setSelectedVideo: (video: Video ,indexes: Indexes) => void
+    selectedChapter: TChapterSchema;
+    setSelectedChapter: (chapter: TChapterSchema,indexes: Indexes) => void;
+    selectedSection: TSectionFormSchema ;
+    setSelectedSection: (section: TSectionFormSchema ,indexes: Indexes) => void;
+    selectedLesson: TLectureSchema ;
+    setSelectedLesson: (lecture: TLectureSchema,indexes: Indexes) => void;
+    selectedFile: TFileFormSchema ;
+    setSelectedFile: (file: TFileFormSchema , indexes: Indexes ) => void
+    selectedVideo: TVideoSchema ;
+    setSelectedVideo: (video: TVideoSchema ,indexes: Indexes) => void
     // Map should contain key "selectedCourse" , "selectedSection","selectedResource"  add this in the type of the map
     currentMap: Map<MapK,number>,
     onError: () => void
@@ -43,15 +44,15 @@ const initialState: IModuleTreeSlice = {
     formState: EditModal.CLOSE,
     setFormState: () => {},
     onSubmit: () => {},
-    selectedChapter: {} as Chapter,
+    selectedChapter: {} as TChapterSchema,
     setSelectedChapter: () => {},
-    selectedSection: {} as Section & {chapterId:string},
+    selectedSection: {} as TSectionFormSchema ,
     setSelectedSection: () => {},
-    selectedLesson: {} as Lecture & {sectionId:string},
+    selectedLesson: {} as TLectureSchema,
     setSelectedLesson: () => {},
-    selectedFile: {} as File & {sectionId:string},
+    selectedFile: {} as TFileFormSchema ,
     setSelectedFile: () => {},
-    selectedVideo: {} as Video & {sectionId:string},
+    selectedVideo: {} as TVideoSchema,
     setSelectedVideo: () => {},
     currentMap: new Map<MapK,number>().set("selectedSection",-1).set("selectedCourse",-1).set("selectedResource",-1),
     onError: ()  => {}

@@ -20,10 +20,10 @@ import {toast} from "sonner";
 import {useModuleTreeStore} from "@/store/module/store";
 type Props = PropsWithChildren & {
   initialValues?: TChapterSchema;
-  mode: "create" | "update";
+  mode: "CREATE" | "UPDATE";
 };
 export function ChapterForm({ initialValues= {id:"",name:"",description:""}, children, mode}: Props) {
-  const formAction = mode === "create" ? createChapter : updateChapter;
+  const formAction = mode === "CREATE" ? createChapter : updateChapter;
   const generatedID = useId()
   const form = useForm<TChapterSchema>({
     mode: "onSubmit",
@@ -49,7 +49,7 @@ export function ChapterForm({ initialValues= {id:"",name:"",description:""}, chi
         return
       }
       onSubmit(prev => {
-        if(mode === "create") {
+        if(mode === "CREATE") {
           return {...prev,courses:[...prev.courses,{id:generatedID,name:v.name,description:v.description,order:prev.courses.length + 1,sections:[]}]}
         }
         const courseIndex = currentMap.get("selectedCourse")

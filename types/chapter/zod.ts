@@ -9,7 +9,7 @@ export type TSectionFormSchema = z.infer<typeof SectionFormSchema>;
 export const FileFormSchema = z.object({
   name: z.string(),
   id: z.string().optional(),
-  section_id: z.string(),
+  section_id: z.string().optional(),
   groups: z
     .array(
       z.object({

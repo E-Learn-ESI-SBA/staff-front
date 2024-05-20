@@ -9,20 +9,20 @@ import {SectionForm} from "@/components/forms/section";
 import {useModuleTreeStore} from "@/store/module/store";
 import VideoForm from "@/components/forms/video";
 import {FileForm} from "@/components/forms/file";
+import {LectureForm} from "@/components/forms/lecture";
+import {fromStringGroupToOptions} from "@/utils/utils";
 
 type Props = {
     modulesData:Module
     path:string
 }
 export function ModuleTree({modulesData,path}:Props) {
-    const {setFormState,formState,buttonLoading,selectedChapter,selectedFile,selectedLesson,selectedVideo,selectedSection,currentModule,selectedIndex,updateModule,setModule,setButtonLoading} = useModuleTreeStore(state => ({
+    const {setFormState,formState,buttonLoading,selectedChapter,selectedFile,selectedLesson,selectedVideo,selectedSection,currentModule,setModule,setButtonLoading} = useModuleTreeStore(state => ({
         setModule: state.setModule,
         setButtonLoading: state.setButtonLoading,
-        updateModule: state.updateModule,
         formState: state.formState,
         setFormState: state.setFormState,
         currentModule: state.currentModule,
-        selectedIndex: state.selectedIndex,
         buttonLoading: state.buttonLoading,
         selectedChapter: state.selectedChapter,
         selectedSection: state.selectedSection,
@@ -43,23 +43,22 @@ export function ModuleTree({modulesData,path}:Props) {
         ))}
        <>
            <ModalDialog open={formState == EditModal.EDIT_CHAPTER} onOpenChange={(v:boolean) => setFormState(EditModal.CLOSE)}>
-               <ChapterForm   initialValues={{id: selectedChapter.id,name: selectedChapter.name,description: selectedChapter.name}} mode="update"  >
+               <ChapterForm   initialValues={{id: selectedChapter.id,name: selectedChapter.name,description: selectedChapter.name}} mode="UPDATE"  >
                    <div className="flex w-full gap-4 items-center justify-end ">
                        <Button onClick={() => setFormState(EditModal.CLOSE)} className="w-fit p-4" variant="ghost">Cancel</Button>
-                       <Button type="submit" className="w-fit p-4" disabled={buttonLoading} >Save</Button>
+                       <Button onClick={() =>setButtonLoading(true) } type="submit" className="w-fit p-4" disabled={buttonLoading} >Save</Button>
                    </div>
                </ChapterForm>
            </ModalDialog>
            <ModalDialog open={formState == EditModal.ADD_CHAPTER} onOpenChange={(v:boolean) => setFormState(EditModal.CLOSE)}>
-               <ChapterForm  mode="create"   >
+               <ChapterForm  mode="CREATE"   >
                    <div className="flex w-full gap-4 items-center justify-end ">
                        <Button onClick={() => setFormState(EditModal.CLOSE)} className="w-fit p-4" variant="ghost">Cancel</Button>
-                       <Button type="submit" className="w-fit p-4" disabled={buttonLoading} >Save</Button>
+                       <Button onClick={() =>setButtonLoading(true) } type="submit" className="w-fit p-4" disabled={buttonLoading} >Save</Button>
                    </div>
                </ChapterForm>
            </ModalDialog>
 
-           <br/>
            <ModalDialog open={formState == EditModal.EDIT_SECTION} onOpenChange={(v:boolean) => setFormState(EditModal.CLOSE)}>
                <SectionForm defaultValues={
                    {
@@ -70,7 +69,7 @@ export function ModuleTree({modulesData,path}:Props) {
                }     mode="UPDATE"  >
                    <div className="flex w-full gap-4 items-center justify-end ">
                        <Button onClick={() => setFormState(EditModal.CLOSE)} className="w-fit p-4" variant="ghost">Cancel</Button>
-                       <Button type="submit" className="w-fit p-4" disabled={buttonLoading} >Save</Button>
+                       <Button onClick={() =>setButtonLoading(true) } type="submit" className="w-fit p-4" disabled={buttonLoading} >Save</Button>
                    </div>
                </SectionForm>
            </ModalDialog>
@@ -82,15 +81,14 @@ export function ModuleTree({modulesData,path}:Props) {
                    </div>
                </SectionForm>
            </ModalDialog>
-           <br/>
            <ModalDialog open={formState == EditModal.EDIT_VIDEO} onOpenChange={(v:boolean) => setFormState(EditModal.CLOSE)}>
-               <VideoForm  year={currentModule.year} sectionId={selectedVideo.sectionId}   defaultValues={
+               <VideoForm  year={currentModule.year} sectionId={selectedVideo.section_id}   defaultValues={
                    {
                        id: selectedVideo.id,
                        name: selectedVideo.name,
-                        section_id: selectedVideo.sectionId,
+                        section_id: selectedVideo.section_id,
                        url: selectedVideo.url,
-                       groups: selectedVideo.groups.map(g => ({label: g, value: g,disabled: false}))
+                          groups: selectedVideo.groups,
                    }
                }     mode="UPDATE"  >
                    <div className="flex w-full gap-4 items-center justify-end ">
@@ -100,49 +98,46 @@ export function ModuleTree({modulesData,path}:Props) {
                </VideoForm>
            </ModalDialog>
            <ModalDialog open={formState == EditModal.ADD_VIDEO} onOpenChange={(v:boolean) => setFormState(EditModal.CLOSE)}>
-               <VideoForm year={currentModule.year} sectionId={selectedVideo.sectionId}       mode="UPDATE"  >
+               <VideoForm year={currentModule.year} sectionId={selectedVideo.section_id}       mode="UPDATE"  >
                    <div className="flex w-full gap-4 items-center justify-end ">
                        <Button onClick={() => setFormState(EditModal.CLOSE)} className="w-fit p-4" variant="ghost">Cancel</Button>
                        <Button type="submit" className="w-fit p-4" disabled={buttonLoading} >Save</Button>
                    </div>
                </VideoForm>
            </ModalDialog>
-           <br/>
            <ModalDialog open={formState == EditModal.EDIT_FILE} onOpenChange={(v:boolean) => setFormState(EditModal.CLOSE)}>
                <FileForm year={currentModule.year}   defaultValues={
                    {
+                       section_id: selectedFile.section_id,
                        id: selectedFile.id,
                        name: selectedFile.name,
-                       section_id: selectedFile.sectionId,
-                       groups: selectedFile.groups.map(g => ({label: g, value: g,disabled: false})),
+                       groups: selectedFile.groups,
 
                    }
                }     mode="UPDATE"  >
                    <div className="flex w-full gap-4 items-center justify-end ">
                        <Button onClick={() => setFormState(EditModal.CLOSE)} className="w-fit p-4" variant="ghost">Cancel</Button>
-                       <Button type="submit" className="w-fit p-4" disabled={buttonLoading} >Save</Button>
+                       <Button onClick={() =>setButtonLoading(true) } type="submit" className="w-fit p-4" disabled={buttonLoading} >Save</Button>
                    </div>
                </FileForm>
            </ModalDialog>
            <ModalDialog open={formState == EditModal.ADD_FILE} onOpenChange={(v:boolean) => setFormState(EditModal.CLOSE)} >
-               <FileForm year={currentModule.year} defaultValues={{section_id: selectedFile.sectionId,groups: [],name: "",id: ""}}      mode="CREATE"  >
+               <FileForm year={currentModule.year}   mode="CREATE"  >
                    <div className="flex w-full gap-4 items-center justify-end ">
                        <Button onClick={() => setFormState(EditModal.CLOSE)} className="w-fit p-4" variant="ghost">Cancel</Button>
-                       <Button type="submit" className="w-fit p-4" disabled={buttonLoading} >Save</Button>
+                       <Button onClick={() =>setButtonLoading(true) } type="submit" className="w-fit p-4" disabled={buttonLoading} >Save</Button>
                    </div>
                </FileForm>
            </ModalDialog>
            <ModalDialog open={formState == EditModal.EDIT_LECTURE} onOpenChange={(v:boolean) => setFormState(EditModal.CLOSE)} >
-               <Lecture year={currentModule.year} defaultValues={{section_id: selectedFile.sectionId,groups: [],name: "",id: ""}}      mode="CREATE"  >
+               <LectureForm year={currentModule.year} defaultValues={{groups: [],name: "",id: ""}}       >
                    <div className="flex w-full gap-4 items-center justify-end ">
                        <Button onClick={() => setFormState(EditModal.CLOSE)} className="w-fit p-4" variant="ghost">Cancel</Button>
-                       <Button type="submit" className="w-fit p-4" disabled={buttonLoading} >Save</Button>
+                       <Button type="submit" className="w-fit p-4" onClick={() =>setButtonLoading(true) } disabled={buttonLoading} >Save</Button>
                    </div>
-               </Lecture>
+               </LectureForm>
            </ModalDialog>
-           <br />
 
        </>
-       <Button onClick={() => setFormState(EditModal.ADD_CHAPTER)} className="w-fit self-end p-4" >Add Chapter</Button>
     </div>)
 }
