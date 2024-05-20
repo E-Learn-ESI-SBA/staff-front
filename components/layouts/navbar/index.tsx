@@ -1,10 +1,12 @@
 "use client";
 import Link from "next/link";
-import { Links } from "@/static/content/navbar";
 import { usePathname } from "next/navigation";
-import { useUserStore } from "@/store/user";
-const Navbar = () => {
-  const isAuth = useUserStore((state) => state.isAuth);
+import {Button} from "@/components/ui/button";
+import link from "@/types/navbar";
+type Props ={
+  links:link[]
+}
+const Navbar = ({links}:Props) => {
   const logoutHandler = () => {
     console.log("logout");
   };
@@ -25,7 +27,7 @@ const Navbar = () => {
         {/* <Image src='' alt='logo' width={0} height={0} sizes="100vw" className="h-12 w-24" /> */}
         <p className="text-2xl font-extrabold">Madaurus</p>
         <div className="hidden sm:flex justify-between items-center gap-4 ">
-          {Links.map((link, index) => (
+          {links.map((link, index) => (
             <Link
               key={index}
               href={link.url}
@@ -35,23 +37,15 @@ const Navbar = () => {
             </Link>
           ))}
         </div>
-        {isAuth == false ? (
-          <Link
-            href="/auth"
-            className={`px-8 py-2 font-medium border rounded-tl-3xl rounded-br-3xl   ${path.substring(1) ? "border-modules-main" : ""} `}
-          >
-            Login
-          </Link>
-        ) : (
-          <button
+
+          <Button
             onClick={() => {
               logoutHandler();
             }}
             className={`px-8 py-2 font-medium border rounded-tl-3xl rounded-br-3xl   ${path.substring(1) ? "border-modules-main" : ""} `}
           >
             Logout
-          </button>
-        )}
+          </Button>
       </div>
     </div>
   );

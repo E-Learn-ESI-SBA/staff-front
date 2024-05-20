@@ -1,11 +1,10 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import ArrowDown from "../../../public/courses/arrowDown.svg";
-import ArrowUp from "../../../public/courses/arrowUp.svg";
 import year from "../../../public/courses/year.svg";
 import speciality from "../../../public/courses/speciality.svg";
 import { filters } from "@/static/content/coursesFilter";
+import {ArrowDown, ArrowUp} from "lucide-react";
 
 const Sidebar = () => {
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
@@ -51,23 +50,9 @@ const Sidebar = () => {
         <h3 className="font-semibold">Category</h3>
         <button onClick={() => toggleFilter("category")}>
           {showFilters.category ? (
-            <Image
-              src={ArrowUp}
-              alt="Arrow down"
-              width={0}
-              height={0}
-              sizes="100vw"
-              className="w-6 h-6"
-            />
+            <ArrowUp className="w-6 h-6 text-blue-origin" />
           ) : (
-            <Image
-              width={0}
-              height={0}
-              sizes="100vw"
-              src={ArrowDown}
-              alt="Arrow up"
-              className="w-6 h-6"
-            />
+            <ArrowDown className="w-6 h-6 text-blue-origin"  />
           )}
         </button>
       </div>
@@ -93,23 +78,11 @@ const Sidebar = () => {
                   onClick={() => toggleFilter(`years-${category}`)}
                 >
                   {showFilters[`years-${category}`] ? (
-                    <Image
-                      width={0}
-                      height={0}
-                      sizes="100vw"
-                      src={ArrowUp}
-                      alt="Arrow down"
-                      className="w-6 h-6"
-                    />
+                      <ArrowUp className="w-6 h-6 text-blue-origin" />
+
                   ) : (
-                    <Image
-                      width={0}
-                      height={0}
-                      sizes="100vw"
-                      src={ArrowDown}
-                      alt="Arrow up"
-                      className="w-6 h-6"
-                    />
+                      <ArrowDown className="w-6 h-6 text-blue-origin" />
+
                   )}
                 </button>
               </div>
@@ -144,23 +117,11 @@ const Sidebar = () => {
                                 {showFilters[
                                   `specialities-${category}-${subcategory}`
                                 ] ? (
-                                  <Image
-                                    width={0}
-                                    height={0}
-                                    sizes="100vw"
-                                    src={ArrowUp}
-                                    alt="Arrow down"
-                                    className="w-6 h-6"
-                                  />
+                                    <ArrowUp className="w-6 h-6 text-blue-origin" />
+
                                 ) : (
-                                  <Image
-                                    width={0}
-                                    height={0}
-                                    sizes="100vw"
-                                    src={ArrowDown}
-                                    alt="Arrow up"
-                                    className="w-6 h-6"
-                                  />
+                                    <ArrowDown className="w-6 h-6 text-blue-origin" />
+
                                 )}
                               </button>
                             </div>

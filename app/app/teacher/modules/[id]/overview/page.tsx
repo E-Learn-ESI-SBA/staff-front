@@ -1,5 +1,4 @@
 import { LinksTabs } from "@/components/teacher/courses/tabs";
-import appRouter from "@/config/routes";
 import { moduleData } from "@/static/dummy-data/modules/chapter";
 import { Overview } from "@/components/courses/overview";
 

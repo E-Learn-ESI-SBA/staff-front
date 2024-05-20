@@ -46,7 +46,7 @@ export const Overview = ({
       <div className="w-full flex flex-col justify-center">
         <div className="flex justify-between flex-wrap">
           <h1 className="text-black text-lg xl:text-2xl lg:text-xl font-medium p-4">
-            {title}
+            {currentData.title}
           </h1>
           {withEdit && (
             <Button className="p-4 px-6 w-fit " onClick={() => setEdit(!edit)}>
@@ -60,7 +60,7 @@ export const Overview = ({
           </h5>
           <p
             className="min-h-96 p-8 text-xs sm:text-sm text-black rounded-3xl"
-            dangerouslySetInnerHTML={{ __html: description }}
+            dangerouslySetInnerHTML={{ __html: currentData.description }}
           />
         </div>
         <div className="p-8 lg:p-12">
@@ -69,7 +69,7 @@ export const Overview = ({
               What you will learn in this course :
             </h5>
             <div className="grid grid-cols-2  gap-4">
-              {points.map((p, i) => (
+              {currentData.points.map((p, i) => (
                 <div className="flex items-center w-full   gap-2" key={i}>
                   <CircleCheck className="w-8 h-8 text-white " fill="#0066FF" />
                   <p className=" text-sm md:text-base ">{p}</p>
@@ -84,6 +84,6 @@ export const Overview = ({
   return !edit ? (
     <OverviewComp />
   ) : (
-    <EditModule data={{ title, description, points }} setClose={closeHandler} />
+    <EditModule data={currentData} setClose={closeHandler} mode="UPDATE" />
   );
 };

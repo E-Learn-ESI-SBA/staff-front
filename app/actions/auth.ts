@@ -1,10 +1,10 @@
 "use server";
-import { GET_AUTH_USER_URL } from "@/config/constants";
 import { TPayload } from "@/types";
 import { jwtVerify } from "jose";
 import { cookies } from "next/headers";
+import {cache} from "react";
 
-export const getAuth = async (
+export const getAuth =cache(async (
   refreshAble?: boolean,
 ): Promise<{
   isAuth: boolean;
@@ -38,4 +38,4 @@ export const getAuth = async (
       payload: null,
     };
   }
-};
+});

@@ -21,10 +21,10 @@ export function Filter<T>({
 
   const firstValue = table
     .getPreFilteredRowModel()
-    .flatRows[0]?.getValue(column.id);
+    .flatRows[0]?.getValue(column?.id!);
 
-  const columnFilterValue = column.getFilterValue();
-  const getFacetedUniqueValues = column.getFacetedUniqueValues;
+  const columnFilterValue = column?.getFilterValue();
+  const getFacetedUniqueValues = column?.getFacetedUniqueValues;
   const sortedUniqueValues = useMemo(
     () =>
       typeof firstValue === "number"
@@ -33,7 +33,7 @@ export function Filter<T>({
     [getFacetedUniqueValues, firstValue],
   );
 
-  return typeof firstValue === "number" || !column.getCanFilter() ? (
+  return typeof firstValue === "number" || !column?.getCanFilter() ? (
     <></>
   ) : (
     <ItemDropDown
