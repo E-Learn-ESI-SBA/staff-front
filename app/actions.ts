@@ -12,7 +12,8 @@ import {
 } from "@/types/chapter/zod";
 import { cookies } from "next/headers";
 import { TAuthSchema } from "@/components/auth/login";
-import staffServiceAxiosClient from "@/utils/axiosClient";
+import { TPayload } from "@/types";
+
 
 type ReturnType = {
   success: boolean;
@@ -90,7 +91,7 @@ export async function storeToken(request: StoreTokenRequest) {
 export async function login(data: TAuthSchema) {
   "use server";
   try {
-    const res = await fetch("http://localhost:8000/api/auth/login/", {
+    const res = await fetch("http://localhost:8000/api/auth/admin-login/", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -148,40 +149,40 @@ export async function refreshTokens() {
   }
 }
 
-export const getAuth = async (
-  refreshAble?: boolean,
-): Promise<{
-  isAuth: boolean;
-  data?: any;
-}> => {
-  try {
-    const cookie = cookies();
-    const token = cookie.get("accessToken")?.value;
-    console.log("token" + token);
-    if (!token)
-      return {
-        isAuth: false,
-      };
+// export const getAuth = async (
+//   refreshAble?: boolean,
+// ): Promise<{
+//   isAuth: boolean;
+//   data?: any;
+// }> => {
+//   try {
+//     const cookie = cookies();
+//     const token = cookie.get("accessToken")?.value;
+//     console.log("token" + token);
+//     if (!token)
+//       return {
+//         isAuth: false,
+//       };
 
-    const auth = await refreshTokens();
-    console.log("auth" + auth);
-    console.log("hello");
-    if (auth.succes) {
-      return {
-        isAuth: true,
-        data: auth.data,
-      };
-    }
-    return {
-      isAuth: false,
-    };
-  } catch (e) {
-    console.log("Error:", e);
-    return {
-      isAuth: false,
-    };
-  }
-};
+//     const auth = await refreshTokens();
+//     console.log("auth" + auth);
+//     console.log("hello");
+//     if (auth.succes) {
+//       return {
+//         isAuth: true,
+//         data: auth.data,
+//       };
+//     }
+//     return {
+//       isAuth: false,
+//     };
+//   } catch (e) {
+//     console.log("Error:", e);
+//     return {
+//       isAuth: false,
+//     };
+//   }
+// };
 
 export const getAuthed = async () => {
   const res = await fetch(GET_AUTH_USER_URL);
@@ -241,4 +242,43 @@ export const resetPassword = async (email: string, code: string, password: strin
   }
 }
 
+
+export const getAuth = async (
+  refreshAble?: boolean,
+): Promise<{
+  isAuth: boolean;
+  payload: TPayload | null;
+}> => {
+  'use server'
+  try {
+    const cookie = cookies();
+    const token = cookie.get("accessToken")?.value;
+    if (!token)
+      return {
+        isAuth: false,
+        payload: null,
+      };
+    const body = token.split(".")[1];
+    const payload = JSON.parse(atob(body)) as TPayload;
+
+    const strPayload = JSON.stringify(payload);
+    // cookies().set("payload", strPayload, {
+    //   httpOnly: true,
+    //   sameSite: "strict",
+    //   secure: true,
+    // });
+    return {
+      isAuth: true,
+      payload: payload,
+    };
+  } catch (e) {
+    console.log("Error:", e);
+    return {
+      isAuth: false,
+      payload: null,
+    };
+  }
+};
+
 // end auth service 
+
