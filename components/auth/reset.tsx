@@ -22,7 +22,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { AuthOption } from "./auth";
-import useResetPassword from "@/lib/hooks/auth/reset";
+import { sendOTP } from "@/app/actions";
+import { toast } from "sonner";
 
 export const resetSchema = z.object({
   email: z.string().email().min(2, "Email is required"),
@@ -38,10 +39,27 @@ export function ResetPassword({
 }) {
   const [isLoading, setIsLoading] = useState<TLoading>("DEFAULT");
 
-  const { resetPassword } = useResetPassword();
   async function onSubmit(values: TResetSchema) {
     setIsLoading("LOADING");
-    await resetPassword(values.email, setSelectedAuth);
+    const response = await sendOTP(values.email);
+    console.log(response)
+    if(response){
+      toast("Email sent!", {
+        style: {
+          backgroundColor: "green",
+          color: "white",
+        },
+      });
+      setSelectedAuth("SUBMIT_NEW_PASSWORD");
+    }
+    else{
+      toast("An error occurred. Please try again.", {
+        style: {
+          backgroundColor: "red",
+          color: "white",
+        },
+      });
+    }
     setTimeout(() => {
       setIsLoading("DEFAULT");
     }, 3000);

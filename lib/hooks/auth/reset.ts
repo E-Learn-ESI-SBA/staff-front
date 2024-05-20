@@ -1,6 +1,7 @@
 import { AuthOption } from "@/components/auth/auth";
 import useAxios from "../axios/useAxios";
 import { toast } from "sonner";
+import { STAFF_BASE_URL } from "@/config/constants";
 
 const useResetPassword = () => {
   const axiosInstance = useAxios();
@@ -9,12 +10,15 @@ const useResetPassword = () => {
     setSelectedAuth: (value: AuthOption) => void,
   ) => {
     try {
-      const response = await axiosInstance.post("api/send-otp/", {
-        email,
+      const res = await fetch(`${STAFF_BASE_URL}/auth/send-otp/`, 
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email })
       });
-
-      const data = await response.data;
-
+      const response = await res.json();
       if (response.status == 202) {
         toast("Success", {
           style: {
@@ -32,7 +36,6 @@ const useResetPassword = () => {
         });
       }
     } catch (error) {
-      console.log({ error });
       toast("An error occurred. Please try again.", {
         style: {
           backgroundColor: "red",
