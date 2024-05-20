@@ -3,7 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ChapterComponent } from "./resources/chapter";
 import { usePathname } from "next/navigation";
 import { Module } from "@/types/chapter/courses";
-import {Overview} from "@/components/courses/overview";
+import { Overview } from "@/components/courses/overview";
 
 type Props = {
   data: Module;
@@ -28,17 +28,23 @@ export default function TeacherCourse({ data }: Props) {
         </TabsList>
         <div className="p-4 pt-12">
           <TabsContent value="Overview">
-            <Overview data={{
+            <Overview
+              data={{
                 description: data.description,
                 points: data.plan,
                 title: data.name,
-
-            }}  />
+              }}
+            />
           </TabsContent>
           <TabsContent value="Resources">
             <div className="w-full h-full flex flex-col gap-6 bg-white rounded-lg p-4">
               {data.courses.map((c, i) => (
-                <ChapterComponent chapter={c} key={i} pathname={pathname} year={data.year} />
+                <ChapterComponent
+                  chapter={c}
+                  key={i}
+                  pathname={pathname}
+                  year={data.year}
+                />
               ))}
             </div>
           </TabsContent>

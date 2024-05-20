@@ -52,17 +52,17 @@ export const VideoSchema = z.object({
 export type TVideoSchema = z.infer<typeof VideoSchema>;
 
 export const LectureSchema = z.object({
-    id: z.string().optional(),
-    sectionId:z.string().optional(),
-    groups: z
-        .array(
-            z.object({
-                label: z.string(),
-                value: z.string().default(""),
-                disabled: z.boolean().default(false).optional(),
-            }),
-        )
-        .min(1, "Please Select at least one group "),
-    name: z.string().min(5, "title is required"),
-})
-export type TLectureSchema = z.infer<typeof LectureSchema>
+  id: z.string().optional(),
+  sectionId: z.string().optional(),
+  groups: z
+    .array(
+      z.object({
+        label: z.string(),
+        value: z.string().default(""),
+        disabled: z.boolean().default(false).optional(),
+      }),
+    )
+    .min(1, "Please Select at least one group "),
+  name: z.string().min(5, "title is required"),
+});
+export type TLectureSchema = z.infer<typeof LectureSchema>;

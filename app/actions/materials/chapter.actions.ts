@@ -1,5 +1,5 @@
 "use server";
-import {IMessage, IResponse} from "@/types/http";
+import { IMessage, IResponse } from "@/types/http";
 import { CREATE_CHAPTER_URL } from "@/config/urls/material/mutations";
 import { TChapterSchema } from "@/types/chapter/zod";
 import { cookies } from "next/headers";
@@ -17,13 +17,13 @@ export const createChapter = async (
       },
       body: JSON.stringify(data),
     });
-    const res = await response.json() as IMessage
+    const res = (await response.json()) as IMessage;
     if (response.status !== 201 || !response.ok) {
-        return {
-            status: response.status,
-            data: {message:""},
-            error: new IError({message: res.message}),
-        };
+      return {
+        status: response.status,
+        data: { message: "" },
+        error: new IError({ message: res.message }),
+      };
     }
     return {
       status: response.status,
@@ -35,7 +35,7 @@ export const createChapter = async (
     return {
       status: 500,
       error: new IError(e),
-      data: {message:""},
+      data: { message: "" },
     };
   }
 };

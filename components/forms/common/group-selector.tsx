@@ -6,8 +6,8 @@ import { getGroups } from "@/app/actions/staff/user.actions";
 import AlertError from "@/components/common/error";
 import { groupToOptions } from "@/utils/utils";
 import MultipleSelector, { Option } from "@/components/ui/multi-select";
-import {CommonCombobox} from "@/components/comments/combobox";
-import {ControllerRenderProps, FieldValues} from "react-hook-form";
+import { CommonCombobox } from "@/components/comments/combobox";
+import { ControllerRenderProps, FieldValues } from "react-hook-form";
 
 type Props = {
   onChange: (options: Option[]) => void;
@@ -16,7 +16,12 @@ type Props = {
   year: string;
 };
 
-export async function MultiGroupSelector({ onChange, value, year,label   }: Props) {
+export async function MultiGroupSelector({
+  onChange,
+  value,
+  year,
+  label,
+}: Props) {
   const { data, status, error } = await getGroups(year);
   const options = groupToOptions(data.groups);
   if (status !== 200) {
@@ -55,7 +60,13 @@ type SingleGroupSelectorProps = {
   year: string;
 };
 
-export async function SingleGroupSelector({ field, setUpdatedValue, year,label,fieldKey   }: SingleGroupSelectorProps) {
+export async function SingleGroupSelector({
+  field,
+  setUpdatedValue,
+  year,
+  label,
+  fieldKey,
+}: SingleGroupSelectorProps) {
   const { data, status, error } = await getGroups(year);
   const options = groupToOptions(data.groups);
   if (status !== 200) {
@@ -65,15 +76,15 @@ export async function SingleGroupSelector({ field, setUpdatedValue, year,label,f
     return <AlertError error={error} />;
   }
   return (
-      <Suspense fallback={<GridLoader />}>
-        <FormControl>
-          <CommonCombobox
-              options={options}
-              field={field}
-              setUpdatedValue={setUpdatedValue}
-              fieldKey={fieldKey}
-          />
-        </FormControl>
-      </Suspense>
+    <Suspense fallback={<GridLoader />}>
+      <FormControl>
+        <CommonCombobox
+          options={options}
+          field={field}
+          setUpdatedValue={setUpdatedValue}
+          fieldKey={fieldKey}
+        />
+      </FormControl>
+    </Suspense>
   );
 }

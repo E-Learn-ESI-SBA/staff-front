@@ -6,7 +6,7 @@ import {
 } from "@/config/urls/material/mutations";
 import { cookies } from "next/headers";
 import { IError } from "@/types/errors";
-import {IMessage, IResponse} from "@/types/http";
+import { IMessage, IResponse } from "@/types/http";
 
 export const createSection = async (
   data: TSectionFormSchema,
@@ -55,7 +55,7 @@ export const updateSection = async (
       },
       body: JSON.stringify(data),
     });
-    const res = await response.json() as IMessage;
+    const res = (await response.json()) as IMessage;
     if (!response.ok) {
       return {
         status: response.status,

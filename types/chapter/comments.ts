@@ -1,4 +1,4 @@
-import {z} from "zod";
+import { z } from "zod";
 
 export interface Comment {
   id?: string;
@@ -32,9 +32,9 @@ export interface LightUser {
   id?: string;
 }
 
-export const CommentSchema  =  z.object({
-    id:z.string().optional(),
-    content: z.string(),
-    course_id: z.string().optional(),
-})
-export type TCommentForm = z.infer<typeof CommentSchema>
+export const CommentSchema = z.object({
+  id: z.string().optional(),
+  content: z.string(),
+  course_id: z.string().optional(),
+});
+export type TCommentForm = z.infer<typeof CommentSchema>;

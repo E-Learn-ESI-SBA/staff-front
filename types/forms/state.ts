@@ -6,7 +6,6 @@ export enum OpenCommentFormEnum {
   CLOSED = "closed",
 }
 
-
 export enum EditModal {
   EDIT_SECTION = "EDIT_SECTION",
   ADD_SECTION = "ADD_SECTION",
@@ -21,9 +20,9 @@ export enum EditModal {
   CLOSE = "CLOSE",
 }
 export enum EResourceType {
-    VIDEO = "VIDEO",
-    LECTURE = "LECTURE",
-    FILE = "FILE",
-    CHAPTER = "CHAPTER",
-    SECTION = "SECTION",
+  VIDEO = "VIDEO",
+  LECTURE = "LECTURE",
+  FILE = "FILE",
+  CHAPTER = "CHAPTER",
+  SECTION = "SECTION",
 }

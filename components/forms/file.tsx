@@ -15,7 +15,7 @@ import {
   TFileFormSchemaWithFile,
 } from "@/types/chapter/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {PropsWithChildren, useId, useState} from "react";
+import { PropsWithChildren, useId, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import MultipleSelector, { Option } from "../ui/multi-select";
@@ -23,26 +23,21 @@ import { Label } from "../ui/label";
 import { Delete, File } from "lucide-react";
 import { Button } from "../ui/button";
 import { IError } from "@/types/errors";
-import {FileComp} from "@/components/common/file-overview";
-import {useModuleTreeStore} from "@/store/module/store";
+import { FileComp } from "@/components/common/file-overview";
+import { useModuleTreeStore } from "@/store/module/store";
 
 type Props = PropsWithChildren & {
   defaultValues?: TFileFormSchema;
   mode: "CREATE" | "UPDATE";
-  year?:string
+  year?: string;
 };
-export function FileForm({
-  defaultValues,
-  mode = "CREATE",
-  children,
-}: Props) {
-  const {currentMap,onError,onSubmit} = useModuleTreeStore(state => ({
+export function FileForm({ defaultValues, mode = "CREATE", children }: Props) {
+  const { currentMap, onError, onSubmit } = useModuleTreeStore((state) => ({
     currentMap: state.currentMap,
     onSubmit: state.onSubmit,
     onError: state.onError,
-
-  }))
-  const ID = useId()
+  }));
+  const ID = useId();
   const form = useForm<TFileFormSchema>({
     resolver: zodResolver(FileFormSchema),
     mode: "onSubmit",
@@ -56,7 +51,7 @@ export function FileForm({
       file: currentFile,
     };
     try {
-      const {data,error} = await action(dataWithFile);
+      const { data, error } = await action(dataWithFile);
       if (!error) {
         form.reset();
         toast.success(data.message, {
@@ -77,14 +72,12 @@ export function FileForm({
             )
               return prev;
             const newPrev = { ...prev };
-            newPrev.courses[courseIndex].sections[
-              sectionIndex
-            ].files.push({
-                name: v.name,
-                groups: v.groups.map((g) => g.value),
+            newPrev.courses[courseIndex].sections[sectionIndex].files.push({
+              name: v.name,
+              groups: v.groups.map((g) => g.value),
               url: "https://www.google.com",
-              id:ID,
-              type:currentFile?.type ?? "pdf",
+              id: ID,
+              type: currentFile?.type ?? "pdf",
               teacher_id: "1",
             });
             return newPrev;
@@ -109,7 +102,7 @@ export function FileForm({
             fileIndex
           ].groups = v.groups.map((g) => g.value);
           return newPrev;
-        })
+        });
       } else {
         toast.error(error?.message ?? "Error While Doing this action", {
           style: {
@@ -117,7 +110,7 @@ export function FileForm({
             color: "white",
           },
         });
-        onError()
+        onError();
       }
     } catch (e) {
       const err = new IError(e);
@@ -127,7 +120,7 @@ export function FileForm({
           color: "white",
         },
       });
-      onError()
+      onError();
     }
   };
   const groups: Option[] = [
@@ -217,35 +210,35 @@ export function FileForm({
         />
 
         {mode == "CREATE" && (
-            <div className="flex flex-col gap-4 border justify-center relative items-center p-6 w-full min-h-[100px]">
-              {!currentFile ? (
-                  <>
-                    <Input
-                        required
-                        accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.py,.java, .c, .cpp, .pas"
-                        type="file"
-                        className="w-fll absolute top-0 h-full  opacity-0"
-                        onChange={(e) => {
-                          if (
-                              e.target.files &&
-                              e.target.files[0].size < MAX_FILE_SIZE
-                          ) {
-                            setCurrentFile(() =>
-                                e.target?.files ? e.target?.files[0] : null,
-                            );
-                          }
-                        }}
-                    />
+          <div className="flex flex-col gap-4 border justify-center relative items-center p-6 w-full min-h-[100px]">
+            {!currentFile ? (
+              <>
+                <Input
+                  required
+                  accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.py,.java, .c, .cpp, .pas"
+                  type="file"
+                  className="w-fll absolute top-0 h-full  opacity-0"
+                  onChange={(e) => {
+                    if (
+                      e.target.files &&
+                      e.target.files[0].size < MAX_FILE_SIZE
+                    ) {
+                      setCurrentFile(() =>
+                        e.target?.files ? e.target?.files[0] : null,
+                      );
+                    }
+                  }}
+                />
 
-                    <Label>Attached File</Label>
-                    <p className="text-center text-sm leading-10 text-gray-600 dark:text-gray-400">
-                      Drag and Drop or file browse with size lower then 8MB
-                    </p>
-                  </>
-              ) : (
-                  <FileComp f={currentFile} setCurrentFile={setCurrentFile}/>
-              )}
-            </div>
+                <Label>Attached File</Label>
+                <p className="text-center text-sm leading-10 text-gray-600 dark:text-gray-400">
+                  Drag and Drop or file browse with size lower then 8MB
+                </p>
+              </>
+            ) : (
+              <FileComp f={currentFile} setCurrentFile={setCurrentFile} />
+            )}
+          </div>
         )}
         {children}
       </form>

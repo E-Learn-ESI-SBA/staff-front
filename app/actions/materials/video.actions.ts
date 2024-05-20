@@ -9,7 +9,7 @@ import { IError } from "@/types/errors";
 import { IMessage, IResponse } from "@/types/http";
 export const createVideo = async (
   data: TVideoSchema,
-  file: File | null
+  file: File | null,
 ): Promise<IResponse<IMessage>> => {
   try {
     const formData = new FormData();

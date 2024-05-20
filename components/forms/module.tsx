@@ -24,7 +24,7 @@ type Props = {
     description: string;
     points: string[];
   };
-  setClose: (value?:TModuleSchema) => void;
+  setClose: (value?: TModuleSchema) => void;
 };
 export function EditModule({ data, setClose }: Props) {
   const form = useForm<TModuleSchema>({
@@ -41,7 +41,7 @@ export function EditModule({ data, setClose }: Props) {
       console.log(data);
       setClose(data);
     } catch (e) {
-       setClose();
+      setClose();
       const err = new IError(e);
       console.log(err.message);
       toast.error(err.message);
@@ -51,7 +51,6 @@ export function EditModule({ data, setClose }: Props) {
     name: "points",
     control: form.control,
   });
-
 
   return (
     <Form {...form}>

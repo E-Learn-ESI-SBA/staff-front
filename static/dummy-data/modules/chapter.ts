@@ -247,6 +247,6 @@ export const moduleData: Module = {
   semester: 1,
   speciality: "Speciality 1",
   year: "2021",
-  createdAt: new Date(),
-  updatedAt: new Date(),
+  created_at: new Date(),
+  updated_at: new Date(),
 };
