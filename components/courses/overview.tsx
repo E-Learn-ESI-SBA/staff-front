@@ -3,6 +3,7 @@ import { useState } from "react";
 import { CircleCheck } from "lucide-react";
 import { EditModule } from "@/components/forms/module";
 import { Button } from "@/components/ui/button";
+import {TModuleSchema} from "@/types/zod";
 
 type TData = {
   title: string;
@@ -22,6 +23,19 @@ export const Overview = ({
   withEdit = false,
   data: { title, description, points },
 }: OverviewProps) => {
+  const closeHandler = (value?:TModuleSchema) => {
+    if(value){
+      console.log(value)
+      setCurrentData(prev => ({
+        ...prev,
+        title: value.title,
+        description: value.description,
+        points: value.points.map(p => p.value)
+      }))
+    }
+    setEdit(false)
+  }
+  const [currentData, setCurrentData] = useState<TData>({ title, description, points });
   const [edit, setEdit] = useState(false);
   const OverviewComp = () => {
     return (
@@ -66,6 +80,6 @@ export const Overview = ({
   return !edit ? (
     <OverviewComp />
   ) : (
-    <EditModule data={{ title, description, points }} setClose={setEdit} />
+    <EditModule data={{ title, description, points }} setClose={closeHandler} />
   );
 };

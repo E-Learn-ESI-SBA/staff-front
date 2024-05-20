@@ -39,6 +39,7 @@ export function ModuleTree({modulesData,path}:Props) {
                 chapter={c}
                 key={i}
                 pathname={path}
+                index={i}
             />
         ))}
        <>

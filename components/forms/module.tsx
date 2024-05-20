@@ -24,7 +24,7 @@ type Props = {
     description: string;
     points: string[];
   };
-  setClose: Dispatch<SetStateAction<boolean>>;
+  setClose: (value?:TModuleSchema) => void;
 };
 export function EditModule({ data, setClose }: Props) {
   const form = useForm<TModuleSchema>({
@@ -39,8 +39,9 @@ export function EditModule({ data, setClose }: Props) {
   const submitHandler = (data: TModuleSchema) => {
     try {
       console.log(data);
-      setClose(false);
+      setClose(data);
     } catch (e) {
+       setClose();
       const err = new IError(e);
       console.log(err.message);
       toast.error(err.message);
@@ -50,6 +51,7 @@ export function EditModule({ data, setClose }: Props) {
     name: "points",
     control: form.control,
   });
+
 
   return (
     <Form {...form}>
@@ -183,7 +185,7 @@ export function EditModule({ data, setClose }: Props) {
           <Button
             variant="ghost"
             className="p-4 px-6 border "
-            onClick={() => setClose(false)}
+            onClick={() => setClose()}
           >
             Cancel
           </Button>

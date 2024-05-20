@@ -1,7 +1,9 @@
-import {Chapter, Lecture, Module, Section, File, Video} from "@/types/chapter/courses";
+import {Chapter, Lecture, Module, Section, File, Video, ResourceEnum} from "@/types/chapter/courses";
 import {EditModal} from "@/types/forms/state";
 import {StateCreator} from "zustand";
 import {TChapterSchema, TFileFormSchema, TLectureSchema, TSectionFormSchema, TVideoSchema} from "@/types/chapter/zod";
+import firebase from "firebase/compat";
+import functions = firebase.functions;
 
 type MapK =  "selectedCourse" | "selectedSection" | "selectedResource"
 type Indexes  = {
@@ -31,6 +33,7 @@ interface IModuleTreeSlice {
     // Map should contain key "selectedCourse" , "selectedSection","selectedResource"  add this in the type of the map
     currentMap: Map<MapK,number>,
     onError: () => void
+    setSelectedResource<T> (resourceType: ResourceEnum, resource:T, indexes: Indexes) : void,
 
 
 }
@@ -55,7 +58,8 @@ const initialState: IModuleTreeSlice = {
     selectedVideo: {} as TVideoSchema,
     setSelectedVideo: () => {},
     currentMap: new Map<MapK,number>().set("selectedSection",-1).set("selectedCourse",-1).set("selectedResource",-1),
-    onError: ()  => {}
+    onError: ()  => {},
+    setSelectedResource: () => {}
 
 
 };
@@ -86,8 +90,27 @@ const moduleTreeSlice :StateCreator<IModuleTreeSlice> = (set,get) => ({
     },
     onError: () => {
         set({buttonLoading: false})
-    }
+    },
+    setSelectedResource : function<T> (selectedResource:ResourceEnum,resourceInstance:T,indexes:Indexes) {
+            switch (selectedResource) {
+                case ResourceEnum.Video:
+                    const resource = resourceInstance as TVideoSchema
+                    set({selectedVideo: resource,currentMap: new Map<MapK,number>().set("selectedSection",indexes.selectedSection ?? -1).set("selectedCourse",indexes.selectedCourse).set("selectedResource",indexes.selectedResource ?? -1)})
+                    break;
+                case ResourceEnum.Lecture:
+                    const lecture = resourceInstance as TLectureSchema
+                    set({selectedLesson: lecture,currentMap: new Map<MapK,number>().set("selectedSection",indexes.selectedSection ?? -1).set("selectedCourse",indexes.selectedCourse).set("selectedResource",indexes.selectedResource ?? -1)})
+                    break;
+                case ResourceEnum.File:
+                    const file = resourceInstance as TFileFormSchema
+                    set({selectedFile: file,currentMap: new Map<MapK,number>().set("selectedSection",indexes.selectedSection ?? -1).set("selectedCourse",indexes.selectedCourse).set("selectedResource",indexes.selectedResource ?? -1)})
+                    break;
+                default :
+                    break
+            }
+            return
 
+    }
 
 })
 export {moduleTreeSlice}
