@@ -39,11 +39,8 @@ interface IModuleTreeSlice {
   selectedSection: TSectionFormSchema;
   setSelectedSection: (section: TSectionFormSchema, indexes: Indexes) => void;
   selectedLesson: TLectureSchema;
-  setSelectedLesson: (lecture: TLectureSchema, indexes: Indexes) => void;
   selectedFile: TFileFormSchema;
-  setSelectedFile: (file: TFileFormSchema, indexes: Indexes) => void;
   selectedVideo: TVideoSchema;
-  setSelectedVideo: (video: TVideoSchema, indexes: Indexes) => void;
   // Map should contain key "selectedCourse" , "selectedSection","selectedResource"  add this in the type of the map
   currentMap: Map<MapK, number>;
   onError: () => void;
@@ -68,11 +65,8 @@ const initialState: IModuleTreeSlice = {
   selectedSection: {} as TSectionFormSchema,
   setSelectedSection: () => {},
   selectedLesson: {} as TLectureSchema,
-  setSelectedLesson: () => {},
   selectedFile: {} as TFileFormSchema,
-  setSelectedFile: () => {},
   selectedVideo: {} as TVideoSchema,
-  setSelectedVideo: () => {},
   currentMap: new Map<MapK, number>()
     .set("selectedSection", -1)
     .set("selectedCourse", -1)
@@ -86,48 +80,21 @@ const moduleTreeSlice: StateCreator<IModuleTreeSlice> = (set, get) => ({
   setButtonLoading: (buttonLoading) => set({ buttonLoading }),
   setFormState: (formState) => set({ formState }),
   onSubmit: (cb) => {
-    set({ buttonLoading: false, formState: EditModal.CLOSE }),
-      set((state) => ({ currentModule: cb(state.currentModule!) })),
-      set({
-        currentMap: new Map<MapK, number>()
-          .set("selectedSection", -1)
-          .set("selectedCourse", -1)
-          .set("selectedResource", -1),
-      });
+    console.log("Submitting")
+      set((state) => ({ currentModule: cb(state.currentModule!), buttonLoading: false, formState: EditModal.CLOSE,currentMap: new Map<MapK, number>()
+            .set("selectedSection", -1)
+            .set("selectedCourse", -1)
+            .set("selectedResource", -1) }))
   },
-  setSelectedVideo: (selectedVideo, indexes) => {
-    set({
-      selectedVideo,
-      currentMap: new Map<MapK, number>()
-        .set("selectedSection", indexes.selectedSection ?? -1)
-        .set("selectedCourse", indexes.selectedCourse)
-        .set("selectedResource", indexes.selectedResource ?? -1),
-    });
-  },
-  setSelectedFile: (selectedFile, indexes) => {
-    set({
-      selectedFile,
-      currentMap: new Map<MapK, number>()
-        .set("selectedSection", indexes.selectedSection ?? -1)
-        .set("selectedCourse", indexes.selectedCourse)
-        .set("selectedResource", indexes.selectedResource ?? -1),
-    });
-  },
-  setSelectedLesson: (selectedLesson, indexes) => {
-    set({
-      selectedLesson,
-      currentMap: new Map<MapK, number>()
-        .set("selectedSection", indexes.selectedSection ?? -1)
-        .set("selectedCourse", indexes.selectedCourse)
-        .set("selectedResource", indexes.selectedResource ?? -1),
-    });
-  },
+
+
+
   setSelectedSection: (selectedSection, indexes) => {
     set({
       selectedSection,
       currentMap: new Map<MapK, number>()
         .set("selectedSection", indexes.selectedSection ?? -1)
-        .set("selectedCourse", indexes.selectedCourse)
+        .set("selectedCourse", indexes.selectedCourse ?? -1)
         .set("selectedResource", indexes.selectedResource ?? -1),
     });
   },

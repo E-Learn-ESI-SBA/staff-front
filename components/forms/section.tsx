@@ -20,26 +20,33 @@ import { toast } from "sonner";
 import { IError } from "@/types/errors";
 import { Chapter } from "@/types/chapter/courses";
 import { useModuleTreeStore } from "@/store/module/store";
+import {dummyMutationSuccess} from "@/static/mock";
 
 type Props = PropsWithChildren & {
   defaultValues?: TSectionFormSchema;
   mode: "CREATE" | "UPDATE";
 };
 export function SectionForm({
-  defaultValues,
+  defaultValues = {
+    name:"",
+    id:""
+  },
   mode = "CREATE",
   children,
 }: Props) {
-  const { onSubmit, currentMap, onError } = useModuleTreeStore((state) => ({
+  const { onSubmit, currentMap,setButtonLoading, onError } = useModuleTreeStore((state) => ({
     onSubmit: state.onSubmit,
     currentMap: state.currentMap,
     onError: state.onError,
+    setButtonLoading: state.setButtonLoading,
+
   }));
   const formAction = mode === "CREATE" ? createSection : updateSection;
   const ID = useId();
   const submitHandler = async (v: TSectionFormSchema): Promise<void> => {
     try {
-      const { data, error } = await formAction(v);
+      setButtonLoading(true)
+      const { data, error } = await dummyMutationSuccess()
       if (error) {
         toast.error(error.message, {
           style: {
@@ -59,7 +66,7 @@ export function SectionForm({
       onSubmit((prev) => {
         if (mode === "CREATE") {
           const courseIndex = currentMap.get("selectedCourse");
-          if (!courseIndex || courseIndex == -1) {
+          if (!courseIndex || courseIndex === -1) {
             return prev;
           }
 
@@ -78,15 +85,19 @@ export function SectionForm({
         }
         const courseIndex = currentMap.get("selectedCourse");
         const sectionIndex = currentMap.get("selectedSection");
+        console.log(sectionIndex, courseIndex);
         if (
-          !courseIndex ||
-          !sectionIndex ||
-          courseIndex == -1 ||
-          sectionIndex == -1
+          courseIndex === undefined ||
+          sectionIndex === undefined ||
+          courseIndex === -1 ||
+          sectionIndex === -1
         ) {
+          console.log("Here ...")
           return prev;
         }
         prev.courses[courseIndex].sections[sectionIndex].name = v.name;
+        console.log("Here 22 ...")
+
         return prev;
       });
       return;
@@ -110,21 +121,23 @@ export function SectionForm({
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(submitHandler)}
-        className="space-y-8 flex flex-col gap-4    py-4"
+          onSubmit={form.handleSubmit(submitHandler)}
+          className="space-y-8 flex flex-col gap-4    py-4"
       >
+        <h2 className="text-lg font-semibold">{mode === "UPDATE" ? "Edit" : "Create"} Section </h2>
+
         <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem className="w-full">
-              <FormLabel>Section Title</FormLabel>
-              <FormControl>
-                <Input placeholder="Enter The title here..." {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+            control={form.control}
+            name="name"
+            render={({field}) => (
+                <FormItem className="w-full">
+                  <FormLabel>Section Title</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter The title here..." {...field} />
+                  </FormControl>
+                  <FormMessage/>
+                </FormItem>
+            )}
         />
         {children}
       </form>

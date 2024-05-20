@@ -11,6 +11,7 @@ import {
 import Link from "next/link";
 import { useModuleTreeStore } from "@/store/module/store";
 import { EditModal } from "@/types/forms/state";
+import {fromStringGroupToOptions} from "@/utils/utils";
 
 type Props = {
   name: string;
@@ -21,9 +22,11 @@ type Props = {
   index: number;
   grandParentIndex: number;
   parentIndex: number;
+  groups: string[];
 };
 export function Resource({
   name,
+    groups,
   url,
   currentPath,
   resourceType,
@@ -43,7 +46,7 @@ export function Resource({
   const setEdit = () => {
     setSelectedResource(
       resourceType,
-      { id, name, url },
+      { id, name, url,groups:fromStringGroupToOptions(groups) },
       {
         selectedCourse: grandParentIndex,
         selectedSection: parentIndex,
@@ -81,12 +84,12 @@ export function Resource({
         </span>
       </Link>
       <span className="flex gap-2 items-center">
-        <Button variant="ghost">
+        <Button variant="ghost" onClick={setEdit}>
           <Pencil
             width={14}
             height={14}
             className="text-black"
-            onClick={setEdit}
+
           />
         </Button>
         <Button variant="ghost">

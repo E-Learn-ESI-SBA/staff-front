@@ -16,11 +16,8 @@ type Props = {
 export function ChapterComponent({ chapter, pathname, year, index }: Props) {
   const {
     setFormState,
-    formState,
     currentMap,
     setSelectedChapter,
-    buttonLoading,
-    setButtonLoading,
   } = useModuleTreeStore((state) => ({
     setFormState: state.setFormState,
     formState: state.formState,
@@ -48,24 +45,22 @@ export function ChapterComponent({ chapter, pathname, year, index }: Props) {
           <span>Chapter {chapter.order}:</span>
           <span>{chapter.name}</span>
         </div>
-        <div className="flex gap-2 items-center">
-          <Button variant="ghost">
+        <div className="flex gap-2 z-50 items-center">
+          <Button variant="ghost" onClick={setAdd}>
             <Plus
               width={14}
               height={14}
               className="text-text-GRAY"
-              onClick={setAdd}
+
             />
-            <abbr className="sr-only">Add Section</abbr>
           </Button>
-          <Button variant="ghost">
+          <Button variant="ghost" onClick={setEdit} >
             <Pencil
               width={14}
               height={14}
               className="text-black"
-              onClick={setEdit}
+
             />
-            <abbr className="sr-only">Edit Chapter</abbr>
           </Button>
           <Button variant="ghost">
             <Trash2 width={14} height={14} className="text-red-origin" />

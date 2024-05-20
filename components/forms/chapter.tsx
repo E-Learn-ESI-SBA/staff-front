@@ -20,6 +20,8 @@ import { IError } from "@/types/errors";
 import { toast } from "sonner";
 import { useModuleTreeStore } from "@/store/module/store";
 import { Textarea } from "@/components/ui/textarea";
+import {IMessage, IResponse} from "@/types/http";
+import {dummyMutationSuccess} from "@/static/mock";
 type Props = PropsWithChildren & {
   initialValues?: TChapterSchema;
   mode: "CREATE" | "UPDATE";
@@ -36,14 +38,17 @@ export function ChapterForm({
     resolver: zodResolver(ChapterSchema),
     defaultValues: initialValues,
   });
-  const { onSubmit, currentMap, onError } = useModuleTreeStore((state) => ({
+  const { onSubmit, currentMap,setButtonLoading, onError } = useModuleTreeStore((state) => ({
     onSubmit: state.onSubmit,
     currentMap: state.currentMap,
     onError: state.onError,
+    setButtonLoading: state.setButtonLoading,
   }));
-  const submitHandler = async (v: TChapterSchema): Promise<void> => {
+  const submitHandler =  async (v: TChapterSchema): Promise<void> => {
     try {
-      const { data, error } = await formAction(v);
+    // wait 5s for dummy function that return {data:{message:"success"} ,error:null},
+      setButtonLoading(true)
+      const { data, error }  =  await dummyMutationSuccess()
       if (error) {
         console.log(error);
         toast.error(error.message, {
@@ -55,6 +60,12 @@ export function ChapterForm({
         onError();
         return;
       }
+        toast.success(data.message, {
+            style: {
+            backgroundColor: "green",
+            color: "#fff",
+            },
+        });
       onSubmit((prev) => {
         if (mode === "CREATE") {
           return {
@@ -72,13 +83,14 @@ export function ChapterForm({
           };
         }
         const courseIndex = currentMap.get("selectedCourse");
-        if (!courseIndex || courseIndex == -1) {
+        if (courseIndex === undefined || courseIndex === -1) {
           return prev;
         }
         prev.courses[courseIndex].name = v.name;
         prev.courses[courseIndex].description = v.description;
         return prev;
       });
+      return
     } catch (e) {
       onError();
       const err = new IError(e);
@@ -97,6 +109,7 @@ export function ChapterForm({
         onSubmit={form.handleSubmit(submitHandler)}
         className="w-full p-4 flex flex-col gap-4"
       >
+        <h2 className="text-lg font-semibold">{mode === "UPDATE" ? "Edit":"Create"} Chapter </h2>
         <FormField
           name="name"
           control={form.control}

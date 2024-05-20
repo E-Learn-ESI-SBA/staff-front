@@ -11,6 +11,7 @@ import VideoForm from "@/components/forms/video";
 import { FileForm } from "@/components/forms/file";
 import { LectureForm } from "@/components/forms/lecture";
 import { useEffect } from "react";
+import {Icons} from "@/components/icons/icons";
 
 type Props = {
   modulesData: Module;
@@ -23,22 +24,18 @@ export function ModuleTree({ modulesData, path }: Props) {
     buttonLoading,
     selectedChapter,
     selectedFile,
-    selectedLesson,
     selectedVideo,
     selectedSection,
     currentModule,
     setModule,
-    setButtonLoading,
   } = useModuleTreeStore((state) => ({
     setModule: state.setModule,
-    setButtonLoading: state.setButtonLoading,
     formState: state.formState,
     setFormState: state.setFormState,
     currentModule: state.currentModule,
     buttonLoading: state.buttonLoading,
     selectedChapter: state.selectedChapter,
     selectedSection: state.selectedSection,
-    selectedLesson: state.selectedLesson,
     selectedFile: state.selectedFile,
     selectedVideo: state.selectedVideo,
   }));
@@ -83,13 +80,13 @@ export function ModuleTree({ modulesData, path }: Props) {
               >
                 Cancel
               </Button>
-              <Button
-                onClick={() => setButtonLoading(true)}
+                             <Button
                 type="submit"
                 className="w-fit p-4"
                 disabled={buttonLoading}
               >
-                Save
+
+                {buttonLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />} Save
               </Button>
             </div>
           </ChapterForm>
@@ -107,13 +104,13 @@ export function ModuleTree({ modulesData, path }: Props) {
               >
                 Cancel
               </Button>
-              <Button
-                onClick={() => setButtonLoading(true)}
+                             <Button
                 type="submit"
                 className="w-fit p-4"
                 disabled={buttonLoading}
               >
-                Save
+
+                {buttonLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />} Save
               </Button>
             </div>
           </ChapterForm>
@@ -138,13 +135,13 @@ export function ModuleTree({ modulesData, path }: Props) {
               >
                 Cancel
               </Button>
-              <Button
-                onClick={() => setButtonLoading(true)}
+                             <Button
                 type="submit"
                 className="w-fit p-4"
                 disabled={buttonLoading}
               >
-                Save
+
+                {buttonLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />} Save
               </Button>
             </div>
           </SectionForm>
@@ -167,7 +164,8 @@ export function ModuleTree({ modulesData, path }: Props) {
                 className="w-fit p-4"
                 disabled={buttonLoading}
               >
-                Save
+                {buttonLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />} Save
+
               </Button>
             </div>
           </SectionForm>
@@ -178,7 +176,7 @@ export function ModuleTree({ modulesData, path }: Props) {
         >
           <VideoForm
             year={modulesData.year}
-            sectionId={selectedVideo.section_id}
+            sectionId={selectedVideo.section_id ?? ""}
             defaultValues={{
               id: selectedVideo.id,
               name: selectedVideo.name,
@@ -201,7 +199,8 @@ export function ModuleTree({ modulesData, path }: Props) {
                 className="w-fit p-4"
                 disabled={buttonLoading}
               >
-                Save
+                {buttonLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />} Save
+
               </Button>
             </div>
           </VideoForm>
@@ -212,8 +211,8 @@ export function ModuleTree({ modulesData, path }: Props) {
         >
           <VideoForm
             year={modulesData.year}
-            sectionId={selectedVideo.section_id}
-            mode="UPDATE"
+            sectionId={selectedVideo.section_id ?? ""}
+            mode="CREATE"
           >
             <div className="flex w-full gap-4 items-center justify-end ">
               <Button
@@ -228,7 +227,7 @@ export function ModuleTree({ modulesData, path }: Props) {
                 className="w-fit p-4"
                 disabled={buttonLoading}
               >
-                Save
+                {buttonLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />} Save
               </Button>
             </div>
           </VideoForm>
@@ -255,13 +254,13 @@ export function ModuleTree({ modulesData, path }: Props) {
               >
                 Cancel
               </Button>
-              <Button
-                onClick={() => setButtonLoading(true)}
+                             <Button
                 type="submit"
                 className="w-fit p-4"
                 disabled={buttonLoading}
               >
-                Save
+
+                {buttonLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />} Save
               </Button>
             </div>
           </FileForm>
@@ -279,13 +278,13 @@ export function ModuleTree({ modulesData, path }: Props) {
               >
                 Cancel
               </Button>
-              <Button
-                onClick={() => setButtonLoading(true)}
+                             <Button
                 type="submit"
                 className="w-fit p-4"
                 disabled={buttonLoading}
               >
-                Save
+
+                {buttonLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />} Save
               </Button>
             </div>
           </FileForm>
@@ -306,13 +305,13 @@ export function ModuleTree({ modulesData, path }: Props) {
               >
                 Cancel
               </Button>
-              <Button
+                            <Button
                 type="submit"
                 className="w-fit p-4"
-                onClick={() => setButtonLoading(true)}
                 disabled={buttonLoading}
               >
-                Save
+
+                {buttonLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />} Save
               </Button>
             </div>
           </LectureForm>

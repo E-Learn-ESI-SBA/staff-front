@@ -29,7 +29,7 @@ export type TFileFormSchemaWithFile = TFileFormSchema & {
 export const ChapterSchema = z.object({
   name: z.string().min(5, "name is required"),
   id: z.string().optional(),
-  description: z.string().min(80, "description is required"),
+  description: z.string().min(30, "description is required"),
 });
 export type TChapterSchema = z.infer<typeof ChapterSchema>;
 
@@ -46,7 +46,7 @@ export const VideoSchema = z.object({
     )
     .min(1, "Please Select at least one group "),
   url: z.string().optional().default(""),
-  section_id: z.string(),
+  section_id: z.string().optional(),
 });
 
 export type TVideoSchema = z.infer<typeof VideoSchema>;

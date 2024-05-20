@@ -7,7 +7,6 @@ import { Separator } from "@/components/ui/separator";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
@@ -55,6 +54,7 @@ export function SectionComponent({
     }
   };
   const setEdit = () => {
+
     setSelectedSection(
       { name: section.name, id: section.id },
       { selectedCourse: parentIndex, selectedSection: index },
@@ -68,7 +68,7 @@ export function SectionComponent({
           <FolderOpen width={16} height={16} className="text-text-GRAY" />
           Section :<span>{section.name}</span>
         </H3>
-        <div className="flex gap-2 items-center">
+        <div className="flex gap-2 items-center z-20">
           <DropdownMenu>
             <DropdownMenuTrigger>
               <Plus width={14} height={14} className="text-text-GRAY" />
@@ -93,12 +93,12 @@ export function SectionComponent({
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          <Button variant="ghost">
+          <Button variant="ghost" onClick={setEdit}>
             <Pencil
               width={14}
               height={14}
               className="text-black"
-              onClick={setEdit}
+
             />
           </Button>
           <Button variant="ghost">
@@ -109,6 +109,7 @@ export function SectionComponent({
       <div className="flex flex-col gap-4 p-4">
         {section.videos.map((v, i) => (
           <Resource
+              groups={v.groups}
             grandParentIndex={parentIndex}
             parentIndex={index}
             key={i}
@@ -123,6 +124,7 @@ export function SectionComponent({
         <Separator />
         {section.lectures.map((l, i) => (
           <Resource
+              groups={l.groups}
             grandParentIndex={parentIndex}
             parentIndex={index}
             key={i}
@@ -137,6 +139,7 @@ export function SectionComponent({
         <Separator />
         {section.files.map((f, i) => (
           <Resource
+              groups={f.groups}
             grandParentIndex={parentIndex}
             parentIndex={index}
             key={i}
