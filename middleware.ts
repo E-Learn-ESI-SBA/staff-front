@@ -1,18 +1,24 @@
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 import { protectedRoutes } from "@/config/routes";
-import { getAuth } from "@/app/actions/auth";
+import { getAuth } from "@/app/actions";
 import { STUDENT, TEACHER } from "@/config/constants";
+import { cookies } from "next/headers";
 
 export async function middleware(request: NextRequest) {
   console.log("Middleware called");
-  // let cookie = request.cookies.get('access_token')
-  // request.headers.set("Authorization" , `Bearer ${cookie}`)
   const { pathname } = request.nextUrl;
+  const auth = await getAuth();
+
+  if(pathname.match("/auth") && auth.isAuth){
+    console.log("Redirecting to /");
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+
   if (!pathname.match(/\/app\/*/)) {
     return NextResponse.next();
   }
-  const auth = await getAuth();
+
   if (!auth.isAuth) {
     return NextResponse.redirect(new URL("/auth", request.url));
   }

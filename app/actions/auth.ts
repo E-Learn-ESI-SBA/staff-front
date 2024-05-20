@@ -3,7 +3,7 @@ import { GET_AUTH_USER_URL } from "@/config/constants";
 import { TPayload } from "@/types";
 import { jwtVerify } from "jose";
 import { cookies } from "next/headers";
-
+  
 export const getAuth = async (
   refreshAble?: boolean,
 ): Promise<{
