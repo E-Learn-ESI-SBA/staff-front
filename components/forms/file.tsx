@@ -36,9 +36,11 @@ export function FileForm({
   mode = "CREATE",
   children,
 }: Props) {
-  const {currentMap,onSubmit} = useModuleTreeStore(state => ({
+  const {currentMap,onError,onSubmit} = useModuleTreeStore(state => ({
     currentMap: state.currentMap,
-    onSubmit: state.onSubmit
+    onSubmit: state.onSubmit,
+    onError: state.onError,
+
   }))
   const ID = useId()
   const form = useForm<TFileFormSchema>({
@@ -115,6 +117,7 @@ export function FileForm({
             color: "white",
           },
         });
+        onError()
       }
     } catch (e) {
       const err = new IError(e);
@@ -124,6 +127,7 @@ export function FileForm({
           color: "white",
         },
       });
+      onError()
     }
   };
   const groups: Option[] = [

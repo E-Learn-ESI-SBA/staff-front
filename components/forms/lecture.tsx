@@ -8,9 +8,9 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {LectureSchema, SectionFormSchema, TLectureSchema, TSectionFormSchema} from "@/types/chapter/zod";
+import {LectureSchema,  TLectureSchema} from "@/types/chapter/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {PropsWithChildren, SetStateAction} from "react";
+import {PropsWithChildren} from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { IError } from "@/types/errors";
@@ -20,23 +20,22 @@ import {useModuleTreeStore} from "@/store/module/store";
 
 type Props = PropsWithChildren & {
     defaultValues?: TLectureSchema;
-    mode: "UPDATE";
 
 
 
 };
 export function LectureForm({
                                 defaultValues,
-                                mode = "UPDATE",
                                 children,
                             }: Props) {
-            const {onSubmit,currentMap} = useModuleTreeStore(state =>  ({
+            const {onSubmit,currentMap,onError} = useModuleTreeStore(state =>  ({
                 onSubmit : state.onSubmit,
-                currentMap: state.currentMap
+                currentMap: state.currentMap,
+                onError : state.onError
             }))
-    const submitHandler = async (v: TLectureSchema) => {
+    const submitHandler = async (v: TLectureSchema) : Promise<void> => {
         try {
-            const {data,status,error} = await updateLecture(v);
+            const {data,error} = await updateLecture(v);
             if (error) {
                 toast.error(error.message, {
                     style: {
@@ -44,6 +43,7 @@ export function LectureForm({
                         color: "white",
                     },
                 });
+                onError()
                 return
             }
             onSubmit(prev => {
@@ -62,6 +62,7 @@ export function LectureForm({
                     color: "white",
                 },
             });
+            return ;
         } catch (e) {
             const err = new IError(e);
             toast.error(err.message, {
@@ -70,6 +71,8 @@ export function LectureForm({
                     color: "white",
                 },
             });
+            onError()
+
         }
     };
     const form = useForm<TLectureSchema>({

@@ -30,9 +30,11 @@ export function SectionForm({
   mode = "CREATE",
   children,
 }: Props) {
-  const {onSubmit,currentMap} = useModuleTreeStore(state => ({
+  const {onSubmit,currentMap,onError} = useModuleTreeStore(state => ({
        onSubmit: state.onSubmit ,
     currentMap: state.currentMap,
+      onError: state.onError,
+
 
   }))
   const formAction = mode === "CREATE" ? createSection : updateSection;
@@ -47,6 +49,7 @@ export function SectionForm({
               color: "white",
             },
           });
+           onError()
           return
         }
        toast.success(data.message, {
@@ -86,6 +89,7 @@ export function SectionForm({
         })
       return
     } catch (e) {
+
       const err = new IError(e);
       toast.error(err.message, {
         style: {
@@ -93,6 +97,7 @@ export function SectionForm({
           color: "white",
         },
       });
+      onError()
     }
   };
   const form = useForm<TSectionFormSchema>({

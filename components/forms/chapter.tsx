@@ -61,6 +61,7 @@ export function ChapterForm({ initialValues= {id:"",name:"",description:""}, chi
         return prev
       })
     } catch (e) {
+        onError()
         const err = new IError(e)
         toast.error(err.message, {
             style:{
@@ -68,7 +69,6 @@ export function ChapterForm({ initialValues= {id:"",name:"",description:""}, chi
                 color: "#fff",
                 }
         });
-      console.log(e);
     }
   };
   return (

@@ -1,4 +1,4 @@
-import {TFileFormSchema, TFileFormSchemaWithFile, TVideoSchema, VideoSchema} from "@/types/chapter/zod";
+import { TVideoSchema, VideoSchema} from "@/types/chapter/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
@@ -6,7 +6,6 @@ import {PropsWithChildren, useId, useState} from "react";
 import MultipleSelector, {Option} from "@/components/ui/multi-select";
 import {Input} from "@/components/ui/input";
 import {Label} from "@/components/ui/label";
-import {File} from "lucide-react";
 import {FileComp} from "@/components/common/file-overview";
 import {toast} from "sonner";
 import {IError} from "@/types/errors";
@@ -59,9 +58,11 @@ export default function VideoForm({
     mode,
   children,
 }: Props) {
-    const {onSubmit,currentMap} = useModuleTreeStore(state => ({
+    const {onSubmit,currentMap,onError} = useModuleTreeStore(state => ({
         onSubmit: state.onSubmit,
-        currentMap: state.currentMap
+        currentMap: state.currentMap,
+        onError: state.onError,
+
     }))
     const ID = useId()
     const MAX_FILE_SIZE = 250000000;
@@ -72,7 +73,7 @@ export default function VideoForm({
     mode: "onSubmit",
   });
   const action = mode === "CREATE" ? createVideo : updateVideo
-    const submitHandler = async (v: TVideoSchema) => {
+    const submitHandler = async (v: TVideoSchema) : Promise<void> => {
         try {
             const {data,error} = await action(v,currentFile);
             if (error) {
@@ -82,6 +83,8 @@ export default function VideoForm({
                         color: "white",
                     },
                 });
+                onError()
+                return
             } else {
                 toast.success(data.message , {
                     style: {
@@ -114,22 +117,22 @@ export default function VideoForm({
                     }
                     const courseIndex = currentMap.get("selectedCourse");
                     const sectionIndex = currentMap.get("selectedSection");
-                    const fileIndex = currentMap.get("selectedResource");
+                    const videoIndex = currentMap.get("selectedResource");
                     if (
                         !courseIndex ||
                         !sectionIndex ||
-                        !fileIndex ||
-                        fileIndex == -1 ||
+                        !videoIndex ||
+                        videoIndex == -1 ||
                         sectionIndex == -1 ||
                         courseIndex == -1
                     )
                         return prev;
                     const newPrev = { ...prev };
                     newPrev.courses[courseIndex].sections[sectionIndex].videos[
-                        fileIndex
+                        videoIndex
                         ].name = v.name;
                     newPrev.courses[courseIndex].sections[sectionIndex].videos[
-                        fileIndex
+                        videoIndex
                         ].groups = v.groups.map((g) => g.value);
                     return newPrev;
                 })
@@ -144,6 +147,7 @@ export default function VideoForm({
                     color: "white",
                 },
             });
+            onError()
         }
     };
   return (
