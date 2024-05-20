@@ -3,6 +3,7 @@ import {
   CREATE_FILE_URL,
   CREATE_SECTION_URL,
   GET_AUTH_USER_URL,
+  STAFF_BASE_URL,
   UPDATE_SECTION_URL,
 } from "@/config/constants";
 import {
@@ -69,7 +70,6 @@ export interface StoreTokenRequest {
 
 export async function storeToken(request: StoreTokenRequest) {
   "use server";
-  console.log(request);
   cookies().set({
     name: "accessToken",
     value: request.access,
@@ -90,12 +90,22 @@ export async function storeToken(request: StoreTokenRequest) {
 export async function login(data: TAuthSchema) {
   "use server";
   try {
-    const response = await staffServiceAxiosClient.post("auth/login/", data);
-    await storeToken(response.data);
-    return response.data;
+    const res = await fetch("http://localhost:8000/api/auth/login/", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const response: StoreTokenRequest = await res.json();
+    if (!response.access) {
+      throw new Error("Invalid email or password");
+    }
+    await storeToken(response);
+    return response;
   } catch (err) {
     console.log(err);
-    throw new Error("couldn't login");
+    throw new Error("Something Went Wrong");
   }
 }
 
@@ -188,3 +198,47 @@ export const getAuthed = async () => {
     });
   }
 };
+
+
+
+// start auth service 
+
+export const sendOTP = async (email: string) => {
+  try {
+    const res = await fetch(`${STAFF_BASE_URL}/auth/send-otp/`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email })
+      });
+    const response = await res.json();
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
+
+
+export const resetPassword = async (email: string, code: string, password: string) => {
+  try {
+    const res = await fetch(`${STAFF_BASE_URL}/auth/reset-password/`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, code, password })
+      });
+
+    if (res.status != 202) {
+      return false
+    }
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
+
+// end auth service 
