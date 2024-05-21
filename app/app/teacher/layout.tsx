@@ -1,4 +1,6 @@
 import { SideBar } from "@/components/layouts/sidebar";
+import {sideBarItemsTeacher} from "@/data/side-bar-items";
+import Header from "@/components/layouts/header";
 
 export default function RootLayout({
   children,
@@ -6,9 +8,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="p-6 w-full h-full flex">
-      <SideBar role="teacher" sideBarItems={} />
-      <div>{children}</div>
-    </main>
+    <div className="w-full h-full flex">
+      <SideBar role="teacher" sideBarItems={sideBarItemsTeacher} />
+      <div className="flex-1 flex-col  h-full ">
+          <Header />
+          {children}
+      </div>
+    </div>
   );
 }

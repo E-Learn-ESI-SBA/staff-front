@@ -77,4 +77,5 @@ export type TPayload = {
   group: string;
   year: string;
   username: string;
+  avatar:string
 };

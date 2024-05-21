@@ -1,18 +1,16 @@
 "use server";
 import {
-  CREATE_FILE_URL,
-  CREATE_SECTION_URL,
-  GET_AUTH_USER_URL,
   STAFF_BASE_URL,
-  UPDATE_SECTION_URL,
 } from "@/config/constants";
 import {
-  TFileFormSchemaWithFile,
+
   TSectionFormSchema,
 } from "@/types/chapter/zod";
 import { cookies } from "next/headers";
 import { TAuthSchema } from "@/components/auth/login";
 import { TPayload } from "@/types";
+import {CREATE_SECTION_URL, UPDATE_SECTION_URL} from "@/config/urls/material/mutations";
+import {GET_AUTH_USER_URL} from "@/config/urls/staff/queries";
 
 type ReturnType = {
   success: boolean;

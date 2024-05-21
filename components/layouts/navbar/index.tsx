@@ -2,11 +2,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import link from "@/types/navbar";
-type Props = {
-  links: link[];
-};
-const Navbar = ({ links }: Props) => {
+import {Links} from "@/static/content/navbar";
+
+const Navbar = () => {
   const logoutHandler = () => {
     console.log("logout");
   };
@@ -27,7 +25,7 @@ const Navbar = ({ links }: Props) => {
         {/* <Image src='' alt='logo' width={0} height={0} sizes="100vw" className="h-12 w-24" /> */}
         <p className="text-2xl font-extrabold">Madaurus</p>
         <div className="hidden sm:flex justify-between items-center gap-4 ">
-          {links.map((link, index) => (
+          {Links.map((link, index) => (
             <Link
               key={index}
               href={link.url}

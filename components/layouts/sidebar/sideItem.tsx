@@ -30,7 +30,7 @@ export default function SideItem({ label, icon, url }: TProps) {
   return (
     <Link href={url} className="">
       <Button
-        className={`flex ${isActive ? "bg-blue-500 text-white" : "text-text bg-transparent"}  w-60  py-6 flex justify-start hover:bg-blue-500 hover:text-white gap-4 text-lg`}
+        className={`flex ${isActive ? "bg-blue-500 text-white" : "text-blue-origin bg-transparent"}  w-60  py-6 flex justify-start hover:bg-blue-500 hover:text-white gap-4 text-lg`}
       >
         <SideIcon icon={icon} />
         <p>{label}</p>

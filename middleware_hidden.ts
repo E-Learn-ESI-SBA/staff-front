@@ -3,9 +3,8 @@ import { NextRequest } from "next/server";
 import { protectedRoutes } from "@/config/routes";
 import { getAuth } from "@/app/actions";
 import { STUDENT, TEACHER } from "@/config/constants";
-import { cookies } from "next/headers";
 
-export async function middleware(request: NextRequest) {
+export async function middleware_hidden(request: NextRequest) {
   console.log("Middleware called");
   const { pathname } = request.nextUrl;
   const auth = await getAuth();
