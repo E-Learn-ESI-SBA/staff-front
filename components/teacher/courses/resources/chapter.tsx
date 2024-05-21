@@ -14,18 +14,16 @@ type Props = {
 };
 
 export function ChapterComponent({ chapter, pathname, year, index }: Props) {
-  const {
-    setFormState,
-    currentMap,
-    setSelectedChapter,
-  } = useModuleTreeStore((state) => ({
-    setFormState: state.setFormState,
-    formState: state.formState,
-    setButtonLoading: state.setButtonLoading,
-    buttonLoading: state.buttonLoading,
-    setSelectedChapter: state.setSelectedChapter,
-    currentMap: state.currentMap,
-  }));
+  const { setFormState, currentMap, setSelectedChapter } = useModuleTreeStore(
+    (state) => ({
+      setFormState: state.setFormState,
+      formState: state.formState,
+      setButtonLoading: state.setButtonLoading,
+      buttonLoading: state.buttonLoading,
+      setSelectedChapter: state.setSelectedChapter,
+      currentMap: state.currentMap,
+    }),
+  );
   const setEdit = () => {
     setSelectedChapter(
       { name: chapter.name, description: chapter.description, id: chapter.id },
@@ -47,20 +45,10 @@ export function ChapterComponent({ chapter, pathname, year, index }: Props) {
         </div>
         <div className="flex gap-2 z-50 items-center">
           <Button variant="ghost" onClick={setAdd}>
-            <Plus
-              width={14}
-              height={14}
-              className="text-text-GRAY"
-
-            />
+            <Plus width={14} height={14} className="text-text-GRAY" />
           </Button>
-          <Button variant="ghost" onClick={setEdit} >
-            <Pencil
-              width={14}
-              height={14}
-              className="text-black"
-
-            />
+          <Button variant="ghost" onClick={setEdit}>
+            <Pencil width={14} height={14} className="text-black" />
           </Button>
           <Button variant="ghost">
             <Trash2 width={14} height={14} className="text-red-origin" />

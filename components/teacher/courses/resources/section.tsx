@@ -54,7 +54,6 @@ export function SectionComponent({
     }
   };
   const setEdit = () => {
-
     setSelectedSection(
       { name: section.name, id: section.id },
       { selectedCourse: parentIndex, selectedSection: index },
@@ -69,7 +68,6 @@ export function SectionComponent({
           Section :<span>{section.name}</span>
         </H3>
         <div className="flex gap-2 items-center z-20">
-
           <DropdownMenu>
             <DropdownMenuTrigger className="hover:bg-accent hover:text-accent-foreground cursor-pointer p-2.5 px-4 rounded-lg">
               <Plus width={14} height={14} className="text-text-GRAY" />
@@ -95,12 +93,7 @@ export function SectionComponent({
             </DropdownMenuContent>
           </DropdownMenu>
           <Button variant="ghost" onClick={setEdit}>
-            <Pencil
-              width={14}
-              height={14}
-              className="text-black"
-
-            />
+            <Pencil width={14} height={14} className="text-black" />
           </Button>
           <Button variant="ghost">
             <Trash2 width={14} height={14} className="text-red-origin" />
@@ -110,7 +103,7 @@ export function SectionComponent({
       <div className="flex flex-col gap-4 p-4">
         {section.videos.map((v, i) => (
           <Resource
-              groups={v.groups}
+            groups={v.groups}
             grandParentIndex={parentIndex}
             parentIndex={index}
             key={i}
@@ -125,7 +118,7 @@ export function SectionComponent({
         <Separator />
         {section.lectures.map((l, i) => (
           <Resource
-              groups={l.groups}
+            groups={l.groups}
             grandParentIndex={parentIndex}
             parentIndex={index}
             key={i}
@@ -140,7 +133,7 @@ export function SectionComponent({
         <Separator />
         {section.files.map((f, i) => (
           <Resource
-              groups={f.groups}
+            groups={f.groups}
             grandParentIndex={parentIndex}
             parentIndex={index}
             key={i}

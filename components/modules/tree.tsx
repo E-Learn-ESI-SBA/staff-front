@@ -11,7 +11,7 @@ import VideoForm from "@/components/forms/video";
 import { FileForm } from "@/components/forms/file";
 import { LectureForm } from "@/components/forms/lecture";
 import { useEffect } from "react";
-import {Icons} from "@/components/icons/icons";
+import { Icons } from "@/components/icons/icons";
 
 type Props = {
   modulesData: Module;
@@ -80,13 +80,15 @@ export function ModuleTree({ modulesData, path }: Props) {
               >
                 Cancel
               </Button>
-                             <Button
+              <Button
                 type="submit"
                 className="w-fit p-4"
                 disabled={buttonLoading}
               >
-
-                {buttonLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />} Save
+                {buttonLoading && (
+                  <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                )}{" "}
+                Save
               </Button>
             </div>
           </ChapterForm>
@@ -104,13 +106,15 @@ export function ModuleTree({ modulesData, path }: Props) {
               >
                 Cancel
               </Button>
-                             <Button
+              <Button
                 type="submit"
                 className="w-fit p-4"
                 disabled={buttonLoading}
               >
-
-                {buttonLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />} Save
+                {buttonLoading && (
+                  <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                )}{" "}
+                Save
               </Button>
             </div>
           </ChapterForm>
@@ -135,13 +139,15 @@ export function ModuleTree({ modulesData, path }: Props) {
               >
                 Cancel
               </Button>
-                             <Button
+              <Button
                 type="submit"
                 className="w-fit p-4"
                 disabled={buttonLoading}
               >
-
-                {buttonLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />} Save
+                {buttonLoading && (
+                  <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                )}{" "}
+                Save
               </Button>
             </div>
           </SectionForm>
@@ -164,8 +170,10 @@ export function ModuleTree({ modulesData, path }: Props) {
                 className="w-fit p-4"
                 disabled={buttonLoading}
               >
-                {buttonLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />} Save
-
+                {buttonLoading && (
+                  <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                )}{" "}
+                Save
               </Button>
             </div>
           </SectionForm>
@@ -199,8 +207,10 @@ export function ModuleTree({ modulesData, path }: Props) {
                 className="w-fit p-4"
                 disabled={buttonLoading}
               >
-                {buttonLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />} Save
-
+                {buttonLoading && (
+                  <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                )}{" "}
+                Save
               </Button>
             </div>
           </VideoForm>
@@ -227,7 +237,10 @@ export function ModuleTree({ modulesData, path }: Props) {
                 className="w-fit p-4"
                 disabled={buttonLoading}
               >
-                {buttonLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />} Save
+                {buttonLoading && (
+                  <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                )}{" "}
+                Save
               </Button>
             </div>
           </VideoForm>
@@ -254,13 +267,15 @@ export function ModuleTree({ modulesData, path }: Props) {
               >
                 Cancel
               </Button>
-                             <Button
+              <Button
                 type="submit"
                 className="w-fit p-4"
                 disabled={buttonLoading}
               >
-
-                {buttonLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />} Save
+                {buttonLoading && (
+                  <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                )}{" "}
+                Save
               </Button>
             </div>
           </FileForm>
@@ -278,13 +293,15 @@ export function ModuleTree({ modulesData, path }: Props) {
               >
                 Cancel
               </Button>
-                             <Button
+              <Button
                 type="submit"
                 className="w-fit p-4"
                 disabled={buttonLoading}
               >
-
-                {buttonLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />} Save
+                {buttonLoading && (
+                  <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                )}{" "}
+                Save
               </Button>
             </div>
           </FileForm>
@@ -305,13 +322,15 @@ export function ModuleTree({ modulesData, path }: Props) {
               >
                 Cancel
               </Button>
-                            <Button
+              <Button
                 type="submit"
                 className="w-fit p-4"
                 disabled={buttonLoading}
               >
-
-                {buttonLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />} Save
+                {buttonLoading && (
+                  <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                )}{" "}
+                Save
               </Button>
             </div>
           </LectureForm>

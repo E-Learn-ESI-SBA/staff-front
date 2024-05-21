@@ -25,9 +25,9 @@ type Props = {
     points: string[];
   };
   setClose: (value?: TModuleSchema) => void;
-  mode:"CREATE"|"UPDATE"
+  mode: "CREATE" | "UPDATE";
 };
-export function EditModule({ data, setClose,mode }: Props) {
+export function EditModule({ data, setClose, mode }: Props) {
   const form = useForm<TModuleSchema>({
     mode: "onSubmit",
     resolver: zodResolver(moduleSchemaValidator),

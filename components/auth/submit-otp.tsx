@@ -20,6 +20,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import useResetPassword from "@/lib/hooks/auth/reset";
 import { AuthOption } from "./auth";
+import { resetPassword, sendOTP } from "@/app/actions";
+import { toast } from "sonner";
 
 export const submitOTPSchema = z.object({
   email: z.string().email().min(2, "Email is required"),
@@ -44,16 +46,37 @@ export function SubmitOTP({
     },
   });
 
-  const { submitOTP } = useResetPassword();
   async function submitHandler(values: TSubmitOTPSchema) {
-    const { success } = await submitOTP(
+    const success = await resetPassword(
       values.email,
       values.code,
       values.password,
     );
+    console.log(success);
     if (success) {
-      setSelectedAuth("PASSWORD_RESET_SUCCESSFULLY");
+      toast.success("Success", {
+        style: {
+          backgroundColor: "green",
+          color: "white",
+        },
+      });
+      setTimeout(() => {
+        setSelectedAuth("PASSWORD_RESET_SUCCESSFULLY");
+      }, 3000);
+    } else {
+      toast.error("Something went wrong", {
+        style: {
+          backgroundColor: "red",
+          color: "white",
+        },
+      });
+      setTimeout(() => {
+        setSelectedAuth("RESET_PASSWORD");
+      }, 3000);
     }
+    // if (success) {
+    //   setSelectedAuth("PASSWORD_RESET_SUCCESSFULLY");
+    // }
   }
 
   return (

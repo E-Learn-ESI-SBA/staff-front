@@ -1,12 +1,12 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {Button} from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import link from "@/types/navbar";
-type Props ={
-  links:link[]
-}
-const Navbar = ({links}:Props) => {
+type Props = {
+  links: link[];
+};
+const Navbar = ({ links }: Props) => {
   const logoutHandler = () => {
     console.log("logout");
   };
@@ -38,14 +38,12 @@ const Navbar = ({links}:Props) => {
           ))}
         </div>
 
-          <Button
-            onClick={() => {
-              logoutHandler();
-            }}
-            className={`px-8 py-2 font-medium border rounded-tl-3xl rounded-br-3xl   ${path.substring(1) ? "border-modules-main" : ""} `}
-          >
-            Logout
-          </Button>
+        <Button
+          onClick={logoutHandler}
+          className={`px-8 py-2 font-medium border rounded-tl-3xl rounded-br-3xl   ${path.substring(1) ? "border-modules-main" : ""} `}
+        >
+          Logout
+        </Button>
       </div>
     </div>
   );

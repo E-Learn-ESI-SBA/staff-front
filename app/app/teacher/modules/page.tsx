@@ -7,10 +7,10 @@ import AlertError from "@/components/common/error";
 
 export default async function Modules() {
   const res = dummyModules;
-  const {data,error} = await useGetTeacherModules();
+  const { data, error } = await useGetTeacherModules();
   console.log(data);
   if (error) {
-    return <AlertError error={error} />
+    return <AlertError error={error} />;
   }
   return (
     <main className="p-6 w-full h-full">

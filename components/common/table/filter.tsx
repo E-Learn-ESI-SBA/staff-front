@@ -24,7 +24,11 @@ export function Filter<T>({
     .flatRows[0]?.getValue(column?.id!);
 
   const columnFilterValue = column?.getFilterValue();
-  const getFacetedUniqueValues = column?.getFacetedUniqueValues ?? function () {return new Map()}
+  const getFacetedUniqueValues =
+    column?.getFacetedUniqueValues ??
+    function () {
+      return new Map();
+    };
   const sortedUniqueValues = useMemo(
     () =>
       typeof firstValue === "number"

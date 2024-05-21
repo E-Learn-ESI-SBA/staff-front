@@ -80,14 +80,17 @@ const moduleTreeSlice: StateCreator<IModuleTreeSlice> = (set, get) => ({
   setButtonLoading: (buttonLoading) => set({ buttonLoading }),
   setFormState: (formState) => set({ formState }),
   onSubmit: (cb) => {
-    console.log("Submitting")
-      set((state) => ({ currentModule: cb(state.currentModule!), buttonLoading: false, formState: EditModal.CLOSE,currentMap: new Map<MapK, number>()
-            .set("selectedSection", -1)
-            .set("selectedCourse", -1)
-            .set("selectedResource", -1) }))
+    console.log("Submitting");
+    set((state) => ({
+      currentModule: cb(state.currentModule!),
+      buttonLoading: false,
+      formState: EditModal.CLOSE,
+      currentMap: new Map<MapK, number>()
+        .set("selectedSection", -1)
+        .set("selectedCourse", -1)
+        .set("selectedResource", -1),
+    }));
   },
-
-
 
   setSelectedSection: (selectedSection, indexes) => {
     set({

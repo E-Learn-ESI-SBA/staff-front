@@ -10,7 +10,8 @@ export interface SideBarItem {
     | "settings"
     | "logout"
     | "discussions"
-    | "schedules";
+    | "schedules"
+    | "modules";
   url: string;
   isActive?: boolean;
 }

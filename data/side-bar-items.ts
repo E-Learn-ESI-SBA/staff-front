@@ -1,34 +1,24 @@
 import { SideBarItem } from "@/types";
 
-export const sideBarItems: SideBarItem[] = [
+export const sideBarItemsTeacher: SideBarItem[] = [
   {
     label: "Dashboard",
     icon: "menu",
     url: "/app/u/s",
   },
   {
-    label: "Courses",
+    label: "Modules",
     icon: "courses",
-    url: "/dashboard/student/courses",
+    url: "/app/teacher/modules",
   },
   {
-    label: "Discussion",
-    icon: "discussions",
-    url: "/dashboard/student/discussion",
-  },
-  {
-    label: "Schedules",
-    icon: "schedules",
-    url: "/dashboard/student/schedules",
-  },
-  {
-    label: "My Account",
+    label: "Profile",
     icon: "profile",
-    url: "/dashboard/student/account",
+    url: "/app/",
   },
   {
     label: "Settings",
+    url: "/app/settings",
     icon: "settings",
-    url: "/dashboard/student/settings",
   },
 ];

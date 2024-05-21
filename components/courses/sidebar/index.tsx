@@ -4,7 +4,7 @@ import Image from "next/image";
 import year from "../../../public/courses/year.svg";
 import speciality from "../../../public/courses/speciality.svg";
 import { filters } from "@/static/content/coursesFilter";
-import {ArrowDown, ArrowUp} from "lucide-react";
+import { ArrowDown, ArrowUp } from "lucide-react";
 
 const Sidebar = () => {
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
@@ -52,7 +52,7 @@ const Sidebar = () => {
           {showFilters.category ? (
             <ArrowUp className="w-6 h-6 text-blue-origin" />
           ) : (
-            <ArrowDown className="w-6 h-6 text-blue-origin"  />
+            <ArrowDown className="w-6 h-6 text-blue-origin" />
           )}
         </button>
       </div>
@@ -78,11 +78,9 @@ const Sidebar = () => {
                   onClick={() => toggleFilter(`years-${category}`)}
                 >
                   {showFilters[`years-${category}`] ? (
-                      <ArrowUp className="w-6 h-6 text-blue-origin" />
-
+                    <ArrowUp className="w-6 h-6 text-blue-origin" />
                   ) : (
-                      <ArrowDown className="w-6 h-6 text-blue-origin" />
-
+                    <ArrowDown className="w-6 h-6 text-blue-origin" />
                   )}
                 </button>
               </div>
@@ -117,11 +115,9 @@ const Sidebar = () => {
                                 {showFilters[
                                   `specialities-${category}-${subcategory}`
                                 ] ? (
-                                    <ArrowUp className="w-6 h-6 text-blue-origin" />
-
+                                  <ArrowUp className="w-6 h-6 text-blue-origin" />
                                 ) : (
-                                    <ArrowDown className="w-6 h-6 text-blue-origin" />
-
+                                  <ArrowDown className="w-6 h-6 text-blue-origin" />
                                 )}
                               </button>
                             </div>

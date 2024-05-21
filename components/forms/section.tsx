@@ -20,7 +20,7 @@ import { toast } from "sonner";
 import { IError } from "@/types/errors";
 import { Chapter } from "@/types/chapter/courses";
 import { useModuleTreeStore } from "@/store/module/store";
-import {dummyMutationSuccess} from "@/static/mock";
+import { dummyMutationSuccess } from "@/static/mock";
 
 type Props = PropsWithChildren & {
   defaultValues?: TSectionFormSchema;
@@ -28,25 +28,25 @@ type Props = PropsWithChildren & {
 };
 export function SectionForm({
   defaultValues = {
-    name:"",
-    id:""
+    name: "",
+    id: "",
   },
   mode = "CREATE",
   children,
 }: Props) {
-  const { onSubmit, currentMap,setButtonLoading, onError } = useModuleTreeStore((state) => ({
-    onSubmit: state.onSubmit,
-    currentMap: state.currentMap,
-    onError: state.onError,
-    setButtonLoading: state.setButtonLoading,
-
-  }));
+  const { onSubmit, currentMap, setButtonLoading, onError } =
+    useModuleTreeStore((state) => ({
+      onSubmit: state.onSubmit,
+      currentMap: state.currentMap,
+      onError: state.onError,
+      setButtonLoading: state.setButtonLoading,
+    }));
   const formAction = mode === "CREATE" ? createSection : updateSection;
   const ID = useId();
   const submitHandler = async (v: TSectionFormSchema): Promise<void> => {
     try {
-      setButtonLoading(true)
-      const { data, error } = await dummyMutationSuccess()
+      setButtonLoading(true);
+      const { data, error } = await dummyMutationSuccess();
       if (error) {
         toast.error(error.message, {
           style: {
@@ -92,11 +92,11 @@ export function SectionForm({
           courseIndex === -1 ||
           sectionIndex === -1
         ) {
-          console.log("Here ...")
+          console.log("Here ...");
           return prev;
         }
         prev.courses[courseIndex].sections[sectionIndex].name = v.name;
-        console.log("Here 22 ...")
+        console.log("Here 22 ...");
 
         return prev;
       });
@@ -121,23 +121,25 @@ export function SectionForm({
   return (
     <Form {...form}>
       <form
-          onSubmit={form.handleSubmit(submitHandler)}
-          className="space-y-8 flex flex-col gap-4    py-4"
+        onSubmit={form.handleSubmit(submitHandler)}
+        className="space-y-8 flex flex-col gap-4    py-4"
       >
-        <h2 className="text-lg font-semibold">{mode === "UPDATE" ? "Edit" : "Create"} Section </h2>
+        <h2 className="text-lg font-semibold">
+          {mode === "UPDATE" ? "Edit" : "Create"} Section{" "}
+        </h2>
 
         <FormField
-            control={form.control}
-            name="name"
-            render={({field}) => (
-                <FormItem className="w-full">
-                  <FormLabel>Section Title</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter The title here..." {...field} />
-                  </FormControl>
-                  <FormMessage/>
-                </FormItem>
-            )}
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem className="w-full">
+              <FormLabel>Section Title</FormLabel>
+              <FormControl>
+                <Input placeholder="Enter The title here..." {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
         />
         {children}
       </form>

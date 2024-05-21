@@ -20,6 +20,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { login } from "@/app/actions";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export const authSchema = z.object({
   email: z.string().email().min(2, "Email is required"),
@@ -39,11 +40,27 @@ export function SignInAccount() {
     },
   });
   const submitHandler = async (data: TAuthSchema) => {
-    const response = await login(data);
-    localStorage.setItem("accessToken", response["access"]);
-    router.replace("/");
-    // console.log(response.data)
-    // console.log(response);
+    try {
+      const response = await login(data);
+      localStorage.setItem("accessToken", response["access"]);
+      toast.success("Login successful", {
+        style: {
+          backgroundColor: "green",
+          color: "white",
+        },
+      });
+      setTimeout(() => {
+        router.replace("/");
+      }, 3000);
+    } catch (e: any) {
+      console.log(e);
+      toast.error(e.message, {
+        style: {
+          backgroundColor: "red",
+          color: "white",
+        },
+      });
+    }
   };
   return (
     <Form {...form}>

@@ -1,7 +1,7 @@
 import { Delete, File, Film } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dispatch, SetStateAction } from "react";
-import {humanFileSize} from "@/utils/utils";
+import { humanFileSize } from "@/utils/utils";
 
 export const FileComp = ({
   f,

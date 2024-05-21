@@ -1,7 +1,7 @@
 "use client";
 import { Filter } from "@/components/common/filter";
 import { Module } from "@/types/chapter/courses";
-import {  useState } from "react";
+import { useState } from "react";
 import { ModuleCard } from "@/components/modules/card";
 import appRouter from "@/config/routes";
 import Link from "next/link";
