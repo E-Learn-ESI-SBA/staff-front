@@ -12,7 +12,9 @@ export default function RootLayout({
       <SideBar role="teacher" sideBarItems={sideBarItemsTeacher} />
       <div className="flex-1 flex-col  h-full ">
           <Header />
+          <div className="p-6">
           {children}
+          </div>
       </div>
     </div>
   );

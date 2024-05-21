@@ -43,7 +43,7 @@ export function ChapterComponent({ chapter, pathname, year, index }: Props) {
           <span>Chapter {chapter.order}:</span>
           <span>{chapter.name}</span>
         </div>
-        <div className="flex gap-2 z-50 items-center">
+        <div className="flex gap-2  items-center">
           <Button variant="ghost" onClick={setAdd}>
             <Plus width={14} height={14} className="text-text-GRAY" />
           </Button>
