@@ -5,8 +5,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <main className="p-6">
-
+        <main className="p-6 w-full h-full">
         {children}
         </main>
     );

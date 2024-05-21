@@ -69,24 +69,25 @@ export function SectionComponent({
           Section :<span>{section.name}</span>
         </H3>
         <div className="flex gap-2 items-center z-20">
+
           <DropdownMenu>
-            <DropdownMenuTrigger>
+            <DropdownMenuTrigger className="hover:bg-accent hover:text-accent-foreground cursor-pointer p-2.5 px-4 rounded-lg">
               <Plus width={14} height={14} className="text-text-GRAY" />
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuLabel>Select the Resource Type</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>
+              <DropdownMenuItem className="cursor-pointer">
                 <span onClick={() => setAdd(ResourceEnum.File)}>
                   Create File
                 </span>
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem className="cursor-pointer">
                 <span onClick={() => setAdd(ResourceEnum.Video)}>
                   Create Video
                 </span>
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem className="cursor-pointer">
                 <span onClick={() => setAdd(ResourceEnum.Lecture)}>
                   Create Lecture
                 </span>

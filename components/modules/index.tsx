@@ -1,7 +1,7 @@
 "use client";
 import { Filter } from "@/components/common/filter";
 import { Module } from "@/types/chapter/courses";
-import { Dispatch, SetStateAction, useState } from "react";
+import {  useState } from "react";
 import { ModuleCard } from "@/components/modules/card";
 import appRouter from "@/config/routes";
 import Link from "next/link";
@@ -12,7 +12,7 @@ type Props = {
 export default function ModulesPage({ data }: Props) {
   const [filteredData, setFilteredData] = useState<Module[]>(data);
   return (
-    <div className="flex flex-col p-4 overflow-hidden  gap-8">
+    <div className="flex flex-col p-4  gap-8">
       <Filter
         data={data}
         filters={[
@@ -28,7 +28,7 @@ export default function ModulesPage({ data }: Props) {
         setFilteredData={setFilteredData}
         withSearch
       />
-      <div className="grid gap-8 gridview">
+      <div className="flex items-center justify-items-start gap-6 h-full ">
         {filteredData.map((module, i) => (
           <Link
             key={i}
@@ -36,7 +36,7 @@ export default function ModulesPage({ data }: Props) {
               appRouter.getPath("module") &&
               appRouter.getPath("module").concat("/", module.id!)
             }
-            className="hover:shadow-lg hover:scale-105 transition-all duration-300 ease-in-out"
+            className="hover:scale-105 transition-all duration-300 ease-in-out"
           >
             <ModuleCard data={module} />
           </Link>

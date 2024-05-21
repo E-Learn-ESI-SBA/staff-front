@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   icons: ["/assets/icons/logo.jpg"],
 };
 import "./globals.css";
+import {cn} from "@/lib/utils";
 
 export default function RootLayout({
   children,
@@ -22,8 +23,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" title="Madaurus">
-      <body className={monts.className}>
+    <html lang="en" title="Madaurus" className="w-full h-full">
+      <body className={cn(monts.className,"w-full h-full")}>
         {children}
         <Toaster />
       </body>

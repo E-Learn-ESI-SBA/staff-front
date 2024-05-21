@@ -17,7 +17,7 @@ export const useGetTeacherModules = async (): Promise<IResponse<Module[]>> => {
       data?: Module[];
       message?: string;
     };
-    if (response.status != 200) {
+    if (!response.ok) {
       return {
         status: response.status,
         data: [],
@@ -39,6 +39,7 @@ export const useGetTeacherModules = async (): Promise<IResponse<Module[]>> => {
       status: response.status,
     };
   } catch (e) {
+    console.log("error",e)
     const err = new IError(e);
     return {
       status: 500,

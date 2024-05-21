@@ -6,7 +6,7 @@ type Props = {
 };
 export const ModuleCard: React.FC<Props> = ({ data }) => {
   return (
-    <div className="rounded-2xl min-w-72 text-cards-main bg-white shadow-xl ">
+    <div className="rounded-2xl min-w-72 text-cards-main bg-white shadow-lg  ">
       <Image
         src="/store/img.jpg"
         alt="course picture"
