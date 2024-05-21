@@ -50,7 +50,7 @@ export default function Following() {
         >
           <div className="flex justify-start gap-4">
             <Image
-              src={user.image}
+              src={user.image ?? "/store/img.jpg"}
               alt="profile pic"
               width={0}
               height={0}

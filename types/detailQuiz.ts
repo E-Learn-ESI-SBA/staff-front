@@ -5,10 +5,14 @@ type Answer = {
 
 export type Question = {
   id: number;
-  questionText: string;
   answers: Answer[];
-  correctAnswerId: number;
-  selectedAnswerId?: number | null;
+  image?: string;
+  body?: string;
+  options?: {
+    id: string;
+    option: string;
+  }[];
+
 };
 
 export default interface Quiz {

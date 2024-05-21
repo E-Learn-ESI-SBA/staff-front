@@ -1,17 +1,20 @@
-//@ts-nocheck
 "use client";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { useState, useEffect } from "react";
+import {useState, useEffect, useCallback} from "react";
 import { questions } from "@/static/content/Quiz";
 import Link from "next/link";
-import { json } from "stream/consumers";
 
 let duration = 5;
 let title = "Web Quiz";
 
+type TAnswer = {
+    questionId: string;
+    choices: string[];
+    };
+
 export default function PassQuiz() {
-  const [answers, setAnswers] = useState(
+  const [answers, setAnswers] = useState<TAnswer[]>(
     questions.map((question) => ({
       questionId: question.id,
       choices: [],
@@ -25,13 +28,13 @@ export default function PassQuiz() {
     setIsLeaving(false); // Reset leaving intent
   };
 
-  const formatTime = (seconds) => {
+  const formatTime = (seconds: number) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
     return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
   };
 
-  const handleOptionChange = (questionIndex, optionId) => {
+  const handleOptionChange = (questionIndex:number, optionId: string) => {
     const newAnswers = [...answers];
     const currentChoices = newAnswers[questionIndex].choices;
     if (currentChoices.includes(optionId)) {
@@ -44,7 +47,7 @@ export default function PassQuiz() {
     setAnswers(newAnswers);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = useCallback(async () => {
     const submission = {
       studentId: "student123",
       quizId: "quiz123",
@@ -60,7 +63,7 @@ export default function PassQuiz() {
           "Content-Type": "application/json",
           Authorization: `Bearer `,
         },
-        body: submission,
+        body: JSON.stringify(submission),
       });
 
       if (response.ok) {
@@ -71,7 +74,7 @@ export default function PassQuiz() {
     } catch (error) {
       console.error("Error submitting quiz:", error);
     }
-  };
+  },[answers]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -86,7 +89,7 @@ export default function PassQuiz() {
       });
     }, 1000);
 
-    const handleBeforeUnload = (event) => {
+    const handleBeforeUnload = (event: BeforeUnloadEvent ) => {
       event.preventDefault();
       event.returnValue = "i know it is going to be ovverided by browser";
     };

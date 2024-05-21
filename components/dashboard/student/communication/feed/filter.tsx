@@ -1,4 +1,4 @@
-import { Flame } from "lucide-react";
+import {Flame, LucideIcon} from "lucide-react";
 import { Rocket } from "lucide-react";
 import { Sparkle } from "lucide-react";
 import { ArrowUpFromDot } from "lucide-react";
@@ -43,7 +43,14 @@ export default function Filter() {
   );
 }
 
-function Item({ Icon, text, active, onClick }) {
+type Props = {
+    Icon: LucideIcon;
+    text: string;
+    active: boolean;
+    onClick: (text: string) => void;
+    };
+
+function Item({ Icon, text, active, onClick }:Props) {
   return (
     <div
       onClick={() => onClick(text)}

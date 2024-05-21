@@ -1,7 +1,7 @@
 "use client";
-import { useCallback, useEffect, useState } from "react";
-import { useDropzone } from "react-dropzone";
-import { CircleX, FileUp } from "lucide-react";
+import {FormEvent, useCallback, useEffect, useState} from "react";
+import {FileRejection, useDropzone} from "react-dropzone";
+import {CircleX, FileUp} from "lucide-react";
 import { useAssignmentFormStore } from "@/store/forms/assignments/question.store";
 
 const Submission = () => {
@@ -10,10 +10,10 @@ const Submission = () => {
     prevStep: state.prevStep,
     first_step_content: state.first_step_content,
   }));
-  const [files, setFiles] = useState([]);
-  const [rejected, setRejected] = useState([]);
+  const [files, setFiles] = useState<File[]>([]);
+  const [rejected, setRejected] = useState<FileRejection[]>([]);
 
-  const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
+  const onDrop = useCallback((acceptedFiles: File[], rejectedFiles:FileRejection[]) => {
     if (acceptedFiles?.length) {
       setFiles((previousFiles) => [
         ...previousFiles,
@@ -38,10 +38,11 @@ const Submission = () => {
 
   useEffect(() => {
     // Revoke the data uris to avoid memory leaks
+    //@ts-ignore
     return () => files.forEach((file) => URL.revokeObjectURL(file.preview));
   }, [files]);
 
-  const removeFile = (name) => {
+  const removeFile = (name:string) => {
     setFiles((files) => files.filter((file) => file.name !== name));
   };
 
@@ -50,11 +51,11 @@ const Submission = () => {
     setRejected([]);
   };
 
-  const removeRejected = (name) => {
+  const removeRejected = (name:string) => {
     setRejected((files) => files.filter(({ file }) => file.name !== name));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e:FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!files?.length) return;
     const formData = new FormData();

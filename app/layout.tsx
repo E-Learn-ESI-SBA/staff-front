@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import "./prosemirror.css";
-import { Montserrat } from "next/font/google";
+import { Almarai } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
-const monts = Montserrat({
-  weight: ["300", "400", "500", "600", "700"],
-  subsets: ["latin"],
+const monts = Almarai({
+  weight: ["400","300","700","800"],
+  subsets: ["arabic"],
   style: ["normal"],
-  variable: "--font-montserrat",
   display: "swap",
 });
 export const metadata: Metadata = {
@@ -23,8 +22,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" title="Madaurus" className="w-full h-full">
-      <body className={cn(monts.className, "w-full h-full")}>
+    <html lang="en" title="Madaurus" className={monts.className}>
+      <body className="w-full h-full">
         {children}
         <Toaster />
       </body>

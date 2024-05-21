@@ -96,8 +96,8 @@ export default function Questions({ form, index }: any) {
 
       {form.formState?.errors.questions && (
         <>
-          {Object.keys(form.formState.errors.questions).map((key) => (
-            <p>
+          {Object.keys(form.formState.errors.questions).map((key,i) => (
+            <p key={i}>
               {" "}
               {key == index && (
                 <TypographyP className="indent-6 text-red-600 my-5 text-sm">

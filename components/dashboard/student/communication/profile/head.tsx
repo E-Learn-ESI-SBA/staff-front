@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import React from "react";
 
-type props = {
+type Props = {
   image: string;
   first_name: string;
   last_name: string;
@@ -25,7 +25,7 @@ export const Head = ({
   address,
   education,
   previous_education,
-}) => {
+}:Props) => {
   return (
     <div>
       <Image src={image} alt="head" width={1920} height={1080} />

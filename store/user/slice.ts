@@ -8,6 +8,7 @@ type TUserStore = {
   isAuth: boolean;
   setUser: (user: TPayload) => void;
   setAuth: (auth: boolean) => void;
+  clearUser: () => void;
 };
 
 const userSlice: StateCreator<TUserStore> = (set, get) => ({
@@ -26,6 +27,7 @@ const userSlice: StateCreator<TUserStore> = (set, get) => ({
       },
         isAuth:true
     })),
+    clearUser: () => set((state) => ({ ...state, user: null, isAuth: false })),
 
 });
 

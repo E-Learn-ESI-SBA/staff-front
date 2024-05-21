@@ -24,16 +24,15 @@ export function Filter<T>({
     .flatRows[0]?.getValue(column?.id!);
 
   const columnFilterValue = column?.getFilterValue();
-  const getFacetedUniqueValues =
-    column?.getFacetedUniqueValues ??
-    function () {
-      return new Map();
-    };
+  const getFacetedUniqueValues = useMemo(() => {
+      const facetedUniqueValues = column?.getFacetedUniqueValues() ?? new Map();
+        return facetedUniqueValues
+  }, [column?.getFacetedUniqueValues]);
   const sortedUniqueValues = useMemo(
     () =>
       typeof firstValue === "number"
         ? []
-        : Array.from(getFacetedUniqueValues().keys()).sort(),
+        : Array.from(getFacetedUniqueValues.keys()).sort(),
     [getFacetedUniqueValues, firstValue],
   );
 

@@ -18,9 +18,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import useResetPassword from "@/lib/hooks/auth/reset";
 import { AuthOption } from "./auth";
-import { resetPassword, sendOTP } from "@/app/actions";
+import { resetPassword } from "@/app/actions";
 import { toast } from "sonner";
 
 export const submitOTPSchema = z.object({
