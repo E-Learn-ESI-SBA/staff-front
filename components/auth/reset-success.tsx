@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import Image from "next/image";
 import checkMark from "../../public/assets/auth/Check.png";
 import { AuthOption } from "./auth";

@@ -21,6 +21,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { login } from "@/app/actions";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import jsCookie from "js-cookie";
+import {IError} from "@/types/errors";
+import {useUserStore} from "@/store/user";
+import {TPayload} from "@/types";
 
 export const authSchema = z.object({
   email: z.string().email().min(2, "Email is required"),
@@ -30,6 +34,9 @@ export const authSchema = z.object({
 export type TAuthSchema = z.infer<typeof authSchema>;
 
 export function SignInAccount() {
+  const {setUser} = useUserStore(state => ({
+    setUser: state.setUser,
+  }))
   const router = useRouter();
   const form = useForm<TAuthSchema>({
     mode: "onChange",
@@ -42,7 +49,10 @@ export function SignInAccount() {
   const submitHandler = async (data: TAuthSchema) => {
     try {
       const response = await login(data);
-      localStorage.setItem("accessToken", response["access"]);
+      const accessToken = response["access"]
+      jsCookie.set("accessToken", accessToken);
+      const payload = JSON.parse(atob(accessToken.split(".")[1])) as TPayload
+      setUser(payload)
       toast.success("Login successful", {
         style: {
           backgroundColor: "green",
@@ -53,8 +63,8 @@ export function SignInAccount() {
         router.replace("/");
       }, 3000);
     } catch (e: any) {
-      console.log(e);
-      toast.error(e.message, {
+      const err  = new IError(e)
+      toast.error(err.message, {
         style: {
           backgroundColor: "red",
           color: "white",

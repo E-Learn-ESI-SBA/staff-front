@@ -5,5 +5,7 @@ import { devtools } from "zustand/middleware";
 export const useModuleTreeStore = create<IModuleTreeSlice>()(
   devtools((...a) => ({
     ...moduleTreeSlice(...a),
-  })),
+  }),{
+      name: "moduleTree"
+  }),
 );

@@ -10,11 +10,11 @@ import {
   EditorRoot,
   type JSONContent,
 } from "novel";
-import { ImageResizer, handleCommandNavigation } from "novel/dist/extensions";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { ImageResizer, handleCommandNavigation } from "novel/extensions";
+import {  useEffect, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { defaultExtensions } from "./extensions";
-import { handleImageDrop, handleImagePaste } from "novel/dist/plugins";
+import { handleImageDrop, handleImagePaste } from "novel/plugins";
 import { uploadFn } from "./image-upload";
 import { slashCommand, suggestionItems } from "./slash-command";
 import { Button } from "@/components/ui/button";

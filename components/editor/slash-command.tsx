@@ -15,7 +15,7 @@ import {
   createSuggestionItems,
   Command,
   renderItems,
-} from "novel/dist/extensions";
+} from "novel/extensions";
 import { uploadFn } from "./image-upload";
 
 export const suggestionItems = createSuggestionItems([

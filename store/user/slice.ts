@@ -1,25 +1,18 @@
 import { StateCreator } from "zustand";
+import {TPayload} from "@/types";
 
-type TUser = {
-  email: string;
-};
+
 
 type TUserStore = {
-  user: TUser;
+  user: TPayload | null
   isAuth: boolean;
-  access: string;
-  refresh: string;
-  setUser: (user: TUser) => void;
+  setUser: (user: TPayload) => void;
   setAuth: (auth: boolean) => void;
-  setAccess: (access: string) => void;
-  setRefresh: (refresh: string) => void;
 };
 
 const userSlice: StateCreator<TUserStore> = (set, get) => ({
   user: null,
   isAuth: false,
-  access: null,
-  refresh: null,
   setAuth: (auth) =>
     set((state) => ({
       ...state,
@@ -31,18 +24,10 @@ const userSlice: StateCreator<TUserStore> = (set, get) => ({
       user: {
         ...user,
       },
+        isAuth:true
     })),
-  setAccess: (access) =>
-    set((state) => ({
-      ...state,
-      access,
-    })),
-  setRefresh: (refresh) =>
-    set((state) => ({
-      ...state,
-      refresh,
-    })),
+
 });
 
 export { userSlice };
-export type { TUserStore, TUser };
+export type { TUserStore };

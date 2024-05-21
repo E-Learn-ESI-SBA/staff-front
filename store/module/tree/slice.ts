@@ -1,10 +1,5 @@
 import {
-  Chapter,
-  Lecture,
   Module,
-  Section,
-  File,
-  Video,
   ResourceEnum,
 } from "@/types/chapter/courses";
 import { EditModal } from "@/types/forms/state";
@@ -16,8 +11,6 @@ import {
   TSectionFormSchema,
   TVideoSchema,
 } from "@/types/chapter/zod";
-import firebase from "firebase/compat";
-import functions = firebase.functions;
 
 type MapK = "selectedCourse" | "selectedSection" | "selectedResource";
 type Indexes = {

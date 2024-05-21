@@ -1,5 +1,4 @@
 import EditorComp from "@/components/editor";
-import { useState } from "react";
 import { JSONContent } from "novel";
 
 export function LectureTeacher() {
