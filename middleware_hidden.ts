@@ -3,18 +3,19 @@ import { NextRequest } from "next/server";
 import { protectedRoutes } from "@/config/routes";
 import { getAuth } from "@/app/actions";
 import { STUDENT, TEACHER } from "@/config/constants";
+import { cookies } from "next/headers";
 
-export async function middleware_hidden(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   console.log("Middleware called");
   const { pathname } = request.nextUrl;
   const auth = await getAuth();
 
-  if (pathname.match("/auth") && auth.isAuth) {
+  if(pathname.match("/auth") && !pathname.match("/auth") && auth.isAuth){
     console.log("Redirecting to /");
     return NextResponse.redirect(new URL("/", request.url));
   }
 
-  if (!pathname.match(/\/app\/*/)) {
+  if (!pathname.match(/\/app\/*/) && !pathname.match("/auth/logout")) {
     return NextResponse.next();
   }
 
@@ -35,5 +36,7 @@ export async function middleware_hidden(request: NextRequest) {
   NextResponse.redirect(new URL("/", request.url));
 }
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+  matcher: [
+  "/((?!api|_next/static|_next/image|favicon.ico).*)",
+  ],
 };

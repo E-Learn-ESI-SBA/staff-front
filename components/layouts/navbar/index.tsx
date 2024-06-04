@@ -1,13 +1,12 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import {Links} from "@/static/content/navbar";
+import { Links } from "@/static/content/navbar";
+import { useUserStore } from "@/store/user";
 
 const Navbar = () => {
-  const logoutHandler = () => {
-    console.log("logout");
-  };
+  const isLoggedIn = useUserStore((state) => state.isAuth);
+
   const path = usePathname();
   const isActiveLink = (url: string) => {
     return (
@@ -36,12 +35,10 @@ const Navbar = () => {
           ))}
         </div>
 
-        <Button
-          onClick={logoutHandler}
-          className={`px-8 py-2 font-medium border rounded-tl-3xl rounded-br-3xl   ${path.substring(1) ? "border-modules-main" : ""} `}
-        >
-          Logout
-        </Button>
+        <Link href={isLoggedIn ? "/auth/logout" : "/auth"}
+          className={`px-8 py-2 font-medium border rounded-tl-3xl rounded-br-3xl ${path.substring(1) ? "border-modules-main" : ""}`}>
+          {isLoggedIn ? "Logout" : "Login"}
+        </Link>
       </div>
     </div>
   );
