@@ -21,10 +21,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { login } from "@/app/actions";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import jsCookie from "js-cookie";
-import {IError} from "@/types/errors";
-import {useUserStore} from "@/store/user";
-import {TPayload} from "@/types";
+import { IError } from "@/types/errors";
+import { useUserStore } from "@/store/user";
+import { TPayload } from "@/types";
 
 export const authSchema = z.object({
   email: z.string().email().min(2, "Email is required"),
@@ -34,7 +33,7 @@ export const authSchema = z.object({
 export type TAuthSchema = z.infer<typeof authSchema>;
 
 export function SignInAccount() {
-  const {setUser} = useUserStore(state => ({
+  const { setUser } = useUserStore(state => ({
     setUser: state.setUser,
   }))
   const router = useRouter();
@@ -50,7 +49,6 @@ export function SignInAccount() {
     try {
       const response = await login(data);
       const accessToken = response["access"]
-      jsCookie.set("accessToken", accessToken);
       const payload = JSON.parse(atob(accessToken.split(".")[1])) as TPayload
       setUser(payload)
       toast.success("Login successful", {
@@ -63,7 +61,7 @@ export function SignInAccount() {
         router.replace("/");
       }, 3000);
     } catch (e: any) {
-      const err  = new IError(e)
+      const err = new IError(e)
       toast.error(err.message, {
         style: {
           backgroundColor: "red",
@@ -86,7 +84,7 @@ export function SignInAccount() {
             use your email/password combination to login
           </CardDescription>
         </CardHeader>
-        {}
+        { }
         <CardContent className="grid gap-4">
           <FormField
             control={form.control}

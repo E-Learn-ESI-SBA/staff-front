@@ -9,8 +9,8 @@ import {
 import { cookies } from "next/headers";
 import { TAuthSchema } from "@/components/auth/login";
 import { TPayload } from "@/types";
-import {CREATE_SECTION_URL, UPDATE_SECTION_URL} from "@/config/urls/material/mutations";
-import {GET_AUTH_USER_URL} from "@/config/urls/staff/queries";
+import { CREATE_SECTION_URL, UPDATE_SECTION_URL } from "@/config/urls/material/mutations";
+import { GET_AUTH_USER_URL } from "@/config/urls/staff/queries";
 
 type ReturnType = {
   success: boolean;
@@ -88,7 +88,7 @@ export async function storeToken(request: StoreTokenRequest) {
 export async function login(data: TAuthSchema) {
   "use server";
   try {
-    const res = await fetch("http://localhost:8000/api/auth/admin-login/", {
+    const res = await fetch(STAFF_BASE_URL + "/auth/login/", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -104,6 +104,18 @@ export async function login(data: TAuthSchema) {
   } catch (err) {
     console.log(err);
     throw new Error("Something Went Wrong");
+  }
+}
+
+export async function logout(): Promise<Boolean> {
+  "use server"
+  try {
+    cookies().delete("accessToken");
+    cookies().delete("refreshToken");
+    cookies().delete("csrftoken");
+    return true;
+  } catch (e) {
+    return false;
   }
 }
 
