@@ -33,7 +33,7 @@ function Person({ data }: PersonProps) {
         </Avatar>
         <div className="flex flex-col">
           <p className="font-bold text-xl">{data.username}</p>
-          <p className=" text-base font-semibold text-gray-thin">
+          <p className=" text-base text-gray-500">
             {data.summary}
           </p>
         </div>

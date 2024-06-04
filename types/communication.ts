@@ -1,7 +1,13 @@
 export interface PostProps {
   id: string;
-  body: string;
-  img?: string;
+  text: string;
+  images: string[];
+  header: string;
+  upvotes_count: number;
+  downvotes_count: number;
+  comments_count: number;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface PostsProps {
