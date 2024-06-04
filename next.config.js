@@ -16,6 +16,12 @@ const nextConfig = {
         port: "",
         pathname: "/v0/b/madaurus-71e46.appspot.com/o/**",
       },
+      {
+        hostname: "i.imgur.com",
+        port: "",
+        pathname: "/*",
+        protocol: "https",
+      }
     ],
   },
 };
