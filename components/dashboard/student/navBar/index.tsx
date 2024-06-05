@@ -3,7 +3,7 @@ import SearchIn from "./search";
 import Icon from "./icon";
 import Image from "next/image";
 
-type Props = {
+type Props = {  
   title: string;
 };
 export default function NavBar({ title }: Props) {

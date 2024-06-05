@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { Card, CardFooter } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
