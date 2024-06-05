@@ -1,7 +1,8 @@
+//@ts-nocheck
 "use client";
-import {FormEvent, useCallback, useEffect, useState} from "react";
-import {FileRejection, useDropzone} from "react-dropzone";
-import {CircleX, FileUp} from "lucide-react";
+import { useCallback, useEffect, useState } from "react";
+import { useDropzone } from "react-dropzone";
+import { CircleX, FileUp } from "lucide-react";
 import { useAssignmentFormStore } from "@/store/forms/assignments/question.store";
 
 const Submission = () => {
@@ -10,10 +11,10 @@ const Submission = () => {
     prevStep: state.prevStep,
     first_step_content: state.first_step_content,
   }));
-  const [files, setFiles] = useState<File[]>([]);
-  const [rejected, setRejected] = useState<FileRejection[]>([]);
+  const [files, setFiles] = useState([]);
+  const [rejected, setRejected] = useState([]);
 
-  const onDrop = useCallback((acceptedFiles: File[], rejectedFiles:FileRejection[]) => {
+  const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
     if (acceptedFiles?.length) {
       setFiles((previousFiles) => [
         ...previousFiles,
@@ -38,11 +39,10 @@ const Submission = () => {
 
   useEffect(() => {
     // Revoke the data uris to avoid memory leaks
-    //@ts-ignore
     return () => files.forEach((file) => URL.revokeObjectURL(file.preview));
   }, [files]);
 
-  const removeFile = (name:string) => {
+  const removeFile = (name) => {
     setFiles((files) => files.filter((file) => file.name !== name));
   };
 
@@ -51,21 +51,54 @@ const Submission = () => {
     setRejected([]);
   };
 
-  const removeRejected = (name:string) => {
+  const removeRejected = (name) => {
     setRejected((files) => files.filter(({ file }) => file.name !== name));
   };
 
-  const handleSubmit = async (e:FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!files?.length) return;
+    
     const formData = new FormData();
+    console.log('files', files);
+  
+    // Append files to FormData
     files.forEach((file, index) => {
-      formData.append(`file${index}`, file);
+      formData.append(`file`, file);
     });
-    console.log("Submitted form");
-    console.log("step1", first_step_content);
-    console.log("step2", formData);
+    let date = new Date(first_step_content.deadline);
+    let formattedDate = date.toISOString().split('T')[0]; 
+    let time = date.toTimeString().split(' ')[0];
+    
+    first_step_content.deadline  = `${formattedDate} ${time}`;
+
+    Object.keys(first_step_content).forEach(key => {
+      formData.append(key, first_step_content[key]);
+    });
+  
+    console.log("Submitted form",formData);
+  
+    try {
+      const response = await fetch("https://89f8-105-235-137-89.ngrok-free.app/assignments", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4NTUxMzk3LCJpYXQiOjE3MTU5NTkzOTcsImp0aSI6IjYxN2EwNDU3MzNiNDQxNDlhNjY5Y2ZmMjkzOGQ3ZWFlIiwiaWQiOiIyMjNlYmU5Yi1jMWMyLTQ5M2EtYTdiYS02OThhOTM1NjdkYmUiLCJhdmF0YXIiOiJkZWZhdWx0IiwidXNlcm5hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AaG9zdC5jb20iLCJyb2xlIjoiYWRtaW4iLCJncm91cCI6Ik5vbmUiLCJ5ZWFyIjoiTm9uZSJ9.2UFOb8hOBkfnGpWHgkQdJcnbK6YwqbEtn9aIFA-FNBc`
+        },
+        body: formData
+      });
+  
+      console.log('FormData', formData);
+  
+      if (response.ok) {
+        console.log("Quiz submitted successfully", response);
+      } else {
+        console.error("Failed to submit quiz", response);
+      }
+    } catch (error) {
+      console.error("Error submitting quiz:", error);
+    }
   };
+  
 
   return (
     <form onSubmit={handleSubmit}>

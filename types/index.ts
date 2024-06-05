@@ -51,14 +51,13 @@ export type Exam = {
 
 export type Assignment = {
   id: string;
-  assignment_title: string;
-  assignment_description: string;
-  assignment_type: AssignmentType;
-  course: ECourseType;
-  start_date: Date;
-  end_date: Date;
-  start_time: string;
-  end_time: string;
+  title: string;
+  description: string;
+  module_id: ECourseType;
+  teacher_id : string;
+  year : string;
+  file?:any;
+  deadline: string;
 };
 
 export type File = {
