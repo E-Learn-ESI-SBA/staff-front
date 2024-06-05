@@ -34,7 +34,7 @@ const ImageUpload = (
     accept: {
       "image/*": [],
     },
-    maxSize: 1024 * 5000,
+    maxSize: 2 * 1024 * 1024, // 2MB
     onDrop,
   });
 

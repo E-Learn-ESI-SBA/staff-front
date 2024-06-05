@@ -8,6 +8,15 @@ export interface PostProps {
   comments_count: number;
   created_at: string;
   updated_at: string;
+  votes: Vote[];
+}
+
+export interface Vote {
+  id: string;
+  vote: 'up' | 'down';
+  user: {
+    id: string;
+  };
 }
 
 export interface PostsProps {

@@ -14,7 +14,7 @@ const nextConfig = {
         protocol: "https",
         hostname: "firebasestorage.googleapis.com",
         port: "",
-        pathname: "/v0/b/madaurus-71e46.appspot.com/o/**",
+        pathname: "/v0/b/madaurus-2c87c.appspot.com/o/**",
       },
       {
         hostname: "i.imgur.com",

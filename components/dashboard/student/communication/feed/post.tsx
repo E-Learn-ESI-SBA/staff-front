@@ -1,5 +1,4 @@
 import { Avatar } from "@/components/ui/avatar";
-import { Card, CardContent } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { PostProps } from "@/types/communication";
 import { AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
@@ -13,6 +12,11 @@ import {
   ListCollapse,
 } from "lucide-react";
 import Image from "next/image";
+import { useState } from "react";
+import { Vote } from "@/types/communication";
+import { toast } from "sonner";
+import { COMMUNICATION_BASE_URL, TEST_TOKEN } from "@/config/constants";
+import { preconnect } from "react-dom";
 
 
 function timeSince(date: string): string {
@@ -33,15 +37,54 @@ function timeSince(date: string): string {
 }
 
 export default function Post({ data }: { data: PostProps }) {
+  // will get the id from the token later
+  // ps: my pc ran out of memory can't run staff service
+  const votes = data.votes;
+  const isVotedVal = votes.find((vote: Vote) => vote.user.id === "c0f6e869-840b-4963-8c58-6453b5d5cae5");
+  const [Vote, setVote] = useState<Vote | null>(isVotedVal || null);
+  const [count, setCount] = useState<number>(data.upvotes_count - data.downvotes_count);
+
+
+  const handleVote = async (vote: 'up' | 'down') => {
+    try {
+      const res = await fetch(`${COMMUNICATION_BASE_URL}/votes/${data.id}/${vote}`, {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${TEST_TOKEN}`,
+        },
+      });
+
+      if (res.ok) {
+        console.log("vote success")
+        if (!Vote) {
+          setVote({ id: "1", user: { id: "c0f6e869-840b-4963-8c58-6453b5d5cae5" }, vote });
+          setCount(vote === 'up' ? count + 1 : count - 1);
+        } else {
+          if (Vote.vote === vote) {
+            setVote(null);
+            setCount(vote === 'up' ? count - 1 : count + 1);
+          } else {
+            setVote({ id: "1", user: { id: "c0f6e869-840b-4963-8c58-6453b5d5cae5" }, vote });
+            setCount(vote === 'up' ? count + 2 : count - 2);
+          }
+        }
+      } else {
+        toast.error("something went wrong...");
+      }
+    } catch (error) {
+      toast.error("something went wrong...");
+    }
+  }
+
   return (
     <div className="text-black feed_border flex flex-row gap-6">
       <div className="flex flex-col justify-start items-center">
-        <div className="cursor-pointer">
-          <ArrowBigUp className="h-8 w-8" color="gray" />
+        <div className="cursor-pointer" onClick={() => handleVote('up')}>
+          <ArrowBigUp className={`h-8 w-8 ${(Vote && Vote.vote == 'up') ? 'fill-blue-500' : '' }`} color={`${(Vote && Vote.vote == 'up') ? '#3b82f6' : 'gray'}`} />
         </div>
-        <p className="text-gray-500 font-bold">{data.upvotes_count - data.downvotes_count}</p>
-        <div className=" cursor-pointer">
-          <ArrowBigDown className="h-8 w-8" color="gray" />
+        <p className="text-gray-500 font-bold">{count}</p>
+        <div className=" cursor-pointer" onClick={() => handleVote('down')}>
+          <ArrowBigDown className={`h-8 w-8 ${(Vote && Vote.vote == 'down') ? 'fill-blue-500' : '' }`} color={`${(Vote && Vote.vote == 'down') ? '#3b82f6' : 'gray'}`} />
         </div>
       </div>
       <div className="flex flex-col gap-8 w-full">
