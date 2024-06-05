@@ -1,7 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Details from "./details";
 import Submission from "./submission";
-const SingleAssignment: React.FC = () => {
+const SingleAssignment = ({assignment} : {assignment ?: any}) => {
   const tabs = ["Details", "Submission"];
   const files = [
     {
@@ -34,11 +34,11 @@ const SingleAssignment: React.FC = () => {
         <div className="p-4 pt-12">
           <TabsContent value="Details">
             <Details
-              title="Articulate structure of C++ and Java in Semester 1"
-              date="12-01-2023"
-              subject="Networking"
-              description="The objective of this assignment is to develop students' analytical skills by examining historical documents related to a specific topic or event. Students will engage with primary sources, analyze the content, and draw conclusions based on their understanding"
-              files={files}
+              title={assignment.title}
+              date={assignment.deadline}
+              subject={assignment.module_id}
+              description={assignment.description} 
+              file={assignment.file}
             />
           </TabsContent>
           <TabsContent value="Submission">
