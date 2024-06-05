@@ -45,7 +45,7 @@ export default function CreatePost() {
     header: "",
     body: "",
   });
-  const [dialogOpen, setDialogOpen] = useState(true);
+  const [dialogOpen, setDialogOpen] = useState(false);
   
   const storeImage = async (file: any) => {
     return new Promise((resolve, reject) => {
@@ -90,12 +90,12 @@ export default function CreatePost() {
 
   const submit = async (data: any) => {
     try {
-      // const urls = await Promise.all(files.map((file) => storeImage(file)));
-      // console.log(urls);
+      const urls = await Promise.all(files.map((file) => storeImage(file)));
       const reqData = {
         ...data,
-        images: []
+        images: urls
       }
+
       
       const res = await fetch(`${COMMUNICATION_BASE_URL}/posts`, {
         method: "POST",
@@ -107,7 +107,6 @@ export default function CreatePost() {
       });
 
       if (res.ok) {
-        console.log("Post created successfully");
         toast.success("Post created successfully");
         form.reset();
         setDialogOpen(false);

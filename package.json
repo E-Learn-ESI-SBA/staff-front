@@ -50,6 +50,7 @@
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
     "react-hook-form": "^7.51.2",
+    "react-infinite-scroll-component": "^6.1.0",
     "react-player": "^2.16.0",
     "recharts": "^2.12.6",
     "sonner": "^1.4.41",
