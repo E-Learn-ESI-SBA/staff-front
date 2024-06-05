@@ -1,69 +1,60 @@
+//@ts-nocheck
 "use client";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import {useState, useEffect, useCallback} from "react";
+import { useState, useEffect } from "react";
 import { questions } from "@/static/content/Quiz";
 import Link from "next/link";
 
+
 let duration = 5;
-let title = "Web Quiz";
+let title = 'Web Quiz'
 
-type TAnswer = {
-    questionId: string;
-    choices: string[];
-    };
-
-export default function PassQuiz() {
-  const [answers, setAnswers] = useState<TAnswer[]>(
-    questions.map((question) => ({
-      questionId: question.id,
-      choices: [],
-    })),
+export default function PassQuiz({quizData} : {quizData :any } ) {
+  console.log('seif',quizData)
+  const [answers, setAnswers] = useState(
+    quizData.questions.map((question) => ({
+      question_id: question.id, 
+      choices: []
+    }))
   );
   const [isTimeUpModalOpen, setIsTimeUpModalOpen] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(duration * 60);
-  const [isLeaving, setIsLeaving] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(quizData.duration * 60);
 
-  const handleLeaveConfirmation = () => {
-    setIsLeaving(false); // Reset leaving intent
-  };
-
-  const formatTime = (seconds: number) => {
+  const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
+    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
   };
 
-  const handleOptionChange = (questionIndex:number, optionId: string) => {
+  const handleOptionChange = (questionIndex, optionId) => {
     const newAnswers = [...answers];
     const currentChoices = newAnswers[questionIndex].choices;
     if (currentChoices.includes(optionId)) {
-      newAnswers[questionIndex].choices = currentChoices.filter(
-        (choice) => choice !== optionId,
-      );
+      newAnswers[questionIndex].choices = currentChoices.filter(choice => choice !== optionId);
     } else {
       newAnswers[questionIndex].choices = [...currentChoices, optionId];
     }
     setAnswers(newAnswers);
   };
 
-  const handleSubmit = useCallback(async () => {
+  const handleSubmit = async () => {
     const submission = {
-      studentId: "student123",
-      quizId: "quiz123",
+      // studentId: "",  
+      quizId: quizData.id,        
       answers: answers,
     };
 
-    console.log("sss", submission);
+    console.log('sss', submission);
 
     try {
-      const response = await fetch("/api/submit-quiz", {
+      const response = await fetch(`http://localhost:8080/quizes/${quizData.id}/submit`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer `,
+          "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4NTUxMzk4LCJpYXQiOjE3MTU5NTkzOTgsImp0aSI6IjhkZWU5YzQ0YjlkOTQyYmZiYjMxNjI2ZmYyMTBkZjIxIiwiaWQiOiJjMGY2ZTg2OS04NDBiLTQ5NjMtOGM1OC02NDUzYjVkNWNhZTUiLCJhdmF0YXIiOiJkZWZhdWx0IiwidXNlcm5hbWUiOiJzdHVkZW50IiwiZW1haWwiOiJzdHVkZW50QGhvc3QuY29tIiwicm9sZSI6InN0dWRlbnQiLCJncm91cCI6Ik5vbmUiLCJ5ZWFyIjoiTm9uZSJ9.WShTxYZQ07i6fRO6SDF-REAOHOscvbUXzbFSr0Vrzlo`,
         },
-        body: JSON.stringify(submission),
+        body: JSON.stringify(submission)
       });
 
       if (response.ok) {
@@ -74,7 +65,7 @@ export default function PassQuiz() {
     } catch (error) {
       console.error("Error submitting quiz:", error);
     }
-  },[answers]);
+  };
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -89,21 +80,21 @@ export default function PassQuiz() {
       });
     }, 1000);
 
-    const handleBeforeUnload = (event: BeforeUnloadEvent ) => {
+    const handleBeforeUnload = (event) => {
       event.preventDefault();
-      event.returnValue = "i know it is going to be ovverided by browser";
+      event.returnValue = 'i know it is going to be ovverided by browser'; 
     };
 
     const handleUnload = () => {
       handleSubmit();
     };
 
-    window.addEventListener("beforeunload", handleBeforeUnload);
-    window.addEventListener("unload", handleUnload);
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    window.addEventListener('unload', handleUnload);
 
     return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-      window.removeEventListener("unload", handleUnload);
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener('unload', handleUnload);
       clearInterval(timer);
     };
   }, [handleSubmit]);
@@ -116,14 +107,11 @@ export default function PassQuiz() {
           <div className="fixed inset-0 z-50 flex justify-center items-center  ">
             <div className="relative bg-white rounded-lg shadow max-w-4xl w-full  h-fit py-8 px-4 flex flex-col">
               <div className="flex flex-col gap-4 font-normal py-4  ">
-                <p className="text-lg font-medium">Time{"'"}s Up!</p>
+                <p className="text-lg font-medium">Time is Up!</p>
                 <p>The quiz has ended. Your answers have been submitted.</p>
               </div>
-              <Link
-                href="/"
-                className="rounded-md px-4 py-1 bg-blue-500 self-end text-white"
-              >
-                Finish
+              <Link href='/' className="rounded-md px-4 py-1 bg-blue-500 self-end text-white">
+                Finish      
               </Link>
             </div>
           </div>
@@ -131,25 +119,16 @@ export default function PassQuiz() {
       )}
 
       <div className="flex justify-between items-center font-medium">
-        <p className="text-3xl font-medium text-[#2B3674] "> {title} </p>
-        <p
-          className={` fixed right-2 text-2xl ${timeLeft <= duration * 12 && "text-red-500"} `}
-        >
-          Timer : <span>{formatTime(timeLeft)}</span>
-        </p>
+        <p className="text-3xl font-medium text-[#2B3674] "> {quizData.title}  </p>
+        <p className={` fixed right-2 text-2xl ${timeLeft <= quizData.duration * 12 && 'text-red-500'} `}>Timer : <span>{formatTime(timeLeft)}</span></p>
       </div>
-      {questions.map((question, index) => (
+      {quizData.questions.map((question, index) => (
         <div key={index} className="flex flex-col my-8 gap-4">
           <div className={`flex flex-col gap-4 `}>
-            <div className="flex flex-col gap-4 lg:w-1/2 text-[#4E5566]">
+            <div className="flex flex-col gap-4 lg:w-1/2 text-[#4E5566]"> 
               <div className="text-2xl font-medium flex justify-between items-center">
-                <p>
-                  Question {index + 1}/{questions.length}
-                </p>
-                <p>
-                  {" "}
-                  score : <span> {question.score}</span>{" "}
-                </p>
+                <p>Question {index + 1}/{quizData.questions.length}</p>
+                <p> score : <span> {question.score}</span> </p>
               </div>
               <p className="text-lg max-w-[50ch]">{question.body}</p>
             </div>
@@ -165,25 +144,21 @@ export default function PassQuiz() {
             )}
           </div>
           <ul className="flex flex-col gap-2 min-w-[250px] w-2/3 lg:w-1/2">
-            {question.options.map((option, i) => (
+            {question.options.map((option,i) => (
               <li
                 key={option.id}
                 className={`rounded-xl p-2 border-2 border-[#DADADA] cursor-pointer ${
-                  answers[index].choices.includes(option.id)
-                    ? "bg-blue-200"
-                    : ""
+                  answers[index].choices.includes(option.id) ? 'bg-blue-200' : ''
                 }`}
                 onClick={() => handleOptionChange(index, option.id)}
               >
-                {i + 1}. {option.option}
+                {i+1}. {option.option}
               </li>
             ))}
           </ul>
         </div>
       ))}
-      <Button onClick={handleSubmit} className="mt-4">
-        Submit Quiz
-      </Button>
+      <Button onClick={handleSubmit} className="mt-4">Submit Quiz</Button>
     </div>
   );
 }

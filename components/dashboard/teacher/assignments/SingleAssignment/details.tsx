@@ -60,7 +60,7 @@ const Details: React.FC<QuizDetailsProps> = ({
             </tr>
           </thead>
           <tbody>
-            {files.map((file, index) => (
+            {files?.map((file, index) => (
               <tr key={index}>
                 <td className="py-2 px-4 border border-gray-300">
                   {file.name}

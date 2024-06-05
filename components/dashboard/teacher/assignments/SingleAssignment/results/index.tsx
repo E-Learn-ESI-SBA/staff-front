@@ -4,11 +4,11 @@ import { CustomColumns } from "./collomns";
 import { results } from "@/static/dummy-data/assignment/results";
 
 export function AssignmentResultTable() {
-  const handleAddNote = (row) => {
+  const handleAddNote = (row:any) => {
     console.log("ee", row);
   };
 
-  const handleAddMark = (row) => {
+  const handleAddMark = (row:any) => {
     console.log("ee", row);
   };
 

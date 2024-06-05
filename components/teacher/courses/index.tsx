@@ -42,6 +42,7 @@ export default function TeacherCourse({ data }: Props) {
                 <ChapterComponent
                   chapter={c}
                   key={i}
+                  index={i}
                   pathname={pathname}
                   year={data.year}
                 />
