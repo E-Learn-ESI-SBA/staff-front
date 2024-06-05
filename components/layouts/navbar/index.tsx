@@ -3,10 +3,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Links } from "@/static/content/navbar";
 import { useUserStore } from "@/store/user";
+import { UserNav } from "../header/user-menu";
 
 const Navbar = () => {
   const isLoggedIn = useUserStore((state) => state.isAuth);
-
+  const user = useUserStore((state) => state.user);
   const path = usePathname();
   const isActiveLink = (url: string) => {
     return (
@@ -33,12 +34,15 @@ const Navbar = () => {
               {link.name}
             </Link>
           ))}
+          {isLoggedIn && <Link href={user?.role === "teacher" ? "/app/teacher" : "/app/student"}
+          className="font-bold underline underline-offset-8">
+            Dashboard
+            </Link>}
         </div>
-
-        <Link href={isLoggedIn ? "/auth/logout" : "/auth"}
+        {isLoggedIn ? <UserNav /> : <Link href="/auth"
           className={`px-8 py-2 font-medium border rounded-tl-3xl rounded-br-3xl ${path.substring(1) ? "border-modules-main" : ""}`}>
-          {isLoggedIn ? "Logout" : "Login"}
-        </Link>
+          Login
+        </Link>}
       </div>
     </div>
   );

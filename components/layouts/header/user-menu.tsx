@@ -15,14 +15,14 @@ import { AvatarIcon, ExitIcon, GearIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import jsCookie from "js-cookie";
 import { useRouter } from "next/navigation";
-import {useUserStore} from "@/store/user";
+import { useUserStore } from "@/store/user";
 
 export function UserNav() {
 
     const router = useRouter();
-    const {clearUser,user} = useUserStore(state => ({
-        user : state.user,
-        clearUser : state.clearUser
+    const { clearUser, user } = useUserStore(state => ({
+        user: state.user,
+        clearUser: state.clearUser
 
     }))
     const logOutHandler = () => {
@@ -37,9 +37,13 @@ export function UserNav() {
         <DropdownMenu>
             <DropdownMenuTrigger asChild className="focus:outline-none">
                 <Button variant="ghost" className="relative h-12 w-12 rounded-full">
-                    <Avatar className="h-12 w-12">
-                        <AvatarImage src={user?.avatar ?? "/store/img.jpg"} alt="@user" />
-                        <AvatarFallback>A</AvatarFallback>
+                    <Avatar className="h-10 w-10">
+                        {user?.avatar == "default" ?
+                            <AvatarImage src="https://github.com/shadcn.png" alt="@user" />
+                            :
+                            <AvatarImage src={user.avatar} alt="@user" /> 
+                        }
+                        <AvatarFallback>Avt</AvatarFallback>
                     </Avatar>
                 </Button>
             </DropdownMenuTrigger>
