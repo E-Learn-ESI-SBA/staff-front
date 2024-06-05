@@ -2,14 +2,14 @@ export interface IAssignment {
   id: string;
   title: string;
   description: string;
-  deadline: string;
-  module_id: string;
-  module?:string;
-  teacher_id: string;
-  teacher:string;
-  file: string;
-  year: string;
-  grade?: Number;
+  startDate: string;
+  endDate: string;
+  module_name: string;
+  publisher: string;
+  files?: string[];
+  state: AssignmentState;
+  marks?: number;
+  type: AssignmentType;
 }
 
 export interface Submission {

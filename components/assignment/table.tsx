@@ -20,26 +20,34 @@ export function AssignmentTable({ show }: { show: Boolean }) {
                   title: "Title",
                 },
                 {
-                  accessorKey: "module",
+                  accessorKey: "module_name",
                   title: "Module Name",
                 },
                 {
-                  accessorKey: "teacher",
+                  accessorKey: "publisher",
                   title: "Publisher",
                 },
                 {
-                  accessorKey: "deadline",
-                  title: "Deadline",
+                  accessorKey: "startDate",
+                  title: "Start",
+                },
+                {
+                  accessorKey: "endDate",
+                  title: "End",
+                },
+                {
+                  accessorKey: "endDate",
+                  title: "End",
+                },
+                {
+                  accessorKey: "marks",
+                  title: "marks",
                 },
               ]
             : [
                 {
                   accessorKey: "id",
                   title: "ID",
-                },
-                {
-                  accessorKey: "title",
-                  title: "Title",
                 },
                 {
                   accessorKey: "title",
@@ -54,14 +62,22 @@ export function AssignmentTable({ show }: { show: Boolean }) {
                   title: "Publisher",
                 },
                 {
-                  accessorKey: "deadline",
-                  title: "Deadline",
+                  accessorKey: "startDate",
+                  title: "Start",
+                },
+                {
+                  accessorKey: "endDate",
+                  title: "End",
+                },
+                {
+                  accessorKey: "endDate",
+                  title: "End",
                 },
               ]
         }
         customColumns={[CustomColumns]}
         defaultFilter="title"
-        fuzzyElements={["module"]}
+        fuzzyElements={["module_name"]}
       />
     </>
   );
