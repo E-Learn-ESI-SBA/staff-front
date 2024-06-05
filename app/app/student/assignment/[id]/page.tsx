@@ -1,5 +1,31 @@
 import SingleAssignemnt from "@/components/dashboard/student/studentProfile/assignment/SingleAssignment";
 
-export default function Assignment() {
-  return <SingleAssignemnt />;
+async function getAssignment(id: string) {
+  const res = await fetch( `https://66d8-105-235-138-23.ngrok-free.app/assignments/${id}`,{
+    method: "GET",
+    cache : 'no-store',
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4NTUxMzk3LCJpYXQiOjE3MTU5NTkzOTcsImp0aSI6IjYxN2EwNDU3MzNiNDQxNDlhNjY5Y2ZmMjkzOGQ3ZWFlIiwiaWQiOiIyMjNlYmU5Yi1jMWMyLTQ5M2EtYTdiYS02OThhOTM1NjdkYmUiLCJhdmF0YXIiOiJkZWZhdWx0IiwidXNlcm5hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AaG9zdC5jb20iLCJyb2xlIjoiYWRtaW4iLCJncm91cCI6Ik5vbmUiLCJ5ZWFyIjoiTm9uZSJ9.2UFOb8hOBkfnGpWHgkQdJcnbK6YwqbEtn9aIFA-FNBc`,
+   }
+ })
+
+  if (!res.ok) {
+    console.log('zz',res.json())
+    throw new Error('Failed to fetch data')
+  }
+
+return res.json()
+// return quiz;
+}
+
+
+export default  async function Assignment({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const data = await getAssignment(params?.id);
+  console.log('dd',data)
+  return  <SingleAssignemnt assignment={data.message} />;
 }
