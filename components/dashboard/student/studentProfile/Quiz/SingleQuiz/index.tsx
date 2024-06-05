@@ -4,7 +4,8 @@ import QuizDetails from "./details";
 import Response from "./response";
 import { questions } from "@/static/content/Quiz";
 
-const SingleQuiz: React.FC = () => {
+const SingleQuiz = ({data} :{data : any} ) => {
+  console.log('ez',data)
   const [selectedButton, setSelectedButton] = useState(true);
 
   const handleToggle = () => {
@@ -14,7 +15,7 @@ const SingleQuiz: React.FC = () => {
   return (
     <div className="flex flex-col gap-4 p-8">
       <p className="bg-[#ECF2FF] text-[#3D70F5] p-2 rounded-lg text-xs w-fit self-end">
-        Result Declared on 12:30 AM | 22 September 2023
+        Result Declared on {data.quiz?.end_date.slice(0,10)}
       </p>
       <p className="text-xl font-medium">Quiz Result Details</p>
 
@@ -39,16 +40,16 @@ const SingleQuiz: React.FC = () => {
 
       {selectedButton ? (
         <QuizDetails
-          title="Articulate structure of C++ and Java in Semester 1"
-          passed={true}
-          date="12-01-2023"
-          subject="Networking"
-          numberOfQuestions={50}
+          title={data.quiz.title}
+          passed={data.submission.is_passed}
+          date={data.quiz?.start_date.slice(0,10)}
+          subject={data.module_name}
+          numberOfQuestions={data.quiz.questions.length}
           correctAnswers={35}
-          percentege={87}
+          grade={data.submission.grade}
         />
       ) : (
-        <Response questions={questions} />
+        <Response data={data} />
       )}
     </div>
   );

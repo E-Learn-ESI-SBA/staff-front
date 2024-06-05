@@ -21,6 +21,8 @@ export interface Module extends IDate {
   description: string;
   plan: string[];
   image: string;
+  createdAt : Date;
+  updatedAt : Date;
   courses: Chapter[]; // Assuming courses can be of any type
 }
 

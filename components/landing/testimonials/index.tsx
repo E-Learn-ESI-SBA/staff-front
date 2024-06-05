@@ -22,7 +22,7 @@ const Testimonilas = () => {
         <p className="font-semibold text-2xl ">{testimonials.subTitle}</p>
         <div className="flex justify-between items-center gap-2">
           <Image
-            src={testimonialsData[0].image}
+            src={testimonialsData[0].image ?? ''}
             alt="cs"
             width={0}
             height={0}
@@ -30,7 +30,7 @@ const Testimonilas = () => {
             className=" aspect-square w-10  sm:w-16  border-4 border-[#C4BBFF] rounded-full "
           />
           <Image
-            src={testimonialsData[1].image}
+            src={testimonialsData[1].image ?? ''}
             alt="cs"
             width={0}
             height={0}
@@ -38,7 +38,7 @@ const Testimonilas = () => {
             className="aspect-square w-10  sm:w-16  border-4 border-[#C4BBFF] rounded-full "
           />
           <Image
-            src={testimonialsData[2].image}
+            src={testimonialsData[2].image ?? ''}
             alt="cs"
             width={0}
             height={0}
@@ -46,7 +46,7 @@ const Testimonilas = () => {
             className="aspect-square w-10  sm:w-16  border-4 border-[#C4BBFF] rounded-full "
           />
           <Image
-            src={testimonialsData[3].image}
+            src={testimonialsData[3].image ?? ''}
             alt="cs"
             width={0}
             height={0}
@@ -54,7 +54,7 @@ const Testimonilas = () => {
             className=" aspect-square w-10   sm:w-16  border-4 border-[#C4BBFF] rounded-full "
           />
           <Image
-            src={testimonialsData[4].image}
+            src={testimonialsData[4].image ?? ''}
             alt="cs"
             width={0}
             height={0}
