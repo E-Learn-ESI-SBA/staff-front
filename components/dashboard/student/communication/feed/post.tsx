@@ -4,19 +4,19 @@ import { PostProps } from "@/types/communication";
 import { AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import {
   ArrowBigUp,
-  MessageSquare,
   ArrowBigDown,
   Repeat2,
   Bookmark,
-  BookmarkCheck,
   ListCollapse,
+  MessageSquare,
 } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 import { Vote } from "@/types/communication";
 import { toast } from "sonner";
 import { COMMUNICATION_BASE_URL, TEST_TOKEN } from "@/config/constants";
-import { preconnect } from "react-dom";
+import Item from "./item";
+import PostDetails from "./post-details";
 
 
 function timeSince(date: string): string {
@@ -105,30 +105,33 @@ export default function Post({ data }: { data: PostProps }) {
         </div>
         <div>
           {/* contains post's images (optional) */}
-          <Carousel className="w-full h-full max-w-md mx-auto">
-            <CarouselContent>
-              {data.images.length > 0 ? (
-                data.images.map((img, index) => (
-                  <CarouselItem key={index}>
-                    <Image
-                      height={600}
-                      width={1000}
-                      src={img}
-                      alt="post image"
-                      className="aspect-square max-h-[600px] object-cover"
-                    ></Image>
-                  </CarouselItem>
-                ))
-              ): null}
-            </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
-          </Carousel>
+          {data.images.length > 0 && (
+            <Carousel className="w-full h-full max-w-md mx-auto">
+              <CarouselContent>
+                {data.images.length > 0 ? (
+                  data.images.map((img, index) => (
+                    <CarouselItem key={index}>
+                      <Image
+                        height={600}
+                        width={1000}
+                        src={img}
+                        alt="post image"
+                        className="aspect-square max-h-[600px] object-cover"
+                      ></Image>
+                    </CarouselItem>
+                  ))
+                ): null}
+              </CarouselContent>
+              <CarouselPrevious />
+              <CarouselNext />
+            </Carousel>
+          )}
         </div>
         <div className="flex flex-row justify-between font-semibold">
           <div className="flex flex-row gap-6 items-center">
             {/* this section is for comments/share/save/more */}
-            <Item Icon={MessageSquare} text="comment" count={data.comments_count} />
+            {/* <Item Icon={MessageSquare} text="comment" count={data.comments_count} /> */}
+            <PostDetails data={data} />
             <Item Icon={Repeat2} text="share" />
             <Item Icon={Bookmark} text="save" />
           </div>
@@ -138,12 +141,3 @@ export default function Post({ data }: { data: PostProps }) {
     </div>
   );
 }
-
-const Item = ({ Icon, text, count }: { Icon: any; text?: string, count?: number }) => {
-  return (
-    <div className="flex flex-row gap-2 items-center cursor-pointer font-bold">
-      <Icon className="h-8 w-8" color="gray" /><span className="text-gray-500">{count}</span>
-      {text && <p className="text-gray-500 font-bold">{text}</p>}
-    </div>
-  );
-};
