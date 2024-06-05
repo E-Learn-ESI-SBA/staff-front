@@ -24,16 +24,15 @@ import { ECourseType } from "@/types";
 import { useAssignmentFormStore } from "@/store/forms/assignments/question.store";
 
 const defaultValues = {
-  assignment_title: "",
-  assignment_description: "",
-  quiz_type: undefined,
-  course: undefined,
-  start_date: undefined,
+  title: "",
+  description: "",
+  module_id: undefined,
   end_date: undefined,
-  start_time: "",
   end_time: "",
-  id: "",
+  year: "",
 };
+
+const years = ['1cp','2cp','1cs','2cs','3cs']
 export default function AssignmentFirstStepForm() {
   const { first_step_content, nextStep, setFirstStepContent } =
     useAssignmentFormStore((state) => ({
@@ -49,10 +48,7 @@ export default function AssignmentFirstStepForm() {
   });
 
   const submitHandler = (data: Assignment) => {
-    data.start_date = new Date(data.start_date);
-    data.end_date = new Date(data.end_date);
     setFirstStepContent(data);
-    console.log("zez", data);
     nextStep();
   };
 
@@ -64,7 +60,7 @@ export default function AssignmentFirstStepForm() {
       >
         <FormField
           control={form.control}
-          name="assignment_title"
+          name="title"
           render={({ field }) => (
             <FormItem className="w-full">
               <FormLabel>Assignment Title</FormLabel>
@@ -80,7 +76,7 @@ export default function AssignmentFirstStepForm() {
         />
         <FormField
           control={form.control}
-          name="assignment_description"
+          name="description"
           render={({ field }) => (
             <FormItem className="w-full">
               <FormLabel>Assignment Description</FormLabel>
@@ -95,36 +91,14 @@ export default function AssignmentFirstStepForm() {
             </FormItem>
           )}
         />
+<div className="flex gap-4" >
 
-        <FormField
+<FormField
           control={form.control}
-          name="assignment_type"
+          name="module_id"
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel>Assignment Type:</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select Type Of Assignment" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value={AssignmentType.AUTOMATED}>
-                    AUTOMATED
-                  </SelectItem>
-                  <SelectItem value={AssignmentType.MANUAL}>MANUAL</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="course"
-          render={({ field }) => (
-            <FormItem className="w-full">
-              <FormLabel>Course:</FormLabel>
+              <FormLabel>Module:</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
@@ -140,51 +114,56 @@ export default function AssignmentFirstStepForm() {
             </FormItem>
           )}
         />
-        <div className="flex gap-4">
-          <FormField
+
+<FormField
             control={form.control}
-            name="start_date"
+            name="year"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel>Start Date</FormLabel>
-                <FormControl>
-                  <Input
-                    type="date"
-                    value={
-                      field.value instanceof Date
-                        ? field.value.toISOString().split("T")[0]
-                        : field.value
-                    }
-                    onChange={(e) => {
-                      const selectedDate = new Date(e.target.value);
-                      if (!isNaN(selectedDate.getTime())) {
-                        field.onChange(selectedDate);
-                      }
-                    }}
-                  />
-                </FormControl>
+                <FormLabel>Class Year:</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}>
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select Class" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {years?.map((year :any ,i : any)  => (
+                      <SelectItem key={i} value={year}>{year}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <FormField
+
+</div>
+            <FormField
             control={form.control}
-            name="end_date"
+            name="deadline"
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormLabel>End Date</FormLabel>
                 <FormControl>
-                  <Input
-                    type="date"
+                <Input
+                    type="datetime-local"
+                    //@ts-ignore
                     value={
-                      field.value instanceof Date
-                        ? field.value.toISOString().split("T")[0]
-                        : field.value
+                      field.value
+                        ?? ''
                     }
                     onChange={(e) => {
-                      const selectedDate = new Date(e.target.value);
+                      const value = e.target.value;
+                      const selectedDate = new Date(value);
                       if (!isNaN(selectedDate.getTime())) {
-                        field.onChange(selectedDate);
+                        const localDateTime = new Date(selectedDate.getTime() - (selectedDate.getTimezoneOffset() * 60000)).toISOString().slice(0, 16);
+                        console.log('dss',localDateTime)
+                        field.onChange(localDateTime);
+                      } else {
+                        field.onChange('');
                       }
                     }}
                   />
@@ -193,35 +172,6 @@ export default function AssignmentFirstStepForm() {
               </FormItem>
             )}
           />
-        </div>
-        <div className="flex gap-4">
-          <FormField
-            control={form.control}
-            name="start_time"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormLabel>Start Time</FormLabel>
-                <FormControl>
-                  <Input type="time" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="end_time"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormLabel>End Time</FormLabel>
-                <FormControl>
-                  <Input type="time" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
 
         <Button type="submit">Next</Button>
       </form>
