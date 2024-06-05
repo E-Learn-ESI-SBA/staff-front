@@ -23,7 +23,7 @@ const Submission = () => {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: {
-      "application/pdf": [],
+      "application/zip": [],
     },
     maxSize: 1024 * 5000,
     onDrop,
@@ -45,9 +45,31 @@ const Submission = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!files?.length) return;
     const formData = new FormData();
-    files.forEach((file) => formData.append("file", file));
+    files.forEach((file, index) => {
+      formData.append(`file`, file);
+    });
+
+  
+    console.log("Submitted form",formData);
+    
+    try {
+      const response = await fetch("https://7a92-105-235-138-23.ngrok-free.app/assignments/1ab30261-6e2a-469d-8347-8e1b0054e960/submissions/", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4NTUxMzk3LCJpYXQiOjE3MTU5NTkzOTcsImp0aSI6IjYxN2EwNDU3MzNiNDQxNDlhNjY5Y2ZmMjkzOGQ3ZWFlIiwiaWQiOiIyMjNlYmU5Yi1jMWMyLTQ5M2EtYTdiYS02OThhOTM1NjdkYmUiLCJhdmF0YXIiOiJkZWZhdWx0IiwidXNlcm5hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AaG9zdC5jb20iLCJyb2xlIjoiYWRtaW4iLCJncm91cCI6Ik5vbmUiLCJ5ZWFyIjoiTm9uZSJ9.2UFOb8hOBkfnGpWHgkQdJcnbK6YwqbEtn9aIFA-FNBc`
+        },
+        body: formData
+      });
+  
+      if (response.ok) {
+        console.log("Quiz submitted successfully", response);
+      } else {
+        console.error("Failed to submit quiz", response);
+      }
+    } catch (error) {
+      console.error("Error submitting quiz:", error);
+    }
   };
 
   return (
