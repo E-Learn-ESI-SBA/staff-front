@@ -12,33 +12,33 @@
 
 import { AssignmentTable } from "@/components/assignment/table";
 import Link from "next/link";
-import { assignments } from "@/static/dummy-data/assignment/assignment";
 import { ASSIGNMENT_BASE_URL } from "@/config/constants";
 import { cookies } from "next/headers";
 
-async function getAssignments() {
-  try {
-    const res = await fetch(`${ASSIGNMENT_BASE_URL}/assignments`,{
-      method: "GET",
-      cache : 'no-store',
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${cookies().get("accessToken")?.value}`,
-     }
-   })
-  
-   return res.json()
-  } catch (err) {
-    console.error("Failed to fetch students data:", err);
-  }
-
-// return quiz;
-}
+export const dynamic = "force-dynamic";
 
 export default async function TeacherAssignment() {
+  async function getAssignments() {
+    try {
+      const res = await fetch(`${ASSIGNMENT_BASE_URL}/assignments`,{
+        method: "GET",
+        cache : 'no-store',
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${cookies().get("accessToken")?.value}`,
+       }
+     })
+    
+     return res.json()
+    } catch (err) {
+      console.error("Failed to fetch students data:", err);
+    }
+  
+  // return quiz;
+  }
   const data = await getAssignments();
   console.log('ssss',data)
-  return (
+  return (  
     <div className="flex flex-col gap-8 p-4">
       <Link
         href="http://localhost:3000/app/teacher/assignment/create"
