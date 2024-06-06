@@ -1,18 +1,13 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Details from "./details";
 import { AssignmentResultTable } from "./results";
-const SingleAssignment: React.FC = () => {
+import { ASSIGNMENT_BASE_URL } from "@/config/constants";
+
+
+
+const SingleAssignment = async({assignment,submissions} : any) => {
   const tabs = ["Details", "Submission"];
-  const files = [
-    {
-      name: "example_file1.txt",
-      url: "https://example.com/files/example_file1.txt",
-    },
-    {
-      name: "example_file2.png",
-      url: "https://example.com/files/example_file2.png",
-    },
-  ];
+
   return (
     <div className="p-4  bg-[#F4F7FE] ">
       <Tabs
@@ -34,15 +29,15 @@ const SingleAssignment: React.FC = () => {
         <div className="p-4 pt-12">
           <TabsContent value="Details">
             <Details
-              title="Articulate structure of C++ and Java in Semester 1"
-              date="12-01-2023"
-              subject="Networking"
-              description="The objective of this assignment is to develop students' analytical skills by examining historical documents related to a specific topic or event. Students will engage with primary sources, analyze the content, and draw conclusions based on their understanding"
-              files={files}
+            title={assignment.title}
+              date={assignment.deadline}
+              subject={assignment.module_id}
+              description={assignment.description} 
+              file={assignment.file}
             />
           </TabsContent>
           <TabsContent value="Submission">
-            <AssignmentResultTable />
+            <AssignmentResultTable data={submissions} />
           </TabsContent>
         </div>
       </Tabs>

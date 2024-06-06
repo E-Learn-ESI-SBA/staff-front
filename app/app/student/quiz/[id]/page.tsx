@@ -22,23 +22,22 @@ const quizMeta = {
 }
 
 async function getQuiz(id:string) {
-  console.log('seif',id)
-    const res = await fetch( `http://localhost:8080/chats`,{
+  try{
+    const res = await fetch( `http://localhost:8080/quiz/${id}`,{
       method: "GET",
    })
-   
-    if (!res.ok) {
-      throw new Error('Failed to fetch data')
-    }
-   
+      
     return res.json()
+  }catch(err){
+    console.error("Failed to fetch data:", err);
+  }
   }
 
 export default async function SingleQuiz({ params }: { params: { id: string } }) {
 const data = await getQuiz(params?.id)
 console.log('eee',data)
   return <div>
-  <PreQuiz  quizMeataData={quizMeta} />;
+  <PreQuiz  quizMeataData={data} />;
   </div>
 
 }

@@ -4,7 +4,7 @@ export const sideBarItemsTeacher: SideBarItem[] = [
   {
     label: "Dashboard",
     icon: "menu",
-    url: "/app/u/s",
+    url: "/app/teacher",
   },
   {
     label: "Modules",
@@ -12,9 +12,24 @@ export const sideBarItemsTeacher: SideBarItem[] = [
     url: "/app/teacher/modules",
   },
   {
-    label: "Profile",
-    icon: "profile",
-    url: "/app/",
+    label: "Assignments",
+    icon: "assignments",
+    url: "/app/teacher/assignment",
+  },
+  {
+    label: "Quizzes",
+    icon: "quizzes",
+    url: "/app/teacher/quiz",
+  },
+  {
+    label: "Communication",
+    url: "/app/communication",
+    icon: "communication",
+  },
+  {
+    label: "Leaderboard",
+    url: "/app/leader-board",
+    icon: "leaderboard",
   },
   {
     label: "Settings",
@@ -32,12 +47,27 @@ export const sideBarItemsStudent: SideBarItem[] = [
   {
     label: "Modules",
     icon: "courses",
-    url: "/app/teacher/modules",
+    url: "/app/student/courses",
   },
   {
-    label: "Profile",
-    icon: "profile",
-    url: "/app/",
+    label: "Assignments",
+    icon: "assignments",
+    url: "/app/student/assignment",
+  },
+  {
+    label: "Quizzes",
+    icon: "quizzes",
+    url: "/app/student/quiz",
+  },
+  {
+    label: "Communication",
+    url: "/app/communication",
+    icon: "communication",
+  },
+  {
+    label: "Leaderboard",
+    url: "/app/leader-board",
+    icon: "leaderboard",
   },
   {
     label: "Settings",

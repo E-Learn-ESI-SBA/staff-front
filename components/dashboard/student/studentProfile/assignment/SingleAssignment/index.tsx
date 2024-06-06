@@ -1,7 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Details from "./details";
 import Submission from "./submission";
-const SingleAssignment = ({assignment} : {assignment ?: any}) => {
+const SingleAssignment = ({assignment,submission} : any) => {
   const tabs = ["Details", "Submission"];
   const files = [
     {
@@ -42,7 +42,7 @@ const SingleAssignment = ({assignment} : {assignment ?: any}) => {
             />
           </TabsContent>
           <TabsContent value="Submission">
-            <Submission />
+            <Submission submission={submission} />
           </TabsContent>
         </div>
       </Tabs>

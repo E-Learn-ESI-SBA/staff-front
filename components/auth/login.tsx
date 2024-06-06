@@ -50,6 +50,7 @@ export function SignInAccount() {
       const response = await login(data);
       const accessToken = response["access"]
       const payload = JSON.parse(atob(accessToken.split(".")[1])) as TPayload
+      payload["accessToken"] = accessToken
       setUser(payload)
       toast.success("Login successful", {
         style: {

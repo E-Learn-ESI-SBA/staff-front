@@ -11,6 +11,10 @@ export interface SideBarItem {
     | "logout"
     | "discussions"
     | "schedules"
+    | "leaderboard"
+    | "assignments"
+    | "quizzes"
+    | "communication"
     | "modules";
   url: string;
   isActive?: boolean;
@@ -76,5 +80,6 @@ export type TPayload = {
   group: string;
   year: string;
   username: string;
-  avatar:string
+  avatar:string;
+  accessToken: string;
 };
