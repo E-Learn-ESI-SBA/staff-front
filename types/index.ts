@@ -11,6 +11,10 @@ export interface SideBarItem {
     | "logout"
     | "discussions"
     | "schedules"
+    | "leaderboard"
+    | "assignments"
+    | "quizzes"
+    | "communication"
     | "modules";
   url: string;
   isActive?: boolean;

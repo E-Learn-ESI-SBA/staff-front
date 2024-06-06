@@ -1,15 +1,19 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import {
+  BookOpenCheck,
+  Brain,
   CalendarCheck,
   CircleUserRound,
   FileText,
   LayoutGrid,
   LogOut,
   Menu,
+  MessageCircle,
   MessageSquareText,
   Package,
   Settings,
+  Sword,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -25,7 +29,7 @@ export default function SideItem({ label, icon, url }: TProps) {
   // const pathname = "/" + usePathname().split("/")[1];
   const pathname = usePathname();
   console.log(pathname);
-  const isActive = pathname.includes(url);
+  const isActive =  pathname === url;
   console.log(url);
   return (
     <Link href={url} className="">
@@ -40,15 +44,18 @@ export default function SideItem({ label, icon, url }: TProps) {
 }
 
 type IconType =
-  | "menu"
+  "menu"
   | "courses"
   | "profile"
   | "settings"
-  | "discussions"
   | "logout"
+  | "discussions"
   | "schedules"
+  | "leaderboard"
+  | "assignments"
+  | "quizzes"
+  | "communication"
   | "modules";
-
 interface SideIconProps {
   icon: IconType;
   [key: string]: any; // allows any additional props
@@ -63,6 +70,11 @@ const icons: Record<IconType, React.ComponentType<any>> = {
   logout: LogOut,
   schedules: CalendarCheck,
   modules: Package,
+  assignments: BookOpenCheck,
+  communication: MessageCircle,
+  quizzes: Sword,
+  leaderboard: Brain,
+
 };
 
 const SideIcon: React.FC<SideIconProps> = ({ icon, ...props }) => {
