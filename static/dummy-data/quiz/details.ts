@@ -57,7 +57,7 @@ export const defaultValues2 = {
           id: "129",
         },
       ],
-      correct_Idx: ["128", "129"],
+      correct_idxs: ["128", "129"],
     },
     {
       body: "question2",
@@ -78,7 +78,7 @@ export const defaultValues2 = {
           id: "9",
         },
       ],
-      correct_Idx: ["5", "1"],
+      correct_idxs: ["5", "1"],
     },
     {
       body: "question3",
@@ -99,7 +99,7 @@ export const defaultValues2 = {
           id: "23",
         },
       ],
-      correct_Idx: ["21", "23"],
+      correct_idxs: ["21", "23"],
     },
   ],
 };

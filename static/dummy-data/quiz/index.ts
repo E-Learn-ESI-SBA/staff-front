@@ -24,7 +24,7 @@ export const quizzes = [
           { id: 3, option: "Ribosome" },
           { id: 4, option: "Endoplasmic Reticulum" },
         ],
-        correct_Idx: [1],
+        correct_idxs: [1],
       },
       {
         id: 2,
@@ -37,7 +37,7 @@ export const quizzes = [
           { id: 3, option: "Plants" },
           { id: 4, option: "Animals" },
         ],
-        correct_Idx: ["0"],
+        correct_idxs: ["0"],
       },
     ],
     grades: [
@@ -73,7 +73,7 @@ export const quizzes = [
           { id: 3, option: "x^2/2 + C" },
           { id: 4, option: "x^3/2 + C" },
         ],
-        correct_Idx: ["0"],
+        correct_idxs: ["0"],
       },
       {
         id: 2,
@@ -86,7 +86,7 @@ export const quizzes = [
           { id: 3, option: "x = 3" },
           { id: 4, option: "x = 4" },
         ],
-        correct_Idx: ["1"],
+        correct_idxs: ["1"],
       },
     ],
     grades: [
@@ -126,7 +126,7 @@ export const quiz = {
         { id: "3", option: "Ribosome" },
         { id: "4", option: "Endoplasmic Reticulum" },
       ],
-      correct_Idx: ["1"],
+      correct_idxs: ["1"],
     },
     {
       id: "2",
@@ -140,7 +140,7 @@ export const quiz = {
         { id: "3", option: "Plants" },
         { id: "4", option: "Animals" },
       ],
-      correct_Idx: ["1"],
+      correct_idxs: ["1"],
     },
     {
       id: "3",
@@ -154,7 +154,7 @@ export const quiz = {
         { id: "3", option: "Plants" },
         { id: "4", option: "Animals" },
       ],
-      correct_Idx: ["1"],
+      correct_idxs: ["1"],
     },
   ],
   grades: [

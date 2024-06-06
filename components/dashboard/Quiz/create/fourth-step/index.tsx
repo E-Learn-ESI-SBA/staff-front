@@ -10,6 +10,7 @@ import {
   uploadBytesResumable,
 } from 'firebase/storage';
 import { app } from '@/config/firebase';
+import { ASSIGNMENT_BASE_URL } from "@/config/constants";
 // import { cookies } from "next/headers";
 
 
@@ -110,7 +111,7 @@ export default function Preview() {
     };
    console.log('final data',data)
     try {
-      const response = await fetch("http://localhost:8080/quizes", {
+      const response = await fetch(`${ASSIGNMENT_BASE_URL}/quizes`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -129,6 +130,8 @@ export default function Preview() {
       console.error("Error submitting quiSON.stringify(submission)z:", error);
     }
   };
+
+  console.log("ee",third_step_content!.questions)
   return (
     <div className="p-2">
       <p className="text-2xl my-8 font-medium text-center">Preview Questions</p>

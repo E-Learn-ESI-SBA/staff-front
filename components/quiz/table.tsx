@@ -5,7 +5,7 @@ import { CustomColumns } from "@/components/quiz/colloms";
 
 export function QuizTable() {
   return (
-    <>
+    <> 
       <DataTable<IQuiz>
         data={quiz}
         headers={[
