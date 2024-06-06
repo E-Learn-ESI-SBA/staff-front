@@ -25,8 +25,19 @@ export async function middleware(request: NextRequest) {
   if (pathname.match(/\/app\/teacher/) && auth.payload?.role == TEACHER) {
     return NextResponse.next();
   }
+
+  // student trying to visit teacher dashboard
+  if (pathname.match(/\/app\/teacher/) && auth.payload?.role != TEACHER) {
+    return NextResponse.redirect(new URL("/app/student", request.url));
+  }
+  
   if (pathname.match(/\/app\/student/) && auth.payload?.role == STUDENT) {
     return NextResponse.next();
+  }
+
+    // teacher trying to visit student dashboard
+  if (pathname.match(/\/app\/student/) && auth.payload?.role != STUDENT) {
+    return NextResponse.redirect(new URL("/app/teacher", request.url));
   }
 
   if (protectedRoutes.some((route) => pathname.match(route))) {
