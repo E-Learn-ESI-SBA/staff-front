@@ -3,7 +3,7 @@ export default function convertObject(obj, number) {
   if (number === 1) {
     return {
       questions: obj.questions.map((question) => {
-        const correct_Idx = question.options
+        const correct_idxs = question.options
           .filter((option) => option.validity)
           .map((option) => option.id);
 
@@ -12,18 +12,18 @@ export default function convertObject(obj, number) {
           return rest;
         });
 
-        return { ...question, correct_Idx, options };
+        return { ...question, correct_idxs, options };
       }),
     };
   } else if (number === 2) {
     return {
       questions: obj.questions.map((question) => {
         const options = question.options.map((option) => {
-          const validity = question.correct_Idx.includes(option.id);
+          const validity = question.correct_idxs.includes(option.id);
           return { ...option, validity };
         });
 
-        const { correct_Idx, ...rest } = question;
+        const { correct_idxs, ...rest } = question;
         return { ...rest, options };
       }),
     };

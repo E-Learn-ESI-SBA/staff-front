@@ -42,7 +42,7 @@ export const sideBarItemsStudent: SideBarItem[] = [
   {
     label: "Dashboard",
     icon: "menu",
-    url: "/app/u/s",
+    url: "/app/student",
   },
   {
     label: "Modules",

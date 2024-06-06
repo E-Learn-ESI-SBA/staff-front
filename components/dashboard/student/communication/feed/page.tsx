@@ -13,7 +13,6 @@ export default function Feed({
 }) {
   return (
     <div className="text-black">
-      <NavBar title="hello world" />
       <div className="flex flex-row w-full">
         <Left className="w-[60%] h-screen" data={posts} />
         <Right className="w-[40%] h-screen" data={suggestions} />
