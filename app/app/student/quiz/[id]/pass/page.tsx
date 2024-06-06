@@ -1,4 +1,5 @@
 import PassQuiz from "@/components/quiz/PassQuiz/pass";
+import { ASSIGNMENT_BASE_URL } from "@/config/constants";
 
 const quizMeta = {
     "title": "updated title...",
@@ -64,7 +65,7 @@ const quizMeta = {
 
 
 async function getQuiz(id:string) {
-    const res = await fetch( `http://localhost:8080/quizes/${id}/questions`,{
+    const res = await fetch( `${ASSIGNMENT_BASE_URL}/quizes/${id}/questions`,{
       method: "GET",
       headers: {
         "Content-Type": "application/json",

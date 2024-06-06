@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { questions } from "@/static/content/Quiz";
 import Link from "next/link";
+import { ASSIGNMENT_BASE_URL } from "@/config/constants";
 
 
 let duration = 5;
@@ -48,7 +49,7 @@ export default function PassQuiz({quizData} : {quizData :any } ) {
     console.log('sss', submission);
 
     try {
-      const response = await fetch(`http://localhost:8080/quizes/${quizData.id}/submit`, {
+      const response = await fetch(`${ASSIGNMENT_BASE_URL}/quizes/${quizData.id}/submit`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
