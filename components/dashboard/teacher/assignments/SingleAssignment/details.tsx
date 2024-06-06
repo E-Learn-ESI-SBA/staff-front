@@ -1,16 +1,16 @@
 import Image from "next/image";
 
-interface File {
-  url: string;
-  name: string;
-}
+// interface File {
+//   url: string;
+//   name: string;
+// }
 
 interface QuizDetailsProps {
   title: string;
   date: string;
   subject: string;
   description: string;
-  files?: File[];
+  file?: string ;
 }
 
 const Details: React.FC<QuizDetailsProps> = ({
@@ -18,7 +18,7 @@ const Details: React.FC<QuizDetailsProps> = ({
   date,
   subject,
   description,
-  files,
+  file,
 }) => {
   return (
     <>
@@ -52,7 +52,7 @@ const Details: React.FC<QuizDetailsProps> = ({
           <thead>
             <tr>
               <th className="py-2 px-4 bg-gray-100 border border-gray-300">
-                File Name
+                File
               </th>
               <th className="py-2 px-4 bg-gray-100 border border-gray-300">
                 File URL
@@ -60,18 +60,19 @@ const Details: React.FC<QuizDetailsProps> = ({
             </tr>
           </thead>
           <tbody>
-            {files?.map((file, index) => (
-              <tr key={index}>
+            {/* {files?.map((file, index) => ( */}
+              <tr >
                 <td className="py-2 px-4 border border-gray-300">
-                  {file.name}
+                  file 
                 </td>
                 <td className="py-2 px-4 border border-gray-300">
-                  <a href={file.url} className="text-blue-500">
-                    {file.url}
+                  <a   href={`https://66d8-105-235-138-23.ngrok-free.app/files/${file}`}
+                     className="text-blue-500" download>
+                   download
                   </a>
                 </td>
               </tr>
-            ))}
+            {/* ))} */}
           </tbody>
         </table>
       </div>

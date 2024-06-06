@@ -3,11 +3,17 @@
 import { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { CircleX, FileUp } from "lucide-react";
-
-const Submission = () => {
+import { ASSIGNMENT_BASE_URL } from "@/config/constants";
+import { usePathname} from "next/navigation";
+import { cookies } from "next/headers";
+import { useUserStore } from "@/store/user";
+const Submission = ({submission} : any ) => {
+  const { user } = useUserStore()
   const [files, setFiles] = useState([]);
   const [rejected, setRejected] = useState([]);
-
+  const router = usePathname();
+  const pathParts = router.split("/");
+  const id = pathParts[pathParts.length - 1];
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
     if (acceptedFiles?.length) {
       setFiles((previousFiles) => [
@@ -54,10 +60,10 @@ const Submission = () => {
     console.log("Submitted form",formData);
     
     try {
-      const response = await fetch("https://7a92-105-235-138-23.ngrok-free.app/assignments/1ab30261-6e2a-469d-8347-8e1b0054e960/submissions/", {
+      const response = await fetch(`${ASSIGNMENT_BASE_URL}/assignments/${id}/submissions/`, {
         method: "POST",
         headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4NTUxMzk3LCJpYXQiOjE3MTU5NTkzOTcsImp0aSI6IjYxN2EwNDU3MzNiNDQxNDlhNjY5Y2ZmMjkzOGQ3ZWFlIiwiaWQiOiIyMjNlYmU5Yi1jMWMyLTQ5M2EtYTdiYS02OThhOTM1NjdkYmUiLCJhdmF0YXIiOiJkZWZhdWx0IiwidXNlcm5hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AaG9zdC5jb20iLCJyb2xlIjoiYWRtaW4iLCJncm91cCI6Ik5vbmUiLCJ5ZWFyIjoiTm9uZSJ9.2UFOb8hOBkfnGpWHgkQdJcnbK6YwqbEtn9aIFA-FNBc`
+          Authorization: `Bearer ${user?.accessToken}`
         },
         body: formData
       });
@@ -73,6 +79,7 @@ const Submission = () => {
   };
 
   return (
+    <>
     <form onSubmit={handleSubmit}>
       <div
         {...getRootProps({})}
@@ -157,6 +164,7 @@ const Submission = () => {
         </div>
       </section>
     </form>
+    </>
   );
 };
 

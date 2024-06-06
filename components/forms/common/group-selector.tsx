@@ -1,90 +1,53 @@
-import { FormControl } from "@/components/ui/form";
+import { NextResponse } from "next/server";
+import { NextRequest } from "next/server";
+import { protectedRoutes } from "@/config/routes";
+import { getAuth } from "@/app/actions";
+import { STUDENT, TEACHER } from "@/config/constants";
+import { cookies } from "next/headers";
 
-import { Suspense } from "react";
-import GridLoader from "@/components/icons/grid";
-import { getGroups } from "@/app/actions/staff/user.actions";
-import AlertError from "@/components/common/error";
-import { groupToOptions } from "@/utils/utils";
-import MultipleSelector, { Option } from "@/components/ui/multi-select";
-import { CommonCombobox } from "@/components/comments/combobox";
-import { ControllerRenderProps, FieldValues } from "react-hook-form";
+export async function middleware(request: NextRequest) {
+  console.log("Middleware called");
+  const { pathname } = request.nextUrl;
+  const auth = await getAuth();
 
-type Props = {
-  onChange: (options: Option[]) => void;
-  value: Option[];
-  label: string;
-  year: string;
-};
-
-export async function MultiGroupSelector({
-  onChange,
-  value,
-  year,
-  label,
-}: Props) {
-  const { data, status, error } = await getGroups(year);
-  const options = groupToOptions(data.groups);
-  if (status !== 200) {
-    return <div>Something went wrong</div>;
+  if(pathname.match("/auth") && !pathname.match("/auth") && auth.isAuth){
+    console.log("Redirecting to /");
+    return NextResponse.redirect(new URL("/", request.url));
   }
-  if (error) {
-    return <AlertError error={error} />;
+
+  if (!pathname.match(/\/app\/*/) && !pathname.match("/auth/logout")) {
+    return NextResponse.next();
   }
-  return (
-    <Suspense fallback={<GridLoader />}>
-      <FormControl>
-        <MultipleSelector
-          aria-label="Select groups"
-          className="z-10"
-          value={value}
-          onChange={onChange}
-          placeholder={label}
-          options={options}
-          defaultOptions={options}
-          emptyIndicator={
-            <p className="text-center text-lg leading-10 text-gray-600 dark:text-gray-400">
-              no results found.
-            </p>
-          }
-        />
-      </FormControl>
-    </Suspense>
-  );
+
+  if (!auth.isAuth) {
+    return NextResponse.redirect(new URL("/auth", request.url));
+  }
+  if (pathname.match(/\/app\/teacher/) && auth.payload?.role == TEACHER) {
+    return NextResponse.next();
+  }
+
+  // student trying to visit teacher dashboard
+  if (pathname.match(/\/app\/teacher/) && auth.payload?.role != TEACHER) {
+    return NextResponse.redirect(new URL("/app/student", request.url));
+  }
+  
+  if (pathname.match(/\/app\/student/) && auth.payload?.role == STUDENT) {
+    return NextResponse.next();
+  }
+
+    // teacher trying to visit student dashboard
+  if (pathname.match(/\/app\/student/) && auth.payload?.role != STUDENT) {
+    return NextResponse.redirect(new URL("/app/teacher", request.url));
+  }
+
+  if (protectedRoutes.some((route) => pathname.match(route))) {
+    return NextResponse.next();
+  }
+
+  NextResponse.redirect(new URL("/", request.url));
 }
-
-type SingleGroupSelectorProps = {
-  label: string;
-  field: ControllerRenderProps<FieldValues, string>;
-  setUpdatedValue: (key: string, value: string) => void;
-  fieldKey: string;
-  year: string;
+export const config = {
+  matcher: [
+  "/((?!api|_next/static|_next/image|favicon.ico).*)",
+  ],
 };
-
-export async function SingleGroupSelector({
-  field,
-  setUpdatedValue,
-  year,
-  label,
-  fieldKey,
-}: SingleGroupSelectorProps) {
-  const { data, status, error } = await getGroups(year);
-  const options = groupToOptions(data.groups);
-  if (status !== 200) {
-    return <div>Something went wrong</div>;
-  }
-  if (error) {
-    return <AlertError error={error} />;
-  }
-  return (
-    <Suspense fallback={<GridLoader />}>
-      <FormControl>
-        <CommonCombobox
-          options={options}
-          field={field}
-          setUpdatedValue={setUpdatedValue}
-          fieldKey={fieldKey}
-        />
-      </FormControl>
-    </Suspense>
-  );
-}
