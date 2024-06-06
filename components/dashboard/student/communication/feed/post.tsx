@@ -17,6 +17,7 @@ import { toast } from "sonner";
 import { COMMUNICATION_BASE_URL, TEST_TOKEN } from "@/config/constants";
 import Item from "./item";
 import PostDetails from "./post-details";
+import { CountdownTimerIcon } from "@radix-ui/react-icons";
 
 
 function timeSince(date: string): string {
@@ -43,7 +44,27 @@ export default function Post({ data }: { data: PostProps }) {
   const isVotedVal = votes.find((vote: Vote) => vote.user.id === "c0f6e869-840b-4963-8c58-6453b5d5cae5");
   const [Vote, setVote] = useState<Vote | null>(isVotedVal || null);
   const [count, setCount] = useState<number>(data.upvotes_count - data.downvotes_count);
+  const [isSaved, setIsSaved] = useState<boolean>(data.isSaved);
 
+  const handleSave = async () => {
+    try {
+      const res = await fetch(`${COMMUNICATION_BASE_URL}/posts/${data.id}/save`, {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${TEST_TOKEN}`,
+        },
+      });
+
+      if (res.ok) {
+        toast.success(`post ${isSaved ? 'unsaved' : 'saved'} successfully!`);
+        setIsSaved(!isSaved);
+      } else {
+        toast.error("something went wrong...");
+      }
+    } catch (error) {
+      toast.error("something went wrong...");
+    }
+  }
 
   const handleVote = async (vote: 'up' | 'down') => {
     try {
@@ -55,7 +76,6 @@ export default function Post({ data }: { data: PostProps }) {
       });
 
       if (res.ok) {
-        console.log("vote success")
         if (!Vote) {
           setVote({ id: "1", user: { id: "c0f6e869-840b-4963-8c58-6453b5d5cae5" }, vote });
           setCount(vote === 'up' ? count + 1 : count - 1);
@@ -127,15 +147,20 @@ export default function Post({ data }: { data: PostProps }) {
             </Carousel>
           )}
         </div>
-        <div className="flex flex-row justify-between font-semibold">
+        <div className="flex flex-row justify-end font-semibold">
           <div className="flex flex-row gap-6 items-center">
             {/* this section is for comments/share/save/more */}
             {/* <Item Icon={MessageSquare} text="comment" count={data.comments_count} /> */}
             <PostDetails data={data} />
-            <Item Icon={Repeat2} text="share" />
-            <Item Icon={Bookmark} text="save" />
+            {/* <Item Icon={Repeat2} text="share" /> */}
+            <Item
+              Icon={Bookmark}
+              text="save"
+              className={`${isSaved ? ' fill-blue-500' : ''}`}
+              color={`${isSaved ? '#3b82f6' : 'gray'}`}
+              onClick={() => handleSave()}
+              />
           </div>
-          <Item Icon={ListCollapse} />
         </div>
       </div>
     </div>
