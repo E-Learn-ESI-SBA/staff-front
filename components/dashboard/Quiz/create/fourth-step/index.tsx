@@ -10,11 +10,16 @@ import {
   uploadBytesResumable,
 } from 'firebase/storage';
 import { app } from '@/config/firebase';
+<<<<<<< HEAD
+import { MATERIAL_BASE_URL } from "@/config/constants";
+import { useUserStore } from "@/store/user";
+=======
 import { ASSIGNMENT_BASE_URL } from "@/config/constants";
+>>>>>>> 4f6055c808aff6253ae848f6b811f2c0293a68f5
 // import { cookies } from "next/headers";
 
-
 export default function Preview() {
+  const { user } = useUserStore()
   const {
     prevStep,
     first_step_content,
@@ -106,16 +111,18 @@ export default function Preview() {
       ...firstData,
       ...second_step_content,
       questions : questions,
-      module_id: "66453ff8a9a6b2a1a507b8a2",
-      teacher_id: "2"
     };
    console.log('final data',data)
     try {
+<<<<<<< HEAD
+      const response = await fetch(`${MATERIAL_BASE_URL}/quizes`, {
+=======
       const response = await fetch(`${ASSIGNMENT_BASE_URL}/quizes`, {
+>>>>>>> 4f6055c808aff6253ae848f6b811f2c0293a68f5
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4NTUxMzk3LCJpYXQiOjE3MTU5NTkzOTcsImp0aSI6IjYxN2EwNDU3MzNiNDQxNDlhNjY5Y2ZmMjkzOGQ3ZWFlIiwiaWQiOiIyMjNlYmU5Yi1jMWMyLTQ5M2EtYTdiYS02OThhOTM1NjdkYmUiLCJhdmF0YXIiOiJkZWZhdWx0IiwidXNlcm5hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AaG9zdC5jb20iLCJyb2xlIjoiYWRtaW4iLCJncm91cCI6Ik5vbmUiLCJ5ZWFyIjoiTm9uZSJ9.2UFOb8hOBkfnGpWHgkQdJcnbK6YwqbEtn9aIFA-FNBc`,
+          Authorization: `Bearer ${user?.accessToken}`,
         },
         //@ts-ignore
         body: JSON.stringify(data)

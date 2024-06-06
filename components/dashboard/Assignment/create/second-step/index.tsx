@@ -5,7 +5,9 @@ import { useDropzone } from "react-dropzone";
 import { CircleX, FileUp } from "lucide-react";
 import { useAssignmentFormStore } from "@/store/forms/assignments/question.store";
 import { ASSIGNMENT_BASE_URL } from "@/config/constants";
+import { useUserStore } from "@/store/user";
 const Submission = () => {
+  const { user } = useUserStore()
   const { prevStep, first_step_content } = useAssignmentFormStore((state) => ({
     nextStep: state.nextStep,
     prevStep: state.prevStep,
@@ -82,7 +84,7 @@ const Submission = () => {
       const response = await fetch(`${ASSIGNMENT_BASE_URL}/assignments`, {
         method: "POST",
         headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4NTUxNDAwLCJpYXQiOjE3MTU5NTk0MDAsImp0aSI6ImIzZDk0M2Y2ZThmMDQ5MTI5NTczMzAzZmNjYTNlY2U0IiwiaWQiOiJmMzRjNDhjYS05NDA0LTQwMzYtOTAyNi05MTdiNGExMjQwZTgiLCJhdmF0YXIiOiJkZWZhdWx0IiwidXNlcm5hbWUiOiJ0ZWFjaGVyIiwiZW1haWwiOiJ0ZWFjaGVyQGhvc3QuY29tIiwicm9sZSI6InRlYWNoZXIiLCJncm91cCI6Ik5vbmUiLCJ5ZWFyIjoiTm9uZSJ9.Z_tUqOd-UcBwLwzzuWSYppcgmIJ5AJZ6_MA63GPMwUM`
+          Authorization: `Bearer ${user?.accessToken}`
         },
         body: formData
       });

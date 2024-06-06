@@ -41,7 +41,7 @@ const SingleAssignment = ({assignment,submission} : any) => {
               file={assignment.file}
             />
           </TabsContent>
-          <TabsContent value="Submission">
+         <TabsContent value="Submission">
             <Submission submission={submission} />
           </TabsContent>
         </div>

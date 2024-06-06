@@ -47,5 +47,5 @@ export default  async function Assignment({
   const submissiondata = await getSubmission(params?.id);
   console.log('dd',data)
   console.log('ff',submissiondata)
-  return  <SingleAssignemnt assignment={data.message} submission={submissiondata?.message} />;
+  return  <SingleAssignemnt assignment={data.message} submission={submissiondata?.submissions} />;
 }
