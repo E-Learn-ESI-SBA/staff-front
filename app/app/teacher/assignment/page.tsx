@@ -14,6 +14,7 @@ import { AssignmentTable } from "@/components/assignment/table";
 import Link from "next/link";
 import { assignments } from "@/static/dummy-data/assignment/assignment";
 import { ASSIGNMENT_BASE_URL } from "@/config/constants";
+import { cookies } from "next/headers";
 
 async function getAssignments() {
   try {
@@ -22,7 +23,7 @@ async function getAssignments() {
       cache : 'no-store',
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4NTUxMzk3LCJpYXQiOjE3MTU5NTkzOTcsImp0aSI6IjYxN2EwNDU3MzNiNDQxNDlhNjY5Y2ZmMjkzOGQ3ZWFlIiwiaWQiOiIyMjNlYmU5Yi1jMWMyLTQ5M2EtYTdiYS02OThhOTM1NjdkYmUiLCJhdmF0YXIiOiJkZWZhdWx0IiwidXNlcm5hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AaG9zdC5jb20iLCJyb2xlIjoiYWRtaW4iLCJncm91cCI6Ik5vbmUiLCJ5ZWFyIjoiTm9uZSJ9.2UFOb8hOBkfnGpWHgkQdJcnbK6YwqbEtn9aIFA-FNBc`,
+        "Authorization": `Bearer ${cookies().get("accessToken")?.value}`,
      }
    })
   

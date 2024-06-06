@@ -31,7 +31,7 @@ export async function  AssignmentResultTable({data}: {data : Submission[] } ) {
     <div>
       <DataTable<Submission>
         data={data}
-        url='http://localhost:3000/app/teacher/submission'
+        url='http://localhost:3000/app/teacher/assignment/submission'
         headers={[
           {
             accessorKey: "id",

@@ -1,5 +1,6 @@
 import SingleAssignment from "@/components/dashboard/teacher/assignments/SingleAssignment";
 import { ASSIGNMENT_BASE_URL } from "@/config/constants";
+import { cookies } from "next/headers";
 
 async function getAssignment(id: string) {
   const res = await fetch( ` ${ASSIGNMENT_BASE_URL}/assignments/${id}`,{
@@ -7,7 +8,7 @@ async function getAssignment(id: string) {
     cache : 'no-store',
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIwMjY0NjU4LCJpYXQiOjE3MTc2NzI2NTgsImp0aSI6IjU4NDkyZjlkNDhhYTRhYmViY2U0Njk3YjViNWQxYzBjIiwiaWQiOiI3NWY1OWVjYy02OGVkLTQ4OTctOWMzMC1lYzdiYWFkYWIwYTkiLCJhdmF0YXIiOiJkZWZhdWx0IiwidXNlcm5hbWUiOiJmZW5kaTEiLCJlbWFpbCI6ImZlbmRpMUBnbWFpbC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImdyb3VwIjoiTm9uZSIsInllYXIiOiIxY3AifQ.s1FzH5zEsuxcZQgM5t4vcmdKyfXv7E746sYoR4gtL2Y`,
+      "Authorization": `Bearer ${cookies().get("accessToken")?.value}`,
    }
  })
 
@@ -26,7 +27,7 @@ async function getSubmissions(id: string) {
     cache : 'no-store',
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIwMjY0NjU4LCJpYXQiOjE3MTc2NzI2NTgsImp0aSI6IjU4NDkyZjlkNDhhYTRhYmViY2U0Njk3YjViNWQxYzBjIiwiaWQiOiI3NWY1OWVjYy02OGVkLTQ4OTctOWMzMC1lYzdiYWFkYWIwYTkiLCJhdmF0YXIiOiJkZWZhdWx0IiwidXNlcm5hbWUiOiJmZW5kaTEiLCJlbWFpbCI6ImZlbmRpMUBnbWFpbC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImdyb3VwIjoiTm9uZSIsInllYXIiOiIxY3AifQ.s1FzH5zEsuxcZQgM5t4vcmdKyfXv7E746sYoR4gtL2Y`,
+      "Authorization": `Bearer ${cookies().get("accessToken")?.value}`,
    }
  })
 
