@@ -28,9 +28,7 @@ type TProps = {
 export default function SideItem({ label, icon, url }: TProps) {
   // const pathname = "/" + usePathname().split("/")[1];
   const pathname = usePathname();
-  console.log(pathname);
   const isActive =  pathname === url;
-  console.log(url);
   return (
     <Link href={url} className="">
       <Button

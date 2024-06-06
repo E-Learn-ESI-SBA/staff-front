@@ -6,12 +6,10 @@ import { STUDENT, TEACHER } from "@/config/constants";
 import { cookies } from "next/headers";
 
 export async function middleware(request: NextRequest) {
-  console.log("Middleware called");
   const { pathname } = request.nextUrl;
   const auth = await getAuth();
 
   if(pathname.match("/auth") && !pathname.match("/auth") && auth.isAuth){
-    console.log("Redirecting to /");
     return NextResponse.redirect(new URL("/", request.url));
   }
 

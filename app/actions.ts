@@ -1,5 +1,6 @@
 "use server";
 import {
+  ASSIGNMENT_BASE_URL,
   STAFF_BASE_URL,
 } from "@/config/constants";
 import {
@@ -8,7 +9,7 @@ import {
 } from "@/types/chapter/zod";
 import { cookies } from "next/headers";
 import { TAuthSchema } from "@/components/auth/login";
-import { TPayload } from "@/types";
+import { Assignment, TPayload } from "@/types";
 import { CREATE_SECTION_URL, UPDATE_SECTION_URL } from "@/config/urls/material/mutations";
 import { GET_AUTH_USER_URL } from "@/config/urls/staff/queries";
 
@@ -288,3 +289,43 @@ export const getAuth = async (
 };
 
 // end auth service
+
+
+
+
+export const getAssignmentsWithSoonestDeadlines = async () => {
+  try {
+    const res = await fetch(`${ASSIGNMENT_BASE_URL}/assignments`, {
+      headers: {
+        Authorization: `Bearer ${cookies().get("accessToken")?.value}`,
+      },
+    });
+    const response = await res.json();
+
+    if (!response.message) {
+      return []
+    }
+    const sortedAssignments = response.message.sort((a: { deadline: string }, b: { deadline: string }) => {
+      const deadlineA: number = new Date(a.deadline).getTime();
+      const deadlineB: number = new Date(b.deadline).getTime();
+      return deadlineA - deadlineB;
+    });
+
+    const numAssignments = sortedAssignments.length;
+    let assignmentsA = [];
+
+    if (numAssignments <= 2) {
+      assignmentsA = sortedAssignments;
+    } else {
+      assignmentsA = sortedAssignments.slice(0, 3);
+    }
+    let assignments: [string, string][] = response.map((assignment: Assignment) => ({
+      title: assignment.title,
+      deadline: assignment.deadline,
+    }));
+    return assignments
+  } catch (error) {
+    console.log("err in function calling")
+    throw new Error("Failed to fetch assignments");
+  }
+};
