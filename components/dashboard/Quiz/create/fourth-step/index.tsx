@@ -111,14 +111,14 @@ export default function Preview() {
     };
    console.log('final data',data)
     try {
-      const response = await fetch(`${ASSIGNMENT_BASE_URL}/quizes`, {
-        method: "POST",
+      const response = await fetch(`${MATERIAL_BASE_URL}`, {
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${user?.accessToken}`,
         },
         //@ts-ignore
-        body: JSON.stringify(data)
+        // body: JSON.stringify(data)
       });
 
       if (response.ok) {

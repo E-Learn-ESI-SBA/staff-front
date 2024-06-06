@@ -67,7 +67,7 @@ export default function QuizFirstStepForm({defaultValues} :any) {
     setFirstStepContent(data);
     nextStep();
   };
-
+  const years = ['1cp','2cp','1cs','2cs','3cs']
   return (
     <Form {...form}>
       <form
@@ -142,6 +142,7 @@ export default function QuizFirstStepForm({defaultValues} :any) {
             </FormItem>
           )}
         />
+<div className="flex gap-4" >
 
         <FormField
           control={form.control}
@@ -164,7 +165,31 @@ export default function QuizFirstStepForm({defaultValues} :any) {
             </FormItem>
           )}
         />
-
+        <FormField
+            control={form.control}
+            name="year"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel>Class Year:</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}>
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select Class" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {years?.map((year :any ,i : any)  => (
+                      <SelectItem key={i} value={year}>{year}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+</div>
         <div className="flex justify-between items-center" >
         <FormField
           control={form.control}
