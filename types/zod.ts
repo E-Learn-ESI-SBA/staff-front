@@ -124,3 +124,17 @@ export const moduleSchemaValidator = z.object({
   ),
 });
 export type TModuleSchema = z.infer<typeof moduleSchemaValidator>;
+
+
+export const submissionSchemaValidator = z.object({
+  feedback: z
+    .string()
+    .min(2, { message: "must be at least 5 characters long" }),
+  grade: z.coerce
+  .number()
+  .min(0, "Minimum mark cannot be negative")
+  .max(100, "Maximum marks cannot exceed 100"),
+  file : z.any(),
+});
+
+export type TSubmissionSchema = z.infer<typeof submissionSchemaValidator>;

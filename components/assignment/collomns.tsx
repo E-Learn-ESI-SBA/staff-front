@@ -8,16 +8,14 @@ export function CustomColumns(): ColumnDef<IAssignment> {
     accessorKey: "state",
     header: "State",
     cell: ({ row }: { row: Row<IAssignment> }) => {
-      const color =
-        row.original.state === "ONGOING"
-          ? "#FF9407"
-          : row.original.state === "UPCOMING"
-            ? "#D80027"
-            : "#0F930F";
+      const deadline = new Date(row.original.deadline).getTime();
+      const now = Date.now();
+      const isOngoing = deadline > now;
+
       return (
-        <div className="flex gap-2 items-center " style={{ color: color }}>
-          <Ping color={color} />
-          {row.original.state}
+        <div className={`flex gap-2 items-center ${isOngoing ? 'text-[#FF9407]' : 'text-[#0F930F]'}`}>
+          <Ping color={isOngoing ? '#FF9407' : '#0F930F'} />
+          {isOngoing ? 'ONGOING' : 'FINISHED'}
         </div>
       );
     },

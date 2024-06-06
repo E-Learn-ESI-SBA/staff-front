@@ -1,24 +1,42 @@
 import SingleAssignemnt from "@/components/dashboard/student/studentProfile/assignment/SingleAssignment";
+import { ASSIGNMENT_BASE_URL } from "@/config/constants";
+import { cookies } from "next/headers";
 
 async function getAssignment(id: string) {
-  const res = await fetch( `https://66d8-105-235-138-23.ngrok-free.app/assignments/${id}`,{
+try {
+  const res = await fetch( ` ${ASSIGNMENT_BASE_URL}/assignments/${id}`,{
     method: "GET",
     cache : 'no-store',
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4NTUxMzk3LCJpYXQiOjE3MTU5NTkzOTcsImp0aSI6IjYxN2EwNDU3MzNiNDQxNDlhNjY5Y2ZmMjkzOGQ3ZWFlIiwiaWQiOiIyMjNlYmU5Yi1jMWMyLTQ5M2EtYTdiYS02OThhOTM1NjdkYmUiLCJhdmF0YXIiOiJkZWZhdWx0IiwidXNlcm5hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AaG9zdC5jb20iLCJyb2xlIjoiYWRtaW4iLCJncm91cCI6Ik5vbmUiLCJ5ZWFyIjoiTm9uZSJ9.2UFOb8hOBkfnGpWHgkQdJcnbK6YwqbEtn9aIFA-FNBc`,
+      "Authorization": `Bearer ${cookies().get("accessToken")?.value}`,
    }
  })
 
-  if (!res.ok) {
-    console.log('zz',res.json())
-    throw new Error('Failed to fetch data')
-  }
-
-return res.json()
-// return quiz;
+ return res.json()
+ 
+} catch (err) {
+  console.error("Failed to fetch students data:", err);
+}
 }
 
+async function getSubmission(id: string) {
+  try {
+    const res = await fetch( `${ASSIGNMENT_BASE_URL}/assignments/${id}/submissions`,{
+      method: "GET",
+      cache : 'no-store',
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${cookies().get("accessToken")?.value}`,
+     }
+   })
+  
+   return res.json()
+   
+  } catch (err) {
+    console.error("Failed to fetch students data:", err);
+  }
+  }
 
 export default  async function Assignment({
   params,
@@ -26,6 +44,8 @@ export default  async function Assignment({
   params: { id: string };
 }) {
   const data = await getAssignment(params?.id);
+  const submissiondata = await getSubmission(params?.id);
   console.log('dd',data)
-  return  <SingleAssignemnt assignment={data.message} />;
+  console.log('ff',submissiondata)
+  return  <SingleAssignemnt assignment={data.message} submission={submissiondata?.message} />;
 }

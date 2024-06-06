@@ -9,6 +9,7 @@ export interface PostProps {
   created_at: string;
   updated_at: string;
   votes: Vote[];
+  isSaved: boolean;
 }
 
 export interface Vote {

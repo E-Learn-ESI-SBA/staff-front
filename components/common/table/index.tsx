@@ -109,7 +109,7 @@ export function DataTable<T extends { id: string }>({
   editHandler = undefined,
   deleteHandler = undefined,
   customOperations,
-  url = "/dashboard",
+  url,
   words_separator = "_",
   fuzzyElements,
 }: Props<T>) {
@@ -356,9 +356,9 @@ export function DataTable<T extends { id: string }>({
           </TableHeader>
           <TableBody>
             {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
+              table.getRowModel().rows?.map((row) => (
                 <TableRow
-                  key={row.id}
+                  key={row?.id}
                   data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) => (
