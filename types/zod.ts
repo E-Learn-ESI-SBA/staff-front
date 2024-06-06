@@ -15,6 +15,7 @@ export const examSchemaValidator = z.object({
   title: z.string().min(2, { message: "must be at least 2 characters long" }),
   image: z.string().optional(),
   file: z.any().optional(),
+  year : z.string(),
   instructions: z
     .string()
     .min(12, { message: "must be at least 12 characters long" }),

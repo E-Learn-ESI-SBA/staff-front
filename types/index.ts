@@ -45,6 +45,7 @@ export type Exam = {
   module_id: ECourseType;
   image: string;
   file: any;
+  year:string;
   duration: number;
   max_score: number;
   min_score: number;
