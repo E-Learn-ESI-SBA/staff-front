@@ -6,7 +6,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import {MATERIAL_BASE_URL } from "@/config/constants";
 import { useUserStore } from "@/store/user";
-import { usePathname } from "next/navigation";
+import { usePathname,useRouter } from "next/navigation";
+import { toast } from "sonner";
 export default function PassQuiz({quizData} : {quizData :any } ) {
   const { user } = useUserStore()
   const [answers, setAnswers] = useState(
@@ -37,21 +38,15 @@ export default function PassQuiz({quizData} : {quizData :any } ) {
 
 
   const router = usePathname()
+  const routerr = useRouter()
   const pathParts = router.split("/");
   const id = pathParts[pathParts.length - 2];
-  console.log('dd',id)
 
   const handleSubmit = async () => {
     const submission = {
-      // studentId: "",  
       quizId: quizData.id,        
       answers: answers,
     };
-
-    console.log('sss', submission);
-
- 
-
     try {
       const response = await fetch(`${MATERIAL_BASE_URL}/quizes/${id}/submit`, {
         method: "POST",
@@ -70,9 +65,16 @@ export default function PassQuiz({quizData} : {quizData :any } ) {
         console.error("Failed to submit quiz");
         toast.error("something went wrong")
       }
+      setTimeout(() => {
+        routerr.replace("/app/student");
+      }, 1500);
+
     } catch (error) {
       console.error("Error submitting quiz:", error);
       toast.error("something went wrong")
+      setTimeout(() => {
+        routerr.replace("/app/student");
+      }, 1500);
     }
   };
 
