@@ -1,6 +1,6 @@
 import { IQuiz, QuizState } from "@/types/quiz";
 
-export const quiz: IQuiz[] = [
+export const quiz: any= [
   {
     id: "1",
     title: "Mathematics",
