@@ -1,7 +1,6 @@
 "use client"
 import { IQuiz } from "@/types/quiz";
 import { DataTable } from "../../../common/table";
-import { quiz } from "@/static/dummy-data/quiz/quiz";
 import { CustomColumns } from "./colloms";
 import { MATERIAL_BASE_URL } from "@/config/constants";
 import { useState } from "react";
@@ -39,7 +38,7 @@ export function QuizTable({data} : { data : IQuiz[]}) {
   return (
     <> 
       <DataTable<IQuiz>
-        data={ quiz ?? []}
+        data={quiz}
         url='http://localhost:3000/app/teacher/quizes'
         deleteHandler={(quiz) => deleteHandler(quiz)}
         headers={[
