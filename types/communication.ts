@@ -10,11 +10,22 @@ export interface PostProps {
   updated_at: string;
   votes: Vote[];
   isSaved: boolean;
-  user: {
-    id: string;
-    username: string;
-    avatar: string;
-  };
+  user: CommunicationUser;
+}
+
+export interface CommunicationUser {
+  id: string;
+  username: string;
+  avatar: string;
+  email: string;
+}
+
+export interface CommentProps {
+  id: string;
+  text: string;
+  created_at: string;
+  updated_at: string;
+  user: CommunicationUser;
 }
 
 export interface Vote {
