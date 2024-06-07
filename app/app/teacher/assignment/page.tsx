@@ -2,8 +2,6 @@ import { AssignmentTable } from "@/components/assignment/table";
 import Link from "next/link";
 import { ASSIGNMENT_BASE_URL } from "@/config/constants";
 import { cookies } from "next/headers";
-import AlertError from "@/components/common/error";
-import NoData from "@/components/common/no-data";
 
 async function getAssignments() {
   try {
@@ -38,7 +36,7 @@ export default async function TeacherAssignment() {
       >
         + Add Assignment
       </Link>
-    <AssignmentTable show={false} assignments={response.message} /> 
+    <AssignmentTable show={false} assignments={data?.message} /> 
     </div>
   );
 }

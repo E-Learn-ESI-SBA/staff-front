@@ -1,5 +1,3 @@
-import AlertError from "@/components/common/error";
-import NoData from "@/components/common/no-data";
 import SingleAssignemnt from "@/components/dashboard/student/studentProfile/assignment/SingleAssignment";
 import { ASSIGNMENT_BASE_URL } from "@/config/constants";
 import { cookies } from "next/headers";
@@ -51,7 +49,6 @@ async function getSubmission(id: string) {
   }
 
   }
-}
 
 export default async function Assignment({
   params,
