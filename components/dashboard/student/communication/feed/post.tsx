@@ -5,19 +5,19 @@ import { AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import {
   ArrowBigUp,
   ArrowBigDown,
-  Repeat2,
   Bookmark,
-  ListCollapse,
-  MessageSquare,
 } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Vote } from "@/types/communication";
 import { toast } from "sonner";
 import { COMMUNICATION_BASE_URL, TEST_TOKEN } from "@/config/constants";
 import Item from "./item";
 import PostDetails from "./post-details";
-import { CountdownTimerIcon } from "@radix-ui/react-icons";
+import { useUserStore } from "@/store/user";
+import { TPayload } from "@/types";
+import PostImages from "./post-images";
+
 
 
 function timeSince(date: string): string {
@@ -37,21 +37,27 @@ function timeSince(date: string): string {
   return `${Math.floor(secondsPast / 86400)} days ago`;
 }
 
-export default function Post({ data }: { data: PostProps }) {
-  // will get the id from the token later
-  // ps: my pc ran out of memory can't run staff service
+export default function Post({ data, user }: { data: PostProps, user: TPayload }) {
   const votes = data.votes;
-  const isVotedVal = votes.find((vote: Vote) => vote.user.id === "c0f6e869-840b-4963-8c58-6453b5d5cae5");
-  const [Vote, setVote] = useState<Vote | null>(isVotedVal || null);
+  
+  // const isVotedVal = votes.find((vote: Vote) => vote.user.id === user?.id);
+  const [Vote, setVote] = useState<Vote | null>(null);
   const [count, setCount] = useState<number>(data.upvotes_count - data.downvotes_count);
   const [isSaved, setIsSaved] = useState<boolean>(data.isSaved);
 
+
+  useEffect(() => {
+    const isVotedVal = votes.find((vote: Vote) => vote.user.id === user?.id);
+    setVote(isVotedVal || null);
+  }, [user])
+
   const handleSave = async () => {
     try {
+      
       const res = await fetch(`${COMMUNICATION_BASE_URL}/posts/${data.id}/save`, {
         method: "POST",
         headers: {
-          "Authorization": `Bearer ${TEST_TOKEN}`,
+          "Authorization": `Bearer ${user?.accessToken!}`,
         },
       });
 
@@ -71,20 +77,20 @@ export default function Post({ data }: { data: PostProps }) {
       const res = await fetch(`${COMMUNICATION_BASE_URL}/votes/${data.id}/${vote}`, {
         method: "POST",
         headers: {
-          "Authorization": `Bearer ${TEST_TOKEN}`,
+          "Authorization": `Bearer ${user?.accessToken!}`,
         },
       });
 
       if (res.ok) {
         if (!Vote) {
-          setVote({ id: "1", user: { id: "c0f6e869-840b-4963-8c58-6453b5d5cae5" }, vote });
+          setVote({ id: "1", user: { id: user?.id! }, vote });
           setCount(vote === 'up' ? count + 1 : count - 1);
         } else {
           if (Vote.vote === vote) {
             setVote(null);
             setCount(vote === 'up' ? count - 1 : count + 1);
           } else {
-            setVote({ id: "1", user: { id: "c0f6e869-840b-4963-8c58-6453b5d5cae5" }, vote });
+            setVote({ id: "1", user: { id: user?.id! }, vote });
             setCount(vote === 'up' ? count + 2 : count - 2);
           }
         }
@@ -110,11 +116,11 @@ export default function Post({ data }: { data: PostProps }) {
       <div className="flex flex-col gap-8 w-full">
         <div className="flex flex-row items-center gap-3">
           <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" alt="avatar" />
+            <AvatarImage src={`${data.user.avatar && data.user.avatar == 'default' ? 'https://github.com/shadcn.png' : data.user.avatar }`} alt="avatar" />
             <AvatarFallback>JD</AvatarFallback>
           </Avatar>
           <div className="flex flex-col md:flex-row gap-3 items-center">
-            <p className="font-bold">r/godsword</p>
+            <p className="font-bold">{data.user.username}</p>
             <p className="text-sm text-gray-500">{timeSince(data.created_at)}</p>
           </div>
         </div>
@@ -125,27 +131,7 @@ export default function Post({ data }: { data: PostProps }) {
         </div>
         <div>
           {/* contains post's images (optional) */}
-          {data.images.length > 0 && (
-            <Carousel className="w-full h-full max-w-md mx-auto">
-              <CarouselContent>
-                {data.images.length > 0 ? (
-                  data.images.map((img, index) => (
-                    <CarouselItem key={index}>
-                      <Image
-                        height={600}
-                        width={1000}
-                        src={img}
-                        alt="post image"
-                        className="aspect-square max-h-[600px] object-cover"
-                      ></Image>
-                    </CarouselItem>
-                  ))
-                ): null}
-              </CarouselContent>
-              <CarouselPrevious />
-              <CarouselNext />
-            </Carousel>
-          )}
+          <PostImages images={data.images}/>
         </div>
         <div className="flex flex-row justify-end font-semibold">
           <div className="flex flex-row gap-6 items-center">

@@ -3,16 +3,13 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
-import { questions } from "@/static/content/Quiz";
 import Link from "next/link";
-import { ASSIGNMENT_BASE_URL } from "@/config/constants";
-
-
-let duration = 5;
-let title = 'Web Quiz'
-
+import {MATERIAL_BASE_URL } from "@/config/constants";
+import { useUserStore } from "@/store/user";
+import { usePathname,useRouter } from "next/navigation";
+import { toast } from "sonner";
 export default function PassQuiz({quizData} : {quizData :any } ) {
-  console.log('seif',quizData)
+  const { user } = useUserStore()
   const [answers, setAnswers] = useState(
     quizData.questions.map((question) => ({
       question_id: question.id, 
@@ -39,32 +36,45 @@ export default function PassQuiz({quizData} : {quizData :any } ) {
     setAnswers(newAnswers);
   };
 
+
+  const router = usePathname()
+  const routerr = useRouter()
+  const pathParts = router.split("/");
+  const id = pathParts[pathParts.length - 2];
+
   const handleSubmit = async () => {
     const submission = {
-      // studentId: "",  
       quizId: quizData.id,        
       answers: answers,
     };
-
-    console.log('sss', submission);
-
     try {
-      const response = await fetch(`${ASSIGNMENT_BASE_URL}/quizes/${quizData.id}/submit`, {
+      const response = await fetch(`${MATERIAL_BASE_URL}/quizes/${id}/submit`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4NTUxMzk4LCJpYXQiOjE3MTU5NTkzOTgsImp0aSI6IjhkZWU5YzQ0YjlkOTQyYmZiYjMxNjI2ZmYyMTBkZjIxIiwiaWQiOiJjMGY2ZTg2OS04NDBiLTQ5NjMtOGM1OC02NDUzYjVkNWNhZTUiLCJhdmF0YXIiOiJkZWZhdWx0IiwidXNlcm5hbWUiOiJzdHVkZW50IiwiZW1haWwiOiJzdHVkZW50QGhvc3QuY29tIiwicm9sZSI6InN0dWRlbnQiLCJncm91cCI6Ik5vbmUiLCJ5ZWFyIjoiTm9uZSJ9.WShTxYZQ07i6fRO6SDF-REAOHOscvbUXzbFSr0Vrzlo`,
+          "Authorization": `Bearer ${user?.accessToken}`
         },
         body: JSON.stringify(submission)
       });
 
       if (response.ok) {
         console.log("Quiz submitted successfully");
+        toast.success("Quiz submitted successfully")
+
       } else {
         console.error("Failed to submit quiz");
+        toast.error("something went wrong")
       }
+      setTimeout(() => {
+        routerr.replace("/app/student");
+      }, 1500);
+
     } catch (error) {
       console.error("Error submitting quiz:", error);
+      toast.error("something went wrong")
+      setTimeout(() => {
+        routerr.replace("/app/student");
+      }, 1500);
     }
   };
 

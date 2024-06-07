@@ -1,11 +1,11 @@
-import SingleQuiz from '@/components/dashboard/student/studentProfile/Quiz/SingleQuiz'
 import { MATERIAL_BASE_URL } from '@/config/constants'
+import SingleQuiz from '@/components/dashboard/student/studentProfile/Quiz/SingleQuiz'
 import { cookies } from 'next/headers'
 import React from 'react'
 
 async function getQuiz(id:string) {
   try{
-    const res = await fetch( `${MATERIAL_BASE_URL}/quizes/${id}/student/result`,{
+    const res = await fetch( `${MATERIAL_BASE_URL}/quizes/${id}/teacher/result`,{
       method: "GET",
       cache : 'no-store',
       headers: {
@@ -14,6 +14,7 @@ async function getQuiz(id:string) {
      }
    })
    if (!res.ok) {
+    console.log(await res.json())
     throw new Error(`HTTP error! status: ${res.status}`);
   }
   
@@ -24,14 +25,14 @@ async function getQuiz(id:string) {
   } 
     }
 
-const QuizResult = async({ params }: { params: { id: string } }) => {
-    const data = await getQuiz(params?.id)
+const QuizResult = async({ params }: { params: { sub: string } }) => {
+    const data = await getQuiz(params?.sub)
   return (
     <>
           {data ? 
       <SingleQuiz data={data} />  
     : 
-    <p className="text-center text-xl font-medium  text-red-500 " >wait untill the end date to see your full result</p>
+    <p className="text-center text-xl font-medium  " >something went wrong please try later</p>
     }
 
     </>
