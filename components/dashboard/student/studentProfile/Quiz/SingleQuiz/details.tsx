@@ -6,7 +6,7 @@ interface QuizDetailsProps {
   date: string;
   subject: string;
   numberOfQuestions: number;
-  correctAnswers: number;
+  score: number;
   grade: string;
 }
 
@@ -16,7 +16,7 @@ const QuizDetails: React.FC<QuizDetailsProps> = ({
   date,
   subject,
   numberOfQuestions,
-  correctAnswers,
+  score,
   grade,
 }) => {
   return (
@@ -26,14 +26,14 @@ const QuizDetails: React.FC<QuizDetailsProps> = ({
         <p
           className={` px-2 py-1 rounded-[10px] ${passed ? "text-[#0F930F] bg-[#d8eed8]" : "bg-[#FE5C73] text-[#DD3A3A]"} `}
         >
-          Status : {passed ? "passed" : "failed"}{" "}
+          Status : {passed ? "passed" : "failed"}
         </p>
       </div>
       <div className="flex items-center justify-start gap-4">
         <p className="font-medium">Quiz Schedule</p>
         <div className=" bg-[#ededf5] px-2 py-1 rounded-[10px] flex justify-between items-center gap-2 ">
           <Calendar className="w-4 h-4" />
-          <p className="text-sm font-light">{date} </p>{" "}
+          <p className="text-sm font-light">{date} </p>
         </div>
       </div>
       <div className="flex items-center justify-start gap-4">
@@ -45,8 +45,8 @@ const QuizDetails: React.FC<QuizDetailsProps> = ({
         <p>{numberOfQuestions} </p>
       </div>
       <div className="flex items-center justify-start gap-4">
-        <p className="font-medium">Correct Answers : </p>
-        <p> {correctAnswers} </p>
+        <p className="font-medium">Score : </p>
+        <p> {score} </p>
       </div>
         <div className="flex items-center justify-start gap-4">
         <p className="font-medium">Grade : </p>

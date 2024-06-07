@@ -38,8 +38,8 @@ export function QuizTable({data} : { data : IQuiz[]}) {
   return (
     <> 
       <DataTable<IQuiz>
-        data={quiz}
-        url='http://localhost:3000/app/teacher/quizes'
+        data={quiz ?? [] }
+        url='http://localhost:3000/app/teacher/quizzes'
         deleteHandler={(quiz) => deleteHandler(quiz)}
         headers={[
           {

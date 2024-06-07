@@ -90,6 +90,7 @@ export type Props<T extends { id: string }> = {
   headers: Headers<T>;
   data: T[];
   url?: string;
+  submission ?: boolean;
   customColumns?: (() => ColumnDef<T>)[];
   editHandler?: (row: T) => void;
   deleteHandler?: (row: T) => void | Promise<void>;
@@ -110,6 +111,7 @@ export function DataTable<T extends { id: string }>({
   deleteHandler = undefined,
   customOperations,
   url,
+  submission,
   words_separator = "_",
   fuzzyElements,
 }: Props<T>) {
@@ -204,7 +206,10 @@ export function DataTable<T extends { id: string }>({
                 Copy ID
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <Link href={`${url}/${selectedRow.id}`}>
+            
+              <Link href={`${url}/${submission ?
+                  //@ts-ignore
+                selectedRow?.quiz_id  :  selectedRow.id}`}>
                 <DropdownMenuItem className="flex justify-between">
                   <span>View details</span>
                   <EyeOpenIcon />

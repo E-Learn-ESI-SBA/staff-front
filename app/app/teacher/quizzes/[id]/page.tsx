@@ -1,9 +1,11 @@
+import { TeacherSubmissionTable } from "@/components/dashboard/teacher/submission/table";
+import { MATERIAL_BASE_URL } from "@/config/constants";
 import { cookies } from "next/headers";
-import { quiz } from "@/static/dummy-data/quiz";
-import Quiz from "@/components/dashboard/Quiz";
+import Link from "next/link";
 
-async function getQuiz(id: string) {
-    const res = await fetch( `https://c27c-105-235-137-89.ngrok-free.app/assignments`,{
+async function getSubmission(id : string) {
+  try {
+    const res = await fetch(`${MATERIAL_BASE_URL}/quizes/${id}/teacher `,{
       method: "GET",
       cache : 'no-store',
       headers: {
@@ -12,20 +14,24 @@ async function getQuiz(id: string) {
      }
    })
 
-    if (!res.ok) {
-      throw new Error('Failed to fetch data')
-    }
-
-  return res.json()
-  // return quiz;
+   if (!res.ok) {
+    throw new Error(`HTTP error! status: ${res.status}`);
+  }
+  
+  return await res.json()
+  } catch (err) {
+      console.error("Failed to fetch quizes data:", err);
+      return []
+  }
 }
 
-export default async function SingleQuiz({
-  params,
-}: {
-  params: { id: string };
-}) {
-  const data = await getQuiz(params?.id);
-  console.log('dd',data)
-  return <Quiz quiz={quiz} />;
-}
+const Quizzes = async({ params }: { params: { id: string } }) => {
+  const data = await getSubmission(params?.id);
+  console.log('submission',data)  
+  return (
+    <div className="flex flex-col gap-8 p-4">
+      <TeacherSubmissionTable data={data} />;
+    </div>
+  );
+};
+export default Quizzes;
