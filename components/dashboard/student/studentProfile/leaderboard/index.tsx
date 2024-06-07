@@ -1,9 +1,13 @@
 "use client";
 import { useState } from "react";
 import Card from "./card";
-import { monthStudents, quartlyStudents } from "@/static/content/rank";
+import Ranking from "@/types/rank";
 
-const LeaderBoard = () => {
+type Props = {
+  dailyStudents: Ranking[];
+  weeklyStudents: Ranking[];
+}
+const LeaderBoard = ({dailyStudents, weeklyStudents}:Props) => {
   const [selectedButton, setSelectedButton] = useState(true);
 
   const handleToggle = () => {
@@ -19,7 +23,7 @@ const LeaderBoard = () => {
             selectedButton ? "bg-white text-blue-500" : "text-white"
           }`}
         >
-          Monthly
+          Daily
         </button>
         <button
           onClick={handleToggle}
@@ -27,20 +31,20 @@ const LeaderBoard = () => {
             !selectedButton ? "bg-white text-blue-500" : "text-white"
           }`}
         >
-          Quarterly
+          Monthly
         </button>
       </div>
 
       {selectedButton ? (
         <div className="flex flex-col gap-2">
           {" "}
-          {monthStudents.map((student, index) => (
+          {dailyStudents.map((student, index) => (
             <Card key={index} student={student} index={index} />
           ))}
         </div>
       ) : (
         <div className="flex flex-col gap-2">
-          {quartlyStudents.map((student, index) => (
+          {weeklyStudents.map((student, index) => (
             <Card key={index} student={student} index={index} />
           ))}
         </div>
