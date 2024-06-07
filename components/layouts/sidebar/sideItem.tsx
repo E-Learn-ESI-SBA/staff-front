@@ -28,7 +28,8 @@ type TProps = {
 export default function SideItem({ label, icon, url }: TProps) {
   // const pathname = "/" + usePathname().split("/")[1];
   const pathname = usePathname();
-  const isActive =  pathname === url;
+  console.log(pathname)
+  const isActive = ["/app/student", "/app/teacher"].includes(url) ? pathname === url : pathname.startsWith(url)
   return (
     <Link href={url} className="">
       <Button

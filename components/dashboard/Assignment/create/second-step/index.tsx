@@ -6,7 +6,10 @@ import { CircleX, FileUp } from "lucide-react";
 import { useAssignmentFormStore } from "@/store/forms/assignments/question.store";
 import { ASSIGNMENT_BASE_URL } from "@/config/constants";
 import { useUserStore } from "@/store/user";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 const Submission = () => {
+  const router = useRouter();
   const { user } = useUserStore()
   const { prevStep, first_step_content } = useAssignmentFormStore((state) => ({
     nextStep: state.nextStep,
@@ -92,11 +95,32 @@ const Submission = () => {
       console.log('FormData', formData);
   
       if (response.ok) {
+        toast.success("Assignment created successfully", {
+          style: {
+            backgroundColor: "green",
+            color: "white",
+          },
+        });
+        setTimeout(() => {
+          router.push("/app/teacher/assignment");
+        }, 2000);
         console.log("Quiz submitted successfully", response);
       } else {
+        toast.error("Error when creating assignment", {
+          style:{
+            background: "#FF0000",
+            color: "#fff",
+          }
+        });
         console.error("Failed to submit quiz", response);
       }
     } catch (error) {
+      toast.error("Error when creating assignment", {
+        style:{
+          background: "#FF0000",
+          color: "#fff",
+        }
+      });
       console.error("Error submitting quiz:", error);
     }
   };
