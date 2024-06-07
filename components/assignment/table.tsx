@@ -2,7 +2,6 @@
 import { IAssignment } from "@/types/assignment";
 import { DataTable } from "../common/table";
 import { CustomColumns } from "@/components/assignment/collomns";
-import { assignments } from "@/static/dummy-data/assignment/assignment";
 import { useState } from "react";
 import { ASSIGNMENT_BASE_URL } from "@/config/constants";
 export function AssignmentTable({ show, assignments }: { show: Boolean, assignments: any }) {
@@ -25,8 +24,6 @@ export function AssignmentTable({ show, assignments }: { show: Boolean, assignme
         return res.json()
       }
 
-
-      // const response = await deleteTeacher(teacher.id);
     } catch (err: any) {
       console.log(err.message)
       throw new Error(err.message)
