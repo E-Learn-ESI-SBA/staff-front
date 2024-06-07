@@ -1,8 +1,10 @@
 interface Ranking {
-  imageSrc: string;
-  name: string;
-  StudentLocation: string;
-  points: number;
+  avatar_url: string;
+  student: string;
+  promo: string;
+  group: string;
+  total_points: number;
+  rank: number;
 }
 
 export default Ranking;

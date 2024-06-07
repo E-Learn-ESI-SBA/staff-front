@@ -26,7 +26,7 @@ export async function middleware(request: NextRequest) {
 
   // student trying to visit teacher dashboard
   if (pathname.match(/\/app\/teacher/) && auth.payload?.role != TEACHER) {
-    return NextResponse.redirect(new URL("/app/student", request.url));
+    return NextResponse.redirect(new URL("/auth/logout", request.url));
   }
   
   if (pathname.match(/\/app\/student/) && auth.payload?.role == STUDENT) {
@@ -35,7 +35,7 @@ export async function middleware(request: NextRequest) {
 
     // teacher trying to visit student dashboard
   if (pathname.match(/\/app\/student/) && auth.payload?.role != STUDENT) {
-    return NextResponse.redirect(new URL("/app/teacher", request.url));
+    return NextResponse.redirect(new URL("/auth/logout", request.url));
   }
 
   if (protectedRoutes.some((route) => pathname.match(route))) {

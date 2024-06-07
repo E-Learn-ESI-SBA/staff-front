@@ -329,3 +329,23 @@ export const getAssignmentsWithSoonestDeadlines = async () => {
     throw new Error("Failed to fetch assignments");
   }
 };
+
+
+export const getLeaderBoard = async () => {
+  try {
+    const res = await fetch(`${STAFF_BASE_URL}/evaluations/leaderboard`, {
+      headers: {
+        Authorization: `Bearer ${cookies().get("accessToken")?.value}`,
+      },
+    })
+    const response = await res.json()
+    if (!res.ok) {
+      throw new Error("Something went wrong")
+    }
+    return response?.data
+  }
+  catch (err: any) {
+    console.log(err)
+    throw new Error("Something went wrong")
+  }
+}
