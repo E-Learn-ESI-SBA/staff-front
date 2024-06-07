@@ -5,7 +5,7 @@ import { ASSIGNMENT_BASE_URL } from "@/config/constants";
 
 
 
-const SingleAssignment = async({assignment,submissions} : any) => {
+const SingleAssignment = async ({ assignment, submissions }: any) => {
   const tabs = ["Details", "Submission"];
 
   return (
@@ -29,15 +29,15 @@ const SingleAssignment = async({assignment,submissions} : any) => {
         <div className="p-4 pt-12">
           <TabsContent value="Details">
             <Details
-            title={assignment.title}
+              title={assignment.title}
               date={assignment.deadline}
               subject={assignment.module_id}
-              description={assignment.description} 
+              description={assignment.description}
               file={assignment.file}
             />
           </TabsContent>
           <TabsContent value="Submission">
-            <AssignmentResultTable data={submissions} />
+            <AssignmentResultTable data={submissions} assignmentId={assignment.id}/>
           </TabsContent>
         </div>
       </Tabs>

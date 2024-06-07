@@ -18,8 +18,8 @@ type Submission = {
 }
 
 
-export async function  AssignmentResultTable({data}: {data : Submission[] } ) {
-
+export async function AssignmentResultTable({ data, assignmentId }: { data: Submission[]; assignmentId: string }) {
+  
   const handleAddNote = (row:any) => {
     console.log("ee", row);
   };
@@ -31,12 +31,8 @@ export async function  AssignmentResultTable({data}: {data : Submission[] } ) {
     <div>
       <DataTable<Submission>
         data={data}
-        url='http://localhost:3000/app/teacher/assignment/submission'
+        url={`/app/teacher/assignment/${assignmentId}/submission`}
         headers={[
-          {
-            accessorKey: "id",
-            title: "ID",
-          },
           {
             accessorKey: "student_id",
             title: "Student",
