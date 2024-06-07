@@ -1,18 +1,12 @@
 export interface IQuiz {
   id: string;
   title: string;
-  description: string;
+  description?: string;
   duration: number;
-  category: string;
-  image: string;
-  startDate: string;
-  endDate: string;
-  questions: number;
-  module_name: string;
-  publisher: string;
-  state: QuizState;
-  points: number;
-  attempts: number;
+  start_date: string;
+  end_date: string;
+  year : string;
+  question_count : string;
 }
 export enum QuizState {
   UPCOMING = "UPCOMING",

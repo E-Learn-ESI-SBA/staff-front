@@ -1,6 +1,30 @@
-import { QuizTable } from "@/components/quiz/table";
+import { QuizTable } from "@/components/dashboard/teacher/quiz/table";
+import { MATERIAL_BASE_URL } from "@/config/constants";
+import { cookies } from "next/headers";
 import Link from "next/link";
-const Quizzes = () => {
+
+async function getQuiz() {
+  try {
+    const res = await fetch(`${MATERIAL_BASE_URL}/quizes/teacher`,{
+      method: "GET",
+      cache : 'no-store',
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${cookies().get("accessToken")?.value}`,
+     }
+   })
+  
+   return res.json()
+  } catch (err) {
+    console.error("Failed to fetch students data:", err);
+  }
+
+// return quiz;
+}
+
+const Quizzes = async() => {
+  const data = await getQuiz();
+  console.log('dd',data)  
   return (
     <div className="flex flex-col gap-8 p-4">
       <Link
@@ -9,7 +33,7 @@ const Quizzes = () => {
       >
         + Add Quiz
       </Link>
-      <QuizTable />;
+      <QuizTable data={data} />;
     </div>
   );
 };
