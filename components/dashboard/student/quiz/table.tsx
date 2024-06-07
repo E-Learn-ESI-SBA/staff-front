@@ -1,13 +1,12 @@
 import { IQuiz } from "@/types/quiz";
 import { DataTable } from "@/components/common/table";
-import { quiz } from "@/static/dummy-data/quiz/quiz";
 import { CustomColumns } from "./colloms";
 
 export function QuizTable({data} : { data : IQuiz[]}) {
   return (
     <> 
       <DataTable<IQuiz>
-        data={ data ?? quiz}
+        data={data}
         headers={[
           {
             accessorKey: "id",

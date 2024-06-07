@@ -27,7 +27,12 @@ async function getQuiz(id:string) {
       method: "GET",
    })
       
-    return res.json()
+   if (!res.ok) {
+    throw new Error(`HTTP error! status: ${res.status}`);
+  }
+  
+  return await res.json()
+
   }catch(err){
     console.error("Failed to fetch data:", err);
   }
@@ -35,9 +40,13 @@ async function getQuiz(id:string) {
 
 export default async function SingleQuiz({ params }: { params: { id: string } }) {
 const data = await getQuiz(params?.id)
-console.log('eee',data)
   return <div>
-  <PreQuiz  quizMeataData={data} />;
+    {data ? 
+  <PreQuiz  quizMeataData={data} />    
+    : 
+    <p className="text-center text-xl font-medium  " >something went wrong please try later</p>
+    }
+
   </div>
 
 }

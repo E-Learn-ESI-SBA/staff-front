@@ -5,7 +5,6 @@ import Link from 'next/link'
 
 
 const PreQuiz = ({quizMeataData} : {quizMeataData :any } ) => {
-  console.log('ee',quizMeataData)
   return (
     <div className='flex flex-col gap-8 text-[#4E5566] p-8' >
       <h1 className="text-3xl font-medium text-[#2B3674] "> {quizMeataData.quiz.title}</h1>
