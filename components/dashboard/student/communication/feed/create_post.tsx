@@ -38,8 +38,9 @@ import {
 import { app } from "@/config/firebase";
 import { toast } from "sonner";
 import { COMMUNICATION_BASE_URL, TEST_TOKEN } from "@/config/constants";
+import { TPayload } from "@/types";
 
-export default function CreatePost() {
+export default function CreatePost({ user }: { user: TPayload }) {
   const [files, setFiles] = useState<File[]>([]);
   const [formData, setFormData] = useState({
     header: "",
@@ -101,7 +102,7 @@ export default function CreatePost() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${TEST_TOKEN}`
+          "Authorization": `Bearer ${user.accessToken!}`
         },
         body: JSON.stringify(reqData),
       });
@@ -120,7 +121,7 @@ export default function CreatePost() {
 
   return (
     <div className="text-black flex gap-6 feed_border">
-      <AvatarComponent />
+      <AvatarComponent src={user?.avatar} />
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogTrigger asChild className="flex flex-row w-full justify-center items-center">
           <div className=" cursor-pointer">
@@ -135,10 +136,10 @@ export default function CreatePost() {
         <DialogContent className="sm:max-w-[625px] text-black">
           <DialogHeader>
             <DialogTitle className="flex flex-row gap-6">
-              <AvatarComponent />
+              <AvatarComponent src={user?.avatar} />
               <div className="flex flex-col">
-                <h3 className="text-lg font-semibold">Pedro Duarte</h3>
-                <p className="text-sm text-gray-400">@godsword</p>
+                <h3 className="text-lg font-semibold">{user?.username}</h3>
+                <p className="text-sm text-gray-400">{user?.email}</p>
               </div>
             </DialogTitle>
             {/* <DialogDescription>
@@ -219,11 +220,11 @@ export default function CreatePost() {
   );
 }
 
-function AvatarComponent() {
+function AvatarComponent({ src }: { src: string }) {
   return (
     <Avatar>
       <AvatarImage
-        src="https://github.com/shadcn.png"
+        src={`${src && src == "default" ? "https://github.com/shadcn.png" : src}`}
         alt="Avatar"
         height={60}
         width={60}
