@@ -10,7 +10,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const { user } = useUserStore();
-  console.log(user)
+  
   return (
     <div className="w-full h-full flex">
       {user?.role == "teacher" ? 

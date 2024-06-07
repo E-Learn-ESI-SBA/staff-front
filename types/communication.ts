@@ -10,6 +10,11 @@ export interface PostProps {
   updated_at: string;
   votes: Vote[];
   isSaved: boolean;
+  user: {
+    id: string;
+    username: string;
+    avatar: string;
+  };
 }
 
 export interface Vote {

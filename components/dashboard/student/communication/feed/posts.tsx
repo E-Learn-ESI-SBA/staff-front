@@ -1,30 +1,29 @@
 'use client';
-import { PostProps, PostsProps } from "@/types/communication";
+import { PostProps } from "@/types/communication";
 import Post from "./post";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useState } from "react";
 import { COMMUNICATION_BASE_URL, TEST_TOKEN } from "@/config/constants";
 import GridLoader from "@/components/icons/grid";
+import { useUserStore } from "@/store/user";
+import { TPayload } from "@/types";
 
 
-export default function Posts({ data }: { data: PostProps[] }) {
+export default function Posts({ data, user }: { data: PostProps[], user: TPayload }) {
   const [posts, setPosts] = useState<PostProps[]>(data);
   const [hasMore, setHasMore] = useState<boolean>(true);
   const [cursor, setCursor] = useState<{page: number, limit: number}>({page: 0, limit: 2});
-
   const refreshFunction = async () => {
     try {
       const response = await fetch(`${COMMUNICATION_BASE_URL}/posts?page=0?limit=2`, {
         method: 'GET',
         headers: {
-          "Authorization": `Bearer ${TEST_TOKEN}`,
+        "Authorization": `Bearer ${user?.accessToken!}`,
         },
         cache: 'no-store',
         // disable cache in fetch
       });
-      console.log("res", response)
       const data = await response.json();
-      console.log("posts fetched: ", data);
       return data;
     } catch (error) {
       console.log(error);
@@ -79,7 +78,7 @@ export default function Posts({ data }: { data: PostProps[] }) {
         refreshFunction={refreshFunction}
       >
         {posts.map((post) => (
-          <Post key={post.id} data={post} />
+          <Post key={post.id} data={post} user={user!}/>
         ))}
       </InfiniteScroll>
     </div>

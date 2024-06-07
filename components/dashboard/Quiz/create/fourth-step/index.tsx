@@ -12,6 +12,7 @@ import {
 import { app } from '@/config/firebase';
 import { ASSIGNMENT_BASE_URL, MATERIAL_BASE_URL } from "@/config/constants";
 import { useUserStore } from "@/store/user";
+import { toast } from "sonner";
 
 // import { cookies } from "next/headers";
 
@@ -111,23 +112,26 @@ export default function Preview() {
     };
    console.log('final data',data)
     try {
-      const response = await fetch(`${MATERIAL_BASE_URL}`, {
-        method: "GET",
+      const response = await fetch(`${MATERIAL_BASE_URL}/quizes`, {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${user?.accessToken}`,
         },
         //@ts-ignore
-        // body: JSON.stringify(data)
+        body: JSON.stringify(data)
       });
 
       if (response.ok) {
         console.log("Quiz submitted successfully",response);
+        toast.success("Quiz submitted successfully");
       } else {
         console.error("Failed to submit quiz");
+        toast.error("Failed to submit quiz");
       }
     } catch (error) {
       console.error("Error submitting quiSON.stringify(submission)z:", error);
+      toast.error("Error submitting quiz");
     }
   };
 
