@@ -2,8 +2,8 @@ import { AssignmentTable } from "@/components/assignment/table";
 import Link from "next/link";
 import { ASSIGNMENT_BASE_URL } from "@/config/constants";
 import { cookies } from "next/headers";
-
-// export const dynamic = "force-dynamic";
+import AlertError from "@/components/common/error";
+import NoData from "@/components/common/no-data";
 
 async function getAssignments() {
   try {
@@ -25,8 +25,6 @@ async function getAssignments() {
     console.error("Failed to fetch assignments data:", err);
     return  {message : [] } ;
   }
-
-// return quiz;
 }
 
 export default async function TeacherAssignment() {
@@ -35,12 +33,12 @@ export default async function TeacherAssignment() {
   return (  
     <div className="flex flex-col gap-8 p-4">
       <Link
-        href="http://localhost:3000/app/teacher/assignment/create"
-        className="px-4 py-2 text-white bg-[#2C62EE] self-end rounded-lg  "
+        href="/app/teacher/assignment/create"
+        className="px-4 py-2 text-white bg-[#2C62EE] self-end rounded-lg  w-fit"
       >
         + Add Assignment
       </Link>
-      <AssignmentTable show={false} assignments={data.message} />;
+    <AssignmentTable show={false} assignments={response.message} /> 
     </div>
   );
 }

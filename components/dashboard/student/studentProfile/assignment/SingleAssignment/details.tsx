@@ -24,13 +24,14 @@ const Details: React.FC<QuizDetailsProps> = ({
     <>
       <div className="flex flex-col gap-4 justify-start text-lg font-medium">
         <div className="flex items-start gap-4">
-          <p className="font-semibold">{title}</p>
+        <p className="font-semibold">Title: </p>
+          <p className="">{title}</p>
         </div>
         <div className="flex items-center gap-4">
-          <p className="font-semibold">Assignment Schedule</p>
+          <p className="font-semibold">Assignment Deadline</p>
           <div className=" bg-[#ededf5] px-2 py-1 rounded-[10px] flex justify-between items-center gap-2 ">
             <Image
-              src="/dashboard/quiz/calendar.svg"
+              src="/dashboard/Quiz/calendar.svg"
               alt="calendar icon"
               width={0}
               height={0}
