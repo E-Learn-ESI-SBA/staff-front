@@ -16,7 +16,7 @@ export function QuizDetails({
   duration,
   image,
   attempts,
-}: Props) {
+}: any) {
   return (
     <main className="layout-container">
       <div className="w-full h-full border-lg bg-white">

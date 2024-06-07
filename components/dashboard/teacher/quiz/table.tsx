@@ -12,7 +12,7 @@ export function QuizTable({data} : { data : IQuiz[]}) {
   const [quiz, setQuiz] = useState<IQuiz[]>(data);
   const deleteHandler = async (quiz : any) => {
     try {
-    const res = await fetch(`${MATERIAL_BASE_URL}/assignments/${quiz.id}`,{
+    const res = await fetch(`${MATERIAL_BASE_URL}/quizes/${quiz.id}`,{
         method: "DELETE",
         headers: {
           "Authorization": `Bearer ${user?.accessToken}`,
