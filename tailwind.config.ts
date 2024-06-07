@@ -29,7 +29,7 @@ const config = {
         yellow: {
           origin: "#FFC700",
         },
-        orange: {
+        orange: { 
           origin: "#FF6636",
           light: "#FFEEE8",
         },
