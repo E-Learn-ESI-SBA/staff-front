@@ -32,7 +32,7 @@ const defaultValues = {
   year: "",
 };
 
-const years = ['1cp','2cp','1cs','2cs','3cs']
+const years = ['1cp', '2cp', '1cs', '2cs', '3cs']
 export default function AssignmentFirstStepForm() {
   const { first_step_content, nextStep, setFirstStepContent } =
     useAssignmentFormStore((state) => ({
@@ -91,31 +91,31 @@ export default function AssignmentFirstStepForm() {
             </FormItem>
           )}
         />
-<div className="flex gap-4" >
+        <div className="flex gap-4" >
 
-<FormField
-          control={form.control}
-          name="module_id"
-          render={({ field }) => (
-            <FormItem className="w-full">
-              <FormLabel>Module:</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select Course" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value={ECourseType.OOP}>OOP</SelectItem>
-                  <SelectItem value={ECourseType.ANALYSE}>Analyse</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            control={form.control}
+            name="module_id"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel>Module:</FormLabel>
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select Course" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value={ECourseType.OOP}>OOP</SelectItem>
+                    <SelectItem value={ECourseType.ANALYSE}>Analyse</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-<FormField
+          <FormField
             control={form.control}
             name="year"
             render={({ field }) => (
@@ -130,7 +130,7 @@ export default function AssignmentFirstStepForm() {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    {years?.map((year :any ,i : any)  => (
+                    {years?.map((year: any, i: any) => (
                       <SelectItem key={i} value={year}>{year}</SelectItem>
                     ))}
                   </SelectContent>
@@ -140,40 +140,40 @@ export default function AssignmentFirstStepForm() {
             )}
           />
 
-</div>
-            <FormField
-            control={form.control}
-            name="deadline"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormLabel>End Date</FormLabel>
-                <FormControl>
+        </div>
+        <FormField
+          control={form.control}
+          name="deadline"
+          render={({ field }) => (
+            <FormItem className="w-full">
+              <FormLabel>End Date</FormLabel>
+              <FormControl>
                 <Input
-                    type="datetime-local"
-                    //@ts-ignore
-                    value={
-                      field.value
-                        ?? ''
+                  type="datetime-local"
+                  //@ts-ignore
+                  value={
+                    field.value
+                    ?? ''
+                  }
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    const selectedDate = new Date(value);
+                    if (!isNaN(selectedDate.getTime())) {
+                      const localDateTime = new Date(selectedDate.getTime() - (selectedDate.getTimezoneOffset() * 60000)).toISOString().slice(0, 16);
+                      console.log('dss', localDateTime)
+                      field.onChange(localDateTime);
+                    } else {
+                      field.onChange('');
                     }
-                    onChange={(e) => {
-                      const value = e.target.value;
-                      const selectedDate = new Date(value);
-                      if (!isNaN(selectedDate.getTime())) {
-                        const localDateTime = new Date(selectedDate.getTime() - (selectedDate.getTimezoneOffset() * 60000)).toISOString().slice(0, 16);
-                        console.log('dss',localDateTime)
-                        field.onChange(localDateTime);
-                      } else {
-                        field.onChange('');
-                      }
-                    }}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+                  }}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-        <Button type="submit">Next</Button>
+        <Button type="submit" className="w-fit self-end p-5">Next</Button>
       </form>
     </Form>
   );

@@ -11,10 +11,11 @@ import { submissionSchemaValidator } from "@/types/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-
 import { ASSIGNMENT_BASE_URL } from "@/config/constants";
 import { Input } from "@/components/ui/input";
 import { useUserStore } from "@/store/user";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 type Submission = {
   feedback: string;
@@ -23,6 +24,7 @@ type Submission = {
 };
 
 const SingleSubmission = ({ submission }: { submission: any }) => {
+  const router = useRouter();
   const { user } = useUserStore()
   const Sub = {
     feedback: submission.feedback,
@@ -50,12 +52,32 @@ const SingleSubmission = ({ submission }: { submission: any }) => {
       });
 
       if (response.ok) {
+        toast.success("Submission Evaluated successfully", {
+          style: {
+            backgroundColor: "green",
+            color: "white",
+          }
+        });
+        setTimeout(() => {
+          router.replace(`/app/teacher/assignment/${submission.assignment_id}`);
+        }, 2000);
+
         console.log("Submission updated successfully", response);
       } else {
-        console.error("Failed to update submission");
+        toast.error("Something went wrong", {
+          style: {
+            backgroundColor: "red",
+            color: "white",
+          }
+        });
       }
     } catch (error) {
-      console.error("Error updating submission:", error);
+      toast.error("Something went wrong", {
+        style: {
+          backgroundColor: "red",
+          color: "white",
+        }
+      });
     }
   };
 
@@ -114,7 +136,7 @@ const SingleSubmission = ({ submission }: { submission: any }) => {
             )}
           />
 
-          <Button type="submit">Submit</Button>
+          <Button type="submit" className="w-fit self-end p-5">Submit</Button>
         </form>
       </Form>
     </div>
