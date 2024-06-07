@@ -1,6 +1,5 @@
 import { AssignmentTable } from "@/components/assignment/table";
 import { ASSIGNMENT_BASE_URL } from "@/config/constants";
-import { assignments } from "@/static/dummy-data/assignment/assignment";
 import { cookies } from "next/headers";
 async function getAssignments() {
 
@@ -13,21 +12,19 @@ async function getAssignments() {
         "Authorization": `Bearer ${cookies().get("accessToken")?.value}`,
      }
    })
-  if(res.ok) {
-    return res.json()
-  }else{
-    return {data : null}
-  }
-  } catch (err) {
-    console.error("Failed to fetch students data:", err);
-    return {data : null}
-  }
 
-// return quiz;
+   if (!res.ok) {
+    throw new Error(`HTTP error! status: ${res.status}`);
+  }
+  return await res.json()
+
+  } catch (err) {
+    console.error("Failed to fetch assignments data:", err);
+    return  {message : [] } ;
+  }
 }
 
 export default async function StudentAssignment() {
   const data = await getAssignments();
-  console.log('students',data)
-  return <AssignmentTable show={true} assignments={data?.message ?? assignments }/>;
+  return <AssignmentTable show={true} assignments={data?.message}/>;
 }

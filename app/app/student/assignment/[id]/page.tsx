@@ -12,11 +12,15 @@ try {
       "Authorization": `Bearer ${cookies().get("accessToken")?.value}`,
    }
  })
+ if (!res.ok) {
+  throw new Error(`HTTP error! status: ${res.status}`);
+}
 
- return res.json()
+ return await res.json()
  
 } catch (err) {
-  console.error("Failed to fetch students data:", err);
+  console.error("Failed to fetch assignments data:", err);
+  return  {message : [] } ;
 }
 }
 
@@ -31,10 +35,14 @@ async function getSubmission(id: string) {
      }
    })
   
-   return res.json()
+   if (!res.ok) {
+    throw new Error(`HTTP error! status: ${res.status}`);
+  }
+
+  return await res.json()
    
   } catch (err) {
-    console.error("Failed to fetch students data:", err);
+    console.error("Failed to fetch submission data:", err);
   }
   }
 
@@ -45,7 +53,5 @@ export default  async function Assignment({
 }) {
   const data = await getAssignment(params?.id);
   const submissiondata = await getSubmission(params?.id);
-  console.log('dd',data)
-  console.log('ff',submissiondata)
   return  <SingleAssignemnt assignment={data.message} submission={submissiondata?.submissions} />;
 }

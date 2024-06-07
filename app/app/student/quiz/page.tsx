@@ -13,13 +13,16 @@ async function getQuiz() {
         "Authorization": `Bearer ${cookies().get("accessToken")?.value}`,
      }
    })
-  
-   return res.json()
-  } catch (err) {
-    console.error("Failed to fetch students data:", err);
-  }
 
-// return quiz;
+   if (!res.ok) {
+    throw new Error(`HTTP error! status: ${res.status}`);
+  }
+  
+  return await res.json()
+  } catch (err) {
+      console.error("Failed to fetch quizes data:", err);
+      return []
+  }
 }
 
 const Quizzes = async() => {

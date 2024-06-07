@@ -3,7 +3,8 @@ import { ASSIGNMENT_BASE_URL } from "@/config/constants";
 import { cookies } from "next/headers";
 
 async function getAssignment(id: string) {
-  const res = await fetch( ` ${ASSIGNMENT_BASE_URL}/assignments/${id}`,{
+try{ 
+const res = await fetch( ` ${ASSIGNMENT_BASE_URL}/assignments/${id}`,{
     method: "GET",
     cache : 'no-store',
     headers: {
@@ -12,32 +13,38 @@ async function getAssignment(id: string) {
    }
  })
 
-  if (!res.ok) {
-    console.log('zz',res.json())
-    throw new Error('Failed to fetch data')
-  }
+ if (!res.ok) {
+  throw new Error(`HTTP error! status: ${res.status}`);
+}
 
-return res.json()
-// return quiz;
+return await res.json()
+} catch (err) {
+  console.error("Failed to fetch assignments data:", err);
+  return  {message : [] } ;
+}
 }
 
 async function getSubmissions(id: string) {
-  const res = await fetch(`${ASSIGNMENT_BASE_URL}/assignments/${id}/submissions`,{
-    method: "GET",
-    cache : 'no-store',
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${cookies().get("accessToken")?.value}`,
-   }
- })
+  try{
+    const res = await fetch(`${ASSIGNMENT_BASE_URL}/assignments/${id}/submissions`,{
+      method: "GET",
+      cache : 'no-store',
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${cookies().get("accessToken")?.value}`,
+     }
+   })
 
-  if (!res.ok) {
-    console.log('zz',res.json())
-    throw new Error('Failed to fetch data')
+   if (!res.ok) {
+    throw new Error(`HTTP error! status: ${res.status}`);
   }
 
-return res.json()
-// return quiz;
+  return await res.json()
+
+  }catch(err){
+    console.error("Failed to fetch submissions data:", err);
+    return  {submissions : [] } ;
+  }
 }
 
 export default async function Assignment({
