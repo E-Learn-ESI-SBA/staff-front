@@ -5,7 +5,6 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { useState } from "react";
 import { COMMUNICATION_BASE_URL, TEST_TOKEN } from "@/config/constants";
 import GridLoader from "@/components/icons/grid";
-import { useUserStore } from "@/store/user";
 import { TPayload } from "@/types";
 
 
@@ -18,10 +17,9 @@ export default function Posts({ data, user }: { data: PostProps[], user: TPayloa
       const response = await fetch(`${COMMUNICATION_BASE_URL}/posts?page=0?limit=2`, {
         method: 'GET',
         headers: {
-        "Authorization": `Bearer ${user?.accessToken!}`,
+        "Authorization": `Bearer ${user?.accessToken}`,
         },
         cache: 'no-store',
-        // disable cache in fetch
       });
       const data = await response.json();
       return data;
@@ -38,20 +36,18 @@ export default function Posts({ data, user }: { data: PostProps[], user: TPayloa
       const response = await fetch(`${COMMUNICATION_BASE_URL}/posts?page=${cursor.page+1}&limit=${cursor.limit}`, {
         method: 'GET',
         headers: {
-          "Authorization": `Bearer ${TEST_TOKEN}`,
+          "Authorization": `Bearer ${user.accessToken}`,
         },
         cache: 'no-store',
         // disable cache in fetch
       });
       const data = await response.json();
-      console.log("res", data.length)
-      console.log("posts fetched: ", data);
       if (data.length === 0) {
         setHasMore(false);
         return;
       }
       setPosts([...posts, ...data]);
-      setCursor({page: cursor.page + 1, limit: cursor.limit});
+      setCursor({...cursor, page: cursor.page+1});
     } catch (error) {
       console.log(error);
       return [];
@@ -70,7 +66,7 @@ export default function Posts({ data, user }: { data: PostProps[], user: TPayloa
           </div>
         )}
         endMessage={
-          <p style={{ textAlign: 'center' }}>
+          <p style={{textAlign: 'center'}}>
             <b>No more posts</b>
           </p>
         }
