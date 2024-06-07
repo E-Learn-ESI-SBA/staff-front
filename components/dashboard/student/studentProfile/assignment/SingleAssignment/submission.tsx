@@ -79,7 +79,7 @@ const Submission = ({ submission }: any) => {
         });
         setTimeout(() => {
           routerNav.replace("/app/student/assignment");
-        }, 3000);
+        }, 2000);
         console.log("Quiz submitted successfully", response);
       } else {
         toast.error("Error when submition", {
