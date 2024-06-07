@@ -45,6 +45,7 @@ export const QCMSchema = z.object({
           .default(30),
         image: z.string().default("").optional(),
         file: z.any(),
+        id : z.string(),
         options: z
           .array(
             z.object({
