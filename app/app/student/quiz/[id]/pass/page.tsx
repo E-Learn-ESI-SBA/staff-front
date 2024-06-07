@@ -1,5 +1,6 @@
 import PassQuiz from "@/components/quiz/PassQuiz/pass";
-import { ASSIGNMENT_BASE_URL } from "@/config/constants";
+import { ASSIGNMENT_BASE_URL, MATERIAL_BASE_URL } from "@/config/constants";
+import { cookies } from "next/headers";
 
 const quizMeta = {
     "title": "updated title...",
@@ -66,25 +67,34 @@ const quizMeta = {
 
 async function getQuiz(id:string) {
   try{
-    const res = await fetch( `${ASSIGNMENT_BASE_URL}/quizes/${id}/questions`,{
+    const res = await fetch( `${MATERIAL_BASE_URL}/quizes/${id}/questions`,{
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE4NTUxMzk4LCJpYXQiOjE3MTU5NTkzOTgsImp0aSI6IjhkZWU5YzQ0YjlkOTQyYmZiYjMxNjI2ZmYyMTBkZjIxIiwiaWQiOiJjMGY2ZTg2OS04NDBiLTQ5NjMtOGM1OC02NDUzYjVkNWNhZTUiLCJhdmF0YXIiOiJkZWZhdWx0IiwidXNlcm5hbWUiOiJzdHVkZW50IiwiZW1haWwiOiJzdHVkZW50QGhvc3QuY29tIiwicm9sZSI6InN0dWRlbnQiLCJncm91cCI6Ik5vbmUiLCJ5ZWFyIjoiTm9uZSJ9.WShTxYZQ07i6fRO6SDF-REAOHOscvbUXzbFSr0Vrzlo`,
+        "Authorization": `Bearer ${cookies().get("accessToken")?.value}`,
      }
    })
 
-   return res.json()
+   if (!res.ok) {
+    throw new Error(`HTTP error! status: ${res.status}`);
+  }
+  
+  return await res.json()
 
   }catch(err){
-    console.error("Failed to fetch data:", err);
+    console.error("Failed to fetch assignments data:", err);
   }   
-
 
   }
 
 
 export default async  function QuizPass({ params }: { params: { id: string } }) {
   const data = await getQuiz(params?.id)
-  return <PassQuiz  quizData={data} />;
+  return <>
+  {data ? 
+  <PassQuiz  quizData={data} />
+  :
+  <p className="text-center text-xl font-medium  " >something went wrong please try later</p>
+  }
+  </> 
 }

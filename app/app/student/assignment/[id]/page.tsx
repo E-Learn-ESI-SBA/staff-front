@@ -3,6 +3,7 @@ import { ASSIGNMENT_BASE_URL } from "@/config/constants";
 import { cookies } from "next/headers";
 
 async function getAssignment(id: string) {
+
 try {
   const res = await fetch( ` ${ASSIGNMENT_BASE_URL}/assignments/${id}`,{
     method: "GET",
@@ -12,40 +13,51 @@ try {
       "Authorization": `Bearer ${cookies().get("accessToken")?.value}`,
    }
  })
+ if (!res.ok) {
+  throw new Error(`HTTP error! status: ${res.status}`);
+}
 
- return res.json()
+ return await res.json()
  
 } catch (err) {
-  console.error("Failed to fetch students data:", err);
+  console.error("Failed to fetch assignments data:", err);
+  return  {message : [] } ;
 }
+
 }
 
 async function getSubmission(id: string) {
   try {
-    const res = await fetch( `${ASSIGNMENT_BASE_URL}/assignments/${id}/submissions`,{
+    const res = await fetch(`${ASSIGNMENT_BASE_URL}/assignments/${id}/submissions`, {
       method: "GET",
-      cache : 'no-store',
+      cache: 'no-store',
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${cookies().get("accessToken")?.value}`,
+
      }
    })
   
-   return res.json()
-   
-  } catch (err) {
-    console.error("Failed to fetch students data:", err);
-  }
+   if (!res.ok) {
+    throw new Error(`HTTP error! status: ${res.status}`);
   }
 
-export default  async function Assignment({
+  return await res.json()
+   
+  } catch (err) {
+    console.error("Failed to fetch submission data:", err);
+  }
+
+  }
+
+export default async function Assignment({
   params,
 }: {
   params: { id: string };
 }) {
   const data = await getAssignment(params?.id);
   const submissiondata = await getSubmission(params?.id);
-  console.log('dd',data)
-  console.log('ff',submissiondata)
+
   return  <SingleAssignemnt assignment={data.message} submission={submissiondata?.submissions} />;
+
 }

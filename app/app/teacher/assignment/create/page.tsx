@@ -2,7 +2,8 @@
 import AssignmentFirstStepForm from "@/components/dashboard/Assignment/create/first-step";
 import AssignmentSecondStep from "@/components/dashboard/Assignment/create/second-step";
 import { useAssignmentFormStore } from "@/store/forms/assignments/question.store";
-export default function CreateQuiz() {
+
+export default function CreateAssignment() {
   const { currentStep } = useAssignmentFormStore((state) => ({
     currentStep: state.currentStep,
   }));

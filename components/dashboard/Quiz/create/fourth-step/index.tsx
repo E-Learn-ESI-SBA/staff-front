@@ -124,14 +124,14 @@ export default function Preview() {
 
       if (response.ok) {
         console.log("Quiz submitted successfully",response);
-        toast.success("Quiz submitted successfully");
+        toast.success('Quiz submitted successfully')
       } else {
         console.error("Failed to submit quiz");
-        toast.error("Failed to submit quiz");
+        toast.error('semthing went wrong')
       }
     } catch (error) {
       console.error("Error submitting quiSON.stringify(submission)z:", error);
-      toast.error("Error submitting quiz");
+      toast.error('semthing went wrong')
     }
   };
 
