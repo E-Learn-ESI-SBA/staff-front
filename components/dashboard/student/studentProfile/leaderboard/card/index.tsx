@@ -18,7 +18,7 @@ const Card: React.FC<CardProps> = ({ student, index }) => {
         </div>
         <div className="flex justify-start items-center gap-2">
           <Image
-            src={student.imageSrc}
+            src={student.avatar_url ? student.avatar_url : "https://github.com/shadcn.png"}
             alt="student picture"
             width={0}
             height={0}
@@ -26,8 +26,8 @@ const Card: React.FC<CardProps> = ({ student, index }) => {
             className="w-16 h-16 rounded-full border-4 border-transparent"
           />
           <div className="flex flex-col">
-            <p>{student.name}</p>
-            <p className="opacity-50 text-xs">{student.StudentLocation}</p>
+            <p>{student.student}</p>
+            <p className="opacity-50 text-xs">{student.promo}, {student.group}</p>
           </div>
         </div>
       </div>
@@ -43,7 +43,7 @@ const Card: React.FC<CardProps> = ({ student, index }) => {
           />
         </div>
         <div className="flex flex-col">
-          <p className="font-medium">₹{student.points}</p>
+          <p className="font-medium">{student.total_points}</p>
           <p className="opacity-50 text-xs">Rewards</p>
         </div>
       </div>

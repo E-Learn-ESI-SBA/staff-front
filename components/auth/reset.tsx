@@ -61,7 +61,7 @@ export function ResetPassword({
     }
     setTimeout(() => {
       setIsLoading("DEFAULT");
-    }, 3000);
+    }, 2000);
   }
 
   const form = useForm<TResetSchema>({

@@ -61,7 +61,7 @@ export function SubmitOTP({
       });
       setTimeout(() => {
         setSelectedAuth("PASSWORD_RESET_SUCCESSFULLY");
-      }, 3000);
+      }, 2000);
     } else {
       toast.error("Something went wrong", {
         style: {
@@ -71,7 +71,7 @@ export function SubmitOTP({
       });
       setTimeout(() => {
         setSelectedAuth("RESET_PASSWORD");
-      }, 3000);
+      }, 2000);
     }
     // if (success) {
     //   setSelectedAuth("PASSWORD_RESET_SUCCESSFULLY");

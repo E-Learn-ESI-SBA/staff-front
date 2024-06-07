@@ -6,8 +6,8 @@ export function QuizTable({data} : { data : IQuiz[]}) {
   return (
     <> 
       <DataTable<IQuiz>
-        data={data}
-        url='http://localhost:3000/app/student/quiz/'
+        data={data ?? []}
+        url='http://localhost:3000/app/student/quiz'
         headers={[
           {
             accessorKey: "id",

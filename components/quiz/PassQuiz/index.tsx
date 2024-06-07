@@ -26,7 +26,7 @@ const PreQuiz = ({quizMeataData} : {quizMeataData :any } ) => {
          <h1 className='font-semibold text-2xl' > Instructions</h1>
          <p>{quizMeataData.quiz.instructions}</p> 
          <div className='flex flex-col items-center gap-4 self-end ' >
-         {quizMeataData.passed ? <p className='max-w-[15ch] text-red-500' >you have passed this quiz before</p>  :  <Link href={`/app/student/quiz/${quizMeataData.quiz.id}/pass`}   className='rounded-3xl bg-[#0066FF] px-6 py-4 flex justify-center items-center text-white w-64 self-end ' >Start</Link> }
+         {quizMeataData.passed ?   <p className="text-center text-xl font-medium text-red-500 " >You have already passed this quiz</p>:  <Link href={`/app/student/quiz/${quizMeataData.quiz.id}/pass`}   className='rounded-3xl bg-[#0066FF] px-6 py-4 flex justify-center items-center text-white w-64 self-end ' >Start</Link> }
          </div>
 
           </div>  
