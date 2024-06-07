@@ -1,5 +1,5 @@
 import PassQuiz from "@/components/quiz/PassQuiz/pass";
-import { ASSIGNMENT_BASE_URL } from "@/config/constants";
+import { ASSIGNMENT_BASE_URL, MATERIAL_BASE_URL } from "@/config/constants";
 import { cookies } from "next/headers";
 
 const quizMeta = {
@@ -67,7 +67,7 @@ const quizMeta = {
 
 async function getQuiz(id:string) {
   try{
-    const res = await fetch( `${ASSIGNMENT_BASE_URL}/quizes/${id}/questions`,{
+    const res = await fetch( `${MATERIAL_BASE_URL}/quizes/${id}/questions`,{
       method: "GET",
       headers: {
         "Content-Type": "application/json",
