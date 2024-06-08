@@ -1,6 +1,6 @@
-import { SERVER_URL } from "@/config/urls/material/queries";
 
 // Modules
+export const SERVER_URL = "http://localhost:8080";
 
 export const CREATE_MODULE_URL = `${SERVER_URL}/module`;
 export const UPDATE_MODULE_URL = `${SERVER_URL}/module`;
@@ -8,6 +8,8 @@ export const DELETE_MODULE_URL = `${SERVER_URL}/module`;
 export const GET_ALL_MODULES_URL = `${SERVER_URL}/modules/public`;
 export const GET_STUDENT_MODULES_URL = `${SERVER_URL}/modules/student`;
 export const GET_TEACHER_MODULES_URL = `${SERVER_URL}/modules/teacher`;
+export const  GET_MODULE_OVERVIEW_URL = `${SERVER_URL}/modules/overview`
+export const GET_MODULE_DETAILS_URL = `${SERVER_URL}/modules`;
 
 // Chapters
 export const CREATE_CHAPTER_URL = `${SERVER_URL}/chapter`;

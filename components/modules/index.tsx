@@ -32,10 +32,7 @@ export default function ModulesPage({ data }: Props) {
         {filteredData.map((module, i) => (
           <Link
             key={i}
-            href={
-              appRouter.getPath("module") &&
-              appRouter.getPath("module").concat("/", module.id!)
-            }
+            href={`/app/teacher/modules/${module.id}/overview`}
             className="hover:scale-105 transition-all duration-300 ease-in-out"
           >
             <ModuleCard data={module} />

@@ -64,7 +64,7 @@ export function SectionComponent({
     <div className="bg-white p-4 rounded-lg">
       <div className="flex justify-between items-center">
         <H3 className="flex gap-2 text-base items-center">
-          <FolderOpen width={16} height={16} className="text-text-GRAY" />
+          <FolderOpen width={16} height={16} className="text-gray-origin" />
           Section :<span>{section.name}</span>
         </H3>
         <div className="flex gap-2 items-center z-20">
@@ -124,7 +124,7 @@ export function SectionComponent({
             key={i}
             currentPath={pathname}
             id={l.id}
-            name={l.content}
+            name={l.name}
             url={`${pathname}/lecture/${l.id}`}
             resourceType={ResourceEnum.Lecture}
             index={i}
