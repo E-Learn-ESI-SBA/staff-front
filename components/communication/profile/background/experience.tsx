@@ -35,14 +35,15 @@ const experiences: experience[] = [
   },
 ];
 
-export default function Experience() {
+export default function Experience({data}:{data ?: experience[]}) {
+  console.log('exp',data)
   return (
     <div className="flex flex-col gap-4 border-t border-[#EAEAEA] py-4 ">
       <div className="flex justify-start gap-2 items-center">
         <UserSearch />
         <h1 className="text-[#121212] font-medium text-xl  ">Experience</h1>
       </div>
-      {experiences.map((exp, i) => (
+      {data?.map((exp, i) => (
         <div className="flex flex-col gap-1 items-start" key={i}>
           <p className="text-[#121212] font-medium text-lg  ">{exp.role}</p>
           <p className=" text-[#807E7E] "> {exp.name}</p>
