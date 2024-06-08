@@ -51,7 +51,8 @@ export default function CommentField({ postId, user, setComments }: { postId: st
                         username: user?.username,
                         email: user?.email,
                         avatar: user?.avatar
-                    }
+                    },
+                    likes: []
                 }
                 setComments(prev => [...prev, newComment])
                 toast.success("comment created successfully", {
