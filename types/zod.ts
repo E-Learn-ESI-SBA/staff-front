@@ -140,3 +140,70 @@ export const submissionSchemaValidator = z.object({
 });
 
 export type TSubmissionSchema = z.infer<typeof submissionSchemaValidator>;
+
+
+//////////////////////////////////////////////////////////////////////////////
+
+export const profileSchemaValidator = z.object({
+  id: z.string().optional(),
+  summary: z.string().min(2, { message: "must be at least 2 characters long" }).optional(),
+  image: z.string().optional(),
+  file: z.any().optional(),
+  year : z.string().optional(),
+  experiences : z.array(
+    z.object({
+      role : z.string(),
+      company : z.string(),
+      start_date : z.string(),
+      end_date : z.string(),
+      description : z
+      .string()
+      .min(5, { message: "must be at least 5 characters long" }),
+    })
+  ).optional(),
+  projects : z.array(
+    z.object({
+      name : z.string(),
+      start_date : z.string(),
+      end_date : z.string(),
+      description : z
+      .string()
+      .min(5, { message: "must be at least 5 characters long" }),
+    })
+  ).optional(),
+  awards : z.array(
+    z.object({
+      name : z.string(),
+      event : z.string(),
+      date : z.string(),
+      description : z
+      .string()
+      .min(5, { message: "must be at least 5 characters long" }),
+    })
+  ).optional(),
+  skills : z.array(
+    z.object({
+      name : z.string(),
+      percentage: z.coerce
+      .number()
+      .min(0, "Minimum value cannot be negative")
+      .max(100, "Maximum value cannot exceed 100"),
+    })
+  ).optional(),
+  other_skills : z.array(
+   z.string()
+  ).optional(),
+  educations : z.array(
+    z.object({
+      institution : z.string(),
+      degree : z.string(),
+      start_date : z.string(),
+      end_date : z.string(),
+      description : z
+      .string()
+      .min(5, { message: "must be at least 5 characters long" }),
+    })
+  ).optional(),
+});
+
+export type TProfileSchema = z.infer<typeof profileSchemaValidator>;

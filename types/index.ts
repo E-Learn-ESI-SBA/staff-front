@@ -84,3 +84,43 @@ export type TPayload = {
   avatar:string;
   accessToken: string;
 };
+
+
+
+export type Profile = {
+  id?: string;
+  summary?: string;
+  image?: string;
+  file ?: any;
+  experiences?: {
+    role: string;
+    company: string;
+    start_date: string;
+    end_date: string;
+    description: string;
+  }[];
+  projects?: {
+    name: string;
+    start_date: string;
+    end_date: string;
+    description: string;
+  }[];
+  awards?: {
+    name: string;
+    event: string;
+    date: string;
+    description: string;
+  }[];
+  skills?: {
+    name: string;
+    percentage: number;
+  }[];
+  other_skills?: string[];
+  educations?: {
+    institution: string;
+    degree: string;
+    start_date: string;
+    end_date: string;
+    description: string;
+  }[];
+};
