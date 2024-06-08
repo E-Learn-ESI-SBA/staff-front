@@ -3,12 +3,12 @@ import Image from "next/image";
 
 
 
-export default function PostImages({ images }: { images: string[] }) {
+export default function PostImages({ images, className }: { images: string[], className?: string}) {
 
     return (
-        <>
+        <div className={className}>
             {images.length > 0 && (
-            <Carousel className="w-full h-full max-w-md mx-auto">
+            <Carousel className={`w-full h-full max-w-md mx-auto`}>
               <CarouselContent>
                 {images.length > 0 ? (
                   images.map((img, index) => (
@@ -32,6 +32,6 @@ export default function PostImages({ images }: { images: string[] }) {
               )}
             </Carousel>
           )}
-        </>
+        </div>
     )
 }

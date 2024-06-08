@@ -7,7 +7,7 @@ type award = {
   description: string;
 };
 
-const awards: award[] = [
+const awards: award[]  = [
   {
     category: "Art Direction",
     name: "2013 MIDAS Awards",
@@ -31,7 +31,8 @@ const awards: award[] = [
   },
 ];
 
-export default function Awards() {
+export default function Awards({data}:{data ?: award[]}) {
+  console.log('award',data)
   return (
     <div className="flex flex-col gap-4 border-t border-[#EAEAEA] py-4 ">
       <div className="flex justify-start  gap-2 items-center">
@@ -41,7 +42,7 @@ export default function Awards() {
         </h1>
       </div>
 
-      {awards.map((award, i) => (
+      {data?.map((award, i) => (
         <div className="flex flex-col gap-1 items-start" key={i}>
           <p className="text-[#121212] font-medium text-lg  ">
             {" "}

@@ -243,3 +243,17 @@ caption {
   font-weight: normal;
   text-align: center;
 }
+
+
+::-webkit-scrollbar {
+  width: 2px;
+}
+
+::-webkit-scrollbar-track {
+  background: white;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3d90d9;
+  height: 10%;
+}

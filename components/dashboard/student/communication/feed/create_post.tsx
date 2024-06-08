@@ -39,6 +39,7 @@ import { app } from "@/config/firebase";
 import { toast } from "sonner";
 import { COMMUNICATION_BASE_URL, TEST_TOKEN } from "@/config/constants";
 import { TPayload } from "@/types";
+import AvatarComponent from "./avatar";
 
 export default function CreatePost({ user }: { user: TPayload }) {
   const [files, setFiles] = useState<File[]>([]);
@@ -217,21 +218,6 @@ export default function CreatePost({ user }: { user: TPayload }) {
         </DialogContent>
       </Dialog>
     </div>
-  );
-}
-
-function AvatarComponent({ src }: { src: string }) {
-  return (
-    <Avatar>
-      <AvatarImage
-        src={`${src && src == "default" ? "https://github.com/shadcn.png" : src}`}
-        alt="Avatar"
-        height={60}
-        width={60}
-        className="rounded-full"
-      />
-      <AvatarFallback>JD</AvatarFallback>
-    </Avatar>
   );
 }
 
