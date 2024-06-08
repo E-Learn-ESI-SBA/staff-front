@@ -13,6 +13,11 @@ export interface PostProps {
   user: CommunicationUser;
 }
 
+export interface CommentLike {
+  id: string;
+  user: CommunicationUser;
+}
+
 export interface CommunicationUser {
   id: string;
   username: string;
@@ -26,6 +31,7 @@ export interface CommentProps {
   created_at: string;
   updated_at: string;
   user: CommunicationUser;
+  likes: CommentLike[];
 }
 
 export interface Vote {

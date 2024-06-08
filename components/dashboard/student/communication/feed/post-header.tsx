@@ -1,7 +1,7 @@
 import AvatarComponent from "./avatar";
 
 
-function timeSince(date: string): string {
+export function timeSince(date: string): string {
     const now = new Date();
     const postDate = new Date(date);
     const secondsPast = (now.getTime() - postDate.getTime()) / 1000;

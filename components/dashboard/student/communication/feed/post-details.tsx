@@ -15,7 +15,6 @@ import CommentField from "./comment-field";
 
 export default function PostDetails({ data, user }: { data: PostProps, user: TPayload}) {
     const [comments, setComments] = useState<CommentProps[]>([]);
-    // const comments_data = await fetchPostComments(data.id, user?.accessToken);
 
 
     const fetchPostComments = async (postId: string, accessToken: string) => {
@@ -59,7 +58,7 @@ export default function PostDetails({ data, user }: { data: PostProps, user: TPa
                 <div className="flex flex-row items-start h-[500px] gap-6">
                     {data.images.length > 0 && <PostImages className="w-1/2" images={data.images}/>}
                     <div className={`border-l-2 h-full flex flex-col gap-4 ${data.images.length > 0 ? 'w-1/2 border-gray-400 pl-10' : 'w-full'}`}> 
-                      <Comments data={comments} />
+                      <Comments data={comments} postId={data.id} />
                       <div className="flex flex-row items-center gap-6">
                         <Votes
                           upvotes_count={data.upvotes_count}
