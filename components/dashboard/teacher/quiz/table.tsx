@@ -2,7 +2,7 @@
 import { IQuiz } from "@/types/quiz";
 import { DataTable } from "../../../common/table";
 import { CustomColumns } from "./colloms";
-import { MATERIAL_BASE_URL } from "@/config/constants";
+import { FRONT_BASE_URL, MATERIAL_BASE_URL } from "@/config/constants";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useUserStore } from "@/store/user";
@@ -39,7 +39,7 @@ export function QuizTable({data} : { data : IQuiz[]}) {
     <> 
       <DataTable<IQuiz>
         data={quiz ?? [] }
-        url='http://localhost:3000/app/teacher/quizzes'
+        url={`${FRONT_BASE_URL}/app/teacher/quizzes`}
         deleteHandler={(quiz) => deleteHandler(quiz)}
         headers={[
           {

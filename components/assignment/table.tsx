@@ -3,7 +3,7 @@ import { IAssignment } from "@/types/assignment";
 import { DataTable } from "../common/table";
 import { CustomColumns } from "@/components/assignment/collomns";
 import { useState } from "react";
-import { ASSIGNMENT_BASE_URL } from "@/config/constants";
+import { ASSIGNMENT_BASE_URL, FRONT_BASE_URL } from "@/config/constants";
 export function AssignmentTable({ show, assignments }: { show: Boolean, assignments: any }) {
 
   const [localAssignment, setLocalAssignment] = useState<any>(assignments);
@@ -37,7 +37,7 @@ export function AssignmentTable({ show, assignments }: { show: Boolean, assignme
       {show ?
         <DataTable<IAssignment>
           data={localAssignment}
-          url='http://localhost:3000/app/student/assignment'
+          url={`${FRONT_BASE_URL}/app/student/assignment`}
           headers={
             [
               {
