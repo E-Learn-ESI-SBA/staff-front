@@ -4,7 +4,6 @@ import {
   BookOpenCheck,
   Brain,
   CalendarCheck,
-  CircleUserRound,
   FileText,
   LayoutGrid,
   LogOut,
@@ -14,6 +13,7 @@ import {
   Package,
   Settings,
   Sword,
+  User,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -53,7 +53,8 @@ type IconType =
   | "assignments"
   | "quizzes"
   | "communication"
-  | "modules";
+  | "modules"
+  | "profile";
 interface SideIconProps {
   icon: IconType;
   [key: string]: any; // allows any additional props
@@ -62,7 +63,6 @@ interface SideIconProps {
 const icons: Record<IconType, React.ComponentType<any>> = {
   menu: Menu,
   courses: FileText,
-  profile: CircleUserRound,
   settings: Settings,
   discussions: MessageSquareText,
   logout: LogOut,
@@ -72,6 +72,7 @@ const icons: Record<IconType, React.ComponentType<any>> = {
   communication: MessageCircle,
   quizzes: Sword,
   leaderboard: Brain,
+  profile: User,
 
 };
 

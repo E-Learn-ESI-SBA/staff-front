@@ -325,7 +325,6 @@ export const getAssignmentsWithSoonestDeadlines = async () => {
     }));
     return assignments
   } catch (error) {
-    console.log("err in function calling")
     throw new Error("Failed to fetch assignments");
   }
 };
@@ -345,7 +344,29 @@ export const getLeaderBoard = async () => {
     return response?.data
   }
   catch (err: any) {
-    console.log(err)
+    throw new Error("Something went wrong")
+  }
+}
+
+export const getProfile = async () => {
+  try {
+    const token = cookies().get("accessToken")?.value;
+    const body = token?.split(".")[1];
+    const payload = JSON.parse(atob(body!)) as TPayload;
+    const url = payload.role == "student" ? `${STAFF_BASE_URL}/students/${payload.id}` : `${STAFF_BASE_URL}/teachers/${payload.id}`
+    const res = await fetch(url,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
+      }
+    );
+    const response = res.json()
+    if (!res.ok) {
+      throw new Error("Something went wrong")
+    }
+    return response
+  } catch (err: any) {
     throw new Error("Something went wrong")
   }
 }

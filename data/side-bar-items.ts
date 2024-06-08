@@ -7,6 +7,11 @@ export const sideBarItemsTeacher: SideBarItem[] = [
     url: "/app/teacher",
   },
   {
+    label: "My Account",
+    icon: "profile",
+    url: "/app/teacher/profile",
+  },
+  {
     label: "Modules",
     icon: "courses",
     url: "/app/teacher/modules",
@@ -19,7 +24,7 @@ export const sideBarItemsTeacher: SideBarItem[] = [
   {
     label: "Quizzes",
     icon: "quizzes",
-    url: "/app/teacher/quiz",
+    url: "/app/teacher/quizzes",
   },
   {
     label: "Communication",
@@ -43,6 +48,11 @@ export const sideBarItemsStudent: SideBarItem[] = [
     label: "Dashboard",
     icon: "menu",
     url: "/app/student",
+  },
+  {
+    label: "My Account",
+    icon: "profile",
+    url: "/app/student/profile",
   },
   {
     label: "Modules",

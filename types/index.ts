@@ -86,6 +86,17 @@ export type TPayload = {
 };
 
 
+export interface User {
+  id: string;
+  email: string;
+  first_name: string;
+  last_name: string;
+  birth_date?: string;
+  city?: string;
+  gender?: string;
+  phone_number?: string;
+  password?: string;
+}
 
 export type Profile = {
   id?: string;

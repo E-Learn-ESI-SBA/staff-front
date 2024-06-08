@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 
 // import LoadingPage from "@/app/loading";
 
@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 export default function TesterPage() {
   return (
     <div>
-      TEST
+      <p>test</p>
     </div>
   )
 }
