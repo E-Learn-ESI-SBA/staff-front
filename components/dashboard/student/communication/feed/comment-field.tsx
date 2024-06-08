@@ -54,13 +54,28 @@ export default function CommentField({ postId, user, setComments }: { postId: st
                     }
                 }
                 setComments(prev => [...prev, newComment])
-                toast.success("comment created successfully")
+                toast.success("comment created successfully", {
+                    style: {
+                        backgroundColor: "green",
+                        color: "white",
+                    },
+                })
                 form.reset()
             } else {
-                toast.error("Comment was not created")
+                toast.error("Comment was not created", {
+                    style: {
+                        backgroundColor: "red",
+                        color: "white",
+                    },
+                })
             }
         } catch (error) {
-            toast.error('Something went wrong...');
+            toast.error('Something went wrong...', {
+                style: {
+                    backgroundColor: 'red',
+                    color: 'white',
+                }
+            });
         }
       }
 

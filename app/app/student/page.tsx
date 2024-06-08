@@ -13,7 +13,7 @@ import { useState } from "react";
 type Object = [string, string];
 
 
-export default async function QuizTable() {
+export default function QuizTable() {
   // console.log(user?.role)
   // console.log(user?.accessToken)
   // const [assignments, setAssignments] = useState<Object[]>()
@@ -120,8 +120,18 @@ export default async function QuizTable() {
                 icon="activity"
               />
             </div>
-            <TrialClass />
-            <div></div>
+            <div className="flex flex-col gap-4">
+              <TrialClass
+                src="/assets/course.jpeg"
+                title="Learn Python in 30 days"
+                description="Time to become advance then others with this course"
+                />
+              <TrialClass
+                src="/assets/ninja.png"
+                title="Learn Web Development with netninja"
+                description="Time to become advance then others with this course" 
+              />
+            </div>
           </div>
         </div>
         <div className="w-full lg:w-1/3 right">

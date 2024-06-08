@@ -109,14 +109,24 @@ export default function CreatePost({ user }: { user: TPayload }) {
       });
 
       if (res.ok) {
-        toast.success("Post created successfully");
+        toast.success("Post created successfully", {
+          style: {
+            backgroundColor: "green",
+            color: "white",
+          },
+        });
         form.reset();
         setDialogOpen(false);
       }
 
     } catch (error) {
       console.log(error);
-      toast.error("An error occured while submitting your post " + error);
+      toast.error("An error occured while submitting your post " + error, {
+        style: {
+          backgroundColor: "red",
+          color: "white",
+        },
+      });
     }
   }
 

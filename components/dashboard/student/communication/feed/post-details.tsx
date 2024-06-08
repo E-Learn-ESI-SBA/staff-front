@@ -28,7 +28,13 @@ export default function PostDetails({ data, user }: { data: PostProps, user: TPa
           }); 
         const data = await response.json();
         if (!response.ok) {
-          toast.error('Something went wrong...');
+          toast.error('Something went wrong...', {
+            style: {
+              backgroundColor: 'red',
+              color: 'white',
+            }
+          });
+          return [];
         }
         return data; 
       } catch (error) {
@@ -49,7 +55,7 @@ export default function PostDetails({ data, user }: { data: PostProps, user: TPa
         <Dialog>
             <DialogTrigger asChild>
                 <button onClick={handleClickFetchComments} >
-                    <Item Icon={MessageSquare} text="comment" count={data.comments_count} />
+                    <Item Icon={MessageSquare} text="comment" color="#3b82f6" count={data.comments_count} className=" hover:text-blue-500" />
                 </button>
             </DialogTrigger>
             <DialogContent className={`${data.images.length > 0 ? 'max-w-screen-xl': 'max-w-screen-md'}`}>

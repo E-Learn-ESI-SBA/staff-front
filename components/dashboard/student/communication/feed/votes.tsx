@@ -40,21 +40,31 @@ export default function Votes({ upvotes_count, downvotes_count, user, postId, vo
               }
             }
           } else {
-            toast.error("something went wrong...");
+            toast.error("something went wrong...", {
+              style: {
+                backgroundColor: "red",
+                color: "white",
+              }
+            });
           }
         } catch (error) {
-          toast.error("something went wrong...");
+          toast.error("something went wrong...", {
+            style: {
+              backgroundColor: "red",
+              color: "white",
+            }
+          });
         }
       }
 
     return (
         <div className="flex flex-col justify-start items-center">
             <div className="cursor-pointer" onClick={() => handleVote('up')}>
-              <ArrowBigUp className={`h-8 w-8 ${(Vote && Vote.vote == 'up') ? 'fill-blue-500' : '' }`} color={`${(Vote && Vote.vote == 'up') ? '#3b82f6' : 'gray'}`} />
+              <ArrowBigUp className={`h-8 w-8 hover:fill-blue-500 ${(Vote && Vote.vote == 'up') ? 'fill-blue-500' : '' }`} color={`#3b82f6`} />
             </div>
-            <p className="text-gray-500 font-bold text-center pt-[3px]">{count}</p>
+            <p className="text-blue-500 font-bold text-center pt-[3px]">{count}</p>
             <div className=" cursor-pointer" onClick={() => handleVote('down')}>
-              <ArrowBigDown className={`h-8 w-8 ${(Vote && Vote.vote == 'down') ? 'fill-blue-500' : '' }`} color={`${(Vote && Vote.vote == 'down') ? '#3b82f6' : 'gray'}`} />
+              <ArrowBigDown className={`h-8 w-8 hover:fill-blue-500 ${(Vote && Vote.vote == 'down') ? 'fill-blue-500' : '' }`} color={`#3b82f6`} />
             </div>
       </div>
     )

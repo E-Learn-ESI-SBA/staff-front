@@ -26,16 +26,26 @@ export default function Comment({data, postId, user}: {data: CommentProps, postI
             });
 
             if (res.ok) {
-                toast.success(`comment ${liked ? 'unliked' : 'liked'}`);
+                // toast.success(`comment ${liked ? 'unliked' : 'liked'}`);
                 setCount(liked ? count - 1 : count + 1);
                 setLiked(!liked);
             } else {
-                toast.error('Something went wrong...');
+                toast.error('Something went wrong...', {
+                    style: {
+                        backgroundColor: 'red',
+                        color: 'white',
+                    }
+                });
             }
 
         } catch (error) {
             console.log(error);
-            toast.error('Server error...');
+            toast.error('Server error...', {
+                style: {
+                    backgroundColor: 'red',
+                    color: 'white',
+                }
+            });
         }
     }
 
@@ -57,7 +67,7 @@ export default function Comment({data, postId, user}: {data: CommentProps, postI
         <div 
         onClick={handleLike}
         className="self-start cursor-pointer">
-            <Heart className={`${liked ? ' fill-red-origin' : ''}`} color={`${liked ? '#D80027' : 'black' }`} />
+            <Heart className={`hover:fill-red-origin ${liked ? ' fill-red-origin' : ''}`} color={`${liked ? '#D80027' : 'black' }`} />
         </div>
     </div>
     )
