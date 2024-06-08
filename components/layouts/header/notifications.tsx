@@ -13,6 +13,7 @@ import {
     DropdownMenuContent,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {ScrollArea} from "@/components/ui/scroll-area";
 const notifications = [
     {
         title: "Your call has been confirmed.",
@@ -37,7 +38,7 @@ export function Notifications({ className, ...props }: CardProps) {
                 <BellIcon  className="cursor-pointer w-6 h-6 text-blue-origin" />
             </DropdownMenuTrigger>
             <DropdownMenuContent
-                className="w-[240px] bg-white p-2"
+                className="w-[340px] bg-white p-2"
                 align="end"
                 forceMount
             >
@@ -46,11 +47,12 @@ export function Notifications({ className, ...props }: CardProps) {
                         <CardTitle>Notifications</CardTitle>
                         <CardDescription>You have 3 unread messages.</CardDescription>
                     </CardHeader>
-                    <CardContent className="grid gap-4">
+                    <CardContent className="flex w-full flex-col items-center h-72 gap-4">
+                        <ScrollArea>
                         {notifications.map((notification, index) => (
                             <div
                                 key={index}
-                                className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0"
+                                className="mb-4 w-full  flex gap-4 hover:bg-accent p-2 rounded-lg cursor-pointer  items-start "
                             >
                                 <span className="flex h-2 w-2 translate-y-1 rounded-full bg-blue-origin" />
                                 <div className="space-y-1">
@@ -63,6 +65,7 @@ export function Notifications({ className, ...props }: CardProps) {
                                 </div>
                             </div>
                         ))}
+                        </ScrollArea>
                     </CardContent>
 
                 </Card>

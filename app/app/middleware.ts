@@ -5,6 +5,7 @@ import { getAuth } from "../actions/auth";
 import { STUDENT, TEACHER } from "@/config/constants";
 
 export async function middleware(request: NextRequest) {
+
   console.log("Middleware called");
   const { pathname } = request.nextUrl;
   if (!pathname.match(/\/app\/*/)) {

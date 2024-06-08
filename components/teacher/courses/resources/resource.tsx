@@ -71,15 +71,18 @@ export function Resource({
     href,
     name,
     Icon,
+    RType,
   }: {
     href: string;
     name: string;
     Icon: LucideIcon;
+    RType: ResourceEnum;
+
   }) => (
     <div className="flex justify-between w-full items-center">
       <Link href={href}>
         <span className="flex gap-2 items-center">
-          <Icon width={12} height={12} className="text-color" />
+          <Icon width={12} height={12} className={RType === ResourceEnum.Lecture ? "text-blue-origin" : RType === ResourceEnum.File ? "text-green-origin" : RType === ResourceEnum.Video ? "text-purple-origin": "text-text-GRAY"} />
           <span>{name}</span>
         </span>
       </Link>
@@ -99,27 +102,31 @@ export function Resource({
       href: `${url}`,
       Icon: MonitorPlay,
       color: "text-purple-origin",
+      RType: ResourceEnum.Video
     },
     [ResourceEnum.Lecture]: {
       href: `${currentPath}/lecture/${id}`,
       Icon: Text,
       color: "text-blue-origin",
+      RType: ResourceEnum.Lecture,
     },
     [ResourceEnum.File]: {
       href: `${currentPath}/video/${id}`,
       Icon: File,
       color: "text-green-origin",
+        RType: ResourceEnum.File,
     },
     [ResourceEnum.Note]: {
       href: `${currentPath}/note/${id}`,
       Icon: File,
       color: "text-green-origin",
+        RType: ResourceEnum.Note,
     },
   };
 
-  const { href, Icon, color } = resourceConfig[resourceType] || {};
+  const { href, Icon, color ,RType} = resourceConfig[resourceType] || {};
 
   if (!href || !Icon || !color) return null;
 
-  return <ResourceItem href={href} name={name} Icon={Icon} />;
+  return <ResourceItem href={href} name={name} Icon={Icon} RType={RType} />;
 }
