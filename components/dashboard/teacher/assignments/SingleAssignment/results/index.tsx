@@ -2,7 +2,7 @@
 import { DataTable } from "@/components/common/table";
 import { CustomColumns } from "./collomns";
 import { results } from "@/static/dummy-data/assignment/results";
-import { ASSIGNMENT_BASE_URL } from "@/config/constants";
+import { ASSIGNMENT_BASE_URL, FRONT_BASE_URL } from "@/config/constants";
 
 
 type Submission = {
@@ -31,7 +31,7 @@ export async function AssignmentResultTable({ data, assignmentId }: { data: Subm
     <div>
       <DataTable<Submission>
         data={data}
-        url={`/app/teacher/assignment/${assignmentId}/submission`}
+        url={`${FRONT_BASE_URL}/app/teacher/assignment/${assignmentId}/submission`}
         headers={[
           {
             accessorKey: "student_id",

@@ -1,13 +1,14 @@
 import {ISubmission } from "@/types/quiz";
 import { DataTable } from "@/components/common/table";
 import { CustomColumns } from "./colloms";
+import { FRONT_BASE_URL } from "@/config/constants";
 
 export function StudentSubmissionTable({data} : { data : ISubmission[]}) {
   return (
     <> 
       <DataTable<ISubmission>
         data={data ?? []}
-        url='http://localhost:3000/app/student/quiz/submissions'
+        url={`${FRONT_BASE_URL}/app/student/quiz/submissions`}
         headers={[
           {
             accessorKey: "id",
