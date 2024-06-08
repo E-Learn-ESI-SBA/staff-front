@@ -1,12 +1,13 @@
 import { Teacher } from "@/types/teachers";
 import { Mail, Phone } from "lucide-react";
 import Image from "next/image";
+import { UpdatePassword } from "../../student/studentProfile/updatePassword";
 
 
 type Props = {
   teacher: any
 }
-const General = ({teacher}: Props) => {
+const General = ({ teacher }: Props) => {
   const currentDate = new Date();
   const formattedCurrentDate = currentDate.toLocaleDateString("en-US", {
     day: "numeric",
@@ -17,7 +18,7 @@ const General = ({teacher}: Props) => {
     <>
       <div className="flex flex-col justify-center items-center gap-2 text-bold py-8">
         <Image
-          src={teacher.user.avatar_url ? teacher.user.avatar_url :"/landing/testimonials/person.png"}
+          src={teacher.user.avatar_url ? teacher.user.avatar_url : "/landing/testimonials/person.png"}
           alt="cs"
           width={0}
           height={0}
@@ -76,7 +77,7 @@ const General = ({teacher}: Props) => {
                 sizes="100vw"
                 className=" h-4 w-4  sm:h-6 sm:w-6  "
               /> */}
-              <Phone color="blue"/>
+              <Phone color="blue" />
               <p>{teacher.user.phone_number}</p>
             </li>
             <li className="flex justify-start items-center gap-1">
@@ -108,6 +109,11 @@ const General = ({teacher}: Props) => {
             </li>
           </ul>
         </div>
+
+      </div>
+      <div className="flex justify-center items-center w-full py-8">
+        <UpdatePassword />
+        {/* <Button>Update Infos</Button> */}
       </div>
     </>
   );
