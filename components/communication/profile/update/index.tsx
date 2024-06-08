@@ -135,14 +135,14 @@ const UpdateProfile = () => {
         });
   
         if (response.ok) {
-          console.log("Quiz submitted successfully",response);
-          toast.success('Quiz submitted successfully')
+          console.log("profile updated successfully",response);
+          toast.success('profile updated successfully')
         } else {
-          console.error("Failed to submit quiz");
+          console.error("Failed to update profile");
           toast.error('semthing went wrong')
         }
       } catch (error) {
-        console.error("Error submitting quiSON.stringify(submission)z:", error);
+        console.error("Error", error);
         toast.error('semthing went wrong')
       }
   };

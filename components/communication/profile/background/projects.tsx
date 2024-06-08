@@ -80,14 +80,16 @@ const projects: project[] = [
   },
 ];
 
-export default function Projects() {
+export default function Projects({data}:{data ?: project[]}) {
+  console.log('projects',data)
   return (
     <div className="flex flex-col gap-4 border-t border-[#EAEAEA] py-4 ">
       <div className="flex justify-start gap-2 items-center">
         <BriefcaseBusiness />
         <h1 className="text-[#121212] font-medium text-xl  ">Projects</h1>
       </div>
-      {projects.map((project, i) => (
+      
+      {data?.map((project, i) => (
         <div className="flex flex-col gap-1 items-start" key={i}>
           <p className="text-[#3E3E59] font-medium text-lg  ">
             {" "}
@@ -100,25 +102,6 @@ export default function Projects() {
             {" "}
             {project.description}
           </p>
-          <p className="font-medium text-lg  ">Team Members</p>
-          <ul className="flex justify-start gap-2">
-            {project.team_members.map((member, i) => (
-              <li key={i}>
-                {" "}
-                <Link href={member.link}>
-                  {" "}
-                  <Image
-                    src={member.image}
-                    alt="profile pic"
-                    width={0}
-                    height={0}
-                    sizes="100vw"
-                    className="w-12 h-12 rounded-full"
-                  />{" "}
-                </Link>
-              </li>
-            ))}
-          </ul>
         </div>
       ))}
     </div>

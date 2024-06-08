@@ -5,7 +5,8 @@ import Background from "./background";
 import Connections from "./connections";
 import Followers from "./followers";
 import Following from "./following";
-export default function Profile() {
+import { Profile } from "@/types";
+export default function ProfilePage({data} : {data: Profile}) {
   const tabs = ["Background", "Connections", "Followers", "Following"];
   return (
     <div className="flex flex-col gap-2 ">
@@ -29,7 +30,7 @@ export default function Profile() {
           </TabsList>
           <div className="p-4 pt-12">
             <TabsContent value="Background">
-              <Background />
+              <Background data={data}  />
             </TabsContent>
             <TabsContent value="Connections">
               <Connections />

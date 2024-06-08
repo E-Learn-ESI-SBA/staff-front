@@ -33,8 +33,10 @@ const profile_skills: Props = {
   other_skills: ["php", "Photoshop", "Photoshop", "Photoshop"],
 };
 
-export default function Skills() {
+export default function Skills({skills,other_skills}:{skills, other_skills ?: any}) {
   // export default function Skills({skills,other_skills}: Props) {
+    console.log('skills',skills)
+    console.log('other',other_skills)
   return (
     <div className="flex flex-col gap-4 border-t border-[#EAEAEA] py-4 ">
       <div className="flex justify-start items-center gap-2">
@@ -42,7 +44,7 @@ export default function Skills() {
         <h1 className="text-[#121212] font-medium text-xl  ">Skills</h1>
       </div>
       <div className="flex justify-start items-center gap-4">
-        {profile_skills.skills.map((skill, i) => (
+        {skills?.map((skill, i) => (
           <div
             key={i}
             className="card flex flex-col items-center justify-center h-48 w-48 justify-start  "
@@ -54,11 +56,11 @@ export default function Skills() {
                   cx="60"
                   cy="60"
                   r="55"
-                  style={{ "--percent": skill.percent }}
+                  style={{ "--percent": skill.percentage }}
                 ></circle>
               </svg>
               <p className="number absolute top-[50%] left-[50%] font-medium text-xl text-[#807E7E] ">
-                {skill.percent}
+                {skill.percentage}
               </p>
             </div>
             <p className="text-[#807E7E] text-xl "> {skill.name} </p>
@@ -69,7 +71,7 @@ export default function Skills() {
         Vishnu also knows about
       </p>
       <ul className="flex justify-start items-center gap-4">
-        {profile_skills.other_skills.map((skill, i) => (
+        {other_skills.map((skill, i) => (
           <li
             className="bg-[#A7A7A7] text-white p-2 rounded-lg text-xs "
             key={i}

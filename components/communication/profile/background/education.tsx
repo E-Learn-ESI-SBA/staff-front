@@ -35,14 +35,15 @@ const educations: education[] = [
   },
 ];
 
-export default function Education() {
+export default function Education({data}:{data ?: education[]}) {
+  console.log('edu',data)
   return (
     <div className="flex flex-col gap-4 border-t border-[#EAEAEA] py-4 ">
       <div className="flex justify-start items-center gap-2">
         <GraduationCap />
         <h1 className="text-[#121212] font-medium text-xl  ">Education</h1>
       </div>
-      {educations.map((edc, i) => (
+      {data?.map((edc, i) => (
         <div className="flex flex-col gap-1 items-start" key={i}>
           <p className="text-[#121212] font-medium text-lg  ">{edc.place}</p>
           <p className=" text-[#807E7E] ">{edc.name} </p>
