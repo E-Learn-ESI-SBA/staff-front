@@ -10,7 +10,7 @@ import { toast } from "sonner";
 import Comments from "./comments";
 import Votes from "./votes";
 import CommentField from "./comment-field";
-
+ 
 
 
 export default function PostDetails({ data, user }: { data: PostProps, user: TPayload}) {

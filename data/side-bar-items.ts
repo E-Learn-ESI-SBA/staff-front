@@ -36,11 +36,6 @@ export const sideBarItemsTeacher: SideBarItem[] = [
     url: "/app/leader-board",
     icon: "leaderboard",
   },
-  {
-    label: "Settings",
-    url: "/app/settings",
-    icon: "settings",
-  },
 ];
 
 export const sideBarItemsStudent: SideBarItem[] = [
@@ -79,9 +74,9 @@ export const sideBarItemsStudent: SideBarItem[] = [
     url: "/app/leader-board",
     icon: "leaderboard",
   },
-  {
-    label: "Settings",
-    url: "/app/settings",
-    icon: "settings",
-  },
+  // {
+  //   label: "Settings",
+  //   url: "/app/settings",
+  //   icon: "settings",
+  // },
 ];

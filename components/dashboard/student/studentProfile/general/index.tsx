@@ -1,12 +1,14 @@
+import { Button } from "@/components/ui/button";
 import { Student } from "@/types/students";
 import { Mail, Phone } from "lucide-react";
 import Image from "next/image";
+import { UpdatePassword } from "../updatePassword";
 
 
 type Props = {
   student: any
 }
-const General = ({student}: Props) => {
+const General = ({ student }: Props) => {
   const currentDate = new Date();
   const formattedCurrentDate = currentDate.toLocaleDateString("en-US", {
     day: "numeric",
@@ -17,7 +19,7 @@ const General = ({student}: Props) => {
     <>
       <div className="flex flex-col justify-center items-center gap-2 text-bold py-8">
         <Image
-          src={student.user.avatar_url ? student.user.avatar_url :"https://github.com/shadcn.png"}
+          src={student.user.avatar_url ? student.user.avatar_url : "https://github.com/shadcn.png"}
           alt="cs"
           width={0}
           height={0}
@@ -76,7 +78,7 @@ const General = ({student}: Props) => {
                 sizes="100vw"
                 className=" h-4 w-4  sm:h-6 sm:w-6  "
               /> */}
-              <Phone color="blue"/>
+              <Phone color="blue" />
               <p>{student.user.phone_number}</p>
             </li>
             <li className="flex justify-start items-center gap-1">
@@ -100,7 +102,7 @@ const General = ({student}: Props) => {
           <ul className="flex flex-col gap-4">
             <li className="flex justify-start items-baseline gap-2">
               <p className="font-bold">First access:</p>
-              <p>Jun 6, 2024</p>    
+              <p>Jun 6, 2024</p>
             </li>
             <li className="flex justify-start items-baseline gap-2">
               <p className="font-bold">Latest access:</p>
@@ -109,6 +111,11 @@ const General = ({student}: Props) => {
           </ul>
         </div>
       </div>
+      <div className="flex justify-center items-center w-full py-8">
+        <UpdatePassword />
+        {/* <Button>Update Infos</Button> */}
+      </div>
+
     </>
   );
 };
