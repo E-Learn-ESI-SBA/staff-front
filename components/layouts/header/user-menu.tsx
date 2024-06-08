@@ -60,7 +60,7 @@ export function UserNav() {
                 <DropdownMenuGroup>
                     <DropdownMenuItem>
                         <Link
-                            href="/app/profile"
+                            href={user.role == "student" ? "/app/student/profile" : "/app/teacher/profile"}
                             className="flex justify-between w-full items-center"
                         >
                             Profile

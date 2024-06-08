@@ -1,7 +1,15 @@
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 
-import LoadingPage from "@/app/loading";
+// import LoadingPage from "@/app/loading";
+
+// export default function TesterPage() {
+//   return <LoadingPage />;
+// }
 
 export default function TesterPage() {
-  return <LoadingPage />;
+  return (
+    <div>
+      <p>test</p>
+    </div>
+  )
 }
