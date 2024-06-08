@@ -5,7 +5,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import Image from "next/image";
 
 type Props = {
-  role: "teacher" | "student";
+  role: "teacher" | "student" | "loading";
   sideBarItems: SideBarItem[];
 };
 export const SideBar: React.FC<Props> = ({ role, sideBarItems }) => {

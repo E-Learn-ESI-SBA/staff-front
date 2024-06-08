@@ -19,7 +19,7 @@ export default function RootLayout({
       <SideBar role="student" sideBarItems={sideBarItemsStudent} /> 
       :
       // need to discuss with team
-      <SideBar role="teacher" sideBarItems={sideBarItemsStudent} /> 
+      <SideBar role="loading" sideBarItems={sideBarItemsStudent} /> 
     }
       <div className="flex-1 flex-col  h-full ">
           <Header />

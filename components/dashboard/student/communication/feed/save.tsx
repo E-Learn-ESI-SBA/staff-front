@@ -23,13 +23,28 @@ export default function PostSaveComponent({ saved, user, postId }: { saved: bool
           });
     
           if (res.ok) {
-            toast.success(`post ${isSaved ? 'unsaved' : 'saved'} successfully!`);
+            toast.success(`post ${isSaved ? 'unsaved' : 'saved'} successfully!`, {
+              style: {
+                backgroundColor: "green",
+                color: "white",
+              }
+            });
             setIsSaved(!isSaved);
           } else {
-            toast.error("something went wrong...");
+            toast.error("something went wrong...", {
+              style: {
+                backgroundColor: "red",
+                color: "white",
+              }
+            });
           }
         } catch (error) {
-          toast.error("something went wrong...");
+          toast.error("something went wrong...", {
+            style: {
+              backgroundColor: "red",
+              color: "white",
+            }
+          });
         }
       }
 
@@ -37,8 +52,8 @@ export default function PostSaveComponent({ saved, user, postId }: { saved: bool
         <Item
         Icon={Bookmark}
         text="save"
-        className={`${isSaved ? ' fill-blue-500' : ''}`}
-        color={`${isSaved ? '#3b82f6' : 'gray'}`}
+        className={`${isSaved ? ' fill-blue-500' : ''} hover:fill-blue-500`}
+        color={`#3b82f6`}
         onClick={() => handleSave()}
         />
     )

@@ -19,13 +19,23 @@ const ImageUpload = (
                 ),
             ]);
         } else {
-            toast.error("Only 5 images are allowed");
+            toast.error("Only 5 images are allowed", {
+                style: {
+                    backgroundColor: "red",
+                    color: "white",
+                },
+            });
         }
 
     }
 
     if (rejectedFiles?.length) {
-      toast.error(rejectedFiles[0].errors[0].message);
+      toast.error(rejectedFiles[0].errors[0].message, {
+        style: {
+          backgroundColor: "red",
+          color: "white",
+        },
+      });
     }
 
   }, []);
