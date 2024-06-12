@@ -37,7 +37,7 @@ export function QuizTable({data} : { data : IQuiz[]}) {
         ]}
         customColumns={[CustomColumns]}
         defaultFilter="title"
-        // fuzzyElements={["category", "module_name", "publisher"]}
+        fuzzyElements={["title","question_count"]}
       />
     </>
   );
