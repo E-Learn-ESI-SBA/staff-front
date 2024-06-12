@@ -5,9 +5,9 @@ import PostImages from "./post-images";
 import Votes from "./votes";
 import PostSaveComponent from "./save";
 import PostHeader from "./post-header";
+import {fakeUser} from '@/static/dummy-data/communication/posts'
 
-
-export default function Post({ data, user }: { data: PostProps, user: TPayload }) {
+export default function Post({ data, user }: { data: PostProps, user: TPayload | null }) {
 
   return (
     <div className="text-black feed_border flex flex-row gap-6">
@@ -20,8 +20,8 @@ export default function Post({ data, user }: { data: PostProps, user: TPayload }
       />
       <div className="flex flex-col gap-8 w-full">
         <PostHeader
-        avatar={data.user.avatar}
-        username={data.user.username}
+        avatar={data.user?.avatar ?? fakeUser!.avatar }
+        username={data.user?.username ?? fakeUser!.username }
         created_at={data.created_at}
         />
         <div className="flex flex-col gap-3">

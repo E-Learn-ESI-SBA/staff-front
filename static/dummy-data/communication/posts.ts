@@ -19,6 +19,11 @@ export const suggestions = [
   },
 ];
 
+export const fakeUser = {
+  avatar : "/",
+  username : "fendi27",
+}
+
 export const posts = [
   {
     "id": "1",

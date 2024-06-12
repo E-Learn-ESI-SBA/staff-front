@@ -8,12 +8,12 @@ import { toast } from "sonner";
 
 
 
-export default function Votes({ upvotes_count, downvotes_count, user, postId, votes }: { upvotes_count: number, downvotes_count: number, user: TPayload, postId: string, votes: Vote[]}) {
+export default function Votes({ upvotes_count, downvotes_count, user, postId, votes }: { upvotes_count: number, downvotes_count: number, user: TPayload | null, postId: string, votes: Vote[]}) {
     const [Vote, setVote] = useState<Vote | null>(null);
     const [count, setCount] = useState<number>(upvotes_count - downvotes_count);
 
     useEffect(() => {
-        const isVotedVal = votes.find((vote: Vote) => vote.user.id === user?.id);
+        const isVotedVal = votes?.find((vote: Vote) => vote.user.id === user?.id);
         setVote(isVotedVal || null);
     }, [user])
 
