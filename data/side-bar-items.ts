@@ -11,6 +11,11 @@ export const sideBarItemsTeacher: SideBarItem[] = [
     icon: "profile",
     url: "/app/teacher/profile",
   },
+    {
+    label: "Teachers",
+    icon: "profile",
+    url: "/app/teachers",
+  },
   {
     label: "Modules",
     icon: "courses",
@@ -48,6 +53,11 @@ export const sideBarItemsStudent: SideBarItem[] = [
     label: "My Account",
     icon: "profile",
     url: "/app/student/profile",
+  },
+      {
+    label: "Teachers",
+    icon: "profile",
+    url: "/app/teachers",
   },
   {
     label: "Modules",
