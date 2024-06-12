@@ -2,9 +2,24 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
+interface Quiz {
+  title: string;
+  image: string;
+  start_date: string;
+  end_date: string;
+  duration: number;
+  max_score: number;
+  min_score: number;
+  instructions: string;
+  id: string;
+}
 
+interface QuizMetaData {
+  quiz: Quiz;
+  passed: boolean;
+}
 
-const PreQuiz = ({quizMeataData} : {quizMeataData :any } ) => {
+const PreQuiz = ({ quizMeataData }: { quizMeataData: QuizMetaData }) => {
   return (
     <div className='flex flex-col gap-8 text-[#4E5566] p-8' >
       <h1 className="text-3xl font-medium text-[#2B3674] "> {quizMeataData.quiz.title}</h1>

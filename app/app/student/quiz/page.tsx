@@ -1,7 +1,6 @@
 import { QuizTable } from "@/components/dashboard/student/quiz/table";
 import { MATERIAL_BASE_URL } from "@/config/constants";
 import { cookies } from "next/headers";
-import Link from "next/link";
 
 async function getQuiz() {
   try {
