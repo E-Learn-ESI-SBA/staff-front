@@ -13,7 +13,7 @@ import { z } from "zod";
 
 
 
-export default function CommentField({ postId, user, setComments }: { postId: string, user: TPayload, setComments: Dispatch<SetStateAction<CommentProps[]>> }) {
+export default function CommentField({ postId, user, setComments }: { postId: string, user: TPayload | null, setComments: Dispatch<SetStateAction<CommentProps[]>> }) {
     const [formData, setFormData] = useState({
         text: "",
     });

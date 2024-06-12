@@ -16,7 +16,7 @@ export default function Left({
     <div className={`text-black ${className}`}>
       <CreatePost user={user!}/>
       <Filter />
-      <Posts data={data} user={user!}/>
+      <Posts data={data} user={user}/>
     </div>
   );
 }

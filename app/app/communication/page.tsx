@@ -15,22 +15,26 @@ const fetchPosts = async () => {
       },
       cache: 'no-store',
     });
-    const data = await response.json();
-    return data;
+       if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  
+      const data = await response.json();
+      return data;
+
   } catch (error) {
+     console.log('aaa')
     console.log(error);
-    return [];
   }
 }
 
 export default async function CommunityPage() {
 
   let data = await fetchPosts()
-  data = data || posts; 
-
+  console.log('dd',data)
   return (
     <div className="text-black">
-      <Feed suggestions={suggestions} posts={data} />
+      <Feed suggestions={suggestions} posts={data ?? posts } />
     </div>
   );
 }

@@ -8,7 +8,7 @@ import GridLoader from "@/components/icons/grid";
 import { TPayload } from "@/types";
 
 
-export default function Posts({ data, user }: { data: PostProps[], user: TPayload }) {
+export default function Posts({ data, user }: { data: PostProps[], user: TPayload | null}) {
   const [posts, setPosts] = useState<PostProps[]>(data);
   const [hasMore, setHasMore] = useState<boolean>(true);
   const [cursor, setCursor] = useState<{page: number, limit: number}>({page: 0, limit: 2});
@@ -21,8 +21,12 @@ export default function Posts({ data, user }: { data: PostProps[], user: TPayloa
         },
         cache: 'no-store',
       });
-      const data = await response.json();
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+       const data = await response.json();
       return data;
+
     } catch (error) {
       console.log(error);
       return [];
@@ -36,7 +40,7 @@ export default function Posts({ data, user }: { data: PostProps[], user: TPayloa
       const response = await fetch(`${COMMUNICATION_BASE_URL}/posts?page=${cursor.page+1}&limit=${cursor.limit}`, {
         method: 'GET',
         headers: {
-          "Authorization": `Bearer ${user.accessToken}`,
+          "Authorization": `Bearer ${user?.accessToken}`,
         },
         cache: 'no-store',
         // disable cache in fetch
@@ -74,7 +78,7 @@ export default function Posts({ data, user }: { data: PostProps[], user: TPayloa
         refreshFunction={refreshFunction}
       >
         {posts.map((post) => (
-          <Post key={post.id} data={post} user={user!}/>
+          <Post key={post.id} data={post} user={user}/>
         ))}
       </InfiniteScroll>
     </div>

@@ -13,7 +13,7 @@ import CommentField from "./comment-field";
  
 
 
-export default function PostDetails({ data, user }: { data: PostProps, user: TPayload}) {
+export default function PostDetails({ data, user }: { data: PostProps, user: TPayload | null}) {
     const [comments, setComments] = useState<CommentProps[]>([]);
 
 
@@ -45,7 +45,7 @@ export default function PostDetails({ data, user }: { data: PostProps, user: TPa
 
 
     const handleClickFetchComments = async () => {
-        const comments_data = await fetchPostComments(data.id, user?.accessToken);
+        const comments_data = await fetchPostComments(data.id, user!.accessToken);
         setComments(comments_data);
     }
 

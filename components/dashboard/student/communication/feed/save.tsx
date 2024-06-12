@@ -8,7 +8,7 @@ import { TPayload } from "@/types";
 
 
 
-export default function PostSaveComponent({ saved, user, postId }: { saved: boolean, user: TPayload, postId: string }) {
+export default function PostSaveComponent({ saved, user, postId }: { saved: boolean, user: TPayload | null, postId: string }) {
     const [isSaved, setIsSaved] = useState<boolean>(saved);
 
 
