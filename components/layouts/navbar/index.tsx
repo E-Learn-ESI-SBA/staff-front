@@ -20,16 +20,16 @@ const Navbar = () => {
   return (
     <div className={`w-full px-4 md:px-8  `}>
       <div
-        className={`flex justify-between items-center py-4  ${path.substring(1) ? "text-modules-main" : "text-white  border-white border-b-2  border-dashed "} `}
+        className={`flex justify-between items-center py-4 border-b-2  border-dashed  ${path.substring(1) ? "text-modules-main border-modules-main " : "text-white  border-white  "} `}
       >
         {/* <Image src='' alt='logo' width={0} height={0} sizes="100vw" className="h-12 w-24" /> */}
-        <p className="text-2xl font-extrabold">Madaurus</p>
-        <div className="hidden sm:flex justify-between items-center gap-4 ">
+        <p className=" text-lg sm:text-2xl font-extrabold">Madaurus</p>
+        <div className="flex justify-between items-center gap-4 ">
           {Links.map((link, index) => (
             <Link
               key={index}
               href={link.url}
-              className={`${isActiveLink(link.url) ? "font-bold" : ""}`}
+              className={` max-sm:text-sm ${isActiveLink(link.url) ? "font-bold" : ""}`}
             >
               {link.name}
             </Link>
@@ -40,7 +40,7 @@ const Navbar = () => {
             </Link>}
         </div>
         {isLoggedIn ? <UserNav /> : <Link href="/auth"
-          className={`px-8 py-2 font-medium border rounded-tl-3xl rounded-br-3xl ${path.substring(1) ? "border-modules-main" : ""}`}>
+          className={` max-sm:text-sm px-8 py-2 font-medium border rounded-tl-3xl rounded-br-3xl ${path.substring(1) ? "border-modules-main" : ""}`}>
           Login
         </Link>}
       </div>

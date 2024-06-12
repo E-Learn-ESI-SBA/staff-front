@@ -4,7 +4,7 @@ import footer from "@/static/content/footer";
 const Footer = () => {
   return (
     <footer className="px-4 py-8 bg-[#4778EC] text-white">
-      <div className="grid grid-cols-5 gap-8 my-8">
+      <div className=" flex flex-wrap md:grid md:grid-cols-3 lg:grid-cols-5 gap-8 my-8">
         <div className="col-span-2 flex flex-col items-center gap-8 ">
           <p className="text-3xl font-semibold">{footer.title} </p>
           <p className="font-light">{footer.description} </p>

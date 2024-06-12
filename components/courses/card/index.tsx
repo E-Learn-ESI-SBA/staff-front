@@ -12,10 +12,10 @@ const Card: React.FC<CardProps> = ({ card }) => {
         width={0}
         height={0}
         sizes="100vw"
-        className="w-full h-1/2 object-cover rounded-t-xl "
+        className="w-full h-1/2 object-cover rounded-t-xl min-w-[350px] "
       />
       <div className="p-2 flex flex-col gap-y-8 ">
-        <p className="text-lg font-semibold"> {card.subject} </p>
+        <p className="text-lg font-semibold text-wrap"> {card.subject}</p>
         <div className="flex justify-between items-center text-base  font-medium ">
           <p>Coéfficient {card.coef} </p>
           <p> {card.duration} </p>

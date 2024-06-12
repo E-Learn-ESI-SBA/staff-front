@@ -30,7 +30,7 @@ const footer: Footer = {
     },
     {
       icon: "/landing/footer/email.svg",
-      content: "michelle.rivera@example.com",
+      content: "fendi@example.com",
     },
   ],
   address: {
@@ -38,7 +38,7 @@ const footer: Footer = {
     content: "2715 Ash Dr. San Jose, South Dakota 83475",
   },
 
-  copyright: "Copyright 2023 | All Rights Reserved",
+  copyright: "Copyright 2024 | All Rights Reserved",
   socialLinks: [
     {
       icon: "/landing/footer/facebook.svg",
