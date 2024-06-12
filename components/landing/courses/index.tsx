@@ -48,7 +48,7 @@ const Courses = () => {
       </div>
       <div className="flex items-center">
         <Link
-          href="/"
+          href="/courses"
           className="px-8 py-2 mx-auto font-medium border rounded-tl-3xl rounded-br-3xl"
         >
           Learn More
