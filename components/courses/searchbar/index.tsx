@@ -1,6 +1,6 @@
 const SearchBar = () => {
   return (
-    <div className=" flex items-center justify-center w-full my-8 ">
+    <div className="flex items-center justify-center w-full my-8 ">
       <div className="flex border border-courses-main  w-1/3 rounded-3xl min-w-64 ">
         <input
           className=" w-full border-none bg-transparent px-4  text-gray-400 outline-none focus:outline-none "

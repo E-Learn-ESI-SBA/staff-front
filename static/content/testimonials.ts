@@ -13,7 +13,7 @@ export const testimonialsData: Testimonial[] = [
     role: "Swoardman",
     review:
       "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    image: "/landing/testimonials/person.png",
+    image: "/landing/testimonials/person2.png",
   },
   {
     name: "Sanji",
@@ -27,7 +27,7 @@ export const testimonialsData: Testimonial[] = [
     role: "Liar",
     review:
       "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    image: "/landing/testimonials/person.png",
+    image: "/landing/testimonials/person2.png",
   },
   {
     name: "Brook",
@@ -41,7 +41,7 @@ export const testimonialsData: Testimonial[] = [
     role: "Shipbuilder",
     review:
       "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    image: "/landing/testimonials/person.png",
+    image: "/landing/testimonials/person2.png",
   },
   {
     name: "Chopper",

@@ -11,7 +11,7 @@ const Courses = () => {
             key={index}
             className="flex justify-start items-center rounded-3xl border border-white py-2 pl-4 pr-16 gap-2 "
           >
-            <div className={`bg-[#DF385B] rounded-xl p-4`}>
+            <div className={` bg-${category.bgColor} rounded-xl p-4`} style={{background : category.bgColor }} >
               {/* <div className={`bg-[${category.bgColor}] rounded-xl p-4`}> */}
               <Image
                 src={category.icon}
@@ -19,7 +19,7 @@ const Courses = () => {
                 width={0}
                 height={0}
                 sizes="100vw"
-                className="h-10 w-10 sm:h-10 sm:w-10"
+                className="h-10 w-10"
               />
             </div>
             <div className="flex flex-col justify-center gap-2 ">

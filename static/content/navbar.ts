@@ -9,12 +9,4 @@ export const Links: link[] = [
     name: "Courses",
     url: "/courses",
   },
-  {
-    name: "Testimonials",
-    url: "/testimonials",
-  },
-  {
-    name: "Contact Us",
-    url: "/contact-us",
-  },
 ];

@@ -45,7 +45,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="py-4 h-fit border font-semibold border-gray-200 bg-white shadow-xl rounded-lg min-w-[250px] max-w-[400px] md:w-1/3 lg:w-1/5">
+    <div className="hidden sm:block py-4 h-fit border font-semibold border-gray-200 bg-white shadow-xl rounded-lg min-w-[250px] max-w-[400px] md:w-1/3 lg:w-1/5">
       <div className="flex items-center justify-between mb-2 px-6">
         <h3 className="font-semibold">Category</h3>
         <button onClick={() => toggleFilter("category")}>
