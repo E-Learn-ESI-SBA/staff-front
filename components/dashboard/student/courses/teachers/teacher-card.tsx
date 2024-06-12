@@ -38,8 +38,8 @@ export default function TeacherCard({
   social,
 }: TeacherCardProps) {
   return (
-    <div className="flex w-full justify-between text-xl py-14 bg-white px-40">
-      <div className="flex gap-10">
+    <div className="flex justify-between text-xl py-14 bg-white w-full">
+      <div className="flex">
         <Image
           src={image}
           width={200}
