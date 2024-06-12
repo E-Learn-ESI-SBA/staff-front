@@ -1,13 +1,13 @@
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBTn9aP8QyCKfUdwSGRxtE1W0bx5eYTd6s",
-  authDomain: "madaurus-2c87c.firebaseapp.com",
-  projectId: "madaurus-2c87c",
-  storageBucket: "madaurus-2c87c.appspot.com",
-  messagingSenderId: "622615067862",
-  appId: "1:622615067862:web:2975e9bd4dc77cda3a9d77",
-  measurementId: "G-J0YZXRMRH1"
+  apiKey: "",
+  authDomain: "madaurus",
+  projectId: "madaurus-c",
+  storageBucket: "madaom",
+  messagingSenderId: "6862",
+  appId: "7",
+  measurementId: "1"
 };
 
 // Initialize Firebase
