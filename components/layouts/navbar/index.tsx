@@ -18,9 +18,9 @@ const Navbar = () => {
     );
   };
   return (
-    <div className={`w-full px-4 md:px-8  `}>
+    <div className={`w-full px-4 md:px-8`}>
       <div
-        className={`flex justify-between items-center py-4 border-b-2  border-dashed  ${path.substring(1) ? "text-modules-main border-modules-main " : "text-white  border-white  "} `}
+        className={`flex justify-between items-center py-4 border-b-2  border-dashed  ${path.substring(1) ? "text-modules-main border-modules-main  " : "text-white  border-white  "} `}
       >
         {/* <Image src='' alt='logo' width={0} height={0} sizes="100vw" className="h-12 w-24" /> */}
         <p className=" text-lg sm:text-2xl font-extrabold">Madaurus</p>

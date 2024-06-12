@@ -31,7 +31,7 @@ Vako realizes that people who take courses on Udemy want to transform their live
 export default function Teachers() {
   const [selected, setSelected] = useState(0);
   return (
-    <div className="text-black bg-secondary-background">
+    <div className="text-black bg-secondary-background pl-8">
       <TeacherCard {...data} />
 
       <div className="flex px-40">
